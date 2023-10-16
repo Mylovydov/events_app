@@ -1,0 +1,57 @@
+{
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaVersion": "latest",
+    "sourceType": "module"
+  },
+  "plugins": [
+    "@typescript-eslint"
+  ],
+  "extends": [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/recommended",
+    "prettier"
+  ],
+  "rules": {
+    "indent": [
+      "error",
+      "tab"
+    ],
+    "linebreak-style": [
+      "error",
+      "unix"
+    ],
+    "quotes": [
+      "error",
+      "single"
+    ],
+    "semi": [
+      "error",
+      "always"
+    ],
+    "eqeqeq": "error",
+    "no-use-before-define": "error",
+    "no-duplicate-imports": "error",
+    "use-isnan": "error",
+    "block-scoped-var": "error",
+    "camelcase": "error",
+    "curly": "error",
+    "default-case": "error",
+    "default-case-last": "error",
+    "no-alert": "error",
+    "no-console": "warn",
+    "no-else-return": "error",
+    "no-magic-numbers": "error",
+    "no-nested-ternary": "error",
+    "no-proto": "error",
+    "no-var": "error",
+    "prefer-arrow-callback": "error",
+    "@typescript-eslint/no-unused-vars": "error",
+    "prefer-const": "error",
+    "comma-dangle": "error",
+    "@typescript-eslint/consistent-type-definitions": ["error", "type"]
+  },
+  "env": {
+    "node": true
+  }
+}
