@@ -1,7 +1,7 @@
 {
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
-    "ecmaVersion": "latest",
+    "ecmaVersion": 2020,
     "sourceType": "module"
   },
   "plugins": [
@@ -41,7 +41,7 @@
     "no-alert": "error",
     "no-console": "warn",
     "no-else-return": "error",
-    "no-magic-numbers": "error",
+    //    "no-magic-numbers": "error",
     "no-nested-ternary": "error",
     "no-proto": "error",
     "no-var": "error",
@@ -49,7 +49,10 @@
     "@typescript-eslint/no-unused-vars": "error",
     "prefer-const": "error",
     "comma-dangle": "error",
-    "@typescript-eslint/consistent-type-definitions": ["error", "type"]
+    "@typescript-eslint/consistent-type-definitions": [
+      "error",
+      "type"
+    ]
   },
   "env": {
     "node": true
