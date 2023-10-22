@@ -1,23 +1,42 @@
 {
-  "name": "server",
+  "name": "events-app-server",
   "version": "1.0.0",
   "description": "Events App",
+  "type": "module",
   "private": true,
+  "main": "dist/index.js",
+  "author": "den.milovido@gmail.com",
+  "license": "ISC",
+  "keywords": [],
   "scripts": {
-    "dev": "tsc --watch",
+    "build": "rimraf ./dist && npx tsc",
+    "start": "npm run build && node dist/index.js",
+    "dev": "npx nodemon",
     "lint": "eslint --ignore-path .eslintignore --ext .ts",
     "lint:fix": "npm run lint --fix",
     "format": "prettier --ignore-path .gitignore --write \"**/*.+ts"
   },
+  "dependencies": {
+    "@trpc/server": "^10.41.0",
+    "@typegoose/typegoose": "^11.6.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "mongoose": "^7.6.3",
+    "zod": "^3.22.4"
+  },
   "devDependencies": {
+    "@types/cors": "^2.8.15",
+    "@types/express": "^4.17.20",
+    "@types/mongoose": "^5.11.97",
     "@typescript-eslint/eslint-plugin": "^6.8.0",
     "@typescript-eslint/parser": "^6.8.0",
     "eslint": "^8.51.0",
     "eslint-config-prettier": "^9.0.0",
+    "nodemon": "^3.0.1",
     "prettier": "^3.0.3",
+    "rimraf": "^5.0.5",
+    "ts-node": "^10.9.1",
     "typescript": "^5.2.2"
-  },
-  "keywords": [],
-  "author": "den.milovido@gmail.com",
-  "license": "ISC"
+  }
 }
