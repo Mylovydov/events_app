@@ -30,7 +30,7 @@
       "always"
     ],
     "eqeqeq": "error",
-    "no-use-before-define": "error",
+    "no-use-before-define": "warn",
     "no-duplicate-imports": "error",
     "use-isnan": "error",
     "block-scoped-var": "error",
