@@ -6,13 +6,18 @@ import swaggerUi from 'swagger-ui-express';
 import { createContext } from './trpc/index.js';
 import { createOpenApiExpressMiddleware } from 'trpc-openapi';
 import openApiDocument from './swaggerDocument/openApi.js';
+import cookiesParser from 'cookie-parser';
 
 const app = express();
 
-app.use(cors({ origin: '*' }));
+app.use(cookiesParser());
+app.use(cors({ origin: '*', credentials: true }));
 app.use(
 	'api/trpc',
-	createExpressMiddleware({ router: appRouter, createContext })
+	createExpressMiddleware({
+		router: appRouter,
+		createContext
+	})
 );
 app.use(
 	'/api',
