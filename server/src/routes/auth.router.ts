@@ -5,5 +5,5 @@ export const authRouter = router({
 	register: authController.register,
 	login: authController.login,
 	logout: authController.logout,
-	check: authController.check
+	check: authController.refresh
 });

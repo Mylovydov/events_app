@@ -1,4 +1,4 @@
-import { publicProcedure } from '../../trpc/index.js';
+import { authProcedure, publicProcedure } from '../../trpc/index.js';
 import {
 	authInput,
 	authOutput,
@@ -15,7 +15,7 @@ const authController = {
 				method: 'POST',
 				path: '/auth/register',
 				tags: ['auth'],
-				summary: 'Register as a new user'
+				summary: 'Register user in the system'
 			}
 		})
 		.input(authInput)
@@ -30,7 +30,7 @@ const authController = {
 				method: 'POST',
 				path: '/auth/login',
 				tags: ['auth'],
-				summary: 'Register as a new user'
+				summary: 'Login user to the system'
 			}
 		})
 		.input(authInput)
@@ -39,13 +39,13 @@ const authController = {
 			return authService.login(input);
 		}),
 
-	logout: publicProcedure
+	logout: authProcedure
 		.meta({
 			openapi: {
 				method: 'POST',
 				path: '/auth/logout',
 				tags: ['auth'],
-				summary: 'Register as a new user'
+				summary: 'Logout user from the system'
 			}
 		})
 		.input(logoutInput)
@@ -54,13 +54,13 @@ const authController = {
 			return authService.logout(ctx.userId);
 		}),
 
-	check: publicProcedure
+	refresh: publicProcedure
 		.meta({
 			openapi: {
 				method: 'POST',
 				path: '/auth/check',
 				tags: ['auth'],
-				summary: ''
+				summary: 'Update token pair by refresh token'
 			}
 		})
 		.input(logoutInput)
@@ -68,7 +68,7 @@ const authController = {
 		.mutation(({ ctx: { req } }) => {
 			const { cookies } = req;
 			const refreshToken = cookies['refreshToken'];
-			return authService.check(refreshToken);
+			return authService.refresh(refreshToken);
 		})
 };
 

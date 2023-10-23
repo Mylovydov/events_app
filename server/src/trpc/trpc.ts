@@ -31,7 +31,7 @@ const isAuthMiddleware = middleware(({ ctx, next }) => {
 	if (ctx.userId) {
 		return next();
 	}
-	throw ApiError.forbidden('Access denied');
+	throw ApiError.unauthorized('Access denied');
 });
 
 export const publicProcedure = t.procedure;

@@ -1,25 +1,25 @@
-import { UserModel } from '../user/user.model.js';
+import { UserDocument, UserModel, userService } from '../user/index.js';
 import { ApiError } from '../../error/index.js';
 import bcrypt from 'bcrypt';
 import { tokenService } from '../token/index.js';
-import { TAuthDto } from './token.types.js';
+import { TAuthDto } from './auth.types.js';
+import { TToken } from '../token/token.types.js';
 
 class AuthService {
 	async register(dto: TAuthDto) {
 		const { password, ...rest } = dto;
 
-		const candidate = await UserModel.findOne({ email: rest.email });
+		const candidate = await userService.getByEmail(rest.email);
 		if (candidate) {
 			throw ApiError.badRequest('User already exists!');
 		}
 
 		const hashPassword = bcrypt.hashSync(password, 3);
 
-		const newUser = await UserModel.create({
+		const newUser: UserDocument = await userService.create({
 			...rest,
 			password: hashPassword
 		});
-
 		const tokens = await tokenService.generateTokens({ userId: newUser.id });
 
 		return {
@@ -70,7 +70,7 @@ class AuthService {
 		};
 	}
 
-	async check(token?: string) {
+	async refresh(token?: TToken) {
 		if (!token) {
 			throw ApiError.unauthorized('Refresh token is missing');
 		}
