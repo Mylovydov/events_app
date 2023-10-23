@@ -15,11 +15,15 @@ export const createUserInput = baseUserSchema.extend({
 		.min(8, 'Password must be at least 8 characters long')
 		.max(25, 'Password must be less than 25 characters')
 });
-
+const objectIdRegExp = /^[0-9a-fA-F]{24}$/;
 export const userIdInput = z.object({
-	userId: z.string()
+	userId: z.string().refine(value => objectIdRegExp.test(value), {
+		message: 'Invalid ObjectId format'
+	})
 });
 
 export const updateUserInput = baseUserSchema.extend({
-	userId: z.string()
+	userId: z.string().refine(value => objectIdRegExp.test(value), {
+		message: 'Invalid ObjectId format'
+	})
 });
