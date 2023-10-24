@@ -4,6 +4,7 @@ import {
 	modelOptions,
 	prop
 } from '@typegoose/typegoose';
+import { v4 as uuidv4 } from 'uuid';
 
 @modelOptions({
 	schemaOptions: {
@@ -11,6 +12,9 @@ import {
 	}
 })
 class User {
+	@prop({ required: true, unique: true, default: () => uuidv4() })
+	public _id!: string;
+
 	@prop()
 	public name?: string;
 

@@ -1,5 +1,5 @@
 import jwt from 'jsonwebtoken';
-import { TGenerateResult, TPayload } from './token.types.js';
+import { TGenerateResult, TPayload, TToken } from './token.types.js';
 import { TokenModel } from './token.model.js';
 
 class TokenService {
@@ -27,7 +27,7 @@ class TokenService {
 		};
 	}
 
-	verifyAccessToken(token: string) {
+	verifyAccessToken(token: TToken) {
 		try {
 			const { userId } = <jwt.JwtPayload>jwt.verify(token, this.accessTokenKey);
 			return userId;
@@ -36,7 +36,7 @@ class TokenService {
 		}
 	}
 
-	verifyRefreshToken(token: string) {
+	verifyRefreshToken(token: TToken) {
 		try {
 			const { userId } = <jwt.JwtPayload>(
 				jwt.verify(token, this.refreshTokenKey)
@@ -55,7 +55,7 @@ class TokenService {
 		return TokenModel.findOne({ refreshToken: token });
 	}
 
-	private async saveRefreshToken(userId: string, refreshToken: string) {
+	private async saveRefreshToken(userId: string, refreshToken: TToken) {
 		await TokenModel.create({ refreshToken, userId });
 	}
 }

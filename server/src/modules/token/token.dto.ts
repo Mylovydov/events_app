@@ -1,8 +1,10 @@
 import { z } from 'zod';
 
+export const token = z.string();
+
 export const generateTokenPairOutput = z.object({
-	accessToken: z.string(),
-	refreshToken: z.string()
+	accessToken: token,
+	refreshToken: token
 });
 
 export const generateTokenPairInput = z.object({

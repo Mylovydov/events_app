@@ -30,6 +30,8 @@ app.use(
 	})
 );
 
+export type TAppRouter = typeof appRouter;
+
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(openApiDocument));
 
 export { app };
