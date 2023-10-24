@@ -40,12 +40,12 @@ export const getUserProcedure = publicProcedure
 			summary: 'Get a user by id',
 			example: {
 				response: {
-					id: '60f0f1b0c9e9b1b3e8f9b3b3',
+					id: 'b24f24af-d5cc-4ccd-ad33-1fc56bd6aeeb',
 					name: 'John Doe',
 					email: 'example@gmail.com'
 				},
 				request: {
-					userId: '60f0f1b0c9e9b1b3e8f9b3b3'
+					userId: 'b24f24af-d5cc-4ccd-ad33-1fc56bd6aeeb'
 				}
 			}
 		}
