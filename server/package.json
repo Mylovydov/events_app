@@ -14,7 +14,10 @@
     "dev": "npx nodemon",
     "lint": "eslint --ignore-path .eslintignore --ext .ts",
     "lint:fix": "npm run lint --fix",
-    "format": "prettier --ignore-path .gitignore --write \"**/*.+ts"
+    "format": "prettier --ignore-path .gitignore --write \"**/*.+ts",
+    "mongo:up": "docker compose up -d",
+    "mongo:down": "docker compose down",
+    "mongo:clean": "npm run mongo:down && docker volume rm server_mongo-volume"
   },
   "dependencies": {
     "@trpc/server": "^10.41.0",

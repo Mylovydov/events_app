@@ -14,7 +14,7 @@ services:
     volumes:
       - ./scripts/mongo/init/init-mongo.js:/docker-entrypoint-initdb.d/init-mongo.js:ro
       - ./scripts/mongo/init:/home/mongodb
-      - mongo:/data/db
+      - mongo-volume:/data/db
     ports:
       - ${MONGO_DB_PORT}:27017
 
@@ -29,19 +29,4 @@ services:
       ME_CONFIG_MONGODB_URL: mongodb://${MONGO_INITDB_ROOT_USERNAME}:${MONGO_INITDB_ROOT_PASSWORD}@mongodb:27017/
 
 volumes:
-  mongo:
-
-  #services:
-  #  # MongoDB
-  #  mongodb:
-  #    image: mongo:latest
-  #    container_name: mongodb
-  #    restart: always
-  ##    ports:
-  ##      - "27017:27017"
-  #    env_file: [.env-mongo, .env]
-  #    volumes:
-  #      - mongo:/data/db
-  #      - ./init-mongo.js:/docker-entrypoint-initdb.d/init-mongo.js
-  #volumes:
-  #  mongo:
+  mongo-volume:
