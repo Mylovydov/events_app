@@ -36,18 +36,20 @@ const authProcedures = {
 				method: 'POST',
 				path: '/auth/logout',
 				tags: ['auth'],
-				summary: 'Logout user from the system'
+				summary: 'Logout user from the system',
+				protect: true
 			}
 		})
 		.input(logoutInput)
 		.output(logoutOutput),
-	refresh: publicProcedure
+	refresh: authProcedure
 		.meta({
 			openapi: {
 				method: 'POST',
 				path: '/auth/check',
 				tags: ['auth'],
-				summary: 'Update token pair by refresh token'
+				summary: 'Update token pair by refresh token',
+				protect: true
 			}
 		})
 		.input(logoutInput)

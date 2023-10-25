@@ -1,4 +1,4 @@
-import { publicProcedure } from '../../trpc/index.js';
+import { authProcedure } from '../../trpc/index.js';
 import {
 	createUserInput,
 	updateUserInput,
@@ -8,13 +8,14 @@ import {
 import { z } from 'zod';
 
 const userProcedures = {
-	create: publicProcedure
+	create: authProcedure
 		.meta({
 			openapi: {
 				method: 'POST',
 				path: '/users',
 				tags: ['users'],
 				summary: 'Create a new user',
+				protect: true,
 				example: {
 					request: {
 						name: 'John Doe',
@@ -31,12 +32,13 @@ const userProcedures = {
 		})
 		.input(createUserInput)
 		.output(userSchema),
-	getUser: publicProcedure
+	getUser: authProcedure
 		.meta({
 			openapi: {
 				method: 'GET',
 				path: '/users',
 				tags: ['users'],
+				protect: true,
 				summary: 'Get a user by id',
 				example: {
 					response: {
@@ -52,13 +54,14 @@ const userProcedures = {
 		})
 		.input(userIdInput)
 		.output(userSchema),
-	update: publicProcedure
+	update: authProcedure
 		.meta({
 			openapi: {
 				method: 'PUT',
 				path: '/users',
 				tags: ['users'],
 				summary: 'Update a user by id',
+				protect: true,
 				example: {
 					response: {
 						id: '60f0f1b0c9e9b1b3e8f9b3b3',
@@ -75,12 +78,13 @@ const userProcedures = {
 		})
 		.input(updateUserInput)
 		.output(userSchema),
-	delete: publicProcedure
+	delete: authProcedure
 		.meta({
 			openapi: {
 				method: 'DELETE',
 				path: '/users',
 				tags: ['users'],
+				protect: true,
 				summary: 'Delete user by id',
 				example: {
 					response: {},
