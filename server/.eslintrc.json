@@ -40,19 +40,19 @@
     "default-case-last": "error",
     "no-alert": "error",
     "no-console": "warn",
-    "no-else-return": "error",
+    "no-else-return": "warn",
     //    "no-magic-numbers": "error",
     "no-nested-ternary": "error",
     "no-proto": "error",
     "no-var": "error",
     "prefer-arrow-callback": "error",
-    "@typescript-eslint/no-unused-vars": "error",
+    "@typescript-eslint/no-unused-vars": "warn",
     "prefer-const": "error",
-    "comma-dangle": "error"
-//    "@typescript-eslint/consistent-type-definitions": [
-//      "warn",
-//      "type"
-//    ]
+    "comma-dangle": "error",
+    "@typescript-eslint/consistent-type-definitions": [
+      "warn",
+      "type"
+    ]
   },
   "env": {
     "node": true

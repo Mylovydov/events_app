@@ -6,17 +6,18 @@ import { TAuthDto } from './auth.types.js';
 import { TToken } from '../token/token.types.js';
 
 class AuthService {
+	private userService = userService;
 	async register(dto: TAuthDto) {
 		const { password, ...rest } = dto;
 
-		const candidate = await userService.getByEmail(rest.email);
+		const candidate = await this.userService.getByEmail(rest.email);
 		if (candidate) {
 			throw ApiError.badRequest('User already exists!');
 		}
 
 		const hashPassword = bcrypt.hashSync(password, 3);
 
-		const newUser: UserDocument = await userService.create({
+		const newUser: UserDocument = await this.userService.create({
 			...rest,
 			password: hashPassword
 		});

@@ -1,6 +1,6 @@
 import { authProcedure } from '../../trpc/index.js';
-import { uploadInput } from './upload.dto.js';
-import { z } from 'zod';
+import { uploadInput, uploadOutput } from './upload.dto.js';
+import exampleBase64CSV from '../../utils/exampleCSV.js';
 
 const uploadProcedures = {
 	upload: authProcedure
@@ -10,11 +10,16 @@ const uploadProcedures = {
 				path: '/upload',
 				tags: ['upload'],
 				summary: 'Upload file in base64 format',
-				protect: true
+				protect: true,
+				example: {
+					request: {
+						file: exampleBase64CSV
+					}
+				}
 			}
 		})
 		.input(uploadInput)
-		.output(z.void())
+		.output(uploadOutput)
 };
 
 export default uploadProcedures;
