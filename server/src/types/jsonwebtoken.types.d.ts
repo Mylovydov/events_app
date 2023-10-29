@@ -5,3 +5,7 @@ declare module 'jsonwebtoken' {
 		userId: string;
 	}
 }
+
+// declare module 'convert-csv-to-json' {
+// 	export interface ConvertCsvToJson extends convert.ConvertCsvToJson {}
+// }
