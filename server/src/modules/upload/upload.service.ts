@@ -1,10 +1,11 @@
 import papaParse, { ParseConfig } from 'papaparse';
 import { ApiError } from '../../error/index.js';
 import { eventsService, TEventsSchema } from '../events/index.js';
+import { TUploadFileDto } from './upload.types.js';
 
 class UploadService {
 	private eventsService = eventsService;
-	async upload(data: string) {
+	async upload(data: TUploadFileDto) {
 		const csvString = this.getCSVDataFromBase64(data);
 
 		const { errors, data: events } = this.parseCSV(csvString);
@@ -24,10 +25,7 @@ class UploadService {
 			validationResult.events!
 		);
 
-		return {
-			message: 'Events successfully created',
-			data: createdEvents
-		};
+		return createdEvents;
 	}
 
 	parseCSV(stringToParse: string, opt?: ParseConfig) {

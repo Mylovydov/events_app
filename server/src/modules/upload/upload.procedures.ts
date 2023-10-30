@@ -1,6 +1,6 @@
 import { authProcedure } from '../../trpc/index.js';
 import { uploadInput, uploadOutput } from './upload.dto.js';
-import exampleBase64CSV from '../../utils/exampleCSV.js';
+import { exampleBase64CSV, exampleEvents } from '../../utils/index.js';
 
 const uploadProcedures = {
 	upload: authProcedure
@@ -14,6 +14,10 @@ const uploadProcedures = {
 				example: {
 					request: {
 						file: exampleBase64CSV
+					},
+					response: {
+						message: '',
+						data: exampleEvents
 					}
 				}
 			}
