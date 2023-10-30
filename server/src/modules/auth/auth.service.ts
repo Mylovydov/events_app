@@ -1,4 +1,4 @@
-import { UserDocument, UserModel, userService } from '../user/index.js';
+import { UserModel, userService } from '../user/index.js';
 import { ApiError } from '../../error/index.js';
 import bcrypt from 'bcrypt';
 import { tokenService } from '../token/index.js';
@@ -17,18 +17,11 @@ class AuthService {
 
 		const hashPassword = bcrypt.hashSync(password, 3);
 
-		const newUser: UserDocument = await this.userService.create({
+		const newUser = await this.userService.create({
 			...rest,
 			password: hashPassword
 		});
-		const tokens = await tokenService.generateTokens({ userId: newUser.id });
-
-		return {
-			message: 'User has been registered',
-			data: {
-				...tokens
-			}
-		};
+		return await tokenService.generateTokens({ userId: newUser._id });
 	}
 
 	async login(dto: TAuthDto) {
@@ -48,14 +41,7 @@ class AuthService {
 			);
 		}
 
-		const tokens = await tokenService.generateTokens({ userId: user.id });
-
-		return {
-			message: 'Logged in successfully',
-			data: {
-				...tokens
-			}
-		};
+		return await tokenService.generateTokens({ userId: user.id });
 	}
 
 	async logout(userId: string | null) {
@@ -64,11 +50,6 @@ class AuthService {
 		}
 
 		await tokenService.deleteRefreshToken(userId);
-
-		return {
-			message: 'Logged out successfully',
-			data: {}
-		};
 	}
 
 	async refresh(token?: TToken) {

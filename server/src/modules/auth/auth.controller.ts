@@ -2,16 +2,30 @@ import { authService } from './index.js';
 import authProcedures from './auth.procedures.js';
 
 const authController = {
-	register: authProcedures.register.mutation(({ input }) => {
-		return authService.register(input);
+	register: authProcedures.register.mutation(async ({ input }) => {
+		const tokens = await authService.register(input);
+		return {
+			message: 'User has been registered',
+			data: tokens
+		};
 	}),
 
-	login: authProcedures.login.mutation(({ input }) => {
-		return authService.login(input);
+	login: authProcedures.login.mutation(async ({ input }) => {
+		const tokens = await authService.login(input);
+		return {
+			message: 'Logged in successfully',
+			data: {
+				...tokens
+			}
+		};
 	}),
 
-	logout: authProcedures.logout.mutation(({ ctx }) => {
-		return authService.logout(ctx.userId);
+	logout: authProcedures.logout.mutation(async ({ ctx }) => {
+		await authService.logout(ctx.userId);
+		return {
+			message: 'Logged out successfully',
+			data: {}
+		};
 	}),
 
 	refresh: authProcedures.refresh.mutation(({ ctx: { req } }) => {
