@@ -1,4 +1,5 @@
 import { z } from 'zod';
+import { mainUserSchema } from '../user/user.dto.js';
 
 export const token = z.string();
 
@@ -8,5 +9,5 @@ export const generateTokenPairOutput = z.object({
 });
 
 export const generateTokenPairInput = z.object({
-	userId: z.string()
+	userId: mainUserSchema.shape._id
 });

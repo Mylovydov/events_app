@@ -10,6 +10,9 @@ export const authOutput = baseOutputSchema.extend({
 export const authInput = mainUserSchema.pick({ email: true, password: true });
 
 export const logoutInput = z.void();
+export const refreshOutput = baseOutputSchema.extend({
+	data: generateTokenPairOutput
+});
 
 export const logoutOutput = baseOutputSchema.extend({
 	data: z.object({})

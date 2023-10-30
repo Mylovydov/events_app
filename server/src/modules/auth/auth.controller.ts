@@ -28,10 +28,14 @@ const authController = {
 		};
 	}),
 
-	refresh: authProcedures.refresh.mutation(({ ctx: { req } }) => {
+	refresh: authProcedures.refresh.mutation(async ({ ctx: { req } }) => {
 		const { cookies } = req;
 		const refreshToken = cookies['refreshToken'];
-		return authService.refresh(refreshToken);
+		const tokens = await authService.refresh(refreshToken);
+		return {
+			message: 'Tokens have been updated',
+			data: tokens
+		};
 	})
 };
 
