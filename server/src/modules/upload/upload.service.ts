@@ -21,11 +21,7 @@ class UploadService {
 			throw ApiError.badRequest(validationResult.error);
 		}
 
-		const createdEvents = await this.eventsService.uploadEventsToDb(
-			validationResult.events!
-		);
-
-		return createdEvents;
+		return await this.eventsService.uploadEventsToDb(validationResult.events!);
 	}
 
 	parseCSV(stringToParse: string, opt?: ParseConfig) {

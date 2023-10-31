@@ -13,7 +13,7 @@ class UserService {
 			throw ApiError.badRequest('User already exists!');
 		}
 		const user = await UserModel.create(dto);
-		return user.toObject();
+		return user.toJSON();
 	}
 
 	async update(dto: TUpdateUserDto) {
@@ -57,7 +57,7 @@ class UserService {
 			throw ApiError.notFound(`User with id: ${id} not found!`);
 		}
 
-		return this.prepareUser(user.toObject());
+		return this.prepareUser(user.toJSON());
 	}
 
 	private prepareUser(user: TMainUserSchema) {

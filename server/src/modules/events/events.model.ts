@@ -24,7 +24,7 @@ class Event {
 	public inviteeFirstName!: string;
 
 	@prop({ required: true, type: String, unique: false })
-	public inviteeEmail?: string;
+	public inviteeEmail!: string;
 
 	@prop({ required: true, type: Date })
 	public startDateTime!: string;
