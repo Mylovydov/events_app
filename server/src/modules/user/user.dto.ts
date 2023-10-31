@@ -1,24 +1,51 @@
 import { z } from 'zod';
+import { baseOutputSchema } from '../utils/index.js';
 
-const baseUserSchema = z.object({
+export const mainUserSchema = z.object({
+	_id: z.string().uuid({ message: 'Invalid UUID format' }),
+	email: z.string().email({ message: 'Invalid email address' }),
 	name: z.string().max(25, 'Name must be less than 25 characters').optional(),
-	email: z.string().email({ message: 'Invalid email address' })
-});
-
-export const userSchema = baseUserSchema.extend({
-	id: z.string().uuid()
-});
-
-export const createUserInput = baseUserSchema.extend({
 	password: z
 		.string()
 		.min(8, 'Password must be at least 8 characters long')
 		.max(25, 'Password must be less than 25 characters')
 });
-export const userIdInput = z.object({
-	userId: z.string().uuid({ message: 'Invalid UUID format' })
+
+// BASE SCHEMA
+export const baseUserSchema = mainUserSchema.omit({ password: true });
+
+// CREATE
+export const createUserInput = mainUserSchema.omit({ _id: true });
+
+export const createUserOutput = baseOutputSchema.extend({
+	data: baseUserSchema
 });
 
+// GET / DELETE
+export const userIdInput = z.object({
+	userId: mainUserSchema.shape._id
+});
+
+// UPDATE
 export const updateUserInput = baseUserSchema.extend({
-	userId: z.string().uuid({ message: 'Invalid UUID format' })
+	userId: mainUserSchema.shape._id
+});
+
+export const updateUserOutput = baseOutputSchema.extend({
+	data: baseUserSchema
+});
+
+// GET USER BY ID
+export const getUserOutput = baseOutputSchema.extend({
+	data: baseUserSchema
+});
+
+// GET ALL
+export const getUsersOutput = baseOutputSchema.extend({
+	data: z.array(baseUserSchema)
+});
+
+// DELETE
+export const deleteUserOutput = baseOutputSchema.extend({
+	data: baseUserSchema
 });

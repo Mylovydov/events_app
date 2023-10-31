@@ -5,30 +5,39 @@ const userController = {
 	create: userProcedures.create.mutation(async ({ input }) => {
 		const user = await userService.create(input);
 		return {
-			id: user.id,
-			email: user.email,
-			name: user.name
+			message: 'User has been successfully registered!',
+			data: user
 		};
 	}),
-	get: userProcedures.getUser.query(async ({ input }) => {
+
+	getUser: userProcedures.getUser.query(async ({ input }) => {
 		const user = await userService.getById(input.userId);
 		return {
-			id: user.id,
-			email: user.email,
-			name: user.name
+			message: 'User was successfully found!',
+			data: user
+		};
+	}),
+	getUsers: userProcedures.getUsers.query(async () => {
+		const users = await userService.getAll();
+		return {
+			message: 'Users were successfully found!',
+			data: users
 		};
 	}),
 	update: userProcedures.update.mutation(async ({ input }) => {
 		const user = await userService.update(input);
 		return {
-			id: user.id,
-			email: user.email,
-			name: user.name
+			message: 'User was successfully updated!',
+			data: user
 		};
 	}),
-	delete: userProcedures.delete.mutation(
-		async ({ input: { userId } }) => await userService.delete(userId)
-	)
+	delete: userProcedures.delete.mutation(async ({ input: { userId } }) => {
+		const user = await userService.delete(userId);
+		return {
+			message: 'User was successfully deleted!',
+			data: user
+		};
+	})
 };
 
 export default userController;

@@ -3,7 +3,11 @@ import uploadService from './upload.service.js';
 
 const uploadController = {
 	upload: uploadProcedures.upload.mutation(async ({ input }) => {
-		return await uploadService.upload(input.file);
+		const createdEvents = await uploadService.upload(input.file);
+		return {
+			message: 'Events successfully created',
+			data: createdEvents
+		};
 	})
 };
 

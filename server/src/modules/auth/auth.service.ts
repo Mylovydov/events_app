@@ -1,4 +1,4 @@
-import { UserDocument, UserModel, userService } from '../user/index.js';
+import { UserModel, userService } from '../user/index.js';
 import { ApiError } from '../../error/index.js';
 import bcrypt from 'bcrypt';
 import { tokenService } from '../token/index.js';
@@ -17,18 +17,11 @@ class AuthService {
 
 		const hashPassword = bcrypt.hashSync(password, 3);
 
-		const newUser: UserDocument = await this.userService.create({
+		const newUser = await this.userService.create({
 			...rest,
 			password: hashPassword
 		});
-		const tokens = await tokenService.generateTokens({ userId: newUser.id });
-
-		return {
-			message: 'User has been registered',
-			data: {
-				...tokens
-			}
-		};
+		return await tokenService.generateTokens({ userId: newUser._id });
 	}
 
 	async login(dto: TAuthDto) {
@@ -43,32 +36,18 @@ class AuthService {
 
 		const verifiedPassword = await bcrypt.compare(password, user.password);
 		if (!verifiedPassword) {
-			throw ApiError.badRequest(
-				'Wrong password. Please try again or use the "Forgot password?" link to reset your password.'
-			);
+			throw ApiError.unauthorized('Wrong password!');
 		}
 
-		const tokens = await tokenService.generateTokens({ userId: user.id });
-
-		return {
-			message: 'Logged in successfully',
-			data: {
-				...tokens
-			}
-		};
+		return await tokenService.generateTokens({ userId: user.id });
 	}
 
 	async logout(userId: string | null) {
 		if (!userId) {
-			throw ApiError.badRequest('User not found');
+			throw ApiError.unauthorized('User id is missing');
 		}
 
 		await tokenService.deleteRefreshToken(userId);
-
-		return {
-			message: 'Logged out successfully',
-			data: {}
-		};
 	}
 
 	async refresh(token?: TToken) {
@@ -80,7 +59,15 @@ class AuthService {
 		if (!dbRefreshToken) {
 			throw ApiError.unauthorized('Invalid refresh token');
 		}
-		// TODO: need finish this method
+
+		const verifiedRefreshToken = tokenService.verifyRefreshToken(token);
+		if (!verifiedRefreshToken) {
+			throw ApiError.unauthorized('Invalid refresh token');
+		}
+
+		const { userId } = verifiedRefreshToken;
+		await tokenService.deleteRefreshToken(userId);
+		return await tokenService.generateTokens({ userId });
 	}
 }
 

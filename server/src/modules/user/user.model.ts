@@ -15,8 +15,8 @@ class User {
 	@prop({ required: true, unique: true, default: () => uuidv4() })
 	public _id!: string;
 
-	@prop()
-	public name?: string;
+	@prop({ default: '' })
+	public name!: string;
 
 	@prop({ type: String, required: true, unique: true, index: true })
 	public email!: string;

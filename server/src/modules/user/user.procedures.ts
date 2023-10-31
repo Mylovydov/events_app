@@ -1,9 +1,13 @@
 import { authProcedure } from '../../trpc/index.js';
 import {
 	createUserInput,
+	createUserOutput,
+	deleteUserOutput,
+	getUserOutput,
+	getUsersOutput,
 	updateUserInput,
-	userIdInput,
-	userSchema
+	updateUserOutput,
+	userIdInput
 } from './user.dto.js';
 import { z } from 'zod';
 
@@ -31,12 +35,13 @@ const userProcedures = {
 			}
 		})
 		.input(createUserInput)
-		.output(userSchema),
+		.output(createUserOutput),
+
 	getUser: authProcedure
 		.meta({
 			openapi: {
 				method: 'GET',
-				path: '/users',
+				path: '/users/{userId}',
 				tags: ['users'],
 				protect: true,
 				summary: 'Get a user by id',
@@ -53,12 +58,45 @@ const userProcedures = {
 			}
 		})
 		.input(userIdInput)
-		.output(userSchema),
+		.output(getUserOutput),
+
+	getUsers: authProcedure
+		.meta({
+			openapi: {
+				method: 'GET',
+				path: '/users',
+				tags: ['users'],
+				protect: true,
+				summary: 'Get all users',
+				example: {
+					response: {
+						message: '',
+						data: [
+							{
+								id: 'b24f24af-d5cc-4ccd-ad33-1fc56bd6aeeb',
+								name: 'John Doe',
+								email: 'example@gmail.com'
+							},
+							{
+								id: 'j34jn5js-d5cc-4ccd-ad33-1fc56bd6aeeb',
+								name: 'John',
+								email: 'example-email@gmail.com'
+							},
+							['...']
+						]
+					},
+					request: {}
+				}
+			}
+		})
+		.input(z.void())
+		.output(getUsersOutput),
+
 	update: authProcedure
 		.meta({
 			openapi: {
 				method: 'PUT',
-				path: '/users',
+				path: '/users/{userId}',
 				tags: ['users'],
 				summary: 'Update a user by id',
 				protect: true,
@@ -77,12 +115,12 @@ const userProcedures = {
 			}
 		})
 		.input(updateUserInput)
-		.output(userSchema),
+		.output(updateUserOutput),
 	delete: authProcedure
 		.meta({
 			openapi: {
 				method: 'DELETE',
-				path: '/users',
+				path: '/users/{userId}',
 				tags: ['users'],
 				protect: true,
 				summary: 'Delete user by id',
@@ -95,7 +133,7 @@ const userProcedures = {
 			}
 		})
 		.input(userIdInput)
-		.output(z.void())
+		.output(deleteUserOutput)
 };
 
 export default userProcedures;

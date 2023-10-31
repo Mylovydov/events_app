@@ -10,19 +10,6 @@ class EventsService {
 		return await EventModel.insertMany(filteredEvents);
 	}
 
-	async filterExistingEvents(events: TEventsSchema) {
-		const dbEvents = await EventModel.find();
-		return events.filter(event => {
-			const isEventExist = dbEvents.some(
-				dbEvent =>
-					dbEvent.eventUUID === event.eventUUID &&
-					dbEvent.inviteeUUID === event.inviteeUUID
-			);
-
-			return !isEventExist;
-		});
-	}
-
 	validateEventsBySchema(events: TEventsSchema): TValidateCSVResult {
 		const parseResult = eventsSchema.safeParse(events);
 
@@ -37,6 +24,18 @@ class EventsService {
 			events: null,
 			error: prepareValidationErrors(parseResult.error.issues)
 		};
+	}
+
+	private async filterExistingEvents(events: TEventsSchema) {
+		const dbEvents = await EventModel.find();
+		return events.filter(({ eventUUID, inviteeUUID }) => {
+			const isEventExist = dbEvents.some(
+				dbEvent =>
+					dbEvent.eventUUID === eventUUID && dbEvent.inviteeUUID === inviteeUUID
+			);
+
+			return !isEventExist;
+		});
 	}
 }
 

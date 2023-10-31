@@ -3,7 +3,8 @@ import userController from '../modules/user/user.controller.js';
 
 const userRouter = router({
 	create: userController.create,
-	get: userController.get,
+	getUser: userController.getUser,
+	getUsers: userController.getUsers,
 	update: userController.update,
 	delete: userController.delete
 });

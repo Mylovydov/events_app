@@ -8,8 +8,8 @@ class TokenService {
 		process.env.REFRESH_JWT_SECRET || 'secret-refresh-key';
 
 	async generateTokens(payload: TPayload): Promise<TGenerateResult> {
-		const accessExpiresIn = '1h';
-		const refreshExpiresIn = '1h';
+		const accessExpiresIn = '10h';
+		const refreshExpiresIn = '10h';
 
 		const accessToken = jwt.sign(payload, this.accessTokenKey, {
 			expiresIn: accessExpiresIn

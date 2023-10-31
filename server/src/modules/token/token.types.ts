@@ -1,13 +1,12 @@
 import { z } from 'zod';
-import { token } from './token.dto.js';
+import {
+	generateTokenPairInput,
+	generateTokenPairOutput,
+	token
+} from './token.dto.js';
 
 export type TToken = z.infer<typeof token>;
 
-export type TPayload = {
-	userId: string;
-};
+export type TPayload = z.infer<typeof generateTokenPairInput>;
 
-export type TGenerateResult = {
-	accessToken: TToken;
-	refreshToken: TToken;
-};
+export type TGenerateResult = z.infer<typeof generateTokenPairOutput>;

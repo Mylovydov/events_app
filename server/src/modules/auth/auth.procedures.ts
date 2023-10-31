@@ -3,9 +3,9 @@ import {
 	authInput,
 	authOutput,
 	logoutInput,
-	logoutOutput
+	logoutOutput,
+	refreshOutput
 } from './auth.dto.js';
-import { z } from 'zod';
 
 const authProcedures = {
 	register: publicProcedure
@@ -53,7 +53,7 @@ const authProcedures = {
 			}
 		})
 		.input(logoutInput)
-		.output(z.void())
+		.output(refreshOutput)
 };
 
 export default authProcedures;
