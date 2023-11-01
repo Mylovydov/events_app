@@ -2,10 +2,10 @@ import { z } from 'zod';
 import {
 	generateTokenPairInput,
 	generateTokenPairOutput,
-	token
+	mainTokenSchema
 } from './token.dto.js';
 
-export type TToken = z.infer<typeof token>;
+export type TToken = z.infer<typeof mainTokenSchema>;
 
 export type TPayload = z.infer<typeof generateTokenPairInput>;
 

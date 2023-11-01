@@ -15,7 +15,11 @@ export const mainUserSchema = z.object({
 export const baseUserSchema = mainUserSchema.omit({ password: true });
 
 // CREATE
-export const createUserInput = mainUserSchema.omit({ _id: true });
+export const createUserInput = mainUserSchema.pick({
+	email: true,
+	name: true,
+	password: true
+});
 
 export const createUserOutput = baseOutputSchema.extend({
 	data: baseUserSchema
@@ -27,7 +31,7 @@ export const userIdInput = z.object({
 });
 
 // UPDATE
-export const updateUserInput = baseUserSchema.extend({
+export const updateUserInput = baseUserSchema.omit({ _id: true }).extend({
 	userId: mainUserSchema.shape._id
 });
 

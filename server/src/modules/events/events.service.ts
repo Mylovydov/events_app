@@ -7,7 +7,6 @@ import { EventModel } from './events.model.js';
 class EventsService {
 	async uploadEventsToDb(eventsToUpload: TEventsSchema) {
 		const filteredEvents = await this.filterExistingEvents(eventsToUpload);
-		// const createdEvents =  await EventModel.insertMany(filteredEvents);
 		const createdEvents = await EventModel.create(filteredEvents);
 		return createdEvents.map(event => event.toJSON());
 	}

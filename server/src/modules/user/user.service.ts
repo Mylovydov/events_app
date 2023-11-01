@@ -1,10 +1,8 @@
-import {
-	TCreateUserDto,
-	TMainUserSchema,
-	TUpdateUserDto
-} from './user.types.js';
-import { UserDocument, UserModel } from './user.model.js';
+import { TCreateUserDto, TUpdateUserDto } from './user.types.js';
+import { UserDocument } from './models/user.model.js';
 import { ApiError } from '../../error/index.js';
+import { TAddSmtpSettingsDto } from '../smtp-settings/smtp-settings.types.js';
+import { SmtpSettingsModel, UserModel } from './models/index.js';
 
 class UserService {
 	async create(dto: TCreateUserDto) {
@@ -21,7 +19,7 @@ class UserService {
 
 		const userToUpdate = await UserModel.findByIdAndUpdate(
 			{ _id: userId },
-			rest,
+			{ ...rest },
 			{ new: true }
 		).lean();
 
@@ -51,21 +49,37 @@ class UserService {
 	}
 
 	async getById(id: string) {
-		const user = await UserModel.findOne({ _id: id });
-
+		const user = await UserModel.findOne({ _id: id }).populate('smtpSettings');
 		if (!user) {
 			throw ApiError.notFound(`User with id: ${id} not found!`);
 		}
 
-		return this.prepareUser(user.toJSON());
+		return user.toJSON();
 	}
 
-	private prepareUser(user: TMainUserSchema) {
-		return {
-			_id: user._id,
-			name: user.name,
-			email: user.email
-		};
+	async addSmtpSettings({ userId, ...restDto }: TAddSmtpSettingsDto) {
+		const user = await UserModel.findById(userId);
+		if (!user) {
+			throw ApiError.notFound(`User with id: ${userId} not found!`);
+		}
+
+		let smtpSettings = await SmtpSettingsModel.findOneAndUpdate(
+			{
+				user: userId
+			},
+			{ ...restDto },
+			{ new: true }
+		);
+
+		if (smtpSettings) {
+			return smtpSettings.toJSON();
+		}
+
+		smtpSettings = await SmtpSettingsModel.create({ ...restDto, user: userId });
+		user.smtpSettings = smtpSettings._id;
+		await user.save();
+
+		return smtpSettings.toJSON();
 	}
 }
 

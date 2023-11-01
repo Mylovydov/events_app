@@ -37,7 +37,16 @@ const userController = {
 			message: 'User was successfully deleted!',
 			data: user
 		};
-	})
+	}),
+	addSmtpSettings: userProcedures.addSmtpSettings.mutation(
+		async ({ input }) => {
+			const smtpSettings = await userService.addSmtpSettings(input);
+			return {
+				message: 'SMTP settings was successfully added!',
+				data: smtpSettings
+			};
+		}
+	)
 };
 
 export default userController;

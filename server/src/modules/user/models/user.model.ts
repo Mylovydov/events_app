@@ -1,10 +1,6 @@
-import {
-	DocumentType,
-	getModelForClass,
-	modelOptions,
-	prop
-} from '@typegoose/typegoose';
+import { DocumentType, modelOptions, prop, Ref } from '@typegoose/typegoose';
 import { v4 as uuidv4 } from 'uuid';
+import Smtp from './smtp-settings.model.js';
 
 @modelOptions({
 	schemaOptions: {
@@ -23,12 +19,11 @@ class User {
 
 	@prop({ type: String, required: true })
 	public password!: string;
+
+	@prop({ ref: () => Smtp, type: () => String })
+	public smtpSettings!: Ref<Smtp, string>;
 }
 
-export const UserModel = getModelForClass(User, {
-	schemaOptions: {
-		versionKey: false
-	}
-});
+export default User;
 
 export type UserDocument = DocumentType<User>;

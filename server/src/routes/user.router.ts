@@ -6,7 +6,8 @@ const userRouter = router({
 	getUser: userController.getUser,
 	getUsers: userController.getUsers,
 	update: userController.update,
-	delete: userController.delete
+	delete: userController.delete,
+	addSmtpSettings: userController.addSmtpSettings
 });
 
 export default userRouter;

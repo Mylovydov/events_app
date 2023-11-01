@@ -14,7 +14,13 @@ const authProcedures = {
 				method: 'POST',
 				path: '/auth/register',
 				tags: ['auth'],
-				summary: 'Register user in the system'
+				summary: 'Register user in the system',
+				example: {
+					request: {
+						email: 'user@example.com',
+						password: '12345678'
+					}
+				}
 			}
 		})
 		.input(authInput)
@@ -25,7 +31,13 @@ const authProcedures = {
 				method: 'POST',
 				path: '/auth/login',
 				tags: ['auth'],
-				summary: 'Login user to the system'
+				summary: 'Login user to the system',
+				example: {
+					request: {
+						email: 'user@example.com',
+						password: '12345678'
+					}
+				}
 			}
 		})
 		.input(authInput)
