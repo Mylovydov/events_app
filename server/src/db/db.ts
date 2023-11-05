@@ -1,4 +1,6 @@
 import * as mongoose from 'mongoose';
+import { UserModel } from '../modules/user/models/index.js';
+import { authService } from '../modules/auth/index.js';
 
 export const db = {
 	connect: async (cb: () => void) => {
@@ -7,5 +9,14 @@ export const db = {
 		);
 
 		cb();
+	},
+	initUser: async () => {
+		const userDocsCount = await UserModel.countDocuments();
+		if (!userDocsCount) {
+			await authService.register({
+				email: 'user@example.com',
+				password: '12345678'
+			});
+		}
 	}
 };

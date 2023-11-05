@@ -1,13 +1,13 @@
 import { z } from 'zod';
 
 import {
+	addAppSettingsInput,
 	addSmtpSettingsInput,
 	baseUserSchema,
 	createUserInput,
 	mainUserSchema,
 	updateUserInput
 } from './dto/index.js';
-import { addAppSettingsInput } from './dto/app-settings.dto.js';
 
 export type TCreateUserDto = z.infer<typeof createUserInput>;
 export type TUpdateUserDto = z.infer<typeof updateUserInput>;
