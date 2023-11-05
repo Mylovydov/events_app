@@ -5,6 +5,7 @@ import {
 } from './user.types.js';
 import { ApiError } from '../../error/index.js';
 import { SmtpSettingsModel, UserModel } from './models/index.js';
+import { TokenModel } from '../token/index.js';
 
 class UserService {
 	async create(dto: TCreateUserDto) {
@@ -43,6 +44,11 @@ class UserService {
 			throw ApiError.notFound(`User with id: ${userId} not found!`);
 		}
 
+		if (deletedUser.smtpSettings) {
+			await SmtpSettingsModel.deleteOne({ _id: deletedUser.smtpSettings });
+		}
+
+		await TokenModel.deleteOne({ userId: deletedUser._id });
 		return deletedUser;
 	}
 
