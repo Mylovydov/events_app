@@ -2,18 +2,13 @@ import {
 	DocumentType,
 	getModelForClass,
 	index,
-	modelOptions,
 	prop
 } from '@typegoose/typegoose';
 import { v4 as uuidv4 } from 'uuid';
+import { baseModelOptions } from '../utils/index.js';
 
-@modelOptions({
-	schemaOptions: {
-		timestamps: true
-	}
-})
 @index({ eventUUID: 1, inviteeUUID: 1 })
-class Event {
+class EventSchema {
 	@prop({ required: true, unique: true, default: () => uuidv4() })
 	public _id!: string;
 
@@ -45,10 +40,9 @@ class Event {
 	public isEmailSend!: boolean;
 }
 
-export const EventModel = getModelForClass(Event, {
-	schemaOptions: {
-		versionKey: false
-	}
+export const EventModel = getModelForClass(EventSchema, {
+	...baseModelOptions,
+	options: { customName: 'events' }
 });
 
-export type EventDocument = DocumentType<Event>;
+export type EventDocument = DocumentType<EventSchema>;

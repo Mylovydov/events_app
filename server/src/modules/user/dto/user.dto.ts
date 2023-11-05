@@ -1,12 +1,14 @@
 import { z } from 'zod';
 import { mainSmtpSettingsSchema } from './smtp-settings.dto.js';
 import { baseOutputSchema } from '../../utils/index.js';
+import { mainAppSettingsSchema } from './app-settings.dto.js';
 
 export const mainUserSchema = z.object({
 	_id: z.string().uuid({ message: 'Invalid UUID format' }),
 	email: z.string().email({ message: 'Invalid email address' }),
 	name: z.string().max(25, 'Name must be less than 25 characters').optional(),
 	smtpSettings: z.optional(z.string().uuid().or(mainSmtpSettingsSchema)),
+	appSettings: z.optional(z.string().uuid().or(mainAppSettingsSchema)),
 	autoEmailSending: z.boolean(),
 	password: z
 		.string()
@@ -52,5 +54,14 @@ export const getUsersOutput = baseOutputSchema.extend({
 
 // DELETE
 export const deleteUserOutput = baseOutputSchema.extend({
+	data: baseUserSchema
+});
+
+// APP SETTINGS
+export const addAppSettingsInput = z.object({
+	userId: z.string().uuid({ message: 'Invalid UUID format' }),
+	highlightColor: z.string()
+});
+export const addAppSettingsOutput = baseOutputSchema.extend({
 	data: baseUserSchema
 });

@@ -1,5 +1,7 @@
 import { authProcedure } from '../../trpc/index.js';
 import {
+	addAppSettingsInput,
+	addAppSettingsOutput,
 	addSmtpSettingsInput,
 	addSmtpSettingsOutput,
 	createUserInput,
@@ -43,7 +45,7 @@ const userProcedures = {
 		.meta({
 			openapi: {
 				method: 'GET',
-				path: '/users/{userId}',
+				path: '/users',
 				tags: ['users'],
 				protect: true,
 				summary: 'Get a user by id',
@@ -66,7 +68,7 @@ const userProcedures = {
 		.meta({
 			openapi: {
 				method: 'GET',
-				path: '/users',
+				path: '/users/all',
 				tags: ['users'],
 				protect: true,
 				summary: 'Get all users',
@@ -156,7 +158,27 @@ const userProcedures = {
 			}
 		})
 		.input(addSmtpSettingsInput)
-		.output(addSmtpSettingsOutput)
+		.output(addSmtpSettingsOutput),
+
+	addAppSettings: authProcedure
+		.meta({
+			openapi: {
+				method: 'PUT',
+				path: '/users/app-settings',
+				tags: ['users'],
+				protect: true,
+				summary: 'Add app settings to user by id',
+				example: {
+					response: {},
+					request: {
+						userId: '10db6a2d-0dd8-44f8-a603-b5a69723e751',
+						highlightColor: '#fbf1e6'
+					}
+				}
+			}
+		})
+		.input(addAppSettingsInput)
+		.output(addAppSettingsOutput)
 };
 
 export default userProcedures;

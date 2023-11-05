@@ -1,5 +1,7 @@
 import { z } from 'zod';
 
-export const baseOutputSchema = z.object({
+const baseOutputSchema = z.object({
 	message: z.string()
 });
+
+export default baseOutputSchema;
