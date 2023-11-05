@@ -4,3 +4,11 @@
 **/.env
 **/.idea
 server/assets
+
+# Logs
+logs
+*.log
+**/npm-debug.log*
+
+**/*.local
+
