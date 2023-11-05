@@ -65,3 +65,14 @@ export const addAppSettingsInput = z.object({
 export const addAppSettingsOutput = baseOutputSchema.extend({
 	data: baseUserSchema
 });
+
+// SMTP SETTINGS
+// // CREATE
+export const addSmtpSettingsInput = z.object({
+	userId: z.string().uuid({ message: 'Invalid UUID format' }),
+	server: z.string()
+});
+
+export const addSmtpSettingsOutput = baseOutputSchema.extend({
+	data: baseUserSchema
+});

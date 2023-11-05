@@ -11,8 +11,7 @@ export class Smtp {
 }
 
 export const SmtpSettingsModel = getModelForClass(Smtp, {
-	...baseModelOptions,
-	options: { customName: 'smtp' }
+	...baseModelOptions
 });
 
 export type SMTPSettingsDocument = DocumentType<Smtp>;
