@@ -1,5 +1,7 @@
 import { authProcedure } from '../../trpc/index.js';
 import {
+	addSmtpSettingsInput,
+	addSmtpSettingsOutput,
 	createUserInput,
 	createUserOutput,
 	deleteUserOutput,
@@ -8,12 +10,8 @@ import {
 	updateUserInput,
 	updateUserOutput,
 	userIdInput
-} from './user.dto.js';
+} from './dto/index.js';
 import { z } from 'zod';
-import {
-	addSmtpSettingsInput,
-	addSmtpSettingsOutput
-} from '../smtp-settings/smtp-settings.dto.js';
 
 const userProcedures = {
 	create: authProcedure

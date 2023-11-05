@@ -1,7 +1,9 @@
-import { TCreateUserDto, TUpdateUserDto } from './user.types.js';
-import { UserDocument } from './models/user.model.js';
+import {
+	TAddSmtpSettingsDto,
+	TCreateUserDto,
+	TUpdateUserDto
+} from './user.types.js';
 import { ApiError } from '../../error/index.js';
-import { TAddSmtpSettingsDto } from '../smtp-settings/smtp-settings.types.js';
 import { SmtpSettingsModel, UserModel } from './models/index.js';
 
 class UserService {
@@ -21,7 +23,9 @@ class UserService {
 			{ _id: userId },
 			{ ...rest },
 			{ new: true }
-		).lean();
+		)
+			.populate('smtpSettings')
+			.lean();
 
 		if (!userToUpdate) {
 			throw ApiError.notFound(`User with id: ${userId} not found!`);
@@ -32,7 +36,9 @@ class UserService {
 	async delete(userId: string) {
 		const deletedUser = await UserModel.findOneAndDelete({
 			_id: userId
-		}).lean();
+		})
+			.populate('smtpSettings')
+			.lean();
 		if (!deletedUser) {
 			throw ApiError.notFound(`User with id: ${userId} not found!`);
 		}
@@ -41,10 +47,10 @@ class UserService {
 	}
 
 	async getAll() {
-		return UserModel.find().lean();
+		return UserModel.find().populate('smtpSettings').lean();
 	}
 
-	async getByEmail(email: string): Promise<UserDocument | null> {
+	async getByEmail(email: string) {
 		return UserModel.findOne({ email });
 	}
 
