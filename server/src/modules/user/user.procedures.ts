@@ -1,16 +1,11 @@
 import { authProcedure } from '../../trpc/index.js';
 import {
 	addAppSettingsInput,
-	addAppSettingsOutput,
 	addSmtpSettingsInput,
-	addSmtpSettingsOutput,
+	baseUserOutput,
 	createUserInput,
-	createUserOutput,
-	deleteUserOutput,
-	getUserOutput,
 	getUsersOutput,
 	updateUserInput,
-	updateUserOutput,
 	userIdInput
 } from './dto/index.js';
 import { z } from 'zod';
@@ -39,7 +34,7 @@ const userProcedures = {
 			}
 		})
 		.input(createUserInput)
-		.output(createUserOutput),
+		.output(baseUserOutput),
 
 	getUser: authProcedure
 		.meta({
@@ -62,7 +57,7 @@ const userProcedures = {
 			}
 		})
 		.input(userIdInput)
-		.output(getUserOutput),
+		.output(baseUserOutput),
 
 	getUsers: authProcedure
 		.meta({
@@ -119,7 +114,7 @@ const userProcedures = {
 			}
 		})
 		.input(updateUserInput)
-		.output(updateUserOutput),
+		.output(baseUserOutput),
 
 	delete: authProcedure
 		.meta({
@@ -138,7 +133,7 @@ const userProcedures = {
 			}
 		})
 		.input(userIdInput)
-		.output(deleteUserOutput),
+		.output(baseUserOutput),
 
 	addSmtpSettings: authProcedure
 		.meta({
@@ -158,7 +153,7 @@ const userProcedures = {
 			}
 		})
 		.input(addSmtpSettingsInput)
-		.output(addSmtpSettingsOutput),
+		.output(baseUserOutput),
 
 	addAppSettings: authProcedure
 		.meta({
@@ -178,7 +173,7 @@ const userProcedures = {
 			}
 		})
 		.input(addAppSettingsInput)
-		.output(addAppSettingsOutput)
+		.output(baseUserOutput)
 };
 
 export default userProcedures;

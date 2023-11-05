@@ -25,7 +25,8 @@ export const createUserInput = mainUserSchema.pick({
 	name: true,
 	password: true
 });
-export const createUserOutput = baseOutputSchema.extend({
+
+export const baseUserOutput = baseOutputSchema.extend({
 	data: baseUserSchema
 });
 
@@ -38,41 +39,22 @@ export const userIdInput = z.object({
 export const updateUserInput = baseUserSchema.omit({ _id: true }).extend({
 	userId: userIdInput
 });
-export const updateUserOutput = baseOutputSchema.extend({
-	data: baseUserSchema
-});
-
-// GET USER BY ID
-export const getUserOutput = baseOutputSchema.extend({
-	data: baseUserSchema
-});
 
 // GET ALL
 export const getUsersOutput = baseOutputSchema.extend({
 	data: z.array(baseUserSchema)
 });
 
-// DELETE
-export const deleteUserOutput = baseOutputSchema.extend({
-	data: baseUserSchema
-});
-
 // APP SETTINGS
-export const addAppSettingsInput = z.object({
-	userId: z.string().uuid({ message: 'Invalid UUID format' }),
-	highlightColor: z.string()
-});
-export const addAppSettingsOutput = baseOutputSchema.extend({
-	data: baseUserSchema
-});
+export const addAppSettingsInput = mainAppSettingsSchema
+	.omit({ _id: true })
+	.extend({
+		userId: mainUserSchema.shape._id
+	});
 
 // SMTP SETTINGS
-// // CREATE
-export const addSmtpSettingsInput = z.object({
-	userId: z.string().uuid({ message: 'Invalid UUID format' }),
-	server: z.string()
-});
-
-export const addSmtpSettingsOutput = baseOutputSchema.extend({
-	data: baseUserSchema
-});
+export const addSmtpSettingsInput = mainSmtpSettingsSchema
+	.omit({ _id: true })
+	.extend({
+		userId: mainUserSchema.shape._id
+	});
