@@ -4,7 +4,7 @@ const minLengthErrorMessage = 'Must be 5 or more characters long';
 const maxLengthErrorMessage = 'Must be 5 or fewer characters long';
 const idErrorMessage = 'Invalid UUID';
 
-export const eventSchema = z.object({
+export const mainEventSchema = z.object({
 	inviteeLastName: z
 		.string()
 		.min(3, { message: minLengthErrorMessage })
@@ -28,4 +28,17 @@ export const eventSchema = z.object({
 	inviteeUUID: z.string().uuid(idErrorMessage)
 });
 
-export const eventsSchema = z.array(eventSchema);
+export const eventSchemaDb = mainEventSchema
+	.omit({ startDateTime: true, endDateTime: true })
+	.extend({
+		_id: z.string().uuid(),
+		isEmailSend: z.boolean(),
+		endDateTime: z.any(),
+		createdAt: z.any(),
+		updatedAt: z.any(),
+		// startDateTime: z.date(),
+		startDateTime: z.any()
+	});
+
+export const eventsSchema = z.array(mainEventSchema);
+export const eventsSchemaDb = z.array(eventSchemaDb);

@@ -17,6 +17,7 @@ const userController = {
 			data: user
 		};
 	}),
+
 	getUsers: userProcedures.getUsers.query(async () => {
 		const users = await userService.getAll();
 		return {
@@ -24,6 +25,7 @@ const userController = {
 			data: users
 		};
 	}),
+
 	update: userProcedures.update.mutation(async ({ input }) => {
 		const user = await userService.update(input);
 		return {
@@ -31,11 +33,30 @@ const userController = {
 			data: user
 		};
 	}),
+
 	delete: userProcedures.delete.mutation(async ({ input: { userId } }) => {
 		const user = await userService.delete(userId);
 		return {
 			message: 'User was successfully deleted!',
 			data: user
+		};
+	}),
+
+	addSmtpSettings: userProcedures.addSmtpSettings.mutation(
+		async ({ input }) => {
+			const smtpSettings = await userService.addSmtpSettings(input);
+			return {
+				message: 'SMTP settings was successfully added!',
+				data: smtpSettings
+			};
+		}
+	),
+
+	addAppSettings: userProcedures.addAppSettings.mutation(async ({ input }) => {
+		const updatedUser = await userService.addAppSettings(input);
+		return {
+			message: 'App settings was successfully added!',
+			data: updatedUser
 		};
 	})
 };

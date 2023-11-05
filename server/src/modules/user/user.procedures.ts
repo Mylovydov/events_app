@@ -1,5 +1,9 @@
 import { authProcedure } from '../../trpc/index.js';
 import {
+	addAppSettingsInput,
+	addAppSettingsOutput,
+	addSmtpSettingsInput,
+	addSmtpSettingsOutput,
 	createUserInput,
 	createUserOutput,
 	deleteUserOutput,
@@ -8,7 +12,7 @@ import {
 	updateUserInput,
 	updateUserOutput,
 	userIdInput
-} from './user.dto.js';
+} from './dto/index.js';
 import { z } from 'zod';
 
 const userProcedures = {
@@ -41,7 +45,7 @@ const userProcedures = {
 		.meta({
 			openapi: {
 				method: 'GET',
-				path: '/users/{userId}',
+				path: '/users',
 				tags: ['users'],
 				protect: true,
 				summary: 'Get a user by id',
@@ -49,7 +53,7 @@ const userProcedures = {
 					response: {
 						id: 'b24f24af-d5cc-4ccd-ad33-1fc56bd6aeeb',
 						name: 'John Doe',
-						email: 'example@gmail.com'
+						email: 'user@example.com'
 					},
 					request: {
 						userId: 'b24f24af-d5cc-4ccd-ad33-1fc56bd6aeeb'
@@ -64,7 +68,7 @@ const userProcedures = {
 		.meta({
 			openapi: {
 				method: 'GET',
-				path: '/users',
+				path: '/users/all',
 				tags: ['users'],
 				protect: true,
 				summary: 'Get all users',
@@ -96,7 +100,7 @@ const userProcedures = {
 		.meta({
 			openapi: {
 				method: 'PUT',
-				path: '/users/{userId}',
+				path: '/users',
 				tags: ['users'],
 				summary: 'Update a user by id',
 				protect: true,
@@ -107,33 +111,74 @@ const userProcedures = {
 						email: 'example@gmail.com'
 					},
 					request: {
-						userId: '60f0f1b0c9e9b1b3e8f9b3b3',
+						userId: '6e6c331e-7f3a-44d4-bb33-7358d9f808f9',
 						name: 'John',
-						email: 'example@gmail.com'
+						email: 'user@example.com'
 					}
 				}
 			}
 		})
 		.input(updateUserInput)
 		.output(updateUserOutput),
+
 	delete: authProcedure
 		.meta({
 			openapi: {
 				method: 'DELETE',
-				path: '/users/{userId}',
+				path: '/users',
 				tags: ['users'],
 				protect: true,
 				summary: 'Delete user by id',
 				example: {
 					response: {},
 					request: {
-						userId: '60f0f1b0c9e9b1b3e8f9b3b3'
+						userId: '6e6c331e-7f3a-44d4-bb33-7358d9f808f9'
 					}
 				}
 			}
 		})
 		.input(userIdInput)
-		.output(deleteUserOutput)
+		.output(deleteUserOutput),
+
+	addSmtpSettings: authProcedure
+		.meta({
+			openapi: {
+				method: 'PUT',
+				path: '/users/smtp-settings',
+				tags: ['users'],
+				protect: true,
+				summary: 'Add SMTP settings to user by id',
+				example: {
+					response: {},
+					request: {
+						userId: '10db6a2d-0dd8-44f8-a603-b5a69723e751',
+						server: 'smtp.gmail.com'
+					}
+				}
+			}
+		})
+		.input(addSmtpSettingsInput)
+		.output(addSmtpSettingsOutput),
+
+	addAppSettings: authProcedure
+		.meta({
+			openapi: {
+				method: 'PUT',
+				path: '/users/app-settings',
+				tags: ['users'],
+				protect: true,
+				summary: 'Add app settings to user by id',
+				example: {
+					response: {},
+					request: {
+						userId: '10db6a2d-0dd8-44f8-a603-b5a69723e751',
+						highlightColor: '#fbf1e6'
+					}
+				}
+			}
+		})
+		.input(addAppSettingsInput)
+		.output(addAppSettingsOutput)
 };
 
 export default userProcedures;

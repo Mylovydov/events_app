@@ -4,6 +4,7 @@ import {
 	modelOptions,
 	prop
 } from '@typegoose/typegoose';
+import { baseModelOptions } from '../utils/index.js';
 
 @modelOptions({
 	schemaOptions: {
@@ -18,10 +19,6 @@ class Token {
 	public refreshToken!: string;
 }
 
-export const TokenModel = getModelForClass(Token, {
-	schemaOptions: {
-		versionKey: false
-	}
-});
+export const TokenModel = getModelForClass(Token, baseModelOptions);
 
 export type TokenDocument = DocumentType<Token>;
