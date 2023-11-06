@@ -1,0 +1,26 @@
+.app {
+    background-color: var(--main-white-color);
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+}
+
+.appSidebar {
+    flex: 0 0 30rem;
+    border-radius: 0 2rem 2rem 0;
+    background: var(--main-gradient);
+}
+
+.appMain {
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.appHeader {
+    background-color: var(--main-white-color);
+}
+
+.appBody {
+    background-color: var(--main-bg-color);
+}
