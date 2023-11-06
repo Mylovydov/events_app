@@ -1,9 +1,18 @@
 :root {
   line-height: 150%;
   font-weight: 400;
+
   --main-gradient: linear-gradient(180deg, #8A4BF1 0%, #6C60F4 100%);
   --main-bg-color: #F9F9FF;
   --main-white-color: #fff;
+
+  --header-z-index: 100;
+
+  --breakpoint-xs: 0;
+  --breakpoint-sm: 59.9rem;
+  --breakpoint-md: 89.9rem;
+  --breakpoint-lg: 119.9rem;
+  --breakpoint-xl: 153.5rem;
 }
 
 html {
