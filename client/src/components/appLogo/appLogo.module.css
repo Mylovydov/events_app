@@ -1,0 +1,16 @@
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.logoImg {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 5rem;
+}
+
+.logoText {
+    flex: 1 1 auto;
+}

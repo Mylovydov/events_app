@@ -9,6 +9,7 @@
     flex: 0 0 30rem;
     border-radius: 0 2rem 2rem 0;
     background: var(--main-gradient);
+    overflow: hidden;
 }
 
 .appMain {
@@ -18,9 +19,11 @@
 }
 
 .appHeader {
-    background-color: var(--main-white-color);
+    position: static;
+    z-index: var(--header-z-index);
 }
 
 .appBody {
     background-color: var(--main-bg-color);
+    flex: 1 1 auto;
 }

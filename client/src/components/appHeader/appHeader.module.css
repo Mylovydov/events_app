@@ -1,0 +1,28 @@
+.appHeader {
+    display: flex;
+    align-items: center;
+    padding: 3rem;
+    justify-content: space-between;
+    gap: 1rem;
+    background-color: var(--main-white-color);
+
+    @media (min-width: 59.9rem) {
+        justify-content: flex-end;
+    }
+}
+
+.appHeaderAction {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex: 0 0 18rem
+}
+
+
+
+.appHeaderMenu {
+    flex: 1 1 auto;
+    @media (min-width: 59.9rem) {
+        display: none;
+    }
+}

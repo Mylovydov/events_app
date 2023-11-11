@@ -1,0 +1,16 @@
+.headerActions {
+    display: flex;
+    align-items: center;
+    gap: 3rem;
+}
+
+.headerActionsInfo {
+    flex: 1 1 auto;
+}
+
+.headerActionsNotify {
+    flex: 0 0 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: end;
+}
