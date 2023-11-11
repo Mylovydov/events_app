@@ -5,9 +5,25 @@ import { RouterProvider } from 'react-router-dom';
 import appRouter from '@/router/app.router.tsx';
 import 'normalize.css';
 import { library } from '@fortawesome/fontawesome-svg-core';
-import { faUser } from '@fortawesome/free-solid-svg-icons';
+import {
+	faArrowRightFromBracket,
+	faBell,
+	faCalendarDays,
+	faGear,
+	faHouse,
+	faRectangleList,
+	faUser
+} from '@fortawesome/free-solid-svg-icons';
 
-library.add(faUser);
+library.add(
+	faUser,
+	faBell,
+	faCalendarDays,
+	faRectangleList,
+	faGear,
+	faArrowRightFromBracket,
+	faHouse
+);
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
 	<React.StrictMode>

@@ -1,15 +1,15 @@
 import styles from './appHeader.module.css';
+import HeaderActions from '../headerActions/HeaderActions.tsx';
 import images from '@/assets/images.jpeg';
-import { Avatar } from '@/components/ui';
-import Typography from '../ui/typography/Typography.tsx';
+import { FC } from 'react';
+import { AppHeaderProps } from '@/components/appHeader/appHeader.types.ts';
 
-const AppHeader = () => {
+const AppHeader: FC<AppHeaderProps> = ({ username }) => {
 	return (
 		<div className={styles.appHeader}>
 			<div className={styles.appHeaderMenu}>appHeaderMenu</div>
 			<div className={styles.appHeaderAction}>
-				<Avatar src={images} />
-				<Typography variant="body1" text="fsfsfsf" weight="regular" />
+				<HeaderActions userAvatar={images} username={username} />
 			</div>
 		</div>
 	);

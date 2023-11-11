@@ -74,3 +74,11 @@
 .bold {
     font-weight: 700;
 }
+
+.noWrap {
+    white-space: nowrap;
+}
+
+.lightColor {
+    color: var(--main-white-color);
+}

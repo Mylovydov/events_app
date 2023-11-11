@@ -1,6 +1,7 @@
 import { createBrowserRouter } from 'react-router-dom';
 import {
 	EMAIL_LAYOUT_PATH,
+	EVENTS_PATH,
 	HOME_PATH,
 	SETTINGS_PATH
 } from '@/router/constants.ts';
@@ -18,6 +19,10 @@ const appRouter = createBrowserRouter([
 				children: [
 					{
 						index: true,
+						element: <div>HOME_PATH</div>
+					},
+					{
+						path: EVENTS_PATH,
 						element: <div>EVENTS_PATH</div>
 					},
 					{

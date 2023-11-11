@@ -22,12 +22,16 @@ const Typography: FC<TTypographyProps> = ({
 	variant = 'body1',
 	text,
 	weight = 'regular',
-	classes = ''
+	classes = '',
+	noWrap,
+	lightColor
 }) => {
 	const typographyClassNames = classNames({
 		[styles.typography]: true,
 		[styles[variant]]: variant,
-		[styles[weight]]: weight
+		[styles[weight]]: weight,
+		[styles.noWrap]: noWrap,
+		[styles.lightColor]: lightColor
 	});
 
 	return React.createElement(

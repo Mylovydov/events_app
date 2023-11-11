@@ -7,7 +7,7 @@ import * as path from 'path';
 // const PORT = import.meta.env.VITE_PORT || 3000;
 
 export default defineConfig({
-	plugins: [react(), svgr(), tsconfigPaths()],
+	plugins: [react(), svgr({ svgrOptions: { icon: true } }), tsconfigPaths()],
 	server: {
 		open: true,
 		port: 3000

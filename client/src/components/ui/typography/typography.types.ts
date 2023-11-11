@@ -17,4 +17,6 @@ export type TTypographyProps = {
 	weight?: 'regular' | 'medium' | 'semi' | 'bold';
 	text: string | ReactNode;
 	classes?: string;
+	noWrap?: boolean;
+	lightColor?: boolean;
 };

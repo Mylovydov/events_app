@@ -15,9 +15,13 @@
     display: flex;
     align-items: center;
     gap: 1rem;
+    flex: 0 0 18rem
 }
 
+
+
 .appHeaderMenu {
+    flex: 1 1 auto;
     @media (min-width: 59.9rem) {
         display: none;
     }

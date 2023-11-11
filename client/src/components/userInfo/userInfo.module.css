@@ -1,0 +1,13 @@
+.userInfo {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.userInfoAvatar {
+    flex: 0 0 4rem
+}
+
+.userInfoText {
+    flex: 1 1 auto;
+}
