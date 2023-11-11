@@ -4,7 +4,7 @@ import useDropZone from './hooks/useDropZone.hook.ts';
 import UploadedFile from './components/uploadedFile/UploadedFile.tsx';
 import classNames from 'classnames';
 import { FC } from 'react';
-import { TDropZoneProps } from '@/components/ui/dropZone/dropZOne.types.ts';
+import { TDropZoneProps } from './dropZone.types.ts';
 
 const DropZone: FC<TDropZoneProps> = ({
 	onDropAccepted,
@@ -13,7 +13,9 @@ const DropZone: FC<TDropZoneProps> = ({
 	dragPlaceholder
 }) => {
 	const onHandleDropAccepted = (files: File[]) => {
-		onDropAccepted && onDropAccepted(files);
+		if (files.length && onDropAccepted) {
+			onDropAccepted(files[0]);
+		}
 	};
 
 	const {

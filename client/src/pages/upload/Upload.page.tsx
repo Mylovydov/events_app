@@ -1,9 +1,8 @@
 import styles from './upload.page.module.css';
 import { Typography } from '@/components';
-import DropZone, {
-	TDropZoneProps
-} from '../../components/ui/dropZone/DropZone.tsx';
+import DropZone from '../../components/ui/dropZone/DropZone.tsx';
 import { FC } from 'react';
+import { TDropZoneProps } from '@/components/ui/dropZone/dropZone.types.ts';
 
 export type TUploadPageProps = {
 	title: string;
