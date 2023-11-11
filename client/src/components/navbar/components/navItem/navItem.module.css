@@ -8,7 +8,7 @@
     align-items: center;
     gap: 2rem;
     color: var(--main-white-color);
-    opacity: .8;
+    opacity: .7;
     cursor: pointer;
     transition: opacity var(--main-transition-delay) var(--main-transition-fn);
 }

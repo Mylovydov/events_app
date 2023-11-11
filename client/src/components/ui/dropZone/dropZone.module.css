@@ -1,0 +1,22 @@
+.uploadAction {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 4rem;
+    border-radius: 1rem;
+    border-width: .2rem;
+    border-style: dashed;
+    outline: none;
+    cursor: pointer;
+    background-color: var(--main-white-color);
+    border-color: var(--main-purple-light-color);
+    min-height: 30rem;
+}
+
+.dragReject {
+    border-color: var(--main-error-color);
+}
+
+.dragAccept {
+    border-color: var(--main-success-color);
+}

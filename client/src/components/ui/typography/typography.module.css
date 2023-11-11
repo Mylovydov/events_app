@@ -82,3 +82,15 @@
 .lightColor {
     color: var(--main-white-color);
 }
+
+.left {
+    text-align: left;
+}
+
+.center {
+    text-align: center;
+}
+
+.right {
+    text-align: right;
+}

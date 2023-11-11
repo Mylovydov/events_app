@@ -21,7 +21,7 @@ const NavItem: FC<TNavItemProps> = ({
 
 	const labelMarkup = (
 		<div className={styles.navLabel}>
-			<Typography text={label} weight="semi" />
+			<Typography text={label} weight="bold" />
 		</div>
 	);
 

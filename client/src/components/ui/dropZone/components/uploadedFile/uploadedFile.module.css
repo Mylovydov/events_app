@@ -1,0 +1,16 @@
+.uploadedFile {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+.uploadedFileIcon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--main-purple-light-color);
+}
+.uploadedFileBody {
+    display: flex;
+    flex-direction: column;
+    gap: .3rem;
+}

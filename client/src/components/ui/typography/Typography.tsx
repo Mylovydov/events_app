@@ -24,20 +24,25 @@ const Typography: FC<TTypographyProps> = ({
 	weight = 'regular',
 	classes = '',
 	noWrap,
-	lightColor
+	lightColor,
+	textAlign = 'left',
+	children
 }) => {
 	const typographyClassNames = classNames({
 		[styles.typography]: true,
 		[styles[variant]]: variant,
 		[styles[weight]]: weight,
+		[styles[textAlign]]: textAlign,
 		[styles.noWrap]: noWrap,
 		[styles.lightColor]: lightColor
 	});
 
+	const props = { className: `${typographyClassNames} ${classes}` };
+
 	return React.createElement(
 		variantTags[variant] || 'p',
-		{ className: `${typographyClassNames} ${classes}` },
-		text
+		props,
+		text || children
 	);
 };
 
