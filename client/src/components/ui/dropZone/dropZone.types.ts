@@ -3,4 +3,5 @@ export type TDropZoneProps = {
 	dragRejectText?: string;
 	dragAcceptText?: string;
 	dragPlaceholder?: string;
+	fileValidator?: (file: File) => Promise<boolean>;
 };

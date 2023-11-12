@@ -3,16 +3,26 @@ import { csvToJson } from '@/utils';
 const readCsvFile = (file: File) =>
 	new Promise((resolve, reject) => {
 		const reader = new FileReader();
-		reader.readAsText(file);
 
-		reader.onload = () => {
-			const content = reader.result;
-			if (content && typeof content === 'string') {
-				csvToJson(content, result => resolve(result.data));
+		reader.onloadend = e => {
+			const content = e.target?.result;
+			if (typeof content === 'string') {
+				const { data, error } = csvToJson(content);
+				return error ? reject(error) : resolve(data);
+			}
+
+			if (content) {
+				const dataView = new DataView(content);
+				const decoder = new TextDecoder('utf-8');
+				const text = decoder.decode(dataView);
+				const { data, error } = csvToJson(text);
+				return error ? reject(error) : resolve(data);
 			}
 		};
 
 		reader.onerror = () => reject(reader.error);
+
+		reader.readAsText(file);
 	});
 
 export default readCsvFile;

@@ -3,39 +3,44 @@ import { Typography } from '@/components';
 import useDropZone from './hooks/useDropZone.hook.ts';
 import UploadedFile from './components/uploadedFile/UploadedFile.tsx';
 import classNames from 'classnames';
-import { FC } from 'react';
+import { FC, useState } from 'react';
 import { TDropZoneProps } from './dropZone.types.ts';
 
 const DropZone: FC<TDropZoneProps> = ({
 	onDropAccepted,
 	dragAcceptText,
 	dragRejectText,
-	dragPlaceholder
+	dragPlaceholder,
+	fileValidator
 }) => {
-	const onHandleDropAccepted = (files: File[]) => {
-		if (files.length && onDropAccepted) {
-			onDropAccepted(files[0]);
+	const [file, setFile] = useState<File | null>(null);
+	const onHandleDropAccepted = async (files: File[]) => {
+		const file = files[0];
+		let isFileValid = true;
+		if (fileValidator) {
+			isFileValid = await fileValidator(file);
 		}
+		if (!isFileValid) {
+			return;
+		}
+
+		setFile(file);
+		onDropAccepted && onDropAccepted(file);
 	};
 
-	const {
-		getRootProps,
-		getInputProps,
-		acceptedFiles,
-		isDragReject,
-		isDragAccept
-	} = useDropZone({
-		onDropAccepted: onHandleDropAccepted
-	});
+	const { getRootProps, getInputProps, isDragReject, isDragAccept } =
+		useDropZone({
+			onDropAccepted: onHandleDropAccepted
+			// onDrop: acceptedFiles => {
+			// 	console.log('onDrop', acceptedFiles);
+			// }
+		});
 
 	const rejectedDragTextMarkup = isDragReject && dragRejectText;
 	const acceptedDragTextMarkup = isDragAccept && dragAcceptText;
 
-	const uploadFilesMarkup = acceptedFiles.length && (
-		<UploadedFile
-			fileSize={acceptedFiles[0].size}
-			filename={acceptedFiles[0].name}
-		/>
+	const uploadFilesMarkup = file && (
+		<UploadedFile fileSize={file.size} filename={file.name} />
 	);
 
 	const placeholderMarkup = (
