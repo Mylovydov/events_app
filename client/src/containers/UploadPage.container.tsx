@@ -1,16 +1,16 @@
 import UploadPage from '../pages/upload/Upload.page.tsx';
+import { validateEvents } from '@/utils/helpers/validateEvents.ts';
 import { readCsvFile } from '@/utils';
 
-// const validateCsvFile = (events: unknown) => {};
-
 const UploadPageContainer = () => {
-	const onDropAccepted = async (file: File) => {};
+	const onDropAccepted = async (file: File) => {
+		const events = await readCsvFile(file);
+		console.log('onDropAccepted', events);
+	};
 
 	const validator = async (file: File) => {
 		try {
-			const csv = await readCsvFile(file);
-			console.log('validator', csv);
-			return false;
+			return await validateEvents(file);
 		} catch (err) {
 			return false;
 		}

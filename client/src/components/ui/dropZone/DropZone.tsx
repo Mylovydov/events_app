@@ -31,9 +31,6 @@ const DropZone: FC<TDropZoneProps> = ({
 	const { getRootProps, getInputProps, isDragReject, isDragAccept } =
 		useDropZone({
 			onDropAccepted: onHandleDropAccepted
-			// onDrop: acceptedFiles => {
-			// 	console.log('onDrop', acceptedFiles);
-			// }
 		});
 
 	const rejectedDragTextMarkup = isDragReject && dragRejectText;
