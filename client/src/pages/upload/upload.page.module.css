@@ -1,0 +1,8 @@
+.uploadPage {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+.uploadPageHeader {}
+.uploadPageBody {}
+

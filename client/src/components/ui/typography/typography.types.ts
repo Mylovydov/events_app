@@ -1,4 +1,4 @@
-import { ReactNode } from 'react';
+import { PropsWithChildren, ReactNode } from 'react';
 
 export type TTypographyProps = {
 	variant?:
@@ -15,8 +15,9 @@ export type TTypographyProps = {
 		| 'caption'
 		| 'button';
 	weight?: 'regular' | 'medium' | 'semi' | 'bold';
-	text: string | ReactNode;
+	text?: string | ReactNode;
 	classes?: string;
 	noWrap?: boolean;
 	lightColor?: boolean;
-};
+	textAlign?: 'left' | 'center' | 'right';
+} & PropsWithChildren;

@@ -26,4 +26,5 @@
 .appBody {
     background-color: var(--main-bg-color);
     flex: 1 1 auto;
+    padding: 3rem;
 }
