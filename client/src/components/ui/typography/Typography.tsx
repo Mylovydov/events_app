@@ -26,7 +26,8 @@ const Typography: FC<TTypographyProps> = ({
 	noWrap,
 	lightColor,
 	textAlign = 'left',
-	children
+	children,
+	uppercase = false
 }) => {
 	const typographyClassNames = classNames({
 		[styles.typography]: true,
@@ -34,7 +35,8 @@ const Typography: FC<TTypographyProps> = ({
 		[styles[weight]]: weight,
 		[styles[textAlign]]: textAlign,
 		[styles.noWrap]: noWrap,
-		[styles.lightColor]: lightColor
+		[styles.lightColor]: lightColor,
+		[styles.uppercase]: uppercase
 	});
 
 	const props = { className: `${typographyClassNames} ${classes}` };

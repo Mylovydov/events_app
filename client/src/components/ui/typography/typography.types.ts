@@ -20,4 +20,5 @@ export type TTypographyProps = {
 	noWrap?: boolean;
 	lightColor?: boolean;
 	textAlign?: 'left' | 'center' | 'right';
+	uppercase?: boolean;
 } & PropsWithChildren;

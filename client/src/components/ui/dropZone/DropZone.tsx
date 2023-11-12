@@ -5,27 +5,44 @@ import UploadedFile from './components/uploadedFile/UploadedFile.tsx';
 import classNames from 'classnames';
 import { FC, useState } from 'react';
 import { TDropZoneProps } from './dropZone.types.ts';
+import Button from '../button/Button.tsx';
 
 const DropZone: FC<TDropZoneProps> = ({
 	onDropAccepted,
 	dragAcceptText,
 	dragRejectText,
 	dragPlaceholder,
-	fileValidator
+	fileValidator,
+	onUpload,
+	btnLabel,
+	isLoading
 }) => {
 	const [file, setFile] = useState<File | null>(null);
+	const [isUploading, setIsUploading] = useState(false);
+
 	const onHandleDropAccepted = async (files: File[]) => {
+		setIsUploading(true);
+
 		const file = files[0];
 		let isFileValid = true;
 		if (fileValidator) {
 			isFileValid = await fileValidator(file);
 		}
 		if (!isFileValid) {
+			setIsUploading(false);
 			return;
 		}
 
 		setFile(file);
 		onDropAccepted && onDropAccepted(file);
+		setIsUploading(false);
+	};
+
+	const onHandleUpload = () => {
+		if (!file) {
+			return;
+		}
+		onUpload && onUpload(file);
 	};
 
 	const { getRootProps, getInputProps, isDragReject, isDragAccept } =
@@ -56,11 +73,18 @@ const DropZone: FC<TDropZoneProps> = ({
 
 	return (
 		<div className={styles.dropZone}>
-			<div className={styles.dropBody}>
+			<div className={styles.dropZoneBody}>
 				<div className={uploadActionClasses} {...getRootProps()}>
 					<input {...getInputProps()} />
 					{contentMarkup}
 				</div>
+			</div>
+			<div className={styles.dropZoneFooter}>
+				<Button
+					label={btnLabel}
+					onClick={onHandleUpload}
+					disabled={isUploading || isLoading}
+				/>
 			</div>
 		</div>
 	);

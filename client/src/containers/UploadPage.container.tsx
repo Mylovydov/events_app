@@ -1,15 +1,15 @@
 import UploadPage from '../pages/upload/Upload.page.tsx';
 import { validateEvents } from '@/utils/helpers/validateEvents.ts';
-import { useCreateMutation } from '@/services';
-import fileToString from '../utils/helpers/fileToString.ts';
+import { fileToString } from '../utils/helpers';
+import useUploadEvents from '../services/hooks/events/useUploadEvents.ts';
 
 const UploadPageContainer = () => {
-	const [createTrigger] = useCreateMutation();
+	const { uploadEvents, isEventsUploading } = useUploadEvents();
 
-	const onDropAccepted = async (file: File) => {
+	const onFileUpload = async (file: File) => {
 		const data = await fileToString(file);
 		if (typeof data === 'string') {
-			createTrigger(data);
+			uploadEvents(data);
 		}
 	};
 
@@ -27,8 +27,10 @@ const UploadPageContainer = () => {
 			dragRejectText="File type not accepted, sorry!"
 			dragAcceptText="File type accepted, nice!"
 			dragPlaceholder="Drag and drop some files here, or click to select files"
-			onDropAccepted={onDropAccepted}
 			fileValidator={validator}
+			btnLabel="Upload events"
+			onUpload={onFileUpload}
+			isLoading={isEventsUploading}
 		/>
 	);
 };

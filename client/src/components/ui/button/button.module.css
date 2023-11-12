@@ -1,0 +1,35 @@
+.button {
+    padding: 1.5rem 4rem;
+    border-radius: 1rem;
+    overflow: hidden;
+    background: var(--main-gradient);
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    vertical-align: middle;
+    transition: all var(--main-transition-delay) var(--main-transition-fn);
+    border: 0;
+    color: var(--main-white-color);
+    cursor: pointer;
+    text-transform: uppercase;
+}
+
+.fullWidth {
+    width: 100%;
+}
+
+.button:hover {
+    transform: translateY(-0.2rem);
+}
+
+.button:focus {
+    transform: translateY(-0.2rem);
+    outline: 1px solid var(--main-text-color);
+}
+
+.button:disabled {
+    color: var(--main-text-color);
+    opacity: .5;
+    cursor: auto;
+}

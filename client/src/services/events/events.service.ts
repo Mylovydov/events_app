@@ -1,9 +1,6 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
 import trpcClient from '../../trpc/trpc.ts';
-import type { inferProcedureOutput } from '@trpc/server';
-import type { TAppRouter } from '../../../../server/src/types/shared.types';
-
-type TUpload = inferProcedureOutput<TAppRouter['upload']['create']>;
+import { TUploadInput, TUploadOutput } from './events.types';
 
 export const eventsApi = createApi({
 	reducerPath: 'eventsApi',
@@ -11,10 +8,10 @@ export const eventsApi = createApi({
 		trpcResult.then(data => ({ data })).catch(error => ({ error })),
 	tagTypes: ['Events'],
 	endpoints: builder => ({
-		create: builder.mutation<TUpload, string>({
+		uploadEvents: builder.mutation<TUploadOutput, TUploadInput['file']>({
 			query: arg => trpcClient.upload.create.mutate({ file: arg })
 		})
 	})
 });
 
-export const { useCreateMutation } = eventsApi;
+export const { useUploadEventsMutation } = eventsApi;
