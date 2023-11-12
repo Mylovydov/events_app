@@ -1,11 +1,16 @@
 import UploadPage from '../pages/upload/Upload.page.tsx';
 import { validateEvents } from '@/utils/helpers/validateEvents.ts';
-import { readCsvFile } from '@/utils';
+import { useCreateMutation } from '@/services';
+import fileToString from '../utils/helpers/fileToString.ts';
 
 const UploadPageContainer = () => {
+	const [createTrigger] = useCreateMutation();
+
 	const onDropAccepted = async (file: File) => {
-		const events = await readCsvFile(file);
-		console.log('onDropAccepted', events);
+		const data = await fileToString(file);
+		if (typeof data === 'string') {
+			createTrigger(data);
+		}
 	};
 
 	const validator = async (file: File) => {

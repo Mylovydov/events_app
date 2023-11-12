@@ -16,6 +16,9 @@ import {
 	faUser
 } from '@fortawesome/free-solid-svg-icons';
 
+import { Provider } from 'react-redux';
+import { store } from '@/store';
+
 library.add(
 	faUser,
 	faBell,
@@ -29,6 +32,8 @@ library.add(
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
 	<React.StrictMode>
-		<RouterProvider router={appRouter} />
+		<Provider store={store}>
+			<RouterProvider router={appRouter} />
+		</Provider>
 	</React.StrictMode>
 );

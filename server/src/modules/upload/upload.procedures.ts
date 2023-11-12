@@ -1,9 +1,9 @@
-import { authProcedure } from '../../trpc/index.js';
+import { publicProcedure } from '../../trpc/index.js';
 import { uploadInput, uploadOutput } from './upload.dto.js';
 import { exampleBase64CSV, exampleEvents } from '../../utils/index.js';
 
 const uploadProcedures = {
-	upload: authProcedure
+	upload: publicProcedure
 		.meta({
 			openapi: {
 				method: 'POST',
