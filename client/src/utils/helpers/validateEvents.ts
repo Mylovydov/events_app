@@ -26,6 +26,10 @@ export const validateEvent = (event: TEvent) => {
 };
 
 export const validateEvents = async (file: File): Promise<boolean> => {
-	const events = await readCsvFile(file);
-	return (events as TEvent[]).every(validateEvent);
+	try {
+		const events = await readCsvFile(file);
+		return (events as TEvent[]).every(validateEvent);
+	} catch (err) {
+		return false;
+	}
 };

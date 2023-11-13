@@ -2,9 +2,11 @@ import { useUploadEventsMutation } from '@/services';
 import { useNavigate } from 'react-router-dom';
 import { useCallback } from 'react';
 import { EVENTS_PATH } from '@/router/constants.ts';
+import useNotify from '@/hooks/useNotify/useNotify.hook.ts';
 
 const useUploadEvents = () => {
 	const navigate = useNavigate();
+	const { successNotify, errorNotify } = useNotify();
 	const [uploadEventsTrigger, { isLoading: isEventsUploading }] =
 		useUploadEventsMutation();
 
@@ -13,14 +15,14 @@ const useUploadEvents = () => {
 			uploadEventsTrigger(events)
 				.unwrap()
 				.then(data => {
-					console.log('data: ', data.message);
+					successNotify(data.message);
 					navigate(EVENTS_PATH);
 				})
 				.catch(err => {
-					console.log('ERROR: ', err.message);
+					errorNotify(err.message);
 				});
 		},
-		[uploadEventsTrigger, navigate]
+		[uploadEventsTrigger, successNotify, navigate, errorNotify]
 	);
 
 	return {

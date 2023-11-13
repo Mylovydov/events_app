@@ -71,6 +71,8 @@ const DropZone: FC<TDropZoneProps> = ({
 		[styles.dragAccept]: isDragAccept
 	});
 
+	const isBtnDisabled = !file || isUploading || isLoading;
+
 	return (
 		<div className={styles.dropZone}>
 			<div className={styles.dropZoneBody}>
@@ -83,7 +85,7 @@ const DropZone: FC<TDropZoneProps> = ({
 				<Button
 					label={btnLabel}
 					onClick={onHandleUpload}
-					disabled={isUploading || isLoading}
+					disabled={isBtnDisabled}
 				/>
 			</div>
 		</div>

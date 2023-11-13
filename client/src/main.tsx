@@ -1,8 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import { RouterProvider } from 'react-router-dom';
-import appRouter from '@/router/app.router.tsx';
 import 'normalize.css';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import {
@@ -15,9 +13,7 @@ import {
 	faRectangleList,
 	faUser
 } from '@fortawesome/free-solid-svg-icons';
-
-import { Provider } from 'react-redux';
-import { store } from '@/store';
+import MainProvider from './providers/main/Main.provider.tsx';
 
 library.add(
 	faUser,
@@ -32,8 +28,6 @@ library.add(
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
 	<React.StrictMode>
-		<Provider store={store}>
-			<RouterProvider router={appRouter} />
-		</Provider>
+		<MainProvider />
 	</React.StrictMode>
 );

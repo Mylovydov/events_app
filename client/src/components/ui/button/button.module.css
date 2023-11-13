@@ -29,7 +29,7 @@
 }
 
 .button:disabled {
-    color: var(--main-text-color);
+    transform: none;
     opacity: .5;
     cursor: auto;
 }
