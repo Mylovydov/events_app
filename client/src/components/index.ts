@@ -6,3 +6,4 @@ export * from './sidebar';
 export * from './appLogo';
 export * from './navbar';
 export * from './logout';
+export * from './baseTable';

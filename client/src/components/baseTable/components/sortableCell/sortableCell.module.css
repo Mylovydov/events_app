@@ -1,0 +1,40 @@
+.sortableLabel {
+    position: relative;
+    background-color: transparent;
+    outline: 0;
+    border: 0;
+    margin: 0;
+    border-radius: 0;
+    padding: 0;
+    user-select: none;
+    vertical-align: middle;
+    text-decoration: none;
+    color: inherit;
+    cursor: pointer;
+    display: inline-flex;
+    justify-content: flex-start;
+    gap: 1rem;
+    flex-direction: inherit;
+    align-items: center;
+}
+
+.sortableLabelIcons {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: var(--main-purple-dark-color);
+}
+
+.iconTop, .iconBottom {
+    opacity: .4;
+    transition: opacity var(--main-transition-delay) var(--main-transition-fn);
+}
+
+.iconActive {
+    opacity: 1;
+}
+
+.sortableLabel:hover .iconTop, .sortableLabel:hover .iconBottom {
+    opacity: 1;
+}

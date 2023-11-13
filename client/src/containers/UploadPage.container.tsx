@@ -23,7 +23,8 @@ const UploadPageContainer = () => {
 
 	return (
 		<UploadPage
-			title="Upload Page Header"
+			title="Events Upload"
+			subtitle="Upload your events in csv format"
 			dragRejectText="File type not accepted, sorry!"
 			dragAcceptText="File type accepted, nice!"
 			dragPlaceholder="Drag and drop some files here, or click to select files"

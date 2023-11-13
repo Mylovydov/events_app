@@ -6,6 +6,7 @@ import classNames from 'classnames';
 import { FC, useState } from 'react';
 import { TDropZoneProps } from './dropZone.types.ts';
 import Button from '../button/Button.tsx';
+import useNotify from '@/hooks/useNotify/useNotify.hook.ts';
 
 const DropZone: FC<TDropZoneProps> = ({
 	onDropAccepted,
@@ -19,6 +20,7 @@ const DropZone: FC<TDropZoneProps> = ({
 }) => {
 	const [file, setFile] = useState<File | null>(null);
 	const [isUploading, setIsUploading] = useState(false);
+	const { errorNotify } = useNotify();
 
 	const onHandleDropAccepted = async (files: File[]) => {
 		setIsUploading(true);
@@ -29,6 +31,7 @@ const DropZone: FC<TDropZoneProps> = ({
 			isFileValid = await fileValidator(file);
 		}
 		if (!isFileValid) {
+			errorNotify('File is not valid');
 			setIsUploading(false);
 			return;
 		}

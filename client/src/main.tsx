@@ -7,6 +7,8 @@ import {
 	faArrowRightFromBracket,
 	faBell,
 	faCalendarDays,
+	faCaretDown,
+	faCaretUp,
 	faFileCsv,
 	faGear,
 	faHouse,
@@ -23,7 +25,9 @@ library.add(
 	faGear,
 	faArrowRightFromBracket,
 	faHouse,
-	faFileCsv
+	faFileCsv,
+	faCaretUp,
+	faCaretDown
 );
 
 ReactDOM.createRoot(document.getElementById('root')!).render(

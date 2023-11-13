@@ -4,6 +4,7 @@
 
     --main-gradient: linear-gradient(180deg, #8A4BF1 0%, #6C60F4 100%);
     --main-bg-color: #F9F9FF;
+    --main-bg-secondary-color: #ebe8ff;
     --main-purple-dark-color: #6C60F4;
     --main-purple-light-color: #8A4BF1;
     --main-white-color: #fff;
@@ -23,15 +24,20 @@
     --breakpoint-xl: 153.5rem;
 }
 
+* {
+    box-sizing: border-box;
+    margin: 0;
+}
+
 html {
     font-size: 62.5%;
     font-family: 'Quicksand', sans-serif;
     color: var(--main-text-color);
 }
 
-h1, h2, h3, h4, h5, h6, p {
-    margin: 0;
-}
+/*h1, h2, h3, h4, h5, h6, p {*/
+
+/*}*/
 
 a {
     text-decoration: none;
