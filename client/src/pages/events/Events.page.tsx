@@ -1,22 +1,15 @@
 import { BaseTable } from '@/components';
+import { FC } from 'react';
+import { TBaseTableProps } from '@/components/baseTable/BaseTable.tsx';
 
-const mockColumns = [
-	{ label: 'Name', accessor: 'name' },
-	{ label: 'Last', accessor: 'last', sortable: true }
-];
+export type TEventsPageProps = {
+	title: string;
+} & TBaseTableProps;
 
-// const mockEvents: TEvent[] = [];
-
-const EventsPage = () => {
+const EventsPage: FC<TEventsPageProps> = ({ title, ...tableProps }) => {
 	return (
 		<div>
-			<BaseTable
-				tableData={[]}
-				columns={mockColumns}
-				onSortDirectionChange={() => {}}
-				sortDirection="desc"
-				sortKey="last"
-			/>
+			<BaseTable {...tableProps} />
 		</div>
 	);
 };

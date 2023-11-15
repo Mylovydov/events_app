@@ -1,1 +1,1 @@
-export { default as useUploadEvents } from './useUploadEvents.hook';
+export { default as useCreateEvents } from './useCreateEvents.hook.ts';

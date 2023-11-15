@@ -1,13 +1,15 @@
 .baseTableWrapper {
+    display: flex;
+    flex-direction: column;
 }
 
 .baseTableContainer {
-    width: 100%;
+    max-width: 100%;
     overflow-x: auto;
-    display: flex;
-    flex-direction: column;
     flex: 1 1 auto;
     min-height: 40rem;
+    display: flex;
+    flex-direction: column;
     background-color: var(--main-white-color);
 }
 
@@ -15,4 +17,5 @@
     width: 100%;
     border-collapse: collapse;
     border-spacing: 0;
+    min-width: 60rem;
 }

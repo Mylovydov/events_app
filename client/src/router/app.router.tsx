@@ -7,8 +7,7 @@ import {
 } from '@/router/constants.ts';
 import { ErrorPage } from '@/pages';
 import { AppLayout } from '@/layouts';
-import { UploadPageContainer } from '@/containers';
-import { EventsPage } from '@/pages/events';
+import { EventsPageContainer, UploadPageContainer } from '@/containers';
 
 const appRouter = createBrowserRouter([
 	{
@@ -25,7 +24,7 @@ const appRouter = createBrowserRouter([
 					},
 					{
 						path: EVENTS_PATH,
-						element: <EventsPage />
+						element: <EventsPageContainer />
 					},
 					{
 						path: SETTINGS_PATH,

@@ -8,13 +8,13 @@ export const eventsApi = createApi({
 		trpcResult.then(data => ({ data })).catch(error => ({ error })),
 	tagTypes: ['Events'],
 	endpoints: builder => ({
-		uploadEvents: builder.mutation<
-			TCreateEventsOutput,
-			TCreateEventsInput['file']
-		>({
+		create: builder.mutation<TCreateEventsOutput, TCreateEventsInput['file']>({
 			query: arg => trpcClient.events.create.mutate({ file: arg })
+		}),
+		getEvents: builder.query<TCreateEventsOutput, void>({
+			query: () => trpcClient.events.getEvents.query()
 		})
 	})
 });
 
-export const { useUploadEventsMutation } = eventsApi;
+export const { useCreateMutation, useGetEventsQuery } = eventsApi;

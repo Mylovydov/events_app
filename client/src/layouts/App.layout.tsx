@@ -32,7 +32,9 @@ const AppLayout = () => {
 					<AppHeader username="Denys" />
 				</header>
 				<main className={styles.appBody}>
-					<Outlet />
+					<div className={styles.appContainer}>
+						<Outlet />
+					</div>
 				</main>
 			</div>
 		</div>

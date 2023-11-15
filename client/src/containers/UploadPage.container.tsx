@@ -1,10 +1,10 @@
 import UploadPage from '../pages/upload/Upload.page.tsx';
 import { validateEvents } from '@/utils/helpers/validateEvents.ts';
 import { fileToString } from '../utils/helpers';
-import { useUploadEvents } from '@/hooks';
+import { useCreateEvents } from '@/hooks';
 
 const UploadPageContainer = () => {
-	const { uploadEvents, isEventsUploading } = useUploadEvents();
+	const { uploadEvents, isEventsUploading } = useCreateEvents();
 
 	const onFileUpload = async (file: File) => {
 		const data = await fileToString(file);
