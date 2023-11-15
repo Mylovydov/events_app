@@ -1,7 +1,12 @@
 import { inferProcedureInput, inferProcedureOutput } from '@trpc/server';
 import type { TAppRouter } from '../../../../server/src/types/shared.types';
 
-export type TUploadOutput = inferProcedureOutput<
-	TAppRouter['upload']['create']
+export type TCreateEventsOutput = inferProcedureOutput<
+	TAppRouter['events']['create']
 >;
-export type TUploadInput = inferProcedureInput<TAppRouter['upload']['create']>;
+
+export type TCreateEventsInput = inferProcedureInput<
+	TAppRouter['events']['create']
+>;
+
+export type TEvent = TCreateEventsOutput['data'][0];

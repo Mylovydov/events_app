@@ -1,12 +1,12 @@
-import { ESortDirection } from '@/components/baseTable/components/sortableCell/sortableCell.types.ts';
 import { TTableColumn } from '@/components/baseTable/baseTable.types.ts';
+import { TSortDirection } from '@/components/baseTable/BaseTable.tsx';
 
 export type TTableHeadProps = {
 	columns: TTableColumn[];
 	onSortDirectionChange: (
 		accessor: string,
-		sortDirection: ESortDirection
+		sortDirection: TSortDirection
 	) => void;
 	sortKey: string;
-	sortDirection: ESortDirection;
+	sortDirection: TSortDirection;
 };

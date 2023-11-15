@@ -1,19 +1,20 @@
 import styles from './baseTable.module.css';
-import TableHead from './components/tableHead/TableHead.tsx';
 import { FC, ReactNode } from 'react';
 import { TTableColumn } from '@/components/baseTable/baseTable.types.ts';
-import { ESortDirection } from '@/components/baseTable/components/sortableCell/sortableCell.types.ts';
+import { TableHead } from '@/components/baseTable/components';
+
+export type TSortDirection = 'asc' | 'desc';
 
 export type TBaseTableProps = {
 	tableData: ReactNode[];
 	columns: TTableColumn[];
 	onSortDirectionChange: (
 		accessor: string,
-		sortDirection: ESortDirection
+		sortDirection: TSortDirection
 	) => void;
 	isLoading?: boolean;
 	sortKey: string;
-	sortDirection: ESortDirection;
+	sortDirection: TSortDirection;
 };
 
 const BaseTable: FC<TBaseTableProps> = ({
