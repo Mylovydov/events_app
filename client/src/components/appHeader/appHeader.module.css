@@ -1,7 +1,7 @@
 .appHeader {
     display: flex;
     align-items: center;
-    padding: 3rem;
+    padding: 2rem 3rem;
     justify-content: space-between;
     gap: 1rem;
     background-color: var(--main-white-color);

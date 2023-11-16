@@ -15,7 +15,7 @@ const NavItem: FC<TNavItemProps> = ({
 }) => {
 	const iconMarkup = icon && (
 		<div className={styles.navIcon}>
-			<FontAwesomeIcon icon={icon} fontSize="3rem" />
+			<FontAwesomeIcon icon={icon} fontSize="2rem" />
 		</div>
 	);
 
