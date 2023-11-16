@@ -1,5 +1,7 @@
 import { EventsPage } from '@/pages';
 import useGetEvents from '../hooks/useGetEvents/useGetEvents.hook.ts';
+import { useMemo } from 'react';
+import EventsTableRow from '../components/eventsTable/components/eventsTableRow/EventsTableRow.tsx';
 
 // const data = {
 // 	createdAt: '2023-11-12T20:01:51.711Z',
@@ -7,8 +9,7 @@ import useGetEvents from '../hooks/useGetEvents/useGetEvents.hook.ts';
 // 	updatedAt: '2023-11-12T20:01:51.711Z'
 // };
 
-const mockColumns = [
-	{ label: 'ID', accessor: '_id', sortable: true },
+const columns = [
 	{ label: 'First Name', accessor: 'inviteeFirstName', sortable: true },
 	{ label: 'Last Name', accessor: 'inviteeLastName', sortable: true },
 	{ label: 'Email', accessor: 'inviteeEmail', sortable: true },
@@ -19,18 +20,22 @@ const mockColumns = [
 	{ label: 'Invitee UUID', accessor: 'inviteeUUID' }
 ];
 
-// const mockEvents: TEvent[] = [];
-
 const EventsPageContainer = () => {
 	const { events, isEventsLoading } = useGetEvents();
 
-	console.log('events', events);
+	const tableRows = useMemo(
+		() =>
+			events.map(item => (
+				<EventsTableRow key={item._id} columns={columns} item={item} />
+			)),
+		[events]
+	);
 
 	return (
 		<EventsPage
 			title="Events"
-			tableData={[]}
-			columns={mockColumns}
+			rows={tableRows}
+			columns={columns}
 			onSortDirectionChange={() => {}}
 			sortDirection="desc"
 			sortKey="last"

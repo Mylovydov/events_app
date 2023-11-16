@@ -6,7 +6,7 @@ import { TableHead } from '@/components/baseTable/components';
 export type TSortDirection = 'asc' | 'desc';
 
 export type TBaseTableProps = {
-	tableData: ReactNode[];
+	rows?: ReactNode[];
 	columns: TTableColumn[];
 	onSortDirectionChange: (
 		accessor: string,
@@ -18,7 +18,7 @@ export type TBaseTableProps = {
 };
 
 const BaseTable: FC<TBaseTableProps> = ({
-	tableData = [],
+	rows = [],
 	isLoading,
 	...tableHeadProps
 }) => {
@@ -27,6 +27,7 @@ const BaseTable: FC<TBaseTableProps> = ({
 			<div className={styles.baseTableContainer}>
 				<table className={styles.baseTable}>
 					<TableHead {...tableHeadProps} />
+					<tbody>{rows}</tbody>
 				</table>
 			</div>
 		</div>

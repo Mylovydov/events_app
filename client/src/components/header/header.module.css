@@ -1,4 +1,4 @@
-.appHeader {
+.header {
     display: flex;
     align-items: center;
     padding: 2rem 3rem;
@@ -11,7 +11,7 @@
     }
 }
 
-.appHeaderAction {
+.headerAction {
     display: flex;
     align-items: center;
     gap: 1rem;
@@ -19,8 +19,7 @@
 }
 
 
-
-.appHeaderMenu {
+.headerMenu {
     flex: 1 1 auto;
     @media (min-width: 59.9rem) {
         display: none;

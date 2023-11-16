@@ -17,5 +17,29 @@
     width: 100%;
     border-collapse: collapse;
     border-spacing: 0;
-    min-width: 60rem;
+}
+
+.baseTable > thead {
+    display: table-header-group;
+}
+
+.baseTable > thead > tr {
+    color: inherit;
+    outline: 0;
+}
+
+.baseTable > thead > tr th {
+    font-weight: 700;
+    background-color: var(--main-bg-secondary-color);
+    white-space: nowrap;
+    font-size: 1.5rem;
+    text-align: left;
+    padding: 1.8rem;
+    display: table-cell;
+    vertical-align: inherit;
+    color: var(--main-text-color);
+}
+
+.baseTable > tbody {
+    display: table-row-group;
 }

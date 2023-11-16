@@ -1,9 +1,0 @@
-.cell {
-    border: none;
-    padding: 1.8rem;
-    font-size: 1.4rem;
-    text-align: left;
-    display: table-cell;
-    vertical-align: inherit;
-    color: var(--main-text-color);
-}

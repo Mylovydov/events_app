@@ -1,8 +1,7 @@
-import styles from './tableHead.module.css';
 import { Cell } from '@/components/baseTable/components/cell';
-import { SortableCell } from '@/components/baseTable/components/sortableCell';
 import { ESortDirection } from '@/components/baseTable/components/sortableCell/sortableCell.types.ts';
 import { FC } from 'react';
+import { SortableCell } from '@/components/baseTable/components';
 import { TTableHeadProps } from '@/components/baseTable/components/tableHead/tableHead.types.ts';
 
 const TableHead: FC<TTableHeadProps> = ({
@@ -20,8 +19,8 @@ const TableHead: FC<TTableHeadProps> = ({
 	};
 
 	return (
-		<thead className={styles.tableHead}>
-			<tr className={styles.tableHeadRow}>
+		<thead>
+			<tr>
 				{columns.map(({ label = 'label', accessor, sortable }) => {
 					const direction =
 						sortKey === accessor && sortDirection === ESortDirection.ASC

@@ -1,6 +1,6 @@
-import { BaseTable } from '@/components';
 import { FC } from 'react';
 import { TBaseTableProps } from '@/components/baseTable/BaseTable.tsx';
+import EventsTable from '../../components/eventsTable/EventsTable.tsx';
 
 export type TEventsPageProps = {
 	title: string;
@@ -9,7 +9,7 @@ export type TEventsPageProps = {
 const EventsPage: FC<TEventsPageProps> = ({ title, ...tableProps }) => {
 	return (
 		<div>
-			<BaseTable {...tableProps} />
+			<EventsTable {...tableProps} />
 		</div>
 	);
 };

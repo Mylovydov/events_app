@@ -1,8 +1,13 @@
-import styles from './cell.module.css';
-import { FC, PropsWithChildren } from 'react';
+import React, { FC, PropsWithChildren } from 'react';
 
-const Cell: FC<PropsWithChildren> = ({ children }) => {
-	return <th className={styles.cell}>{children}</th>;
+export type TCellProps = {
+	className?: string;
+	isHead?: boolean;
+} & PropsWithChildren;
+
+const Cell: FC<TCellProps> = ({ children, isHead = true, ...props }) => {
+	const tag = isHead ? 'th' : 'td';
+	return React.createElement(tag, props, children);
 };
 
 export default Cell;

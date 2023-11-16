@@ -1,12 +1,11 @@
 
 .navItem {
     padding: 2rem;
-    border-top-left-radius: 1.5rem;
-    border-bottom-left-radius: 1.5rem;
+    border-radius: 1.5rem 0 0 1.5rem;
     overflow: hidden;
     display: flex;
     align-items: center;
-    gap: 2rem;
+    gap: 1.5rem;
     color: var(--main-white-color);
     opacity: .7;
     cursor: pointer;

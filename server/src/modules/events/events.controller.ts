@@ -5,7 +5,7 @@ const eventsController = {
 	create: eventsProcedures.create.mutation(async ({ input }) => {
 		const createdEvents = await eventsService.create(input.file);
 		return {
-			message: 'Events successfully created',
+			message: 'Events successfully created!',
 			data: createdEvents
 		};
 	}),
@@ -13,7 +13,7 @@ const eventsController = {
 	getEvents: eventsProcedures.getEvents.query(async () => {
 		const events = await eventsService.getEvents();
 		return {
-			message: 'Events successfully created',
+			message: 'Events successfully found!',
 			data: events
 		};
 	})
