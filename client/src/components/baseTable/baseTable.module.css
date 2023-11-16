@@ -7,7 +7,7 @@
     max-width: 100%;
     overflow-x: auto;
     flex: 1 1 auto;
-    min-height: 40rem;
+    min-height: 30rem;
     display: flex;
     flex-direction: column;
     background-color: var(--main-white-color);
@@ -42,4 +42,27 @@
 
 .baseTable > tbody {
     display: table-row-group;
+}
+
+.baseTable.baseTableSticky > thead > tr th:last-of-type {
+    background-color: var(--main-bg-secondary-color);
+}
+
+.baseTable.baseTableSticky > tbody > tr td:last-of-type {
+    background-color: var(--main-white-color);
+}
+
+.baseTable.baseTableSticky > thead > tr th:last-of-type,
+.baseTable.baseTableSticky > tbody > tr td:last-of-type {
+    position: sticky;
+    z-index: 10;
+    right: -.1rem;
+    filter: drop-shadow(-0.1rem 0.7rem 2px rgba(0, 0, 0, 0.1));
+}
+
+.baseTableEmpty {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 1 1 auto;
 }

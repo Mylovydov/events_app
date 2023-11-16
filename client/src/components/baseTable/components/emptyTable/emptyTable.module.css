@@ -1,0 +1,21 @@
+.emptyTable {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    max-width: 20rem;
+    width: 100%;
+    gap: 2rem;
+}
+
+.emptyTableIcon {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: var(--main-purple-dark-color);
+    font-size: 4rem;
+}
+
+.emptyTableContent {
+
+}

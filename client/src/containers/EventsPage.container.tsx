@@ -3,12 +3,6 @@ import useGetEvents from '../hooks/useGetEvents/useGetEvents.hook.ts';
 import { useMemo } from 'react';
 import EventsTableRow from '../components/eventsTable/components/eventsTableRow/EventsTableRow.tsx';
 
-// const data = {
-// 	createdAt: '2023-11-12T20:01:51.711Z',
-// 	isEmailSend: false,
-// 	updatedAt: '2023-11-12T20:01:51.711Z'
-// };
-
 const columns = [
 	{ label: 'First Name', accessor: 'inviteeFirstName', sortable: true },
 	{ label: 'Last Name', accessor: 'inviteeLastName', sortable: true },
@@ -35,11 +29,12 @@ const EventsPageContainer = () => {
 		<EventsPage
 			title="Events"
 			rows={tableRows}
-			columns={columns}
+			columns={[...columns, { label: 'Action', accessor: '' }]}
 			onSortDirectionChange={() => {}}
 			sortDirection="desc"
 			sortKey="last"
 			isLoading={isEventsLoading}
+			emptyLabel="No events found"
 		/>
 	);
 };

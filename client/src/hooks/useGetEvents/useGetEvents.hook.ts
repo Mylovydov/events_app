@@ -1,10 +1,6 @@
-import { TEvent, useGetEventsQuery } from '@/services';
+import { useGetEventsQuery } from '@/services';
 import useNotify from '@/hooks/useNotify/useNotify.hook.ts';
-
-export type TUseGetEventsReturn = {
-	events: TEvent[];
-	isEventsLoading: boolean;
-};
+import { TUseGetEventsReturn } from '@/hooks/useGetEvents/useGetEvents.types.ts';
 
 const useGetEvents = (): TUseGetEventsReturn => {
 	const { errorNotify } = useNotify();

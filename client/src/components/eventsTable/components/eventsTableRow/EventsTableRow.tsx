@@ -6,6 +6,7 @@ import {
 	TEventsTableRowProps
 } from '@/components/eventsTable/components/eventsTableRow/eventsTableRow.types.ts';
 import prepareRowValue from '../../utils/prepareRowValue.ts';
+import { Button } from '@/components';
 
 const EventsTableRow: FC<TEventsTableRowProps> = ({ columns, item }) => {
 	const rowsKeys = columns.map(c => c.accessor);
@@ -18,6 +19,12 @@ const EventsTableRow: FC<TEventsTableRowProps> = ({ columns, item }) => {
 			</Cell>
 		);
 	});
+
+	tableRowsMarkup.push(
+		<Cell isHead={false} className={styles.eventsTableCell}>
+			<Button label="Send" />
+		</Cell>
+	);
 	return <tr className={styles.eventsTableRow}>{tableRowsMarkup}</tr>;
 };
 

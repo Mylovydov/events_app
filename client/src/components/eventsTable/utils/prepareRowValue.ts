@@ -7,7 +7,7 @@ import formatDate from '../../../utils/helpers/formatDate.ts';
 const defaultValue = '——';
 
 const prepareRowValue = (value: TEventValue, key: TEventUnionKeys) => {
-	let rowValue;
+	let rowValue: string;
 
 	switch (key) {
 		case 'startDateTime':

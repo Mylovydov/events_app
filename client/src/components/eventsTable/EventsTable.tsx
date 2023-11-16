@@ -7,7 +7,7 @@ export type TEventsTableProps = TBaseTableProps;
 const EventsTable: FC<TEventsTableProps> = props => {
 	return (
 		<div>
-			<BaseTable {...props} />
+			<BaseTable {...props} isLastColumnSticky={true} />
 		</div>
 	);
 };

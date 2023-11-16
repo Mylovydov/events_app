@@ -2,33 +2,10 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import 'normalize.css';
-import { library } from '@fortawesome/fontawesome-svg-core';
-import {
-	faArrowRightFromBracket,
-	faBell,
-	faCalendarDays,
-	faCaretDown,
-	faCaretUp,
-	faFileCsv,
-	faGear,
-	faHouse,
-	faRectangleList,
-	faUser
-} from '@fortawesome/free-solid-svg-icons';
 import MainProvider from './providers/main/Main.provider.tsx';
+import fontAwesome from './fontAwesome/fontAwesome.ts';
 
-library.add(
-	faUser,
-	faBell,
-	faCalendarDays,
-	faRectangleList,
-	faGear,
-	faArrowRightFromBracket,
-	faHouse,
-	faFileCsv,
-	faCaretUp,
-	faCaretDown
-);
+fontAwesome.init();
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
 	<React.StrictMode>
