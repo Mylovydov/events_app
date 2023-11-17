@@ -3,7 +3,10 @@
     flex-direction: column;
     gap: 2rem
 }
-.dropZoneBody {}
+
+.dropZoneBody {
+}
+
 .dropZoneFooter {
     display: flex;
     justify-content: center;

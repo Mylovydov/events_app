@@ -1,6 +1,6 @@
-import { TBaseTableProps } from '@/components/baseTable/BaseTable.tsx';
 import { FC } from 'react';
 import { BaseTable } from '@/components';
+import { TBaseTableProps } from '@/components/baseTable/baseTable.types.ts';
 
 export type TEventsTableProps = TBaseTableProps;
 

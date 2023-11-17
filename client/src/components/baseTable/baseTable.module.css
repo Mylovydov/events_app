@@ -9,6 +9,7 @@
     flex: 1 1 auto;
     min-height: 30rem;
     display: flex;
+    border-radius: 1rem;
     flex-direction: column;
     background-color: var(--main-white-color);
 }
@@ -17,6 +18,8 @@
     width: 100%;
     border-collapse: collapse;
     border-spacing: 0;
+    display: table;
+    min-width: 65rem;
 }
 
 .baseTable > thead {
@@ -26,6 +29,8 @@
 .baseTable > thead > tr {
     color: inherit;
     outline: 0;
+    display: table-row;
+    vertical-align: middle;
 }
 
 .baseTable > thead > tr th {

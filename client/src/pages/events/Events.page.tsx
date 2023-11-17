@@ -1,6 +1,6 @@
 import { FC } from 'react';
-import { TBaseTableProps } from '@/components/baseTable/BaseTable.tsx';
 import EventsTable from '../../components/eventsTable/EventsTable.tsx';
+import { TBaseTableProps } from '@/components/baseTable/baseTable.types.ts';
 
 export type TEventsPageProps = {
 	title: string;

@@ -3,10 +3,13 @@
     flex-direction: column;
     gap: 4rem;
 }
+
 .uploadPageHeader {
     display: flex;
     flex-direction: column;
     gap: 1rem;
 }
-.uploadPageBody {}
+
+.uploadPageBody {
+}
 

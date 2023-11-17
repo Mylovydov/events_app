@@ -8,7 +8,11 @@ import {
 import prepareRowValue from '../../utils/prepareRowValue.ts';
 import { Button } from '@/components';
 
-const EventsTableRow: FC<TEventsTableRowProps> = ({ columns, item }) => {
+const EventsTableRow: FC<TEventsTableRowProps> = ({
+	columns,
+	item,
+	actionBtnLabel
+}) => {
 	const rowsKeys = columns.map(c => c.accessor);
 
 	const tableRowsMarkup = (rowsKeys as TEventKeys).map(key => {
@@ -21,8 +25,8 @@ const EventsTableRow: FC<TEventsTableRowProps> = ({ columns, item }) => {
 	});
 
 	tableRowsMarkup.push(
-		<Cell isHead={false} className={styles.eventsTableCell}>
-			<Button label="Send" />
+		<Cell isHead={false} key="action" className={styles.eventsTableCell}>
+			<Button label={actionBtnLabel} />
 		</Cell>
 	);
 	return <tr className={styles.eventsTableRow}>{tableRowsMarkup}</tr>;
