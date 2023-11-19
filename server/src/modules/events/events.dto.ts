@@ -48,12 +48,23 @@ export const createEventsInput = z.object({
 	file: z.string()
 });
 
-export const getEventsInput = z.object({
-	sortDirection: z.enum(['asc', 'desc']).optional(),
-	// sortField: z.enum(['startDateTime', 'endDateTime']).optional()
-	sortKey: eventSchemaDb.keyof().optional()
-});
-
 export const createEventsOutput = baseOutputSchema.extend({
 	data: eventsSchemaDb
+});
+
+export const getEventsInput = z.object({
+	sortDirection: z.enum(['asc', 'desc']).optional(),
+	sortKey: eventSchemaDb.keyof().optional(),
+	page: z.number().optional(),
+	limit: z.number().optional()
+});
+
+export const getEventsOutput = baseOutputSchema.extend({
+	data: z.object({
+		events: eventsSchemaDb,
+		total: z.number(),
+		skip: z.number(),
+		limit: z.number(),
+		pageCount: z.number()
+	})
 });

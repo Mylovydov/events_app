@@ -1,10 +1,11 @@
 import { FC } from 'react';
-import EventsTable from '../../components/eventsTable/EventsTable.tsx';
-import { TBaseTableProps } from '@/components/baseTable/baseTable.types.ts';
+import EventsTable, {
+	TEventsTableProps
+} from '../../components/eventsTable/EventsTable.tsx';
 
 export type TEventsPageProps = {
 	title: string;
-} & TBaseTableProps;
+} & TEventsTableProps;
 
 const EventsPage: FC<TEventsPageProps> = ({ title, ...tableProps }) => {
 	return (

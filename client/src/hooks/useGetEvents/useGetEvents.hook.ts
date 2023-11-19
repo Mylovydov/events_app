@@ -8,17 +8,21 @@ const useGetEvents = (
 ): TUseGetEventsReturn => {
 	const { errorNotify } = useNotify();
 	const {
-		data: events,
+		data: eventsData,
 		isLoading: isEventsLoading,
 		error
-	} = useGetEventsQuery(args, opt);
+	} = useGetEventsQuery({ ...args, limit: 5 }, opt);
 
 	if (error) {
 		errorNotify(JSON.stringify(error));
 	}
 
 	return {
-		events: events?.data || [],
+		events: eventsData?.data.events || [],
+		total: eventsData?.data.total || 0,
+		limit: eventsData?.data.limit || 0,
+		skip: eventsData?.data.skip || 0,
+		pageCount: eventsData?.data.pageCount || 0,
 		isEventsLoading
 	};
 };

@@ -11,10 +11,10 @@ const eventsController = {
 	}),
 
 	getEvents: eventsProcedures.getEvents.query(async ({ input }) => {
-		const events = await eventsService.getEvents(input);
+		const eventsData = await eventsService.getEvents(input);
 		return {
 			message: 'Events successfully found!',
-			data: events
+			data: eventsData
 		};
 	})
 };

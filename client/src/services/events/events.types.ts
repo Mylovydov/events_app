@@ -13,4 +13,8 @@ export type TGetEventsInput = inferProcedureInput<
 	TAppRouter['events']['getEvents']
 >;
 
+export type TGetEventsOutput = inferProcedureOutput<
+	TAppRouter['events']['getEvents']
+>;
+
 export type TEvent = TCreateEventsOutput['data'][0];

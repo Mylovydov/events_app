@@ -7,6 +7,7 @@
     --main-bg-secondary-color: #ebe8ff;
     --main-purple-dark-color: #6C60F4;
     --main-purple-light-color: #8A4BF1;
+    --main-grey-color: #b6b6b6;
     --main-white-color: #fff;
     --main-text-color: #0C1E36;
     --main-error-color: #ec3333;
@@ -61,4 +62,5 @@ a:hover {
 ul, li {
     padding: 0;
     margin: 0;
+    list-style: none;
 }

@@ -2,7 +2,8 @@ import { createApi } from '@reduxjs/toolkit/query/react';
 import {
 	TCreateEventsInput,
 	TCreateEventsOutput,
-	TGetEventsInput
+	TGetEventsInput,
+	TGetEventsOutput
 } from '@/services';
 import { trpcClient } from '@/trpc';
 
@@ -16,7 +17,7 @@ export const eventsApi = createApi({
 			query: arg => trpcClient.events.create.mutate({ file: arg })
 		}),
 
-		getEvents: builder.query<TCreateEventsOutput, TGetEventsInput>({
+		getEvents: builder.query<TGetEventsOutput, TGetEventsInput>({
 			query: arg => trpcClient.events.getEvents.query(arg)
 		})
 	})

@@ -4,7 +4,7 @@ import { fileToString } from '../utils/helpers';
 import { useCreateEvents } from '@/hooks';
 
 const UploadPageContainer = () => {
-	const { uploadEvents, isEventsUploading } = useCreateEvents();
+	const { uploadEvents, isEventsCreating } = useCreateEvents();
 
 	const onFileUpload = async (file: File) => {
 		const data = await fileToString(file);
@@ -31,7 +31,7 @@ const UploadPageContainer = () => {
 			fileValidator={validator}
 			btnLabel="Upload events"
 			onUpload={onFileUpload}
-			isLoading={isEventsUploading}
+			isLoading={isEventsCreating}
 		/>
 	);
 };

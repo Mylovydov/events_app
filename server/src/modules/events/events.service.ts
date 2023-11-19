@@ -32,11 +32,27 @@ class EventsService {
 		return await this.uploadEventsToDb(validationResult.events!);
 	}
 
-	async getEvents({ sortKey, sortDirection }: TEventsSortData) {
-		const events = await EventModel.find().sort({
-			[sortKey || defaultSortKey]: sortDirection || defaultDirection
-		});
-		return events.map(event => event.toJSON());
+	async getEvents({ sortKey, sortDirection, limit, page }: TEventsSortData) {
+		page = page || 1;
+		limit = limit || 5;
+		const offset = (page - 1) * limit;
+
+		const events = await EventModel.find()
+			.sort({
+				[sortKey || defaultSortKey]: sortDirection || defaultDirection
+			})
+			.skip(offset)
+			.limit(limit);
+
+		const totalEvents = await EventModel.countDocuments();
+
+		return {
+			events: events.map(event => event.toJSON()),
+			total: totalEvents,
+			skip: offset,
+			limit: limit,
+			pageCount: Math.ceil(totalEvents / limit)
+		};
 	}
 
 	private prepareFileData(events: TEventsSchema) {

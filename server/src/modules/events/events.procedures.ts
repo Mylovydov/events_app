@@ -3,7 +3,8 @@ import { exampleBase64CSV, exampleEvents } from '../../utils/index.js';
 import {
 	createEventsInput,
 	createEventsOutput,
-	getEventsInput
+	getEventsInput,
+	getEventsOutput
 } from './events.dto.js';
 
 const eventsProcedures = {
@@ -47,7 +48,7 @@ const eventsProcedures = {
 			}
 		})
 		.input(getEventsInput)
-		.output(createEventsOutput)
+		.output(getEventsOutput)
 };
 
 export default eventsProcedures;

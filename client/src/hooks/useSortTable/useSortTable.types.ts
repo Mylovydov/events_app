@@ -1,8 +1,11 @@
 import { TSortDirection } from '@/components/baseTable/baseTable.types.ts';
 
-export type TSetSortParams = {
+export type TUseSortTableParams = {
 	sortKeyName: string;
-	sortKeyValue: string;
 	sortDirectionKeyName: string;
+};
+
+export type TSetSortParams = {
+	sortKeyValue: string;
 	sortDirectionValue: TSortDirection;
 };

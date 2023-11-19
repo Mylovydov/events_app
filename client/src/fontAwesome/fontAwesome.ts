@@ -5,6 +5,8 @@ import {
 	faCalendarDays,
 	faCaretDown,
 	faCaretUp,
+	faChevronLeft,
+	faChevronRight,
 	faFaceSadTear,
 	faFileCsv,
 	faGear,
@@ -28,7 +30,9 @@ const fontAwesome = {
 			faCaretUp,
 			faCaretDown,
 			faFaceSadTear,
-			faSpinner
+			faSpinner,
+			faChevronRight,
+			faChevronLeft
 		)
 };
 
