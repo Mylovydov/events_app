@@ -1,7 +1,10 @@
 import { publicProcedure } from '../../trpc/index.js';
 import { exampleBase64CSV, exampleEvents } from '../../utils/index.js';
-import { z } from 'zod';
-import { createEventsInput, createEventsOutput } from './events.dto.js';
+import {
+	createEventsInput,
+	createEventsOutput,
+	getEventsInput
+} from './events.dto.js';
 
 const eventsProcedures = {
 	create: publicProcedure
@@ -32,7 +35,7 @@ const eventsProcedures = {
 				method: 'GET',
 				path: '/events',
 				tags: ['events'],
-				summary: 'Get all uploaded events',
+				summary: 'Get all uploaded events and sorting',
 				protect: true,
 				example: {
 					// request: {},
@@ -43,7 +46,7 @@ const eventsProcedures = {
 				}
 			}
 		})
-		.input(z.void())
+		.input(getEventsInput)
 		.output(createEventsOutput)
 };
 

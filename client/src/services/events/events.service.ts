@@ -1,5 +1,9 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
-import { TCreateEventsInput, TCreateEventsOutput } from '@/services';
+import {
+	TCreateEventsInput,
+	TCreateEventsOutput,
+	TGetEventsInput
+} from '@/services';
 import { trpcClient } from '@/trpc';
 
 export const eventsApi = createApi({
@@ -11,8 +15,9 @@ export const eventsApi = createApi({
 		create: builder.mutation<TCreateEventsOutput, TCreateEventsInput['file']>({
 			query: arg => trpcClient.events.create.mutate({ file: arg })
 		}),
-		getEvents: builder.query<TCreateEventsOutput, void>({
-			query: () => trpcClient.events.getEvents.query()
+
+		getEvents: builder.query<TCreateEventsOutput, TGetEventsInput>({
+			query: arg => trpcClient.events.getEvents.query(arg)
 		})
 	})
 });

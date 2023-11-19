@@ -26,12 +26,15 @@ const defaultSortKey: TEventUnionKeys = 'startDateTime';
 
 const EventsPageContainer = () => {
 	const { setSortParams } = useSortTable();
-	const { events, isEventsLoading } = useGetEvents();
 	const [searchParams, setSearchParams] = useSearchParams();
 
 	const [sortDirection, setSortDirection] =
 		useState<TSortDirection>(defaultDirection);
 	const [sortKey, setSortKey] = useState<TEventUnionKeys>(defaultSortKey);
+	const { events, isEventsLoading } = useGetEvents({
+		sortDirection,
+		sortKey
+	});
 
 	useEffect(() => {
 		const sortDirection = searchParams.get(SORT_DIRECTION_PARAM_KEY);

@@ -1,6 +1,7 @@
 import {
 	TCreateFileDto,
 	TEventsSchema,
+	TEventsSortData,
 	TValidateCSVResult
 } from './events.types.js';
 import { eventsSchema } from './events.dto.js';
@@ -8,6 +9,9 @@ import { EventModel } from './events.model.js';
 import { ApiError } from '../../error/index.js';
 import papaParse, { ParseConfig } from 'papaparse';
 import { prepareValidationErrors } from './events.utils.js';
+
+const defaultDirection = 'desc';
+const defaultSortKey = 'startDateTime';
 
 class EventsService {
 	async create(data: TCreateFileDto) {
@@ -28,8 +32,10 @@ class EventsService {
 		return await this.uploadEventsToDb(validationResult.events!);
 	}
 
-	async getEvents() {
-		const events = await EventModel.find();
+	async getEvents({ sortKey, sortDirection }: TEventsSortData) {
+		const events = await EventModel.find().sort({
+			[sortKey || defaultSortKey]: sortDirection || defaultDirection
+		});
 		return events.map(event => event.toJSON());
 	}
 

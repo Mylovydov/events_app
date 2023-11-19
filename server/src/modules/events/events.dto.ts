@@ -37,8 +37,8 @@ export const eventSchemaDb = mainEventSchema
 		endDateTime: z.any(),
 		createdAt: z.any(),
 		updatedAt: z.any(),
-		// startDateTime: z.date(),
 		startDateTime: z.any()
+		// startDateTime: z.date(),
 	});
 
 export const eventsSchema = z.array(mainEventSchema);
@@ -46,6 +46,12 @@ export const eventsSchemaDb = z.array(eventSchemaDb);
 
 export const createEventsInput = z.object({
 	file: z.string()
+});
+
+export const getEventsInput = z.object({
+	sortDirection: z.enum(['asc', 'desc']).optional(),
+	// sortField: z.enum(['startDateTime', 'endDateTime']).optional()
+	sortKey: eventSchemaDb.keyof().optional()
 });
 
 export const createEventsOutput = baseOutputSchema.extend({
