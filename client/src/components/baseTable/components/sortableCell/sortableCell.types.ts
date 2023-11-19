@@ -1,4 +1,4 @@
-import React, { PropsWithChildren } from 'react';
+import { PropsWithChildren } from 'react';
 
 export enum ESortDirection {
 	ASC = 'asc',
@@ -10,5 +10,5 @@ export type TSortDirection = 'asc' | 'desc' | false;
 export type TSortableCellProps = {
 	active?: boolean;
 	direction?: TSortDirection;
-	onClick?: (e: React.MouseEventHandler<HTMLSpanElement>) => void;
+	onClick?: () => void;
 } & PropsWithChildren;

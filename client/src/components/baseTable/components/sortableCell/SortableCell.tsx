@@ -11,7 +11,8 @@ import {
 const SortableCell: FC<TSortableCellProps> = ({
 	children,
 	active,
-	direction
+	direction,
+	onClick
 }) => {
 	const topIconClasses = classNames({
 		[styles.iconTop]: true,
@@ -24,7 +25,7 @@ const SortableCell: FC<TSortableCellProps> = ({
 	});
 
 	return (
-		<Cell>
+		<Cell onClick={onClick}>
 			<span className={styles.sortableLabel}>
 				{children}
 				<span className={styles.sortableLabelIcons}>

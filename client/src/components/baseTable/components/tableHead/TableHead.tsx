@@ -10,7 +10,6 @@ const TableHead: FC<TTableHeadProps> = ({
 	sortKey,
 	columns = []
 }) => {
-	console.log('onSortDirectionChange', onSortDirectionChange);
 	const handleSortingChange = (accessor: string) => {
 		const newSortOrder =
 			accessor === sortKey && sortDirection === ESortDirection.ASC

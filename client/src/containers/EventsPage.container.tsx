@@ -43,8 +43,6 @@ const EventsPageContainer = () => {
 
 	const onSortDirectionChange = useCallback(
 		(accessor: string, sortDirection: TSortDirection) => {
-			console.log('accessor', accessor);
-			console.log('sortDirection', sortDirection);
 			setSortParams({
 				sortKeyName: SORT_KEY_PARAM_KEY,
 				sortKeyValue: accessor,
