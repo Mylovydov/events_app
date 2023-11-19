@@ -16,8 +16,8 @@ export type TBaseTableProps = {
 		sortDirection: TSortDirection
 	) => void;
 	isLoading?: boolean;
-	sortKey: string;
-	sortDirection: TSortDirection;
+	sortKey?: string;
+	sortDirection?: TSortDirection;
 	isLastColumnSticky?: boolean;
 	emptyLabel?: string;
 };

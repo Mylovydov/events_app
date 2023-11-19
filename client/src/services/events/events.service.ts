@@ -18,7 +18,16 @@ export const eventsApi = createApi({
 		}),
 
 		getEvents: builder.query<TGetEventsOutput, TGetEventsInput>({
-			query: arg => trpcClient.events.getEvents.query(arg)
+			query: arg => trpcClient.events.getEvents.query(arg),
+			providesTags: result => {
+				if (!result) {
+					return ['Events'];
+				}
+				return result.data.events.map(({ _id }) => ({
+					type: 'Events' as const,
+					id: _id
+				}));
+			}
 		})
 	})
 });

@@ -1,5 +1,7 @@
-import { TTableColumn } from '@/components/baseTable/baseTable.types.ts';
-import { TSortDirection } from '@/components/baseTable/BaseTable.tsx';
+import {
+	TSortDirection,
+	TTableColumn
+} from '@/components/baseTable/baseTable.types.ts';
 
 export type TTableHeadProps = {
 	columns: TTableColumn[];
@@ -7,6 +9,6 @@ export type TTableHeadProps = {
 		accessor: string,
 		sortDirection: TSortDirection
 	) => void;
-	sortKey: string;
-	sortDirection: TSortDirection;
+	sortKey?: string;
+	sortDirection?: TSortDirection;
 };

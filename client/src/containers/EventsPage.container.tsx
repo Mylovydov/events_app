@@ -1,16 +1,17 @@
 import { EventsPage } from '@/pages';
 import useGetEvents from '../hooks/useGetEvents/useGetEvents.hook.ts';
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useCallback, useMemo } from 'react';
 import EventsTableRow from '../components/eventsTable/components/eventsTableRow/EventsTableRow.tsx';
 import { TSortDirection } from '@/components/baseTable/baseTable.types.ts';
-import { TEventUnionKeys } from '@/components/eventsTable/components/eventsTableRow/eventsTableRow.types.ts';
 import { useSortTable } from '@/hooks';
-import { useSearchParams } from 'react-router-dom';
 import usePagination from '../hooks/usePagination/usePagination.ts';
-
-export const SORT_DIRECTION_PARAM_KEY = 'direction';
-export const SORT_KEY_PARAM_KEY = 'key';
-export const PAGE_PARAM_KEY = 'page';
+import {
+	defaultDirection,
+	defaultSortKey,
+	PAGE_PARAM_KEY,
+	SORT_DIRECTION_PARAM_KEY,
+	SORT_KEY_PARAM_KEY
+} from '@/utils';
 
 const columns = [
 	{ label: 'First Name', accessor: 'inviteeFirstName', sortable: true },
@@ -23,44 +24,27 @@ const columns = [
 	{ label: 'Invitee UUID', accessor: 'inviteeUUID' }
 ];
 
-const defaultDirection: TSortDirection = 'desc';
-const defaultSortKey: TEventUnionKeys = 'startDateTime';
-
 const EventsPageContainer = () => {
-	const { setSortParams } = useSortTable({
+	const { setSortParams, sortKey, sortDirection } = useSortTable({
 		sortKeyName: SORT_KEY_PARAM_KEY,
-		sortDirectionKeyName: SORT_DIRECTION_PARAM_KEY
+		sortDirectionKeyName: SORT_DIRECTION_PARAM_KEY,
+		defaultDirection,
+		defaultSortKey,
+		pageParamKey: PAGE_PARAM_KEY,
+		resetPageAfterSort: true
 	});
-	const { changePaginationPage, page, setPage } = usePagination(PAGE_PARAM_KEY);
-	const [searchParams, setSearchParams] = useSearchParams();
+	const { changePaginationPage, page } = usePagination(PAGE_PARAM_KEY);
 
-	const [sortDirection, setSortDirection] =
-		useState<TSortDirection>(defaultDirection);
-	const [sortKey, setSortKey] = useState<TEventUnionKeys>(defaultSortKey);
-
-	const { events, isEventsLoading, pageCount } = useGetEvents({
-		sortDirection,
-		sortKey,
-		page
-	});
-
-	useEffect(() => {
-		const page = parseInt(searchParams.get(PAGE_PARAM_KEY) || '1', 10);
-		console.log('page', page);
-		const sortDirection = (searchParams.get(SORT_DIRECTION_PARAM_KEY) ||
-			defaultDirection) as TSortDirection;
-		const sortKey = (searchParams.get(SORT_KEY_PARAM_KEY) ||
-			defaultSortKey) as TEventUnionKeys;
-
-		page > 1
-			? searchParams.set(PAGE_PARAM_KEY, String(page))
-			: searchParams.delete(PAGE_PARAM_KEY);
-
-		setSearchParams(searchParams);
-		setSortDirection(sortDirection);
-		setSortKey(sortKey);
-		setPage(page);
-	}, [searchParams, setPage, setSearchParams]);
+	const { events, isEventsLoading, pageCount } = useGetEvents(
+		{
+			sortDirection,
+			sortKey,
+			page
+		},
+		{
+			skip: !(sortDirection && sortKey && page)
+		}
+	);
 
 	const onSortDirectionChange = useCallback(
 		(accessor: string, sortDirection: TSortDirection) => {
@@ -68,9 +52,8 @@ const EventsPageContainer = () => {
 				sortKeyValue: accessor,
 				sortDirectionValue: sortDirection
 			});
-			searchParams.set(PAGE_PARAM_KEY, '1');
 		},
-		[searchParams, setSortParams]
+		[setSortParams]
 	);
 
 	const onPageChange = useCallback(

@@ -1,16 +1,24 @@
 import { FC } from 'react';
-import EventsTable, {
-	TEventsTableProps
-} from '../../components/eventsTable/EventsTable.tsx';
+import EventsTable from '../../components/eventsTable/EventsTable.tsx';
 
-export type TEventsPageProps = {
-	title: string;
-} & TEventsTableProps;
+import styles from './events.page.module.css';
+import { Typography } from '@/components';
+import { TEventsPageProps } from '@/pages/events/events.page.types.ts';
 
-const EventsPage: FC<TEventsPageProps> = ({ title, ...tableProps }) => {
+const EventsPage: FC<TEventsPageProps> = ({
+	title,
+	subtitle,
+	...tableProps
+}) => {
 	return (
-		<div>
-			<EventsTable {...tableProps} />
+		<div className={styles.eventsPage}>
+			<div className={styles.eventsPageHeader}>
+				<Typography text={title} variant="h1" weight="bold" />
+				{subtitle && <Typography text={subtitle} variant="h6" />}
+			</div>
+			<div className={styles.eventsPageBody}>
+				<EventsTable {...tableProps} />
+			</div>
 		</div>
 	);
 };
