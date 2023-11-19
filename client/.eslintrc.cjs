@@ -16,8 +16,9 @@ module.exports = {
 			{ allowConstantExport: true }
 		],
 		"indent": [
-		  "error",
-		  "tab",
+			"error",
+			"tab",
+			{ "SwitchCase": 1 }
 		],
 		'linebreak-style': [
 			'error',

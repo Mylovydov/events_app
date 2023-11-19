@@ -1,6 +1,6 @@
 import styles from './app.layout.module.css';
 import { Outlet } from 'react-router-dom';
-import AppHeader from '../components/appHeader/AppHeader.tsx';
+import Header from '@/components/header/Header.tsx';
 import Sidebar from '../components/sidebar/Sidebar.tsx';
 import { TNavItemProps } from '@/components/navbar/components/navItem/navItem.types.ts';
 import {
@@ -29,10 +29,12 @@ const AppLayout = () => {
 			</aside>
 			<div className={styles.appMain}>
 				<header className={styles.appHeader}>
-					<AppHeader username="Denys" />
+					<Header username="Denys" />
 				</header>
 				<main className={styles.appBody}>
-					<Outlet />
+					<div className={styles.appContainer}>
+						<Outlet />
+					</div>
 				</main>
 			</div>
 		</div>

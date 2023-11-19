@@ -1,0 +1,15 @@
+.eventsPage {
+    display: flex;
+    flex-direction: column;
+    gap: 4rem;
+}
+
+.eventsPageHeader {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.eventsPageBody {
+}
+

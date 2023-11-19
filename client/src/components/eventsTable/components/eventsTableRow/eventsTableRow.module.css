@@ -1,0 +1,16 @@
+.eventsTableRow {
+    display: table-row;
+    vertical-align: middle;
+    outline: 0;
+}
+
+.eventsTableCell {
+    padding: 1rem 1.8rem;
+    min-width: 10rem;
+    color: var(--main-text-color);
+    font-weight: 400;
+    display: table-cell;
+    text-align: left;
+    font-size: 1.4rem;
+    white-space: nowrap;
+}

@@ -1,4 +1,4 @@
-import { authProcedure } from '../../trpc/index.js';
+import { authProcedure, publicProcedure } from '../../trpc/index.js';
 import {
 	addAppSettingsInput,
 	addSmtpSettingsInput,
@@ -59,7 +59,7 @@ const userProcedures = {
 		.input(userIdInput)
 		.output(baseUserOutput),
 
-	getUsers: authProcedure
+	getUsers: publicProcedure
 		.meta({
 			openapi: {
 				method: 'GET',

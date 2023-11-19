@@ -4,8 +4,10 @@
 
     --main-gradient: linear-gradient(180deg, #8A4BF1 0%, #6C60F4 100%);
     --main-bg-color: #F9F9FF;
+    --main-bg-secondary-color: #ebe8ff;
     --main-purple-dark-color: #6C60F4;
     --main-purple-light-color: #8A4BF1;
+    --main-grey-color: #b6b6b6;
     --main-white-color: #fff;
     --main-text-color: #0C1E36;
     --main-error-color: #ec3333;
@@ -13,6 +15,8 @@
 
     --main-transition-delay: 200ms;
     --main-transition-fn: ease-in;
+
+    --main-border-radius: 1rem;
 
     --header-z-index: 100;
 
@@ -23,17 +27,34 @@
     --breakpoint-xl: 153.5rem;
 }
 
+*, :after, :before {
+    box-sizing: border-box;
+}
+
+
 html {
+    text-size-adjust: 100%;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
     font-size: 62.5%;
     font-family: 'Quicksand', sans-serif;
     color: var(--main-text-color);
 }
 
-h1, h2, h3, h4, h5, h6, p {
-    margin: 0;
+html, body {
+    width: 100%;
+    height: 100%;
+    letter-spacing: normal;
+    text-transform: none;
 }
 
 a {
+    text-decoration: none;
+    color: inherit;
+    display: inline-block;
+}
+
+a:hover {
     text-decoration: none;
     color: inherit;
 }
@@ -41,4 +62,5 @@ a {
 ul, li {
     padding: 0;
     margin: 0;
+    list-style: none;
 }
