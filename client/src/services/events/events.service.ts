@@ -1,11 +1,11 @@
 import {
+	baseApi,
 	TCreateEventsInput,
 	TCreateEventsOutput,
 	TGetEventsInput,
 	TGetEventsOutput
 } from '@/services';
 import { trpcClient } from '@/trpc';
-import baseApi from '../base/baseApi.ts';
 
 export const eventsApi = baseApi.injectEndpoints({
 	endpoints: builder => ({

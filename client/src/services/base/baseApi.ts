@@ -4,7 +4,7 @@ const baseApi = createApi({
 	reducerPath: 'baseApi',
 	baseQuery: (trpcResult: Promise<unknown>) =>
 		trpcResult.then(data => ({ data })).catch(error => ({ error })),
-	tagTypes: ['Events'],
+	tagTypes: ['Events', 'Users'],
 	endpoints: () => ({})
 });
 
