@@ -1,7 +1,7 @@
 import styles from './upload.page.module.css';
 import { FC } from 'react';
-import { TUploadPageProps } from '@/pages/upload/upload.page.types.ts';
 import { DropZone, PageHeader } from '@/components';
+import { TUploadPageProps } from '@/pages';
 
 const UploadPage: FC<TUploadPageProps> = ({
 	title,
