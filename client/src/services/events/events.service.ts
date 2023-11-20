@@ -1,4 +1,3 @@
-import { createApi } from '@reduxjs/toolkit/query/react';
 import {
 	TCreateEventsInput,
 	TCreateEventsOutput,
@@ -6,12 +5,9 @@ import {
 	TGetEventsOutput
 } from '@/services';
 import { trpcClient } from '@/trpc';
+import baseApi from '../base/baseApi.ts';
 
-export const eventsApi = createApi({
-	reducerPath: 'eventsApi',
-	baseQuery: (trpcResult: Promise<unknown>) =>
-		trpcResult.then(data => ({ data })).catch(error => ({ error })),
-	tagTypes: ['Events'],
+export const eventsApi = baseApi.injectEndpoints({
 	endpoints: builder => ({
 		create: builder.mutation<TCreateEventsOutput, TCreateEventsInput['file']>({
 			query: arg => trpcClient.events.create.mutate({ file: arg })

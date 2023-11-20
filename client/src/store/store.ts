@@ -1,13 +1,13 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { eventsApi } from '@/services';
+import { baseApi } from '@/services';
 
 const store = configureStore({
 	reducer: {
-		[eventsApi.reducerPath]: eventsApi.reducer
+		[baseApi.reducerPath]: baseApi.reducer
 	},
 	middleware: getDefaultMiddleware => [
 		...getDefaultMiddleware(),
-		eventsApi.middleware
+		baseApi.middleware
 	]
 });
 
