@@ -1,6 +1,5 @@
 import { TGetEventsInput, useGetEventsQuery } from '@/services';
-import useNotify from '@/hooks/useNotify/useNotify.hook.ts';
-import { TUseGetEventsReturn } from '@/hooks/useGetEvents/useGetEvents.types.ts';
+import { TUseGetEventsReturn, useNotify } from '@/hooks';
 
 const useGetEvents = (
 	args: TGetEventsInput,

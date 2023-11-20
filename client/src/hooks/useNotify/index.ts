@@ -1,1 +1,1 @@
-export { default as useSuccessNotify } from './useNotify.hook.ts';
+export { default as useNotify } from './useNotify.hook.ts';

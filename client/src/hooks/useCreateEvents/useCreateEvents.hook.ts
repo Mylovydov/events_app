@@ -2,7 +2,7 @@ import { useCreateMutation } from '@/services';
 import { useNavigate } from 'react-router-dom';
 import { useCallback } from 'react';
 import { EVENTS_PATH } from '@/router/constants.ts';
-import useNotify from '@/hooks/useNotify/useNotify.hook.ts';
+import { useNotify } from '@/hooks';
 
 const useCreateEvents = () => {
 	const navigate = useNavigate();
