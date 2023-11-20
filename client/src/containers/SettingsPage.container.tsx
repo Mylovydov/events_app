@@ -1,9 +1,23 @@
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { ColorPicker } from '@/components';
 import { SettingsPage } from '@/pages';
+import { useUserContext } from '@/hooks';
+import { isStringType } from '@/utils';
 
 const SettingsPageContainer = () => {
-	const [color, setColor] = useState('#000000');
+	const { user, isUserLoading } = useUserContext();
+
+	const [color, setColor] = useState<string | undefined>(undefined);
+
+	useEffect(() => {
+		if (!user) {
+			return;
+		}
+
+		if (!isStringType(user.appSettings)) {
+			setColor(user.appSettings.highlightColor || '#000');
+		}
+	}, [user]);
 
 	const settingsItems = useMemo(
 		() => [
@@ -28,6 +42,7 @@ const SettingsPageContainer = () => {
 			title="Settings"
 			subtitle="Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum "
 			items={settingsItems}
+			isPageLoading={isUserLoading}
 		/>
 	);
 };

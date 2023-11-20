@@ -9,7 +9,10 @@ import { trpcClient } from '@/trpc';
 
 export const eventsApi = baseApi.injectEndpoints({
 	endpoints: builder => ({
-		create: builder.mutation<TCreateEventsOutput, TCreateEventsInput['file']>({
+		createEvents: builder.mutation<
+			TCreateEventsOutput,
+			TCreateEventsInput['file']
+		>({
 			query: arg => trpcClient.events.create.mutate({ file: arg })
 		}),
 
@@ -28,4 +31,4 @@ export const eventsApi = baseApi.injectEndpoints({
 	})
 });
 
-export const { useCreateMutation, useGetEventsQuery } = eventsApi;
+export const { useCreateEventsMutation, useGetEventsQuery } = eventsApi;

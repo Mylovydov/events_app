@@ -19,7 +19,7 @@ import {
 
 export const usersApi = baseApi.injectEndpoints({
 	endpoints: builder => ({
-		create: builder.mutation<TCreateUserOutput, TCreateUserInput>({
+		createUser: builder.mutation<TCreateUserOutput, TCreateUserInput>({
 			query: arg => trpcClient.users.create.mutate(arg)
 		}),
 		getUser: builder.query<TGetUserOutput, TGetUserInput>({
@@ -28,19 +28,19 @@ export const usersApi = baseApi.injectEndpoints({
 		getUsers: builder.query<TGetUsersOutput, TGetUsersInput>({
 			query: arg => trpcClient.users.getUsers.query(arg)
 		}),
-		update: builder.query<TUpdateUserOutput, TUpdateUserInput>({
+		updateUser: builder.mutation<TUpdateUserOutput, TUpdateUserInput>({
 			query: arg => trpcClient.users.update.mutate(arg)
 		}),
-		delete: builder.query<TDeleteUserOutput, TDeleteUserInput>({
+		deleteUser: builder.mutation<TDeleteUserOutput, TDeleteUserInput>({
 			query: arg => trpcClient.users.delete.mutate(arg)
 		}),
-		addSmtpSettings: builder.query<
+		addSmtpSettings: builder.mutation<
 			TAddSMTPSettingsUserOutput,
 			TAddSMTPSettingsUserInput
 		>({
 			query: arg => trpcClient.users.addSmtpSettings.mutate(arg)
 		}),
-		addAppSettings: builder.query<
+		addAppSettings: builder.mutation<
 			TAddAppSettingsUserOutput,
 			TAddAppSettingsUserInput
 		>({
@@ -49,4 +49,12 @@ export const usersApi = baseApi.injectEndpoints({
 	})
 });
 
-export const {} = usersApi;
+export const {
+	useCreateUserMutation,
+	useGetUserQuery,
+	useGetUsersQuery,
+	useUpdateUserMutation,
+	useDeleteUserMutation,
+	useAddAppSettingsMutation,
+	useAddSmtpSettingsMutation
+} = usersApi;

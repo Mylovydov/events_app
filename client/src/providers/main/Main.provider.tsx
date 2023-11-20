@@ -5,6 +5,7 @@ import { useMemo } from 'react';
 import { SnackbarProviderProps } from 'notistack';
 import { NotifyProvider } from '@/providers';
 import { appRouter } from '@/router';
+import UserProvider from '../user/User.provider.tsx';
 
 const MainProvider = () => {
 	const notifyOpt = useMemo(
@@ -27,7 +28,9 @@ const MainProvider = () => {
 	return (
 		<NotifyProvider {...notifyOpt}>
 			<Provider store={store}>
-				<RouterProvider router={appRouter} />
+				<UserProvider>
+					<RouterProvider router={appRouter} />
+				</UserProvider>
 			</Provider>
 		</NotifyProvider>
 	);

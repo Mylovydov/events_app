@@ -1,4 +1,4 @@
-import { useCreateMutation } from '@/services';
+import { useCreateEventsMutation } from '@/services';
 import { useNavigate } from 'react-router-dom';
 import { useCallback } from 'react';
 import { EVENTS_PATH } from '@/router/constants.ts';
@@ -8,7 +8,7 @@ const useCreateEvents = () => {
 	const navigate = useNavigate();
 	const { successNotify, errorNotify } = useNotify();
 	const [createEventsTrigger, { isLoading: isEventsCreating }] =
-		useCreateMutation();
+		useCreateEventsMutation();
 
 	const uploadEvents = useCallback(
 		(events: string) => {

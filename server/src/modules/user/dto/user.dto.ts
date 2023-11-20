@@ -8,7 +8,7 @@ export const mainUserSchema = z.object({
 	email: z.string().email({ message: 'Invalid email address' }),
 	name: z.string().max(25, 'Name must be less than 25 characters').optional(),
 	smtpSettings: z.optional(z.string().uuid().or(mainSmtpSettingsSchema)),
-	appSettings: z.optional(z.string().uuid().or(mainAppSettingsSchema)),
+	appSettings: mainAppSettingsSchema.or(z.string().uuid()),
 	autoEmailSending: z.boolean(),
 	password: z
 		.string()

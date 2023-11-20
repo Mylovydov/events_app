@@ -1,23 +1,28 @@
 import styles from './settings.page.module.css';
 import { FC } from 'react';
-import { AppSettings, Button, PageHeader } from '@/components';
+import { AppSettings, Button, PageHeader, Spinner } from '@/components';
 import { TSettingsPageProps } from '@/pages';
 
 const SettingsPage: FC<TSettingsPageProps> = ({
 	title,
 	subtitle,
+	isPageLoading,
 	...settingsProps
 }) => {
+	const contentMarkup = isPageLoading ? (
+		<Spinner />
+	) : (
+		<AppSettings {...settingsProps} />
+	);
+
 	return (
 		<section className={styles.settingsPage}>
 			<div className={styles.settingsPageHeader}>
 				<PageHeader {...{ title, subtitle }} />
 			</div>
-			<div className={styles.settingsPageBody}>
-				<AppSettings {...settingsProps} />
-			</div>
+			<div className={styles.settingsPageBody}>{contentMarkup}</div>
 			<div className={styles.settingsPageFooter}>
-				<Button label="Save" />
+				<Button label="Save" disabled={isPageLoading} />
 			</div>
 		</section>
 	);
