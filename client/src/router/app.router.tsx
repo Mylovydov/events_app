@@ -1,10 +1,5 @@
 import { createBrowserRouter } from 'react-router-dom';
-import {
-	EMAIL_LAYOUT_PATH,
-	EVENTS_PATH,
-	HOME_PATH,
-	SETTINGS_PATH
-} from '@/router/constants.ts';
+
 import { ErrorPage } from '@/pages';
 import { AppLayout } from '@/layouts';
 import {
@@ -12,6 +7,12 @@ import {
 	SettingsPageContainer,
 	UploadPageContainer
 } from '@/containers';
+import {
+	EMAIL_LAYOUT_PATH,
+	EVENTS_PATH,
+	HOME_PATH,
+	SETTINGS_PATH
+} from '@/router';
 
 const appRouter = createBrowserRouter([
 	{
