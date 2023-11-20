@@ -10,10 +10,7 @@ import {
 	SnackbarProviderProps,
 	useSnackbar
 } from 'notistack';
-import {
-	IOpenNotifyParams,
-	TNotifyContext
-} from '@/providers/notify/notify.provider.types.ts';
+import { IOpenNotifyParams, TNotifyContext } from '@/providers';
 
 export const NotifyContext = createContext<TNotifyContext>({
 	open: () => {},

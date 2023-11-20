@@ -1,10 +1,10 @@
-import NotifyProvider from '../notify/Notify.provider.tsx';
 import { Provider } from 'react-redux';
 import { store } from '@/store';
 import { RouterProvider } from 'react-router-dom';
 import appRouter from '@/router/app.router.tsx';
 import { useMemo } from 'react';
 import { SnackbarProviderProps } from 'notistack';
+import { NotifyProvider } from '@/providers';
 
 const MainProvider = () => {
 	const notifyOpt = useMemo(

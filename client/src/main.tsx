@@ -2,8 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import 'normalize.css';
-import MainProvider from './providers/main/Main.provider.tsx';
 import { fontAwesome } from '@/fontAwesome';
+import { MainProvider } from '@/providers';
 
 fontAwesome.init();
 
