@@ -1,4 +1,3 @@
-import { TDropZoneProps } from '@/components/ui/dropZone/dropZone.types.ts';
-import { TPageHeaderProps } from '@/components/pageHeader/pageHeader.types.ts';
+import { TDropZoneProps, TPageHeaderProps } from '@/components';
 
 export type TUploadPageProps = TPageHeaderProps & TDropZoneProps;

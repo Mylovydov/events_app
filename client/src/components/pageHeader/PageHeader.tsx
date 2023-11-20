@@ -1,7 +1,6 @@
 import styles from './pageHeader.module.css';
 import { FC } from 'react';
-import { TPageHeaderProps } from '@/components/pageHeader/pageHeader.types.ts';
-import { Typography } from '@/components';
+import { TPageHeaderProps, Typography } from '@/components';
 
 const PageHeader: FC<TPageHeaderProps> = ({ title, subtitle }) => {
 	return (

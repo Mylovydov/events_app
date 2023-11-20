@@ -3,8 +3,8 @@ import { FC } from 'react';
 import { TBaseTableProps } from '@/components/baseTable/baseTable.types.ts';
 import { TableHead } from '@/components/baseTable/components';
 import classNames from 'classnames';
-import EmptyTable from './components/emptyTable/EmptyTable.tsx';
 import Spinner from '../ui/spinner/Spinner.tsx';
+import { EmptyTable } from '@/components/baseTable/components/emptyTable';
 
 const BaseTable: FC<TBaseTableProps> = ({
 	rows = [],

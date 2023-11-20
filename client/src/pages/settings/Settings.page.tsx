@@ -1,8 +1,7 @@
 import styles from './settings.page.module.css';
 import { FC } from 'react';
 import { TSettingsPageProps } from '@/pages/settings/settings.page.types.ts';
-import { Button, PageHeader } from '@/components';
-import AppSettings from '../../components/appSettings/AppSettings.tsx';
+import { AppSettings, Button, PageHeader } from '@/components';
 
 const SettingsPage: FC<TSettingsPageProps> = ({
 	title,

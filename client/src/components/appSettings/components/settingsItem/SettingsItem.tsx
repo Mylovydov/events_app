@@ -1,11 +1,6 @@
 import styles from './settingsItem.module.css';
-import { Typography } from '@/components';
-import { FC, PropsWithChildren } from 'react';
-
-export type TSettingsItemProps = {
-	title: string;
-	subtitle?: string;
-} & PropsWithChildren;
+import { TSettingsItemProps, Typography } from '@/components';
+import { FC } from 'react';
 
 const SettingsItem: FC<TSettingsItemProps> = ({
 	title,

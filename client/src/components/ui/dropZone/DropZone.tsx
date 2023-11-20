@@ -1,10 +1,8 @@
 import styles from './dropZone.module.css';
-import { Typography } from '@/components';
+import { TDropZoneProps, Typography, UploadedFile } from '@/components';
 import useDropZone from './hooks/useDropZone.hook.ts';
-import UploadedFile from './components/uploadedFile/UploadedFile.tsx';
 import classNames from 'classnames';
 import { FC, useState } from 'react';
-import { TDropZoneProps } from './dropZone.types.ts';
 import Button from '../button/Button.tsx';
 import useNotify from '@/hooks/useNotify/useNotify.hook.ts';
 

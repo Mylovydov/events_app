@@ -1,7 +1,7 @@
-import UploadPage from '../pages/upload/Upload.page.tsx';
 import { validateEvents } from '@/utils/helpers/validateEvents.ts';
 import { fileToString } from '../utils/helpers';
 import { useCreateEvents } from '@/hooks';
+import { UploadPage } from '@/pages';
 
 const UploadPageContainer = () => {
 	const { uploadEvents, isEventsCreating } = useCreateEvents();

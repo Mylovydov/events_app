@@ -1,8 +1,7 @@
-import SettingsPage from '../pages/settings/Settings.page.tsx';
 import { useMemo, useState } from 'react';
 import { ColorPicker } from '@/components';
-// title="Event Highlighting Color"
-// subtitle="Select the color that will be used to highlight unsent messages"
+import { SettingsPage } from '@/pages';
+
 const SettingsPageContainer = () => {
 	const [color, setColor] = useState('#000000');
 

@@ -1,12 +1,9 @@
 import styles from './appSettings.module.css';
-import SettingsItem, {
-	TSettingsItemProps
-} from './components/SettingsItem.tsx';
+
 import { FC } from 'react';
 
-export type TAppSettingsProps = {
-	items: TSettingsItemProps[];
-};
+import { SettingsItem } from '@/components/appSettings/components';
+import { TAppSettingsProps } from '@/components/appSettings/appSettings.types.ts';
 
 const AppSettings: FC<TAppSettingsProps> = ({ items = [] }) => (
 	<div className={styles.appSettings}>
