@@ -1,7 +1,7 @@
 import styles from './avatar.module.css';
 import { FC } from 'react';
 import classNames from 'classnames';
-import { TAvatarProps } from '@/components/ui/avatar/avatar.types.ts';
+import { TAvatarProps } from '@/components';
 
 const Avatar: FC<TAvatarProps> = ({ src, alt, size = 'medium', name }) => {
 	const avatarClassNames = classNames({
