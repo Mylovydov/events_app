@@ -2,7 +2,7 @@ import styles from './colorPicker.module.css';
 import { HexColorPicker } from 'react-colorful';
 import { FC, useCallback, useRef, useState } from 'react';
 import { useClickOutside } from '@/hooks';
-import { TColorPickerProps } from '@/components/ui/colorPicker/colorPicker.types.ts';
+import { TColorPickerProps } from '@/components';
 
 const ColorPicker: FC<TColorPickerProps> = ({ color, onChange }) => {
 	const popover = useRef<HTMLDivElement | null>(null);
