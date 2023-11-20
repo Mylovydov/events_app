@@ -1,7 +1,12 @@
-import { TEvent } from '@/types';
 import { readCsvFile } from '@/utils';
+import { TEvent } from '@/services';
 
-const exampleEvent: Record<keyof TEvent, string> = {
+export type TOmitEvent = Omit<
+	TEvent,
+	'_id' | 'isEmailSend' | 'createdAt' | 'updatedAt'
+>;
+
+const exampleEvent: Record<keyof TOmitEvent, string> = {
 	endDateTime: 'string',
 	eventUUID: 'string',
 	inviteeEmail: 'string',
@@ -15,10 +20,11 @@ const exampleEvent: Record<keyof TEvent, string> = {
 export const validateEvent = (event: TEvent) => {
 	for (const key in exampleEvent) {
 		const isKeyExist = key in event;
-		const isValidTYpe =
-			typeof event[key as keyof TEvent] === exampleEvent[key as keyof TEvent];
+		const isValidType =
+			typeof event[key as keyof TEvent] ===
+			exampleEvent[key as keyof TOmitEvent];
 
-		if (!(isKeyExist && isValidTYpe)) {
+		if (!(isKeyExist && isValidType)) {
 			return false;
 		}
 	}
