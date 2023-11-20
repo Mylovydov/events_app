@@ -6,8 +6,7 @@ import {
 	HOME_PATH,
 	SETTINGS_PATH
 } from '@/router/constants.ts';
-import { Header, Sidebar } from '@/components';
-import { TNavItemProps } from '@/components/navbar/components/navItem/navItem.types.ts';
+import { Header, Sidebar, TNavItemProps } from '@/components';
 
 const navList: TNavItemProps[] = [
 	{ label: 'Home', to: HOME_PATH, icon: 'house' },

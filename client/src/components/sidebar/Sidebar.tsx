@@ -1,8 +1,7 @@
 import styles from './sidebar.module.css';
-import { Navbar } from '../navbar';
 import { FC } from 'react';
 import { TSidebarProps } from '@/components/sidebar/sidebar.types.ts';
-import { AppLogo, Logout } from '@/components';
+import { AppLogo, Logout, Navbar } from '@/components';
 
 const Sidebar: FC<TSidebarProps> = ({
 	navList,
