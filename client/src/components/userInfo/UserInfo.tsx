@@ -1,7 +1,6 @@
 import styles from './userInfo.module.css';
-import { Avatar, Typography } from '@/components';
+import { Avatar, TUserInfoProps, Typography } from '@/components';
 import { FC } from 'react';
-import { TUserInfoProps } from '@/components/userInfo/userInfo.types.ts';
 
 const UserInfo: FC<TUserInfoProps> = ({ name = 'John Doe', src }) => (
 	<div className={styles.userInfo}>
