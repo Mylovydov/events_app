@@ -8,3 +8,5 @@ export * from './navbar';
 export * from './logout';
 export * from './baseTable';
 export * from './eventsTable';
+export * from './pageHeader';
+export * from './appSettings';
