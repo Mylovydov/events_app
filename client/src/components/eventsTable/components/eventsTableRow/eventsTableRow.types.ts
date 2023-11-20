@@ -1,5 +1,5 @@
 import { TEvent } from '@/services';
-import { TTableColumn } from '@/components/baseTable/baseTable.types.ts';
+import { TTableColumn } from '@/components';
 
 export type TEventUnionKeys = keyof TEvent;
 export type TEventValue = TEvent[TEventUnionKeys];

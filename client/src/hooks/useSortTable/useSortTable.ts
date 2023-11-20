@@ -4,7 +4,7 @@ import {
 	TSetSortParams,
 	TUseSortTableParams
 } from '@/hooks/useSortTable/useSortTable.types.ts';
-import { TSortDirection } from '@/components/baseTable/baseTable.types.ts';
+import { TBaseSortDirection } from '@/components/baseTable/baseTable.types.ts';
 import { TEventUnionKeys } from '@/components/eventsTable/components/eventsTableRow/eventsTableRow.types.ts';
 
 const useSortTable = ({
@@ -17,7 +17,7 @@ const useSortTable = ({
 }: TUseSortTableParams) => {
 	const [searchParams, setSearchParams] = useSearchParams();
 	const [sortDirection, setSortDirection] = useState<
-		TSortDirection | undefined
+		TBaseSortDirection | undefined
 	>(undefined);
 	const [sortKey, setSortKey] = useState<TEventUnionKeys | undefined>(
 		undefined
@@ -25,7 +25,7 @@ const useSortTable = ({
 
 	useEffect(() => {
 		const sortDirection = (searchParams.get(sortDirectionKeyName) ||
-			defaultDirection) as TSortDirection;
+			defaultDirection) as TBaseSortDirection;
 		const sortKey = (searchParams.get(sortKeyName) ||
 			defaultSortKey) as TEventUnionKeys;
 

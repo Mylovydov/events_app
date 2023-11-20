@@ -2,7 +2,7 @@ import { EventsPage } from '@/pages';
 import useGetEvents from '../hooks/useGetEvents/useGetEvents.hook.ts';
 import { useCallback, useMemo } from 'react';
 import EventsTableRow from '../components/eventsTable/components/eventsTableRow/EventsTableRow.tsx';
-import { TSortDirection } from '@/components/baseTable/baseTable.types.ts';
+import { TBaseSortDirection } from '@/components/baseTable/baseTable.types.ts';
 import { useSortTable } from '@/hooks';
 import usePagination from '../hooks/usePagination/usePagination.ts';
 import {
@@ -47,7 +47,7 @@ const EventsPageContainer = () => {
 	);
 
 	const onSortDirectionChange = useCallback(
-		(accessor: string, sortDirection: TSortDirection) => {
+		(accessor: string, sortDirection: TBaseSortDirection) => {
 			setSortParams({
 				sortKeyValue: accessor,
 				sortDirectionValue: sortDirection

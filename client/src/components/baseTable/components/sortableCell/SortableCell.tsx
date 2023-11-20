@@ -3,10 +3,7 @@ import styles from './sortableCell.module.css';
 import { FC } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames';
-import {
-	ESortDirection,
-	TSortableCellProps
-} from '@/components/baseTable/components/sortableCell/sortableCell.types.ts';
+import { ESortDirection, TSortableCellProps } from '@/components';
 
 const SortableCell: FC<TSortableCellProps> = ({
 	children,

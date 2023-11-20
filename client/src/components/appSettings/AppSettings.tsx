@@ -3,7 +3,7 @@ import styles from './appSettings.module.css';
 import { FC } from 'react';
 
 import { SettingsItem } from '@/components/appSettings/components';
-import { TAppSettingsProps } from '@/components/appSettings/appSettings.types.ts';
+import { TAppSettingsProps } from '@/components';
 
 const AppSettings: FC<TAppSettingsProps> = ({ items = [] }) => (
 	<div className={styles.appSettings}>
