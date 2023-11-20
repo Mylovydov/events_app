@@ -1,7 +1,6 @@
 import { EventsPage } from '@/pages';
 import useGetEvents from '../hooks/useGetEvents/useGetEvents.hook.ts';
 import { useCallback, useMemo } from 'react';
-import EventsTableRow from '../components/eventsTable/components/eventsTableRow/EventsTableRow.tsx';
 import { TBaseSortDirection } from '@/components/baseTable/baseTable.types.ts';
 import { useSortTable } from '@/hooks';
 import usePagination from '../hooks/usePagination/usePagination.ts';
@@ -12,6 +11,7 @@ import {
 	SORT_DIRECTION_PARAM_KEY,
 	SORT_KEY_PARAM_KEY
 } from '@/utils';
+import { EventsTableRow } from '@/components';
 
 const columns = [
 	{ label: 'First Name', accessor: 'inviteeFirstName', sortable: true },

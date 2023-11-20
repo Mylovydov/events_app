@@ -1,9 +1,9 @@
 import { FC } from 'react';
-import EventsTable from '../../components/eventsTable/EventsTable.tsx';
 
 import styles from './events.page.module.css';
-import { TEventsPageProps } from '@/pages/events/events.page.types.ts';
 import PageHeader from '../../components/pageHeader/PageHeader.tsx';
+import { EventsTable } from '@/components';
+import { TEventsPageProps } from '@/pages';
 
 const EventsPage: FC<TEventsPageProps> = ({
 	title,

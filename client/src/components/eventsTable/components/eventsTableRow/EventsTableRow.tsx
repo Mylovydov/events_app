@@ -2,11 +2,11 @@ import { FC } from 'react';
 import { Cell } from '@/components/baseTable/components';
 import styles from './eventsTableRow.module.css';
 import {
+	Button,
+	prepareRowValue,
 	TEventKeys,
 	TEventsTableRowProps
-} from '@/components/eventsTable/components/eventsTableRow/eventsTableRow.types.ts';
-import prepareRowValue from '../../utils/prepareRowValue.ts';
-import { Button } from '@/components';
+} from '@/components';
 
 const EventsTableRow: FC<TEventsTableRowProps> = ({
 	columns,

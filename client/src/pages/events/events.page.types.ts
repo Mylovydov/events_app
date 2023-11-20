@@ -1,4 +1,3 @@
-import { TEventsTableProps } from '@/components/eventsTable/EventsTable.tsx';
-import { TPageHeaderProps } from '@/components';
+import { TEventsTableProps, TPageHeaderProps } from '@/components';
 
 export type TEventsPageProps = TPageHeaderProps & TEventsTableProps;

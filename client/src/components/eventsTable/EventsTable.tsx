@@ -1,10 +1,7 @@
 import { FC } from 'react';
-import { BaseTable, Pagination, TPaginationProps } from '@/components';
-import { TBaseTableProps } from '@/components/baseTable/baseTable.types.ts';
+import { BaseTable, Pagination, TEventsTableProps } from '@/components';
 
 import styles from './eventsTable.module.css';
-
-export type TEventsTableProps = TBaseTableProps & TPaginationProps;
 
 const EventsTable: FC<TEventsTableProps> = ({
 	rows,
