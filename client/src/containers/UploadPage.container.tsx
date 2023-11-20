@@ -1,7 +1,7 @@
-import { validateEvents } from '@/utils/helpers/validateEvents.ts';
 import { fileToString } from '../utils/helpers';
 import { useCreateEvents } from '@/hooks';
 import { UploadPage } from '@/pages';
+import { validateEvents } from '@/utils';
 
 const UploadPageContainer = () => {
 	const { uploadEvents, isEventsCreating } = useCreateEvents();

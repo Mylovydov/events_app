@@ -1,5 +1,4 @@
-import { TBaseSortDirection } from '@/components/baseTable/baseTable.types.ts';
-import { TEventUnionKeys } from '@/components/eventsTable/components/eventsTableRow/eventsTableRow.types.ts';
+import { TBaseSortDirection, TEventUnionKeys } from '@/components';
 
 export const SORT_DIRECTION_PARAM_KEY = 'direction';
 export const SORT_KEY_PARAM_KEY = 'key';

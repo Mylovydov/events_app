@@ -1,7 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { eventsApi } from '@/services';
 
-export const store = configureStore({
+const store = configureStore({
 	reducer: {
 		[eventsApi.reducerPath]: eventsApi.reducer
 	},
@@ -10,3 +10,5 @@ export const store = configureStore({
 		eventsApi.middleware
 	]
 });
+
+export default store;
