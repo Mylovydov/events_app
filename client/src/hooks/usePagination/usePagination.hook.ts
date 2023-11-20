@@ -33,7 +33,7 @@ const usePagination = (
 		searchParams.set(pageKeyName, '1');
 		setSearchParams(searchParams);
 		setPage(initialPage);
-	}, [pageKeyName, searchParams, setSearchParams]);
+	}, [initialPage, pageKeyName, searchParams, setSearchParams]);
 
 	return { changePaginationPage, page, setPage, resetPage };
 };
