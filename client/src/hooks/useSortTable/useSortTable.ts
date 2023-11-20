@@ -1,10 +1,8 @@
 import { useSearchParams } from 'react-router-dom';
 import { useCallback, useEffect, useState } from 'react';
-import {
-	TSetSortParams,
-	TUseSortTableParams
-} from '@/hooks/useSortTable/useSortTable.types.ts';
+
 import { TBaseSortDirection, TEventUnionKeys } from '@/components';
+import { TSetSortParams, TUseSortTableParams } from '@/hooks';
 
 const useSortTable = ({
 	sortKeyName,

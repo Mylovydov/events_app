@@ -1,5 +1,4 @@
-import { TBaseSortDirection } from '@/components/baseTable/baseTable.types.ts';
-import { TEventUnionKeys } from '@/components/eventsTable/components/eventsTableRow/eventsTableRow.types.ts';
+import { TBaseSortDirection, TEventUnionKeys } from '@/components';
 
 export type TUseSortTableParams = {
 	sortKeyName: string;
