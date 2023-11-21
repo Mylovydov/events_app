@@ -44,7 +44,8 @@ export const usersApi = baseApi.injectEndpoints({
 			TAddAppSettingsUserOutput,
 			TAddAppSettingsUserInput
 		>({
-			query: arg => trpcClient.users.addAppSettings.mutate(arg)
+			query: arg => trpcClient.users.addAppSettings.mutate(arg),
+			invalidatesTags: ['Users']
 		})
 	})
 });

@@ -1,14 +1,14 @@
 import styles from './colorPicker.module.css';
 import { HexColorPicker } from 'react-colorful';
-import { FC, useCallback, useRef, useState } from 'react';
+import { FC, memo, useCallback, useRef, useState } from 'react';
 import { useClickOutside } from '@/hooks';
 import { TColorPickerProps } from '@/components';
 
-const ColorPicker: FC<TColorPickerProps> = ({ color, onChange }) => {
+const ColorPicker: FC<TColorPickerProps> = memo(({ color, onChange }) => {
 	const popover = useRef<HTMLDivElement | null>(null);
-	const [isOpen, toggle] = useState(false);
+	const [isOpen, setIsOpen] = useState(false);
 
-	const close = useCallback(() => toggle(false), []);
+	const close = useCallback(() => setIsOpen(false), []);
 	useClickOutside(popover, close);
 
 	return (
@@ -16,7 +16,7 @@ const ColorPicker: FC<TColorPickerProps> = ({ color, onChange }) => {
 			<div
 				className={styles.colorPickerSwatch}
 				style={{ backgroundColor: color }}
-				onClick={() => toggle(true)}
+				onClick={() => setIsOpen(true)}
 			/>
 			{isOpen && (
 				<div className={styles.colorPickerPopover} ref={popover}>
@@ -25,6 +25,6 @@ const ColorPicker: FC<TColorPickerProps> = ({ color, onChange }) => {
 			)}
 		</div>
 	);
-};
+});
 
 export default ColorPicker;

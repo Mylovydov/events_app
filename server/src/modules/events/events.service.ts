@@ -35,13 +35,13 @@ class EventsService {
 	async getEvents({ sortKey, sortDirection, limit, page }: TEventsSortData) {
 		page = page || 1;
 		limit = limit || 5;
-		const offset = (page - 1) * limit;
+		const skip = (page - 1) * limit;
 
 		const events = await EventModel.find()
 			.sort({
 				[sortKey || defaultSortKey]: sortDirection || defaultDirection
 			})
-			.skip(offset)
+			.skip(skip)
 			.limit(limit);
 
 		const totalEvents = await EventModel.countDocuments();
@@ -49,8 +49,8 @@ class EventsService {
 		return {
 			events: events.map(event => event.toJSON()),
 			total: totalEvents,
-			skip: offset,
-			limit: limit,
+			skip,
+			limit,
 			pageCount: Math.ceil(totalEvents / limit)
 		};
 	}

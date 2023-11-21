@@ -12,6 +12,7 @@ const eventsController = {
 
 	getEvents: eventsProcedures.getEvents.query(async ({ input }) => {
 		const eventsData = await eventsService.getEvents(input);
+
 		return {
 			message: 'Events successfully found!',
 			data: eventsData

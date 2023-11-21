@@ -8,6 +8,9 @@ export class Settings {
 
 	@prop({ type: String, default: '#fbf1e6' })
 	public highlightColor!: string;
+
+	@prop({ type: Boolean, default: false })
+	public isAutoSendEnabled!: boolean;
 }
 
 export const AppSettingsModel = getModelForClass(Settings, {

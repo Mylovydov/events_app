@@ -155,7 +155,7 @@ const userProcedures = {
 		.input(addSmtpSettingsInput)
 		.output(baseUserOutput),
 
-	addAppSettings: publicProcedure
+	addAppSettings: authProcedure
 		.meta({
 			openapi: {
 				method: 'PUT',

@@ -9,7 +9,7 @@ export const UserContext = createContext<TUserContext>({
 
 const UserProvider: FC<PropsWithChildren> = ({ children }) => {
 	const { user, isUserLoading } = useGetUser({
-		userId: 'd45cd472-9bf2-4ebf-8e8b-542045367721'
+		userId: '180aab9e-a0ed-49a9-b452-65c74bc586ad'
 	});
 
 	const value: TUserContext = useMemo(
