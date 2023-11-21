@@ -17,10 +17,7 @@ const useAddAppSettings = () => {
 				.then(data => {
 					successNotify(data.message);
 				})
-				.catch(err => {
-					console.log('err============addAppSettings============', err);
-					errorNotify(err.message);
-				});
+				.catch(err => errorNotify(err.message));
 		},
 		[addAppSettingsTrigger, successNotify, errorNotify]
 	);

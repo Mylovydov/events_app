@@ -18,9 +18,7 @@ const useCreateEvents = () => {
 					successNotify(data.message);
 					navigate(EVENTS_PATH);
 				})
-				.catch(err => {
-					errorNotify(err.message);
-				});
+				.catch(err => errorNotify(err.message));
 		},
 		[createEventsTrigger, successNotify, navigate, errorNotify]
 	);

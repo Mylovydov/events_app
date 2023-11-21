@@ -1,6 +1,7 @@
 import { TGetUserInput, useGetUserQuery } from '@/services';
 import { useNotify } from '@/hooks';
 import { TUseGetUserReturn } from '@/hooks/useGetUser/useGetUser.types.ts';
+import { isTErrorResponse } from '@/utils';
 
 const useGetUser = (
 	args: TGetUserInput,
@@ -14,7 +15,11 @@ const useGetUser = (
 	} = useGetUserQuery(args, opt);
 
 	if (error) {
-		errorNotify(JSON.stringify(error));
+		if (isTErrorResponse(error)) {
+			errorNotify(error.message);
+		} else {
+			errorNotify('Something went wrong');
+		}
 	}
 
 	return {

@@ -4,6 +4,7 @@ import userProcedures from './user.procedures.js';
 const userController = {
 	create: userProcedures.create.mutation(async ({ input }) => {
 		const user = await userService.create(input);
+
 		return {
 			message: 'User has been successfully registered!',
 			data: user
@@ -12,6 +13,7 @@ const userController = {
 
 	getUser: userProcedures.getUser.query(async ({ input }) => {
 		const user = await userService.getById(input.userId);
+
 		return {
 			message: 'User was successfully found!',
 			data: user
