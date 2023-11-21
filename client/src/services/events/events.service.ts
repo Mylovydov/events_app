@@ -13,7 +13,8 @@ export const eventsApi = baseApi.injectEndpoints({
 			TCreateEventsOutput,
 			TCreateEventsInput['file']
 		>({
-			query: arg => trpcClient.events.create.mutate({ file: arg })
+			query: arg => trpcClient.events.create.mutate({ file: arg }),
+			invalidatesTags: ['Events']
 		}),
 
 		getEvents: builder.query<TGetEventsOutput, TGetEventsInput>({

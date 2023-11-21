@@ -32,16 +32,11 @@ const EventsPageContainer = () => {
 	});
 	const { changePaginationPage, page } = usePagination(PAGE_PARAM_KEY);
 
-	const { events, isEventsLoading, pageCount } = useGetEvents(
-		{
-			sortDirection,
-			sortKey,
-			page
-		},
-		{
-			skip: !(sortDirection && sortKey && page)
-		}
-	);
+	const { events, isEventsLoading, pageCount } = useGetEvents({
+		sortDirection,
+		sortKey,
+		page
+	});
 
 	const onSortDirectionChange = useCallback(
 		(accessor: string, sortDirection: TBaseSortDirection) => {

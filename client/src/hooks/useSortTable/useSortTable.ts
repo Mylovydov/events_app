@@ -13,12 +13,9 @@ const useSortTable = ({
 	pageParamKey
 }: TUseSortTableParams) => {
 	const [searchParams, setSearchParams] = useSearchParams();
-	const [sortDirection, setSortDirection] = useState<
-		TBaseSortDirection | undefined
-	>(undefined);
-	const [sortKey, setSortKey] = useState<TEventUnionKeys | undefined>(
-		undefined
-	);
+	const [sortDirection, setSortDirection] =
+		useState<TBaseSortDirection>(defaultDirection);
+	const [sortKey, setSortKey] = useState<TEventUnionKeys>(defaultSortKey);
 
 	useEffect(() => {
 		const sortDirection = (searchParams.get(sortDirectionKeyName) ||
