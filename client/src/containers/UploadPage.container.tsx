@@ -11,6 +11,7 @@ const UploadPageContainer = () => {
 	const onFileUpload = useCallback(
 		async (file: File) => {
 			const data = await fileToString(file);
+
 			if (!(typeof data === 'string' && user?._id)) {
 				return;
 			}

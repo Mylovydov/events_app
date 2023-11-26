@@ -34,6 +34,7 @@ export const eventSchemaDb = mainEventSchema
 	.omit({ startDateTime: true, endDateTime: true })
 	.extend({
 		_id: z.string().uuid(),
+		userId: z.optional(z.string().uuid().or(mainUserSchema)),
 		isEmailSend: z.boolean(),
 		endDateTime: z.any(),
 		createdAt: z.any(),
@@ -58,7 +59,8 @@ export const getEventsInput = z.object({
 	sortDirection: z.enum(['asc', 'desc']).optional(),
 	sortKey: eventSchemaDb.keyof().optional(),
 	page: z.number().optional(),
-	limit: z.number().optional()
+	limit: z.number().optional(),
+	userId: mainUserSchema.shape._id
 });
 
 export const getEventsOutput = baseOutputSchema.extend({

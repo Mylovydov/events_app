@@ -14,7 +14,8 @@ const editorOptions: EmailEditorProps['options'] = {
 			name: 'Invitee First Name',
 			value: '{{inviteeFirstName}}'
 		}
-	}
+	},
+	displayMode: 'email'
 };
 
 const EmailLayoutPageContainer = () => {

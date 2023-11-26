@@ -1,7 +1,7 @@
 import {
 	TCreateFileDto,
 	TEventsSchema,
-	TEventsSortData,
+	TGetEventsInput,
 	TValidateCSVResult
 } from './events.types.js';
 import { eventsSchema } from './events.dto.js';
@@ -29,15 +29,24 @@ class EventsService {
 			throw ApiError.badRequest(validationResult.error);
 		}
 
-		return await this.uploadEventsToDb(validationResult.events!);
+		return await this.uploadEventsToDb(validationResult.events!, userId);
 	}
 
-	async getEvents({ sortKey, sortDirection, limit, page }: TEventsSortData) {
+	async getEvents({
+		sortKey,
+		sortDirection,
+		limit,
+		page,
+		userId
+	}: TGetEventsInput) {
+		if (!userId) {
+			throw ApiError.badRequest('User id is required!');
+		}
 		page = page || 1;
 		limit = limit || 5;
 		const skip = (page - 1) * limit;
 
-		const events = await EventModel.find()
+		const events = await EventModel.find({ userId })
 			.sort({
 				[sortKey || defaultSortKey]: sortDirection || defaultDirection
 			})
@@ -55,6 +64,13 @@ class EventsService {
 		};
 	}
 
+	addUserIdToEvent(events: TEventsSchema, userId: string) {
+		return events.map(event => ({
+			...event,
+			userId
+		}));
+	}
+
 	private prepareFileData(events: TEventsSchema) {
 		return events.map(({ startDateTime, endDateTime, ...restEvent }) => ({
 			...restEvent,
@@ -63,9 +79,17 @@ class EventsService {
 		}));
 	}
 
-	private async uploadEventsToDb(eventsToUpload: TEventsSchema) {
-		const filteredEvents = await this.filterExistingEvents(eventsToUpload);
-		const createdEvents = await EventModel.create(filteredEvents);
+	private async uploadEventsToDb(
+		eventsToUpload: TEventsSchema,
+		userId: string
+	) {
+		const filteredEvents = await this.filterExistingEvents(
+			eventsToUpload,
+			userId
+		);
+
+		const eventsWithUserId = this.addUserIdToEvent(filteredEvents, userId);
+		const createdEvents = await EventModel.create(eventsWithUserId);
 		return createdEvents.map(event => event.toJSON());
 	}
 
@@ -97,12 +121,15 @@ class EventsService {
 		return Buffer.from(base64Data, 'base64').toString('utf-8');
 	}
 
-	private async filterExistingEvents(events: TEventsSchema) {
+	private async filterExistingEvents(events: TEventsSchema, userId: string) {
 		const dbEvents = await EventModel.find();
+
 		return events.filter(({ eventUUID, inviteeUUID }) => {
 			const isEventExist = dbEvents.some(
 				dbEvent =>
-					dbEvent.eventUUID === eventUUID && dbEvent.inviteeUUID === inviteeUUID
+					dbEvent.eventUUID === eventUUID &&
+					dbEvent.inviteeUUID === inviteeUUID &&
+					dbEvent.userId === userId
 			);
 
 			return !isEventExist;

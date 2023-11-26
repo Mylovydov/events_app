@@ -10,7 +10,7 @@ import { baseModelOptions } from '../../utils/index.js';
 import { Smtp } from './smtp-settings.model.js';
 import { Settings } from './app-settings.model.js';
 
-class User {
+export class User {
 	@prop({ required: true, unique: true, default: () => uuidv4() })
 	public _id!: string;
 
