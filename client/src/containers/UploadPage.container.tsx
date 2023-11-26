@@ -1,17 +1,28 @@
 import { fileToString } from '../utils/helpers';
-import { useCreateEvents } from '@/hooks';
+import { useCreateEvents, useUserContext } from '@/hooks';
 import { UploadPage } from '@/pages';
 import { validateEvents } from '@/utils';
+import { useCallback } from 'react';
 
 const UploadPageContainer = () => {
 	const { uploadEvents, isEventsCreating } = useCreateEvents();
+	const { user } = useUserContext();
 
-	const onFileUpload = async (file: File) => {
-		const data = await fileToString(file);
-		if (typeof data === 'string') {
-			uploadEvents(data);
-		}
-	};
+	const onFileUpload = useCallback(
+		async (file: File) => {
+			const data = await fileToString(file);
+
+			if (!(typeof data === 'string' && user?._id)) {
+				return;
+			}
+
+			uploadEvents({
+				userId: user._id,
+				file: data
+			});
+		},
+		[uploadEvents, user]
+	);
 
 	const validator = async (file: File) => {
 		try {

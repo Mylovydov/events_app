@@ -3,6 +3,7 @@ import { createBrowserRouter } from 'react-router-dom';
 import { ErrorPage } from '@/pages';
 import { AppLayout } from '@/layouts';
 import {
+	EmailLayoutPageContainer,
 	EventsPageContainer,
 	SettingsPageContainer,
 	UploadPageContainer
@@ -37,7 +38,7 @@ const appRouter = createBrowserRouter([
 					},
 					{
 						path: EMAIL_LAYOUT_PATH,
-						element: <div>EMAIL_LAYOUT_PATH</div>
+						element: <EmailLayoutPageContainer />
 					}
 				]
 			}

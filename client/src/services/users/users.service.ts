@@ -3,6 +3,8 @@ import {
 	baseApi,
 	TAddAppSettingsUserInput,
 	TAddAppSettingsUserOutput,
+	TAddEmailTemplateByUserIdInput,
+	TAddEmailTemplateByUserIdOutput,
 	TAddSMTPSettingsUserInput,
 	TAddSMTPSettingsUserOutput,
 	TCreateUserInput,
@@ -16,7 +18,7 @@ import {
 	TUpdateUserInput,
 	TUpdateUserOutput
 } from '@/services';
-import { USERS_API_TAG } from '@/utils';
+import { EApiTags } from '@/utils';
 
 export const usersApi = baseApi.injectEndpoints({
 	endpoints: builder => ({
@@ -26,17 +28,19 @@ export const usersApi = baseApi.injectEndpoints({
 		getUser: builder.query<TGetUserOutput, TGetUserInput>({
 			query: arg => trpcClient.users.getUser.query(arg),
 			transformErrorResponse: ({ data }) => data,
-			providesTags: (_, __, { userId }) => [{ type: USERS_API_TAG, id: userId }]
+			providesTags: (_, __, { userId }) => [
+				{ type: EApiTags.USERS, id: userId }
+			]
 		}),
 		getUsers: builder.query<TGetUsersOutput, TGetUsersInput>({
 			query: arg => trpcClient.users.getUsers.query(arg),
 			transformErrorResponse: ({ data }) => data,
 			providesTags: result => {
 				if (!result) {
-					return [USERS_API_TAG];
+					return [EApiTags.USERS];
 				}
 				return result.data.map(({ _id }) => ({
-					type: USERS_API_TAG,
+					type: EApiTags.USERS,
 					id: _id
 				}));
 			}
@@ -44,12 +48,12 @@ export const usersApi = baseApi.injectEndpoints({
 		updateUser: builder.mutation<TUpdateUserOutput, TUpdateUserInput>({
 			query: arg => trpcClient.users.update.mutate(arg),
 			transformErrorResponse: ({ data }) => data,
-			invalidatesTags: [USERS_API_TAG]
+			invalidatesTags: [EApiTags.USERS]
 		}),
 		deleteUser: builder.mutation<TDeleteUserOutput, TDeleteUserInput>({
 			query: arg => trpcClient.users.delete.mutate(arg),
 			transformErrorResponse: ({ data }) => data,
-			invalidatesTags: [USERS_API_TAG]
+			invalidatesTags: [EApiTags.USERS]
 		}),
 		addSmtpSettings: builder.mutation<
 			TAddSMTPSettingsUserOutput,
@@ -57,14 +61,22 @@ export const usersApi = baseApi.injectEndpoints({
 		>({
 			query: arg => trpcClient.users.addSmtpSettings.mutate(arg),
 			transformErrorResponse: ({ data }) => data,
-			invalidatesTags: [USERS_API_TAG]
+			invalidatesTags: [EApiTags.USERS]
 		}),
 		addAppSettings: builder.mutation<
 			TAddAppSettingsUserOutput,
 			TAddAppSettingsUserInput
 		>({
 			query: arg => trpcClient.users.addAppSettings.mutate(arg),
-			invalidatesTags: [USERS_API_TAG],
+			invalidatesTags: [EApiTags.USERS, EApiTags.EVENTS],
+			transformErrorResponse: ({ data }) => data
+		}),
+		addEmailTemplateByUserId: builder.mutation<
+			TAddEmailTemplateByUserIdOutput,
+			TAddEmailTemplateByUserIdInput
+		>({
+			query: arg => trpcClient.users.addEmailTemplateByUserId.mutate(arg),
+			invalidatesTags: [EApiTags.USERS],
 			transformErrorResponse: ({ data }) => data
 		})
 	})
@@ -77,5 +89,6 @@ export const {
 	useUpdateUserMutation,
 	useDeleteUserMutation,
 	useAddAppSettingsMutation,
-	useAddSmtpSettingsMutation
+	useAddSmtpSettingsMutation,
+	useAddEmailTemplateByUserIdMutation
 } = usersApi;

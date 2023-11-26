@@ -1,17 +1,25 @@
-import { TGetEventsInput, useGetEventsQuery } from '@/services';
+import { TGetModifyEventsInput, useGetEventsQuery } from '@/services';
 import { TUseGetEventsReturn, useNotify } from '@/hooks';
 import { isTErrorResponse } from '@/utils';
 
-const useGetEvents = (
-	args: TGetEventsInput,
-	opt?: { [key: string]: unknown }
-): TUseGetEventsReturn => {
+const useGetEvents = ({
+	userId,
+	...restArgs
+}: TGetModifyEventsInput): TUseGetEventsReturn => {
 	const { errorNotify } = useNotify();
+
 	const {
 		data: eventsData,
 		isLoading: isEventsLoading,
 		error
-	} = useGetEventsQuery({ ...args, limit: 5 }, opt);
+	} = useGetEventsQuery(
+		// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+		// @ts-ignore
+		{ ...restArgs, limit: 5, userId },
+		{
+			skip: !userId
+		}
+	);
 
 	if (error) {
 		if (isTErrorResponse(error)) {

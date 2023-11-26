@@ -13,6 +13,10 @@ export type TGetEventsInput = inferProcedureInput<
 	TAppRouter['events']['getEvents']
 >;
 
+export type TGetModifyEventsInput = Omit<TGetEventsInput, 'userId'> & {
+	userId?: string;
+};
+
 export type TGetEventsOutput = inferProcedureOutput<
 	TAppRouter['events']['getEvents']
 >;

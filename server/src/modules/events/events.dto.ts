@@ -1,5 +1,6 @@
 import { z } from 'zod';
 import { baseOutputSchema } from '../utils/index.js';
+import { mainUserSchema } from '../user/dto/index.js';
 
 const minLengthErrorMessage = 'Must be 5 or more characters long';
 const maxLengthErrorMessage = 'Must be 5 or fewer characters long';
@@ -33,6 +34,7 @@ export const eventSchemaDb = mainEventSchema
 	.omit({ startDateTime: true, endDateTime: true })
 	.extend({
 		_id: z.string().uuid(),
+		userId: z.optional(z.string().uuid().or(mainUserSchema)),
 		isEmailSend: z.boolean(),
 		endDateTime: z.any(),
 		createdAt: z.any(),
@@ -45,7 +47,8 @@ export const eventsSchema = z.array(mainEventSchema);
 export const eventsSchemaDb = z.array(eventSchemaDb);
 
 export const createEventsInput = z.object({
-	file: z.string()
+	file: z.string(),
+	userId: mainUserSchema.shape._id
 });
 
 export const createEventsOutput = baseOutputSchema.extend({
@@ -56,7 +59,8 @@ export const getEventsInput = z.object({
 	sortDirection: z.enum(['asc', 'desc']).optional(),
 	sortKey: eventSchemaDb.keyof().optional(),
 	page: z.number().optional(),
-	limit: z.number().optional()
+	limit: z.number().optional(),
+	userId: mainUserSchema.shape._id
 });
 
 export const getEventsOutput = baseOutputSchema.extend({

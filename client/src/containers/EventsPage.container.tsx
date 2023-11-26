@@ -43,7 +43,8 @@ const EventsPageContainer = () => {
 	const { events, isEventsLoading, pageCount } = useGetEvents({
 		sortDirection,
 		sortKey,
-		page
+		page,
+		userId: user?._id
 	});
 
 	const [highlightColor, setHighlightColor] = useState<string | undefined>(

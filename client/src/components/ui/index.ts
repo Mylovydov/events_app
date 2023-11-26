@@ -6,3 +6,4 @@ export * from './spinner';
 export * from './pagination';
 export * from './colorPicker';
 export * from './switch';
+export * from './emailLayoutEditor';

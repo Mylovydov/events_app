@@ -8,7 +8,8 @@ const userRouter = router({
 	update: userController.update,
 	delete: userController.delete,
 	addSmtpSettings: userController.addSmtpSettings,
-	addAppSettings: userController.addAppSettings
+	addAppSettings: userController.addAppSettings,
+	addEmailTemplateByUserId: userController.addEmailTemplateByUserId
 });
 
 export default userRouter;

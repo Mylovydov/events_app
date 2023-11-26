@@ -11,6 +11,10 @@ import {
 	UserModel
 } from './models/index.js';
 import { tokenService } from '../token/index.js';
+import {
+	emailTemplateService,
+	TAddEmailTemplateInput
+} from '../emailTemplate/index.js';
 
 class UserService {
 	async create(dto: TCreateUserDto) {
@@ -33,6 +37,7 @@ class UserService {
 		)
 			.populate('smtpSettings')
 			.populate('appSettings')
+			.populate('emailTemplate')
 			.lean();
 
 		if (!userToUpdate) {
@@ -47,6 +52,7 @@ class UserService {
 		})
 			.populate('smtpSettings')
 			.populate('appSettings')
+			.populate('emailTemplate')
 			.lean();
 		if (!deletedUser) {
 			throw ApiError.notFound(`User with id: ${userId} not found!`);
@@ -68,6 +74,7 @@ class UserService {
 		return UserModel.find()
 			.populate('smtpSettings')
 			.populate('appSettings')
+			.populate('emailTemplate')
 			.lean();
 	}
 
@@ -76,14 +83,18 @@ class UserService {
 	}
 
 	async getById(id: string) {
-		const user = await UserModel.findOne({ _id: id })
+		const user = await UserModel.findById(id)
 			.populate('smtpSettings')
-			.populate('appSettings');
+			.populate('appSettings')
+			.populate('emailTemplate');
 		if (!user) {
 			throw ApiError.notFound(`User with id: ${id} not found!`);
 		}
-
 		return user.toJSON();
+	}
+
+	async getByIdWithoutFlatten(id: string) {
+		return UserModel.findById(id);
 	}
 
 	async addSmtpSettings({ userId, ...restSmtpSettings }: TAddSmtpSettingsDto) {
@@ -108,6 +119,7 @@ class UserService {
 
 		const updatedUser = await UserModel.findById(user._id)
 			.populate('smtpSettings')
+			.populate('emailTemplate')
 			.populate('appSettings');
 
 		return updatedUser!.toJSON();
@@ -133,11 +145,12 @@ class UserService {
 			await user.save();
 		}
 
-		const updatedUser = await UserModel.findById(user._id)
-			.populate('smtpSettings')
-			.populate('appSettings');
+		return await this.getById(user._id);
+	}
 
-		return updatedUser!.toJSON();
+	async addEmailTemplateByUserId(input: TAddEmailTemplateInput) {
+		await emailTemplateService.addEmailTemplate(input);
+		return await this.getById(input.userId);
 	}
 }
 

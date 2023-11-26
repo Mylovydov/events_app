@@ -2,10 +2,12 @@ import {
 	DocumentType,
 	getModelForClass,
 	index,
-	prop
+	prop,
+	Ref
 } from '@typegoose/typegoose';
 import { v4 as uuidv4 } from 'uuid';
 import { baseModelOptions } from '../utils/index.js';
+import { User } from '../user/models/index.js';
 
 @index({ eventUUID: 1, inviteeUUID: 1 })
 class EventSchema {
@@ -38,6 +40,9 @@ class EventSchema {
 
 	@prop({ required: true, type: Boolean, default: false })
 	public isEmailSend!: boolean;
+
+	@prop({ ref: () => User, type: () => String })
+	public userId!: Ref<User, string>;
 }
 
 export const EventModel = getModelForClass(EventSchema, {

@@ -1,9 +1,9 @@
 import eventsProcedures from './events.procedures.js';
-import eventsService from './events.service.js';
+import { eventsService } from './index.js';
 
 const eventsController = {
 	create: eventsProcedures.create.mutation(async ({ input }) => {
-		const createdEvents = await eventsService.create(input.file);
+		const createdEvents = await eventsService.create(input);
 		return {
 			message: 'Events successfully created!',
 			data: createdEvents

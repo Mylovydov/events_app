@@ -2,12 +2,17 @@ import { z } from 'zod';
 import { mainSmtpSettingsSchema } from './smtp-settings.dto.js';
 import { baseOutputSchema } from '../../utils/index.js';
 import { mainAppSettingsSchema } from './app-settings.dto.js';
+import {
+	addEmailTemplateInput,
+	mainEmailTemplateSchema
+} from '../../emailTemplate/index.js';
 
 export const mainUserSchema = z.object({
 	_id: z.string().uuid({ message: 'Invalid UUID format' }),
 	email: z.string().email({ message: 'Invalid email address' }),
 	name: z.string().max(25, 'Name must be less than 25 characters').optional(),
 	smtpSettings: z.optional(z.string().uuid().or(mainSmtpSettingsSchema)),
+	emailTemplate: z.optional(z.string().uuid().or(mainEmailTemplateSchema)),
 	appSettings: mainAppSettingsSchema.or(z.string().uuid()),
 	password: z
 		.string()
@@ -30,6 +35,7 @@ export const baseUserOutput = baseOutputSchema.extend({
 });
 
 // GET / DELETE
+// TODO: Можно было брать userId из токена, но мне кажется это повлияет на расширяемость, если нужно будет делать админку, то мы не сможем управлять всеми юзерами
 export const userIdInput = z.object({
 	userId: mainUserSchema.shape._id
 });
@@ -50,6 +56,11 @@ export const addAppSettingsInput = mainAppSettingsSchema
 	.extend({
 		userId: mainUserSchema.shape._id
 	});
+
+export const addEmailTemplateByUserIdInput = addEmailTemplateInput;
+export const addEmailTemplateByUserIdOutput = baseOutputSchema.extend({
+	data: baseUserSchema
+});
 
 // SMTP SETTINGS
 export const addSmtpSettingsInput = mainSmtpSettingsSchema
