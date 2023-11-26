@@ -1,4 +1,4 @@
-import { useCreateEventsMutation } from '@/services';
+import { TCreateEventsInput, useCreateEventsMutation } from '@/services';
 import { useNavigate } from 'react-router-dom';
 import { useCallback } from 'react';
 import { EVENTS_PATH } from '@/router/constants.ts';
@@ -11,8 +11,8 @@ const useCreateEvents = () => {
 		useCreateEventsMutation();
 
 	const uploadEvents = useCallback(
-		(events: string) => {
-			createEventsTrigger(events)
+		(arg: TCreateEventsInput) => {
+			createEventsTrigger(arg)
 				.unwrap()
 				.then(data => {
 					successNotify(data.message);

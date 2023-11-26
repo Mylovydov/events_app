@@ -1,6 +1,8 @@
 import { EmailLayoutPage } from '@/pages';
-import { useRef, useState } from 'react';
+import { useCallback, useRef, useState } from 'react';
 import { EditorRef, EmailEditorProps } from 'react-email-editor/dist/types';
+import { useAddEmailTemplate, useUserContext } from '@/hooks';
+import { isStringType } from '@/utils';
 
 const editorOptions: EmailEditorProps['options'] = {
 	mergeTags: {
@@ -16,32 +18,44 @@ const editorOptions: EmailEditorProps['options'] = {
 };
 
 const EmailLayoutPageContainer = () => {
+	const { user, isUserLoading } = useUserContext();
+	const { addEmailTemplateToUser, isEmailTemplateAdding } =
+		useAddEmailTemplate();
 	const [isEditorLoading, setIsEditorLoading] = useState(true);
 	const emailEditorRef = useRef<EditorRef>(null);
 
-	const exportHtml = () => {
-		if (!emailEditorRef.current?.editor) {
+	const onAddEmailTemplate = useCallback(() => {
+		if (!(emailEditorRef.current?.editor && user?._id)) {
 			return;
 		}
 
 		emailEditorRef.current.editor.exportHtml(data => {
-			const { html } = data;
-			console.log('exportHtml', html);
+			const { html, design } = data;
+			addEmailTemplateToUser({
+				userId: user._id,
+				template: html,
+				design: JSON.stringify(design)
+			});
 		});
-	};
+	}, [addEmailTemplateToUser, user]);
 
 	const onLoad = () => {
-		// editor instance is created
-		// you can load your template here;
-		// const templateJson = {};
-		// emailEditorRef.current.editor.loadDesign(templateJson);
-		console.log('onLoad');
+		if (!(emailEditorRef.current?.editor && user?.emailTemplate)) {
+			return;
+		}
+
+		if (!isStringType(user.emailTemplate)) {
+			const templateJson = JSON.parse(user.emailTemplate.design);
+			emailEditorRef.current.editor.loadDesign(templateJson);
+		}
 	};
 
 	const onReady = () => {
-		console.log('onReady');
 		setIsEditorLoading(false);
 	};
+
+	const isPageLoading =
+		isUserLoading || isEmailTemplateAdding || isEditorLoading;
 
 	return (
 		<EmailLayoutPage
@@ -49,9 +63,9 @@ const EmailLayoutPageContainer = () => {
 			onLoad={onLoad}
 			onReady={onReady}
 			editorRef={emailEditorRef}
-			onLayoutSave={exportHtml}
+			onLayoutSave={onAddEmailTemplate}
 			options={editorOptions}
-			isPageLoading={isEditorLoading}
+			isPageLoading={isPageLoading}
 		/>
 	);
 };

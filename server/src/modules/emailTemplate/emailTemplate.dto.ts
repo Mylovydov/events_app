@@ -2,7 +2,8 @@ import { z } from 'zod';
 import { baseOutputSchema } from '../utils/index.js';
 
 export const mainEmailTemplateSchema = z.object({
-	template: z.string()
+	template: z.string(),
+	design: z.string()
 });
 
 export const emailTemplateSchemaDb = mainEmailTemplateSchema.extend({
@@ -11,19 +12,10 @@ export const emailTemplateSchemaDb = mainEmailTemplateSchema.extend({
 	updatedAt: z.any()
 });
 
-export const addEmailTemplateInput = z.object({
-	template: z.string(),
+export const addEmailTemplateInput = mainEmailTemplateSchema.extend({
 	userId: z.string().uuid()
 });
 
 export const addEmailTemplateOutput = baseOutputSchema.extend({
-	data: emailTemplateSchemaDb
-});
-
-export const getEmailTemplateByUserIdInput = z.object({
-	userId: z.string().uuid()
-});
-
-export const getEmailTemplateByUserIdOutput = baseOutputSchema.extend({
 	data: emailTemplateSchemaDb
 });

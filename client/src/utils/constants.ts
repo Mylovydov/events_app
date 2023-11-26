@@ -1,5 +1,11 @@
 import { TBaseSortDirection, TEventUnionKeys } from '@/components';
 
+export enum EApiTags {
+	USERS = 'Users',
+	EVENTS = 'Events',
+	LIST = 'List'
+}
+
 export const USERS_API_TAG = 'Users';
 export const EVENTS_API_TAG = 'Events';
 export const SORT_DIRECTION_PARAM_KEY = 'direction';

@@ -1,9 +1,7 @@
 import { publicProcedure } from '../../trpc/index.js';
 import {
 	addEmailTemplateInput,
-	addEmailTemplateOutput,
-	getEmailTemplateByUserIdInput,
-	getEmailTemplateByUserIdOutput
+	addEmailTemplateOutput
 } from './emailTemplate.dto.js';
 
 const emailTemplateProcedures = {
@@ -25,27 +23,7 @@ const emailTemplateProcedures = {
 			}
 		})
 		.input(addEmailTemplateInput)
-		.output(addEmailTemplateOutput),
-
-	getEmailTemplateByUserId: publicProcedure
-		.meta({
-			openapi: {
-				method: 'GET',
-				path: '/emailTemplate',
-				tags: ['emailTemplate'],
-				summary: 'Get email template by user id',
-				protect: true,
-				example: {
-					request: {},
-					response: {
-						message: '',
-						data: {}
-					}
-				}
-			}
-		})
-		.input(getEmailTemplateByUserIdInput)
-		.output(getEmailTemplateByUserIdOutput)
+		.output(addEmailTemplateOutput)
 };
 
 export default emailTemplateProcedures;

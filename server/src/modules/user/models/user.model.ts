@@ -1,3 +1,4 @@
+import { Template } from '../../emailTemplate/index.js';
 import {
 	DocumentType,
 	getModelForClass,
@@ -8,7 +9,6 @@ import { v4 as uuidv4 } from 'uuid';
 import { baseModelOptions } from '../../utils/index.js';
 import { Smtp } from './smtp-settings.model.js';
 import { Settings } from './app-settings.model.js';
-import { EmailTemplateSchema } from '../../emailTemplate/emailTemplates.model.js';
 
 class User {
 	@prop({ required: true, unique: true, default: () => uuidv4() })
@@ -29,8 +29,8 @@ class User {
 	@prop({ ref: () => Settings, type: () => String })
 	public appSettings!: Ref<Settings, string>;
 
-	@prop({ ref: () => Settings, type: () => String })
-	public emailTemplate!: Ref<EmailTemplateSchema, string>;
+	@prop({ ref: () => Template, type: () => String })
+	public emailTemplate!: Ref<Template, string>;
 }
 
 export const UserModel = getModelForClass(User, {

@@ -1,5 +1,6 @@
 import { z } from 'zod';
 import { baseOutputSchema } from '../utils/index.js';
+import { mainUserSchema } from '../user/dto/index.js';
 
 const minLengthErrorMessage = 'Must be 5 or more characters long';
 const maxLengthErrorMessage = 'Must be 5 or fewer characters long';
@@ -45,7 +46,8 @@ export const eventsSchema = z.array(mainEventSchema);
 export const eventsSchemaDb = z.array(eventSchemaDb);
 
 export const createEventsInput = z.object({
-	file: z.string()
+	file: z.string(),
+	userId: mainUserSchema.shape._id
 });
 
 export const createEventsOutput = baseOutputSchema.extend({

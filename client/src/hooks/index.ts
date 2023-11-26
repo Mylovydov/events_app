@@ -9,3 +9,4 @@ export * from './useSortTable';
 export * from './useGetUser';
 export * from './useUserContext';
 export * from './useAddAppSettings';
+export * from './useAddEmailTemplate';

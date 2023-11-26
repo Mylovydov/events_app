@@ -90,7 +90,6 @@ class UserService {
 		if (!user) {
 			throw ApiError.notFound(`User with id: ${id} not found!`);
 		}
-
 		return user.toJSON();
 	}
 
@@ -149,9 +148,9 @@ class UserService {
 		return await this.getById(user._id);
 	}
 
-	async addEmailTemplateByUserId({ userId, template }: TAddEmailTemplateInput) {
-		await emailTemplateService.addEmailTemplate({ userId, template });
-		return await this.getById(userId);
+	async addEmailTemplateByUserId(input: TAddEmailTemplateInput) {
+		await emailTemplateService.addEmailTemplate(input);
+		return await this.getById(input.userId);
 	}
 }
 

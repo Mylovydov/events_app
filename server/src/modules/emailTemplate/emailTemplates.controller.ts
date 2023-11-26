@@ -10,18 +10,7 @@ const emailTemplatesController = {
 				data: emailTemplate
 			};
 		}
-	),
-	getEmailTemplateByUserId:
-		emailTemplateProcedures.getEmailTemplateByUserId.query(
-			async ({ input }) => {
-				const emailTemplate =
-					await emailTemplateService.getEmailTemplateByUserId(input);
-				return {
-					message: 'Email template successfully created or updated!',
-					data: emailTemplate
-				};
-			}
-		)
+	)
 };
 
 export default emailTemplatesController;

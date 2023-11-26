@@ -14,8 +14,8 @@ const defaultDirection = 'desc';
 const defaultSortKey = 'startDateTime';
 
 class EventsService {
-	async create(data: TCreateFileDto) {
-		const csvString = this.getCSVDataFromBase64(data);
+	async create({ userId, file }: TCreateFileDto) {
+		const csvString = this.getCSVDataFromBase64(file);
 
 		const { errors, data: events } = this.parseCSV(csvString);
 		if (errors.length) {

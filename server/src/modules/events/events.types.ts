@@ -11,7 +11,7 @@ export type TEventSchema = z.infer<typeof mainEventSchema>;
 export type TEventsSchema = z.infer<typeof eventsSchema>;
 export type TEventsSchemaDb = z.infer<typeof eventSchemaDb>;
 export type TEventsSortData = z.infer<typeof getEventsInput>;
-export type TCreateFileDto = z.infer<typeof createEventsInput.shape.file>;
+export type TCreateFileDto = z.infer<typeof createEventsInput>;
 
 export type TValidateCSVResult = {
 	error: string | null;
