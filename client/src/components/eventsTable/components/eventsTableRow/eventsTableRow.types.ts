@@ -9,4 +9,5 @@ export type TEventsTableRowProps = {
 	columns: TTableColumn[];
 	item: TEvent;
 	actionBtnLabel: string;
+	highlightColor: string | undefined;
 };

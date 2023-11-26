@@ -8,6 +8,7 @@ const SettingsPage: FC<TSettingsPageProps> = ({
 	subtitle,
 	isPageLoading,
 	onSave,
+	disableSaveButton,
 	...settingsProps
 }) => {
 	const contentMarkup = isPageLoading ? (
@@ -23,7 +24,11 @@ const SettingsPage: FC<TSettingsPageProps> = ({
 			</div>
 			<div className={styles.settingsPageBody}>{contentMarkup}</div>
 			<div className={styles.settingsPageFooter}>
-				<Button label="Save" onClick={onSave} disabled={isPageLoading} />
+				<Button
+					label="Save"
+					onClick={onSave}
+					disabled={isPageLoading || disableSaveButton}
+				/>
 			</div>
 		</section>
 	);

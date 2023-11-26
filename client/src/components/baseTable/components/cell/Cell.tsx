@@ -4,6 +4,7 @@ export type TCellProps = {
 	className?: string;
 	isHead?: boolean;
 	onClick?: () => void;
+	style?: React.CSSProperties;
 } & PropsWithChildren;
 
 const Cell: FC<TCellProps> = ({ children, isHead = true, ...props }) => {

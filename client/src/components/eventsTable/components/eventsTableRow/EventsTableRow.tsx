@@ -7,25 +7,42 @@ import {
 	TEventKeys,
 	TEventsTableRowProps
 } from '@/components';
+import isColorDark from '../../../../utils/helpers/isColorDark.ts';
 
 const EventsTableRow: FC<TEventsTableRowProps> = ({
 	columns,
 	item,
-	actionBtnLabel
+	actionBtnLabel,
+	highlightColor
 }) => {
 	const rowsKeys = columns.map(c => c.accessor);
+	const style = {
+		backgroundColor: highlightColor,
+		color: isColorDark(highlightColor) ? '#fff' : '#0C1E36'
+	};
 
 	const tableRowsMarkup = (rowsKeys as TEventKeys).map(key => {
 		const rowValue = prepareRowValue(item[key], key);
+
 		return (
-			<Cell isHead={false} className={styles.eventsTableCell} key={key}>
+			<Cell
+				style={style}
+				isHead={false}
+				className={styles.eventsTableCell}
+				key={key}
+			>
 				{rowValue || '——'}
 			</Cell>
 		);
 	});
 
 	tableRowsMarkup.push(
-		<Cell isHead={false} key="action" className={styles.eventsTableCell}>
+		<Cell
+			style={style}
+			isHead={false}
+			key="action"
+			className={styles.eventsTableCell}
+		>
 			<Button label={actionBtnLabel} />
 		</Cell>
 	);

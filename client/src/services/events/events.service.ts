@@ -6,6 +6,7 @@ import {
 	TGetEventsOutput
 } from '@/services';
 import { trpcClient } from '@/trpc';
+import { EVENTS_API_TAG } from '@/utils';
 
 export const eventsApi = baseApi.injectEndpoints({
 	endpoints: builder => ({
@@ -14,7 +15,7 @@ export const eventsApi = baseApi.injectEndpoints({
 			TCreateEventsInput['file']
 		>({
 			query: arg => trpcClient.events.create.mutate({ file: arg }),
-			invalidatesTags: ['Events'],
+			invalidatesTags: [EVENTS_API_TAG],
 			transformErrorResponse: ({ data }) => data
 		}),
 
@@ -22,10 +23,10 @@ export const eventsApi = baseApi.injectEndpoints({
 			query: arg => trpcClient.events.getEvents.query(arg),
 			providesTags: result => {
 				if (!result) {
-					return ['Events'];
+					return [EVENTS_API_TAG];
 				}
 				return result.data.events.map(({ _id }) => ({
-					type: 'Events' as const,
+					type: EVENTS_API_TAG,
 					id: _id
 				}));
 			},

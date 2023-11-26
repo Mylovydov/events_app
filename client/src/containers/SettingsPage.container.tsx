@@ -2,12 +2,12 @@ import { useCallback, useEffect, useMemo, useState } from 'react';
 import { ColorPicker, Switch } from '@/components';
 import { SettingsPage } from '@/pages';
 import { useAddAppSettings, useUserContext } from '@/hooks';
-import { isStringType } from '@/utils';
+import { defaultHighlightColor, isStringType } from '@/utils';
 
 const SettingsPageContainer = () => {
 	const { user, isUserLoading } = useUserContext();
 
-	const [color, setColor] = useState<string>('#ebe8ff');
+	const [color, setColor] = useState<string>(defaultHighlightColor);
 	const [isAutoSendEnabled, setIsAutoSendEnabled] = useState<boolean>(false);
 
 	const { addAppSettings, isAppSettingsAdding } = useAddAppSettings();
@@ -58,18 +58,34 @@ const SettingsPageContainer = () => {
 		}
 
 		if (!isStringType(user.appSettings)) {
-			setColor(user.appSettings.highlightColor || '#ebe8ff');
+			setColor(user.appSettings.highlightColor || defaultHighlightColor);
 			setIsAutoSendEnabled(user.appSettings.isAutoSendEnabled);
 		}
 	}, [user]);
 
+	const isAppSettingsChanged = useMemo(() => {
+		if (!user) {
+			return false;
+		}
+
+		if (!isStringType(user.appSettings)) {
+			return (
+				user.appSettings.highlightColor !== color ||
+				user.appSettings.isAutoSendEnabled !== isAutoSendEnabled
+			);
+		}
+
+		return false;
+	}, [color, isAutoSendEnabled, user]);
+
 	return (
 		<SettingsPage
 			title="Settings"
-			subtitle="Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum "
+			subtitle="Change the settings of your application"
 			items={settingsItems}
-			isPageLoading={isUserLoading}
-			onSave={onAddAppSettings || isAppSettingsAdding}
+			disableSaveButton={!isAppSettingsChanged}
+			isPageLoading={isUserLoading || isAppSettingsAdding}
+			onSave={onAddAppSettings}
 		/>
 	);
 };
