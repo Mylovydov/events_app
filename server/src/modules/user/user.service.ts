@@ -1,20 +1,17 @@
 import {
 	TAddAppSettingsDto,
-	TAddSmtpSettingsDto,
+	TAddEmailSettingsDto,
 	TCreateUserDto,
 	TUpdateUserDto
 } from './user.types.js';
 import { ApiError } from '../../error/index.js';
-import {
-	AppSettingsModel,
-	SmtpSettingsModel,
-	UserModel
-} from './models/index.js';
+import { AppSettingsModel, UserModel } from './models/index.js';
 import { tokenService } from '../token/index.js';
 import {
 	emailTemplateService,
 	TAddEmailTemplateInput
 } from '../emailTemplate/index.js';
+import { EmailSettingsModel } from '../email/index.js';
 
 class UserService {
 	async create(dto: TCreateUserDto) {
@@ -58,8 +55,8 @@ class UserService {
 			throw ApiError.notFound(`User with id: ${userId} not found!`);
 		}
 
-		if (deletedUser.smtpSettings) {
-			await SmtpSettingsModel.deleteOne({ _id: deletedUser.smtpSettings });
+		if (deletedUser.emailSettings) {
+			await EmailSettingsModel.deleteOne({ _id: deletedUser.emailSettings });
 		}
 
 		if (deletedUser.appSettings) {
@@ -97,23 +94,26 @@ class UserService {
 		return UserModel.findById(id);
 	}
 
-	async addSmtpSettings({ userId, ...restSmtpSettings }: TAddSmtpSettingsDto) {
+	async addEmailSettings({
+		userId,
+		...restEmailSettings
+	}: TAddEmailSettingsDto) {
 		const user = await UserModel.findById(userId);
 		if (!user) {
 			throw ApiError.notFound(`User with id: ${userId} not found!`);
 		}
 
-		const smtpSettingsDb = await SmtpSettingsModel.findByIdAndUpdate(
-			user.smtpSettings,
-			{ ...restSmtpSettings },
+		const emailSettingsDb = await EmailSettingsModel.findByIdAndUpdate(
+			user.emailSettings,
+			{ ...restEmailSettings },
 			{ new: true }
 		);
 
-		if (!smtpSettingsDb) {
-			const createdSmtpSettings = await SmtpSettingsModel.create({
-				...restSmtpSettings
+		if (!emailSettingsDb) {
+			const createdEmailSettings = await EmailSettingsModel.create({
+				...restEmailSettings
 			});
-			user.appSettings = createdSmtpSettings._id;
+			user.appSettings = createdEmailSettings._id;
 			await user.save();
 		}
 

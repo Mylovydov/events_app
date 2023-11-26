@@ -44,12 +44,12 @@ const userController = {
 		};
 	}),
 
-	addSmtpSettings: userProcedures.addSmtpSettings.mutation(
+	addEmailSettings: userProcedures.addSmtpSettings.mutation(
 		async ({ input }) => {
-			const smtpSettings = await userService.addSmtpSettings(input);
+			const emailSettings = await userService.addEmailSettings(input);
 			return {
 				message: 'SMTP settings was successfully added!',
-				data: smtpSettings
+				data: emailSettings
 			};
 		}
 	),
