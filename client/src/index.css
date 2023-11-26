@@ -7,18 +7,20 @@
     --main-bg-secondary-color: #ebe8ff;
     --main-purple-dark-color: #6C60F4;
     --main-purple-light-color: #8A4BF1;
-    --main-grey-color: #b6b6b6;
+    --main-grey-color: #cbcbcb;
+    --main-grey-light-color: #dcdcdc;
     --main-white-color: #fff;
     --main-text-color: #0C1E36;
     --main-error-color: #ec3333;
     --main-success-color: #51F14BFF;
 
-    --main-transition-delay: 200ms;
+    --main-transition-delay: 250ms;
     --main-transition-fn: ease-in;
 
     --main-border-radius: 1rem;
 
-    --header-z-index: 100;
+    --header-z-index: 500;
+    --main-z-index: 100;
 
     --breakpoint-xs: 0;
     --breakpoint-sm: 59.9rem;

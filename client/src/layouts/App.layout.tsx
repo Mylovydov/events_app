@@ -1,14 +1,12 @@
 import styles from './app.layout.module.css';
 import { Outlet } from 'react-router-dom';
-import Header from '@/components/header/Header.tsx';
-import Sidebar from '../components/sidebar/Sidebar.tsx';
-import { TNavItemProps } from '@/components/navbar/components/navItem/navItem.types.ts';
 import {
 	EMAIL_LAYOUT_PATH,
 	EVENTS_PATH,
 	HOME_PATH,
 	SETTINGS_PATH
 } from '@/router/constants.ts';
+import { Header, Sidebar, TNavItemProps } from '@/components';
 
 const navList: TNavItemProps[] = [
 	{ label: 'Home', to: HOME_PATH, icon: 'house' },

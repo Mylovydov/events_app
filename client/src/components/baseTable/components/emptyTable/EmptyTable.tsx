@@ -1,8 +1,7 @@
 import { FC } from 'react';
 import styles from './emptyTable.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { Typography } from '@/components';
-import { TEmptyTableProps } from '@/components/baseTable/components/emptyTable/emptyTable.types.ts';
+import { TEmptyTableProps, Typography } from '@/components';
 
 const EmptyTable: FC<TEmptyTableProps> = ({
 	icon = 'face-sad-tear',

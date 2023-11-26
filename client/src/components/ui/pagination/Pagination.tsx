@@ -1,9 +1,8 @@
 import ReactPaginate, { ReactPaginateProps } from 'react-paginate';
 import styles from './pagination.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { Typography } from '@/components';
+import { TPaginationProps, Typography } from '@/components';
 import { FC, memo } from 'react';
-import { TPaginationProps } from '@/components/ui/pagination/pagination.types.ts';
 
 const Pagination: FC<TPaginationProps> = memo(
 	({

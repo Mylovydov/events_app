@@ -1,1 +1,1 @@
-export { default as usePagination } from './usePagination';
+export { default as usePagination } from './usePagination.hook.ts';

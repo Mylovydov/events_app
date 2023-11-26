@@ -1,6 +1,3 @@
-import { TEventsTableProps } from '@/components/eventsTable/EventsTable.tsx';
+import { TEventsTableProps, TPageHeaderProps } from '@/components';
 
-export type TEventsPageProps = {
-	title: string;
-	subtitle?: string;
-} & TEventsTableProps;
+export type TEventsPageProps = TPageHeaderProps & TEventsTableProps;

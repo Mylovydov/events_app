@@ -1,35 +1,38 @@
-import { createApi } from '@reduxjs/toolkit/query/react';
 import {
+	baseApi,
 	TCreateEventsInput,
 	TCreateEventsOutput,
 	TGetEventsInput,
 	TGetEventsOutput
 } from '@/services';
 import { trpcClient } from '@/trpc';
+import { EVENTS_API_TAG } from '@/utils';
 
-export const eventsApi = createApi({
-	reducerPath: 'eventsApi',
-	baseQuery: (trpcResult: Promise<unknown>) =>
-		trpcResult.then(data => ({ data })).catch(error => ({ error })),
-	tagTypes: ['Events'],
+export const eventsApi = baseApi.injectEndpoints({
 	endpoints: builder => ({
-		create: builder.mutation<TCreateEventsOutput, TCreateEventsInput['file']>({
-			query: arg => trpcClient.events.create.mutate({ file: arg })
+		createEvents: builder.mutation<
+			TCreateEventsOutput,
+			TCreateEventsInput['file']
+		>({
+			query: arg => trpcClient.events.create.mutate({ file: arg }),
+			invalidatesTags: [EVENTS_API_TAG],
+			transformErrorResponse: ({ data }) => data
 		}),
 
 		getEvents: builder.query<TGetEventsOutput, TGetEventsInput>({
 			query: arg => trpcClient.events.getEvents.query(arg),
 			providesTags: result => {
 				if (!result) {
-					return ['Events'];
+					return [EVENTS_API_TAG];
 				}
 				return result.data.events.map(({ _id }) => ({
-					type: 'Events' as const,
+					type: EVENTS_API_TAG,
 					id: _id
 				}));
-			}
+			},
+			transformErrorResponse: ({ data }) => data
 		})
 	})
 });
 
-export const { useCreateMutation, useGetEventsQuery } = eventsApi;
+export const { useCreateEventsMutation, useGetEventsQuery } = eventsApi;

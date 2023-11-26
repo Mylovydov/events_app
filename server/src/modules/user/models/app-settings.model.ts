@@ -6,8 +6,11 @@ export class Settings {
 	@prop({ required: true, unique: true, default: () => uuidv4() })
 	public _id!: string;
 
-	@prop({ type: String, required: true, default: '#fbf1e6' })
+	@prop({ type: String, default: '#fbf1e6' })
 	public highlightColor!: string;
+
+	@prop({ type: Boolean, default: false })
+	public isAutoSendEnabled!: boolean;
 }
 
 export const AppSettingsModel = getModelForClass(Settings, {

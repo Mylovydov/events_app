@@ -1,7 +1,6 @@
 import styles from './navList.module.css';
-import { NavItem } from '@/components/navbar/components';
 import { FC } from 'react';
-import { TNavListProps } from '@/components/navbar/components/navLIst/navList.types.ts';
+import { NavItem, TNavListProps } from '@/components';
 
 const NavList: FC<TNavListProps> = ({ items }) => (
 	<ul className={styles.navList}>

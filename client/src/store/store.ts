@@ -1,12 +1,24 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { eventsApi } from '@/services';
+import { baseApi } from '@/services';
 
-export const store = configureStore({
+// export const rtkQueryErrorLogger: Middleware =
+// 	(api: MiddlewareAPI) => next => action => {
+// 		if (isRejectedWithValue(action)) {
+// 			console.warn('We got a rejected action!', action);
+// 		}
+//
+// 		return next(action);
+// 	};
+
+const store = configureStore({
 	reducer: {
-		[eventsApi.reducerPath]: eventsApi.reducer
+		[baseApi.reducerPath]: baseApi.reducer
 	},
 	middleware: getDefaultMiddleware => [
 		...getDefaultMiddleware(),
-		eventsApi.middleware
+		baseApi.middleware
+		// rtkQueryErrorLogger
 	]
 });
+
+export default store;

@@ -1,10 +1,9 @@
 import { NavLink } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { Typography } from '@/components';
+import { TNavItemProps, Typography } from '@/components';
 import styles from './navItem.module.css';
 import { FC } from 'react';
 import classNames from 'classnames';
-import { TNavItemProps } from '@/components/navbar/components/navItem/navItem.types.ts';
 
 const NavItem: FC<TNavItemProps> = ({
 	to,

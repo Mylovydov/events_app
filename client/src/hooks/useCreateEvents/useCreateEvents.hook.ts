@@ -1,14 +1,14 @@
-import { useCreateMutation } from '@/services';
+import { useCreateEventsMutation } from '@/services';
 import { useNavigate } from 'react-router-dom';
 import { useCallback } from 'react';
 import { EVENTS_PATH } from '@/router/constants.ts';
-import useNotify from '@/hooks/useNotify/useNotify.hook.ts';
+import { useNotify } from '@/hooks';
 
 const useCreateEvents = () => {
 	const navigate = useNavigate();
 	const { successNotify, errorNotify } = useNotify();
 	const [createEventsTrigger, { isLoading: isEventsCreating }] =
-		useCreateMutation();
+		useCreateEventsMutation();
 
 	const uploadEvents = useCallback(
 		(events: string) => {
@@ -18,9 +18,7 @@ const useCreateEvents = () => {
 					successNotify(data.message);
 					navigate(EVENTS_PATH);
 				})
-				.catch(err => {
-					errorNotify(err.message);
-				});
+				.catch(err => errorNotify(err.message));
 		},
 		[createEventsTrigger, successNotify, navigate, errorNotify]
 	);

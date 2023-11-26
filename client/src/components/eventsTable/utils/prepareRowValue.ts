@@ -1,8 +1,5 @@
-import {
-	TEventUnionKeys,
-	TEventValue
-} from '@/components/eventsTable/components/eventsTableRow/eventsTableRow.types.ts';
-import formatDate from '../../../utils/helpers/formatDate.ts';
+import { TEventUnionKeys, TEventValue } from '@/components';
+import { formatDate } from '@/utils';
 
 const defaultValue = '——';
 

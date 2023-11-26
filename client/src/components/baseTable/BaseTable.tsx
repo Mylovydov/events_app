@@ -1,10 +1,7 @@
 import styles from './baseTable.module.css';
 import { FC } from 'react';
-import { TBaseTableProps } from '@/components/baseTable/baseTable.types.ts';
-import { TableHead } from '@/components/baseTable/components';
 import classNames from 'classnames';
-import EmptyTable from './components/emptyTable/EmptyTable.tsx';
-import Spinner from '../ui/spinner/Spinner.tsx';
+import { EmptyTable, Spinner, TableHead, TBaseTableProps } from '@/components';
 
 const BaseTable: FC<TBaseTableProps> = ({
 	rows = [],

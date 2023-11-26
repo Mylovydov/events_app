@@ -1,8 +1,7 @@
 import styles from './uploadedFile.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { Typography } from '@/components';
+import { TUploadedFileProps, Typography } from '@/components';
 import { FC } from 'react';
-import { TUploadedFileProps } from '@/components/ui/dropZone/components/uploadedFile/uploadedFile.types.ts';
 
 const UploadedFile: FC<TUploadedFileProps> = ({ filename, fileSize }) => (
 	<div className={styles.uploadedFile}>

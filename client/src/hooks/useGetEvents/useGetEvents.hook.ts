@@ -1,6 +1,6 @@
 import { TGetEventsInput, useGetEventsQuery } from '@/services';
-import useNotify from '@/hooks/useNotify/useNotify.hook.ts';
-import { TUseGetEventsReturn } from '@/hooks/useGetEvents/useGetEvents.types.ts';
+import { TUseGetEventsReturn, useNotify } from '@/hooks';
+import { isTErrorResponse } from '@/utils';
 
 const useGetEvents = (
 	args: TGetEventsInput,
@@ -14,7 +14,11 @@ const useGetEvents = (
 	} = useGetEventsQuery({ ...args, limit: 5 }, opt);
 
 	if (error) {
-		errorNotify(JSON.stringify(error));
+		if (isTErrorResponse(error)) {
+			errorNotify(error.message);
+		} else {
+			errorNotify('Something went wrong');
+		}
 	}
 
 	return {

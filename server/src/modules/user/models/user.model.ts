@@ -22,9 +22,6 @@ class User {
 	@prop({ type: String, required: true })
 	public password!: string;
 
-	@prop({ type: Boolean, required: true, default: false })
-	public autoEmailSending!: boolean;
-
 	@prop({ ref: () => Smtp, type: () => String })
 	public smtpSettings!: Ref<Smtp, string>;
 

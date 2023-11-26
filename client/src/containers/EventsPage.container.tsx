@@ -1,17 +1,21 @@
 import { EventsPage } from '@/pages';
-import useGetEvents from '../hooks/useGetEvents/useGetEvents.hook.ts';
-import { useCallback, useMemo } from 'react';
-import EventsTableRow from '../components/eventsTable/components/eventsTableRow/EventsTableRow.tsx';
-import { TSortDirection } from '@/components/baseTable/baseTable.types.ts';
-import { useSortTable } from '@/hooks';
-import usePagination from '../hooks/usePagination/usePagination.ts';
+import { useCallback, useEffect, useMemo, useState } from 'react';
+import {
+	useGetEvents,
+	usePagination,
+	useSortTable,
+	useUserContext
+} from '@/hooks';
 import {
 	defaultDirection,
+	defaultHighlightColor,
 	defaultSortKey,
+	isStringType,
 	PAGE_PARAM_KEY,
 	SORT_DIRECTION_PARAM_KEY,
 	SORT_KEY_PARAM_KEY
 } from '@/utils';
+import { EventsTableRow, TBaseSortDirection } from '@/components';
 
 const columns = [
 	{ label: 'First Name', accessor: 'inviteeFirstName', sortable: true },
@@ -25,6 +29,7 @@ const columns = [
 ];
 
 const EventsPageContainer = () => {
+	const { user, isUserLoading } = useUserContext();
 	const { setSortParams, sortKey, sortDirection } = useSortTable({
 		sortKeyName: SORT_KEY_PARAM_KEY,
 		sortDirectionKeyName: SORT_DIRECTION_PARAM_KEY,
@@ -35,19 +40,30 @@ const EventsPageContainer = () => {
 	});
 	const { changePaginationPage, page } = usePagination(PAGE_PARAM_KEY);
 
-	const { events, isEventsLoading, pageCount } = useGetEvents(
-		{
-			sortDirection,
-			sortKey,
-			page
-		},
-		{
-			skip: !(sortDirection && sortKey && page)
-		}
+	const { events, isEventsLoading, pageCount } = useGetEvents({
+		sortDirection,
+		sortKey,
+		page
+	});
+
+	const [highlightColor, setHighlightColor] = useState<string | undefined>(
+		undefined
 	);
 
+	useEffect(() => {
+		if (!user) {
+			return;
+		}
+
+		if (!isStringType(user.appSettings)) {
+			setHighlightColor(
+				user.appSettings.highlightColor || defaultHighlightColor
+			);
+		}
+	}, [user]);
+
 	const onSortDirectionChange = useCallback(
-		(accessor: string, sortDirection: TSortDirection) => {
+		(accessor: string, sortDirection: TBaseSortDirection) => {
 			setSortParams({
 				sortKeyValue: accessor,
 				sortDirectionValue: sortDirection
@@ -68,12 +84,13 @@ const EventsPageContainer = () => {
 			events.map(item => (
 				<EventsTableRow
 					key={item._id}
+					highlightColor={highlightColor}
 					columns={columns}
 					item={item}
 					actionBtnLabel="Send"
 				/>
 			)),
-		[events]
+		[events, highlightColor]
 	);
 
 	const tableColumns = useMemo(
@@ -90,7 +107,7 @@ const EventsPageContainer = () => {
 			onSortDirectionChange={onSortDirectionChange}
 			sortDirection={sortDirection}
 			sortKey={sortKey}
-			isLoading={isEventsLoading}
+			isLoading={isEventsLoading || isUserLoading}
 			onPageChange={onPageChange}
 			pageCount={pageCount}
 			forcePage={page}

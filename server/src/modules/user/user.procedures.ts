@@ -36,7 +36,7 @@ const userProcedures = {
 		.input(createUserInput)
 		.output(baseUserOutput),
 
-	getUser: authProcedure
+	getUser: publicProcedure
 		.meta({
 			openapi: {
 				method: 'GET',
@@ -91,7 +91,7 @@ const userProcedures = {
 		.input(z.void())
 		.output(getUsersOutput),
 
-	update: authProcedure
+	update: publicProcedure
 		.meta({
 			openapi: {
 				method: 'PUT',
@@ -135,7 +135,7 @@ const userProcedures = {
 		.input(userIdInput)
 		.output(baseUserOutput),
 
-	addSmtpSettings: authProcedure
+	addSmtpSettings: publicProcedure
 		.meta({
 			openapi: {
 				method: 'PUT',
@@ -155,7 +155,7 @@ const userProcedures = {
 		.input(addSmtpSettingsInput)
 		.output(baseUserOutput),
 
-	addAppSettings: authProcedure
+	addAppSettings: publicProcedure
 		.meta({
 			openapi: {
 				method: 'PUT',

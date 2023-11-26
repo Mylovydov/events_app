@@ -19,6 +19,7 @@ class UserService {
 			throw ApiError.badRequest('User already exists!');
 		}
 		const user = await UserModel.create(dto);
+		await this.addAppSettings({ userId: user._id, isAutoSendEnabled: false });
 		return user.toJSON();
 	}
 

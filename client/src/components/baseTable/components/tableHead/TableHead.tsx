@@ -1,8 +1,10 @@
-import { Cell } from '@/components/baseTable/components/cell';
-import { ESortDirection } from '@/components/baseTable/components/sortableCell/sortableCell.types.ts';
 import { FC } from 'react';
-import { SortableCell } from '@/components/baseTable/components';
-import { TTableHeadProps } from '@/components/baseTable/components/tableHead/tableHead.types.ts';
+import {
+	Cell,
+	ESortDirection,
+	SortableCell,
+	TTableHeadProps
+} from '@/components';
 
 const TableHead: FC<TTableHeadProps> = ({
 	sortDirection,

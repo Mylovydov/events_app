@@ -1,8 +1,7 @@
 import styles from './headerActions.module.css';
-import UserInfo from '../userInfo/UserInfo.tsx';
 import { FC } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { THeaderActionsProps } from '@/components/headerActions/headerActions.types.ts';
+import { THeaderActionsProps, UserInfo } from '@/components';
 
 const HeaderActions: FC<THeaderActionsProps> = ({ username, userAvatar }) => (
 	<div className={styles.headerActions}>

@@ -1,4 +1,4 @@
-import { TNavItemProps } from '@/components/navbar/components/navItem/navItem.types.ts';
+import { TNavItemProps } from '@/components';
 
 export type TNavListProps = {
 	items: TNavItemProps[];

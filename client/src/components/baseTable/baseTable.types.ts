@@ -6,18 +6,18 @@ export type TTableColumn = {
 	sortable?: boolean;
 };
 
-export type TSortDirection = 'asc' | 'desc';
+export type TBaseSortDirection = 'asc' | 'desc';
 
 export type TBaseTableProps = {
 	rows?: ReactNode[];
 	columns: TTableColumn[];
 	onSortDirectionChange: (
 		accessor: string,
-		sortDirection: TSortDirection
+		sortDirection: TBaseSortDirection
 	) => void;
 	isLoading?: boolean;
 	sortKey?: string;
-	sortDirection?: TSortDirection;
+	sortDirection?: TBaseSortDirection;
 	isLastColumnSticky?: boolean;
 	emptyLabel?: string;
 };

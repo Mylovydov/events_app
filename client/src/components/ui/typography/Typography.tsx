@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
-import { TTypographyProps } from '@/components/ui/typography/typography.types.ts';
 import classNames from 'classnames';
 import styles from './typography.module.css';
+import { TTypographyProps } from '@/components';
 
 const variantTags = {
 	h1: 'h1',

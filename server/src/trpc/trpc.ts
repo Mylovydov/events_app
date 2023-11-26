@@ -1,8 +1,9 @@
 import { initTRPC } from '@trpc/server';
 import { OpenApiMeta } from 'trpc-openapi';
 import { TContext } from './context.js';
-import { ZodError } from 'zod';
 import { ApiError } from '../error/index.js';
+import { ZodError } from 'zod';
+import { prepareFlattenZodError } from '../utils/index.js';
 
 export const t = initTRPC
 	.context<TContext>()
@@ -14,10 +15,12 @@ export const t = initTRPC
 			return {
 				...shape,
 				data: {
-					...shape.data,
+					code: shape.data.code,
+					status: shape.data.httpStatus,
+					message: shape.message,
 					zodError:
 						error.code === 'BAD_REQUEST' && error.cause instanceof ZodError
-							? error.cause.flatten()
+							? prepareFlattenZodError(error.cause.flatten())
 							: null
 				}
 			};

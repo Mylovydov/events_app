@@ -1,6 +1,6 @@
 import styles from './logout.module.css';
-import { NavItem } from '@/components/navbar/components';
 import { FC } from 'react';
+import { NavItem } from '@/components';
 
 export type TLogoutProps = {
 	label: string;

@@ -1,16 +1,15 @@
-import { TSortDirection } from '@/components/baseTable/baseTable.types.ts';
-import { TEventUnionKeys } from '@/components/eventsTable/components/eventsTableRow/eventsTableRow.types.ts';
+import { TBaseSortDirection, TEventUnionKeys } from '@/components';
 
 export type TUseSortTableParams = {
 	sortKeyName: string;
 	defaultSortKey: TEventUnionKeys;
 	sortDirectionKeyName: string;
-	defaultDirection: TSortDirection;
+	defaultDirection: TBaseSortDirection;
 	pageParamKey: string;
 	resetPageAfterSort: boolean;
 };
 
 export type TSetSortParams = {
 	sortKeyValue: string;
-	sortDirectionValue: TSortDirection;
+	sortDirectionValue: TBaseSortDirection;
 };

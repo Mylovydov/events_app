@@ -1,11 +1,8 @@
 import { useSearchParams } from 'react-router-dom';
 import { useCallback, useEffect, useState } from 'react';
-import {
-	TSetSortParams,
-	TUseSortTableParams
-} from '@/hooks/useSortTable/useSortTable.types.ts';
-import { TSortDirection } from '@/components/baseTable/baseTable.types.ts';
-import { TEventUnionKeys } from '@/components/eventsTable/components/eventsTableRow/eventsTableRow.types.ts';
+
+import { TBaseSortDirection, TEventUnionKeys } from '@/components';
+import { TSetSortParams, TUseSortTableParams } from '@/hooks';
 
 const useSortTable = ({
 	sortKeyName,
@@ -16,16 +13,13 @@ const useSortTable = ({
 	pageParamKey
 }: TUseSortTableParams) => {
 	const [searchParams, setSearchParams] = useSearchParams();
-	const [sortDirection, setSortDirection] = useState<
-		TSortDirection | undefined
-	>(undefined);
-	const [sortKey, setSortKey] = useState<TEventUnionKeys | undefined>(
-		undefined
-	);
+	const [sortDirection, setSortDirection] =
+		useState<TBaseSortDirection>(defaultDirection);
+	const [sortKey, setSortKey] = useState<TEventUnionKeys>(defaultSortKey);
 
 	useEffect(() => {
 		const sortDirection = (searchParams.get(sortDirectionKeyName) ||
-			defaultDirection) as TSortDirection;
+			defaultDirection) as TBaseSortDirection;
 		const sortKey = (searchParams.get(sortKeyName) ||
 			defaultSortKey) as TEventUnionKeys;
 

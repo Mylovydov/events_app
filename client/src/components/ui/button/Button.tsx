@@ -1,8 +1,7 @@
 import styles from './button.module.css';
-import { Typography } from '@/components';
+import { TButtonProps, Typography } from '@/components';
 import { FC } from 'react';
 import classNames from 'classnames';
-import { TButtonProps } from '@/components/ui/button/button.types.ts';
 
 const Button: FC<TButtonProps> = ({
 	label,

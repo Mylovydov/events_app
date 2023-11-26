@@ -1,13 +1,18 @@
 import { createBrowserRouter } from 'react-router-dom';
+
+import { ErrorPage } from '@/pages';
+import { AppLayout } from '@/layouts';
+import {
+	EventsPageContainer,
+	SettingsPageContainer,
+	UploadPageContainer
+} from '@/containers';
 import {
 	EMAIL_LAYOUT_PATH,
 	EVENTS_PATH,
 	HOME_PATH,
 	SETTINGS_PATH
-} from '@/router/constants.ts';
-import { ErrorPage } from '@/pages';
-import { AppLayout } from '@/layouts';
-import { EventsPageContainer, UploadPageContainer } from '@/containers';
+} from '@/router';
 
 const appRouter = createBrowserRouter([
 	{
@@ -28,7 +33,7 @@ const appRouter = createBrowserRouter([
 					},
 					{
 						path: SETTINGS_PATH,
-						element: <div>SETTINGS_PATH</div>
+						element: <SettingsPageContainer />
 					},
 					{
 						path: EMAIL_LAYOUT_PATH,
