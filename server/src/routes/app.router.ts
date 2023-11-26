@@ -3,12 +3,14 @@ import authRouter from './auth.router.js';
 import userRouter from './user.router.js';
 import eventsRouter from './events.router.js';
 import tokenRouter from './token.router.js';
+import emailTemplateRouter from './emailTemplate.router.js';
 
 const appRouter = router({
 	token: tokenRouter,
 	auth: authRouter,
 	users: userRouter,
-	events: eventsRouter
+	events: eventsRouter,
+	emailTemplate: emailTemplateRouter
 });
 
 export default appRouter;

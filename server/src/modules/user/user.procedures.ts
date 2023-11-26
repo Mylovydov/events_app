@@ -1,6 +1,8 @@
 import { authProcedure, publicProcedure } from '../../trpc/index.js';
 import {
 	addAppSettingsInput,
+	addEmailTemplateByUserIdInput,
+	addEmailTemplateByUserIdOutput,
 	addSmtpSettingsInput,
 	baseUserOutput,
 	createUserInput,
@@ -173,7 +175,27 @@ const userProcedures = {
 			}
 		})
 		.input(addAppSettingsInput)
-		.output(baseUserOutput)
+		.output(baseUserOutput),
+
+	addEmailTemplateByUserId: publicProcedure
+		.meta({
+			openapi: {
+				method: 'POST',
+				path: '/users/email-template',
+				tags: ['users'],
+				summary: 'Create or update email template by user id',
+				protect: true,
+				example: {
+					request: {},
+					response: {
+						message: '',
+						data: {}
+					}
+				}
+			}
+		})
+		.input(addEmailTemplateByUserIdInput)
+		.output(addEmailTemplateByUserIdOutput)
 };
 
 export default userProcedures;

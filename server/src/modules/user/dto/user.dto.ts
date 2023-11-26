@@ -2,6 +2,7 @@ import { z } from 'zod';
 import { mainSmtpSettingsSchema } from './smtp-settings.dto.js';
 import { baseOutputSchema } from '../../utils/index.js';
 import { mainAppSettingsSchema } from './app-settings.dto.js';
+import { addEmailTemplateInput } from '../../emailTemplate/index.js';
 
 export const mainUserSchema = z.object({
 	_id: z.string().uuid({ message: 'Invalid UUID format' }),
@@ -30,6 +31,7 @@ export const baseUserOutput = baseOutputSchema.extend({
 });
 
 // GET / DELETE
+// TODO: Можно было брать userId из токена, но мне кажется это повлияет на расширяемость, если нужно будет делать админку, то мы не сможем управлять всеми юзерами
 export const userIdInput = z.object({
 	userId: mainUserSchema.shape._id
 });
@@ -50,6 +52,11 @@ export const addAppSettingsInput = mainAppSettingsSchema
 	.extend({
 		userId: mainUserSchema.shape._id
 	});
+
+export const addEmailTemplateByUserIdInput = addEmailTemplateInput;
+export const addEmailTemplateByUserIdOutput = baseOutputSchema.extend({
+	data: baseUserSchema
+});
 
 // SMTP SETTINGS
 export const addSmtpSettingsInput = mainSmtpSettingsSchema

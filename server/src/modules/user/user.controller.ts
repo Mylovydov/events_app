@@ -60,7 +60,17 @@ const userController = {
 			message: 'App settings was successfully added!',
 			data: updatedUser
 		};
-	})
+	}),
+
+	addEmailTemplateByUserId: userProcedures.addEmailTemplateByUserId.mutation(
+		async ({ input }) => {
+			const updatedUser = await userService.addEmailTemplateByUserId(input);
+			return {
+				message: 'Email template was successfully added or updated!',
+				data: updatedUser
+			};
+		}
+	)
 };
 
 export default userController;
