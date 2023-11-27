@@ -8,7 +8,24 @@ const emailProcedures = {
 				method: 'POST',
 				path: '/email',
 				tags: ['email'],
-				summary: 'Upload file in base64 format',
+				summary: 'Add email settings',
+				protect: true,
+				example: {
+					request: {},
+					response: {}
+				}
+			}
+		})
+		.input(z.void())
+		.output(z.any()),
+
+	sendInvitationToEvent: publicProcedure
+		.meta({
+			openapi: {
+				method: 'POST',
+				path: '/email/send-invitation',
+				tags: ['email'],
+				summary: 'Send invitation to event',
 				protect: true,
 				example: {
 					request: {},

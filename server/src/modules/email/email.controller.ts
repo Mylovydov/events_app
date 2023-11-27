@@ -5,7 +5,17 @@ const emailController = {
 		async ({ input }) => {
 			const createdEvents = await emailService.addEmailSettings();
 			return {
-				message: 'Events successfully created!',
+				message: 'Email settings successfully added!',
+				data: createdEvents
+			};
+		}
+	),
+
+	sendInvitationToEvent: emailProcedures.sendInvitationToEvent.mutation(
+		async ({ input }) => {
+			const createdEvents = await emailService.sendInvitationToEvent();
+			return {
+				message: 'Invitation successfully sent!',
 				data: createdEvents
 			};
 		}

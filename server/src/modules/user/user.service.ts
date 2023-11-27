@@ -32,7 +32,7 @@ class UserService {
 			{ ...rest },
 			{ new: true }
 		)
-			.populate('smtpSettings')
+			.populate('emailSettings')
 			.populate('appSettings')
 			.populate('emailTemplate')
 			.lean();
@@ -47,7 +47,7 @@ class UserService {
 		const deletedUser = await UserModel.findOneAndDelete({
 			_id: userId
 		})
-			.populate('smtpSettings')
+			.populate('emailSettings')
 			.populate('appSettings')
 			.populate('emailTemplate')
 			.lean();
@@ -69,7 +69,7 @@ class UserService {
 
 	async getAll() {
 		return UserModel.find()
-			.populate('smtpSettings')
+			.populate('emailSettings')
 			.populate('appSettings')
 			.populate('emailTemplate')
 			.lean();
@@ -81,7 +81,7 @@ class UserService {
 
 	async getById(id: string) {
 		const user = await UserModel.findById(id)
-			.populate('smtpSettings')
+			.populate('emailSettings')
 			.populate('appSettings')
 			.populate('emailTemplate');
 		if (!user) {
@@ -118,7 +118,7 @@ class UserService {
 		}
 
 		const updatedUser = await UserModel.findById(user._id)
-			.populate('smtpSettings')
+			.populate('emailSettings')
 			.populate('emailTemplate')
 			.populate('appSettings');
 
