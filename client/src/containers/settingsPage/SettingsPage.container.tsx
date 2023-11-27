@@ -3,7 +3,7 @@ import { ColorPicker, EmailSettingsForm, Switch } from '@/components';
 import { SettingsPage } from '@/pages';
 import { useAddAppSettings, useUserContext } from '@/hooks';
 import { defaultHighlightColor, isStringType } from '@/utils';
-import { useForm } from 'react-hook-form';
+import { Controller, useForm } from 'react-hook-form';
 import { TEmailSettings, TSettingsFormValues } from '@/containers';
 
 const SettingsPageContainer = () => {
@@ -25,27 +25,25 @@ const SettingsPageContainer = () => {
 		values: {
 			color,
 			isAutoSendEnabled,
-			service: userEmailSettings?.service || '',
+			service: userEmailSettings?.service || 'gmail',
 			password: userEmailSettings?.password || '',
 			user: userEmailSettings?.user || ''
 		}
 	});
 
-	const onAddAppSettings = useCallback(() => {
-		if (!user?._id) {
-			return;
-		}
+	const onAddAppSettings = useCallback(
+		data => {
+			if (!user?._id) {
+				return;
+			}
 
-		addAppSettings({
-			userId: user._id,
-			highlightColor: color,
-			isAutoSendEnabled
-		});
-	}, [addAppSettings, color, isAutoSendEnabled, user]);
-
-	const onIsAutoSendEnabledChange = useCallback(
-		(isChecked: boolean) => setIsAutoSendEnabled(isChecked),
-		[]
+			addAppSettings({
+				userId: user._id,
+				highlightColor: color,
+				isAutoSendEnabled
+			});
+		},
+		[addAppSettings, color, isAutoSendEnabled, user]
 	);
 
 	useEffect(() => {
@@ -64,20 +62,20 @@ const SettingsPageContainer = () => {
 		}
 	}, [user]);
 
-	const isAppSettingsChanged = useMemo(() => {
-		if (!user) {
-			return false;
-		}
-
-		if (!isStringType(user.appSettings)) {
-			return (
-				user.appSettings.highlightColor !== color ||
-				user.appSettings.isAutoSendEnabled !== isAutoSendEnabled
-			);
-		}
-
-		return false;
-	}, [color, isAutoSendEnabled, user]);
+	// const isAppSettingsChanged = useMemo(() => {
+	// 	if (!user) {
+	// 		return false;
+	// 	}
+	//
+	// 	if (!isStringType(user.appSettings)) {
+	// 		return (
+	// 			user.appSettings.highlightColor !== color ||
+	// 			user.appSettings.isAutoSendEnabled !== isAutoSendEnabled
+	// 		);
+	// 	}
+	//
+	// 	return false;
+	// }, [color, isAutoSendEnabled, user]);
 
 	const settingsItems = useMemo(
 		() => [
@@ -85,16 +83,27 @@ const SettingsPageContainer = () => {
 				title: 'Event Highlighting Color',
 				subtitle:
 					'Select the color that will be used to highlight unsent messages',
-				children: <ColorPicker color={color} onChange={setColor} />
+				children: (
+					<Controller
+						name="color"
+						control={methods.control}
+						render={({ field: { value, onChange } }) => (
+							<ColorPicker color={value} onChange={onChange} />
+						)}
+					/>
+				)
 			},
 			{
 				title: 'Automatic sending of emails',
 				subtitle:
 					'Enable/disable automatic messaging when events are downloaded',
 				children: (
-					<Switch
-						checked={isAutoSendEnabled}
-						onChange={onIsAutoSendEnabledChange}
+					<Controller
+						name="isAutoSendEnabled"
+						control={methods.control}
+						render={({ field: { value, onChange } }) => (
+							<Switch checked={value} onChange={onChange} />
+						)}
 					/>
 				)
 			},
@@ -105,7 +114,7 @@ const SettingsPageContainer = () => {
 				children: <EmailSettingsForm />
 			}
 		],
-		[color, isAutoSendEnabled, onIsAutoSendEnabledChange]
+		[methods.control]
 	);
 
 	return (
@@ -113,9 +122,9 @@ const SettingsPageContainer = () => {
 			title="Settings"
 			subtitle="Change the settings of your application"
 			items={settingsItems}
-			disableSaveButton={!isAppSettingsChanged}
+			disableSaveButton={false}
 			isPageLoading={isUserLoading || isAppSettingsAdding}
-			onSave={onAddAppSettings}
+			onSubmit={onAddAppSettings}
 			methods={methods}
 		/>
 	);

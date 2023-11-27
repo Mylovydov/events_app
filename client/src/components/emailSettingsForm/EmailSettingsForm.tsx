@@ -1,10 +1,16 @@
 import styles from './emailSettingsForm.module.css';
 import { FC } from 'react';
 import { TEmailSettingsFormProps, TextField } from '@/components';
+import { useFormContext } from 'react-hook-form';
 
 const EmailSettingsForm: FC<TEmailSettingsFormProps> = () => {
+	const {
+		register,
+		formState: { errors }
+	} = useFormContext();
+
 	return (
-		<form className={styles.emailSettingsForm} noValidate>
+		<div className={styles.emailSettingsForm}>
 			<div className={styles.emailSettingsFormBody}>
 				<div className={styles.emailSettingsFormItem}>
 					<TextField
@@ -12,9 +18,8 @@ const EmailSettingsForm: FC<TEmailSettingsFormProps> = () => {
 							label: 'Service'
 						}}
 						disabled
-						value="Gmail"
-						name="service"
 						fullWidth
+						{...register('service')}
 					/>
 				</div>
 				<div className={styles.emailSettingsFormItem}>
@@ -23,8 +28,13 @@ const EmailSettingsForm: FC<TEmailSettingsFormProps> = () => {
 							label: 'Password',
 							required: true
 						}}
-						name="password"
+						errorMessageProps={{
+							message: errors.password?.message as string
+						}}
 						fullWidth
+						{...register('password', {
+							required: { value: true, message: 'Required field!' }
+						})}
 					/>
 				</div>
 				<div className={styles.emailSettingsFormItem}>
@@ -33,13 +43,18 @@ const EmailSettingsForm: FC<TEmailSettingsFormProps> = () => {
 							label: 'User',
 							required: true
 						}}
-						name="user"
+						errorMessageProps={{
+							message: errors.user?.message as string
+						}}
 						fullWidth
+						{...register('user', {
+							required: { value: true, message: 'Required field!' }
+						})}
 					/>
 				</div>
 			</div>
 			<div className={styles.emailSettingsFormFooter}></div>
-		</form>
+		</div>
 	);
 };
 
