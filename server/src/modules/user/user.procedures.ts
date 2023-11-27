@@ -1,9 +1,9 @@
 import { authProcedure, publicProcedure } from '../../trpc/index.js';
 import {
 	addAppSettingsInput,
+	addEmailSettingsInput,
 	addEmailTemplateByUserIdInput,
 	addEmailTemplateByUserIdOutput,
-	addSmtpSettingsInput,
 	baseUserOutput,
 	createUserInput,
 	getUsersOutput,
@@ -154,7 +154,7 @@ const userProcedures = {
 				}
 			}
 		})
-		.input(addSmtpSettingsInput)
+		.input(addEmailSettingsInput)
 		.output(baseUserOutput),
 
 	addAppSettings: publicProcedure
