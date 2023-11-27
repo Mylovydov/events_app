@@ -44,30 +44,30 @@ const userController = {
 		};
 	}),
 
-	addEmailSettings: userProcedures.addSmtpSettings.mutation(
+	addEmailSettingsToUser: userProcedures.addEmailSettingsToUser.mutation(
 		async ({ input }) => {
-			const emailSettings = await userService.addEmailSettings(input);
+			const user = await userService.addEmailSettingsToUser(input);
 			return {
-				message: 'SMTP settings was successfully added!',
-				data: emailSettings
+				message: 'Email settings was successfully added to user!',
+				data: user
 			};
 		}
 	),
 
 	addAppSettings: userProcedures.addAppSettings.mutation(async ({ input }) => {
-		const updatedUser = await userService.addAppSettings(input);
+		const user = await userService.addAppSettings(input);
 		return {
 			message: 'App settings was successfully added!',
-			data: updatedUser
+			data: user
 		};
 	}),
 
 	addEmailTemplateByUserId: userProcedures.addEmailTemplateByUserId.mutation(
 		async ({ input }) => {
-			const updatedUser = await userService.addEmailTemplateByUserId(input);
+			const user = await userService.addEmailTemplateByUserId(input);
 			return {
 				message: 'Email template was successfully added or updated!',
-				data: updatedUser
+				data: user
 			};
 		}
 	)

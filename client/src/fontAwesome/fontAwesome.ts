@@ -13,6 +13,7 @@ import {
 	faHouse,
 	faRectangleList,
 	faSpinner,
+	faStarOfLife,
 	faUser
 } from '@fortawesome/free-solid-svg-icons';
 
@@ -32,6 +33,7 @@ const fontAwesome = {
 			faFaceSadTear,
 			faSpinner,
 			faChevronRight,
+			faStarOfLife,
 			faChevronLeft
 		)
 };

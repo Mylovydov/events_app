@@ -1,7 +1,7 @@
 import { authProcedure, publicProcedure } from '../../trpc/index.js';
 import {
 	addAppSettingsInput,
-	addEmailSettingsInput,
+	addEmailSettingsToUserInput,
 	addEmailTemplateByUserIdInput,
 	addEmailTemplateByUserIdOutput,
 	baseUserOutput,
@@ -137,7 +137,7 @@ const userProcedures = {
 		.input(userIdInput)
 		.output(baseUserOutput),
 
-	addSmtpSettings: publicProcedure
+	addEmailSettingsToUser: publicProcedure
 		.meta({
 			openapi: {
 				method: 'PUT',
@@ -154,7 +154,7 @@ const userProcedures = {
 				}
 			}
 		})
-		.input(addEmailSettingsInput)
+		.input(addEmailSettingsToUserInput)
 		.output(baseUserOutput),
 
 	addAppSettings: publicProcedure

@@ -11,7 +11,7 @@ import {
 	emailTemplateService,
 	TAddEmailTemplateInput
 } from '../emailTemplate/index.js';
-import { EmailSettingsModel } from '../email/index.js';
+import { emailService, EmailSettingsModel } from '../email/index.js';
 
 class UserService {
 	async create(dto: TCreateUserDto) {
@@ -94,35 +94,9 @@ class UserService {
 		return UserModel.findById(id);
 	}
 
-	async addEmailSettings({
-		userId,
-		...restEmailSettings
-	}: TAddEmailSettingsDto) {
-		const user = await UserModel.findById(userId);
-		if (!user) {
-			throw ApiError.notFound(`User with id: ${userId} not found!`);
-		}
-
-		const emailSettingsDb = await EmailSettingsModel.findByIdAndUpdate(
-			user.emailSettings,
-			{ ...restEmailSettings },
-			{ new: true }
-		);
-
-		if (!emailSettingsDb) {
-			const createdEmailSettings = await EmailSettingsModel.create({
-				...restEmailSettings
-			});
-			user.appSettings = createdEmailSettings._id;
-			await user.save();
-		}
-
-		const updatedUser = await UserModel.findById(user._id)
-			.populate('emailSettings')
-			.populate('emailTemplate')
-			.populate('appSettings');
-
-		return updatedUser!.toJSON();
+	async addEmailSettingsToUser(input: TAddEmailSettingsDto) {
+		await emailService.addEmailSettings(input);
+		return await this.getById(input.userId);
 	}
 
 	async addAppSettings({ userId, ...restAppSettings }: TAddAppSettingsDto) {

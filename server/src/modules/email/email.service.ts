@@ -1,5 +1,9 @@
 import nodemailer, { Transporter } from 'nodemailer';
 import SMTPTransport from 'nodemailer/lib/smtp-transport/index.js';
+import { TAddEmailSettingsInputSchema } from './email.types.js';
+import userService from '../user/user.service.js';
+import { ApiError } from '../../error/index.js';
+import { EmailSettingsModel } from './email-settings.model.js';
 
 class EmailService {
 	transporter: Transporter<SMTPTransport.SentMessageInfo>;
@@ -14,7 +18,31 @@ class EmailService {
 		});
 		this.verifyEmailSettings();
 	}
-	async addEmailSettings() {}
+	async addEmailSettings({
+		userId,
+		...restEmailSettings
+	}: TAddEmailSettingsInputSchema) {
+		const user = await userService.getByIdWithoutFlatten(userId);
+		if (!user) {
+			throw ApiError.notFound(`User with id: ${userId} not found!`);
+		}
+
+		let emailSettingsDb = await EmailSettingsModel.findByIdAndUpdate(
+			user.emailSettings,
+			{ ...restEmailSettings },
+			{ new: true }
+		);
+
+		if (!emailSettingsDb) {
+			emailSettingsDb = await EmailSettingsModel.create({
+				...restEmailSettings
+			});
+			user.appSettings = emailSettingsDb._id;
+			await user.save();
+		}
+
+		return emailSettingsDb.toJSON();
+	}
 
 	async sendInvitationToEvent() {
 		await this.transporter.sendMail({

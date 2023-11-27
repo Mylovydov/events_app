@@ -1,10 +1,11 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
-import { ColorPicker, Switch } from '@/components';
+import { ColorPicker, EmailSettingsForm, Switch } from '@/components';
 import { SettingsPage } from '@/pages';
 import { useAddAppSettings, useUserContext } from '@/hooks';
 import { defaultHighlightColor, isStringType } from '@/utils';
 
 const SettingsPageContainer = () => {
+	// const methods = useForm({});
 	const { user, isUserLoading } = useUserContext();
 
 	const [color, setColor] = useState<string>(defaultHighlightColor);
@@ -47,6 +48,12 @@ const SettingsPageContainer = () => {
 						onChange={onIsAutoSendEnabledChange}
 					/>
 				)
+			},
+			{
+				title: 'Automatic sending of emails',
+				subtitle:
+					'Enable/disable automatic messaging when events are downloaded',
+				children: <EmailSettingsForm />
 			}
 		],
 		[color, isAutoSendEnabled, onIsAutoSendEnabledChange]

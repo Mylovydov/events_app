@@ -1,0 +1,14 @@
+.inputLabel {
+    display: flex;
+    align-items: start;
+    gap: .5rem;
+}
+
+.inputLabelContent {
+}
+
+.inputLabelIcon {
+    margin-top: .3rem;
+    color: var(--main-error-color);
+    font-size: .6rem;
+}

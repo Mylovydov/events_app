@@ -63,7 +63,7 @@ export const addEmailTemplateByUserIdOutput = baseOutputSchema.extend({
 });
 
 // EMAIL SETTINGS
-export const addEmailSettingsInput = emailSettingsSchemaDb
+export const addEmailSettingsToUserInput = emailSettingsSchemaDb
 	.omit({ _id: true })
 	.extend({
 		userId: mainUserSchema.shape._id

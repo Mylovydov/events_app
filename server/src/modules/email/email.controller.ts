@@ -3,10 +3,10 @@ import { emailProcedures, emailService } from './index.js';
 const emailController = {
 	addEmailSettings: emailProcedures.addEmailSettings.mutation(
 		async ({ input }) => {
-			const createdEvents = await emailService.addEmailSettings();
+			const emailSettings = await emailService.addEmailSettings(input);
 			return {
 				message: 'Email settings successfully added!',
-				data: createdEvents
+				data: emailSettings
 			};
 		}
 	),
