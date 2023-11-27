@@ -12,15 +12,7 @@ class EmailService {
 				user: process.env.EMAIL_USER
 			}
 		});
-
-		this.transporter
-			.verify()
-			.then(value => {
-				console.log('value', value);
-			})
-			.catch(reason => {
-				console.log('reason', reason);
-			});
+		this.verifyEmailSettings();
 	}
 	async addEmailSettings() {}
 
@@ -31,6 +23,14 @@ class EmailService {
 			subject: 'Invitation to event',
 			html: '<h1>Invitation to event</h1>'
 		});
+	}
+
+	async verifyEmailSettings() {
+		try {
+			return await this.transporter.verify();
+		} catch {
+			return false;
+		}
 	}
 }
 
