@@ -13,6 +13,8 @@ const EmailSettingsForm: FC<TEmailSettingsFormProps> = () => {
 						}}
 						disabled
 						value="Gmail"
+						name="service"
+						fullWidth
 					/>
 				</div>
 				<div className={styles.emailSettingsFormItem}>
@@ -21,6 +23,8 @@ const EmailSettingsForm: FC<TEmailSettingsFormProps> = () => {
 							label: 'Password',
 							required: true
 						}}
+						name="password"
+						fullWidth
 					/>
 				</div>
 				<div className={styles.emailSettingsFormItem}>
@@ -29,6 +33,8 @@ const EmailSettingsForm: FC<TEmailSettingsFormProps> = () => {
 							label: 'User',
 							required: true
 						}}
+						name="user"
+						fullWidth
 					/>
 				</div>
 			</div>

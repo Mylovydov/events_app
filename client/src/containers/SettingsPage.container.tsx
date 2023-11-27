@@ -3,6 +3,12 @@ import { ColorPicker, EmailSettingsForm, Switch } from '@/components';
 import { SettingsPage } from '@/pages';
 import { useAddAppSettings, useUserContext } from '@/hooks';
 import { defaultHighlightColor, isStringType } from '@/utils';
+// import { useForm } from 'react-hook-form';
+
+export type TSettingsFormValues = {
+	color: string;
+	isAutoSendEnabled: boolean;
+};
 
 const SettingsPageContainer = () => {
 	// const methods = useForm({});
