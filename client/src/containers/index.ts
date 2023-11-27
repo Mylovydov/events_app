@@ -1,4 +1,4 @@
 export { default as UploadPageContainer } from './UploadPage.container';
 export { default as EventsPageContainer } from './EventsPage.container';
-export { default as SettingsPageContainer } from './SettingsPage.container';
+export * from './settingsPage';
 export { default as EmailLayoutPageContainer } from './EmailLayoutPage.container';
