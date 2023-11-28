@@ -9,11 +9,14 @@ export class EmailSettings {
 	@prop({ type: String, default: 'gmail', required: false })
 	public service!: string;
 
-	@prop({ type: String, required: false })
+	@prop({ type: String, required: false, default: '' })
 	public servicePassword!: string;
 
-	@prop({ type: String, required: false })
+	@prop({ type: String, required: false, default: '' })
 	public serviceEmail!: string;
+
+	@prop({ type: Boolean, required: false, default: false })
+	public isSettingsVerified!: boolean;
 }
 
 export const EmailSettingsModel = getModelForClass(EmailSettings, {

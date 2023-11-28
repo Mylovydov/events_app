@@ -7,7 +7,8 @@ const getFormValues = (user: TUser | null) => {
 		isAutoSendEnabled: false,
 		service: '',
 		servicePassword: '',
-		serviceEmail: ''
+		serviceEmail: '',
+		isSettingsVerified: false
 	};
 
 	if (!user) {
@@ -28,14 +29,16 @@ const getFormValues = (user: TUser | null) => {
 		const {
 			servicePassword = '',
 			serviceEmail = '',
-			service = ''
+			service = '',
+			isSettingsVerified = false
 		} = emailSettings;
 
 		defaultValues = {
 			...defaultValues,
 			servicePassword,
 			serviceEmail,
-			service
+			service,
+			isSettingsVerified
 		};
 	}
 	return defaultValues;

@@ -19,6 +19,8 @@ const SettingsPageContainer = () => {
 		values: getFormValues(user)
 	});
 
+	const { isSettingsVerified } = methods.getValues();
+
 	const onChangeSettings = useCallback(
 		(data: TSettingsFormValues) => {
 			if (!user) {
@@ -26,7 +28,14 @@ const SettingsPageContainer = () => {
 			}
 
 			const { _id: userId } = user;
-			const { highlightColor, isAutoSendEnabled, ...emailSettings } = data;
+
+			const {
+				highlightColor,
+				isAutoSendEnabled,
+				// eslint-disable-next-line @typescript-eslint/no-unused-vars
+				isSettingsVerified,
+				...emailSettings
+			} = data;
 
 			addAppSettings({
 				userId,
@@ -59,6 +68,12 @@ const SettingsPageContainer = () => {
 				)
 			},
 			{
+				title: 'Specify the SMT server settings',
+				subtitle:
+					'Once verified, automatic invitations will be available when events are uploaded',
+				children: <EmailSettingsForm />
+			},
+			{
 				title: 'Automatic sending of emails',
 				subtitle:
 					'Enable/disable automatic messaging when events are downloaded',
@@ -67,19 +82,17 @@ const SettingsPageContainer = () => {
 						name="isAutoSendEnabled"
 						control={methods.control}
 						render={({ field: { value, onChange } }) => (
-							<Switch checked={value} onChange={onChange} />
+							<Switch
+								checked={value}
+								onChange={onChange}
+								disabled={!isSettingsVerified}
+							/>
 						)}
 					/>
 				)
-			},
-			{
-				title: 'Automatic sending of emails',
-				subtitle:
-					'Enable/disable automatic messaging when events are downloaded',
-				children: <EmailSettingsForm />
 			}
 		],
-		[methods.control]
+		[isSettingsVerified, methods.control]
 	);
 
 	const isPageLoading =

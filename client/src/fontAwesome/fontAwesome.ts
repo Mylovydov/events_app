@@ -7,6 +7,8 @@ import {
 	faCaretUp,
 	faChevronLeft,
 	faChevronRight,
+	faCircleCheck,
+	faCircleXmark,
 	faFaceSadTear,
 	faFileCsv,
 	faGear,
@@ -34,7 +36,9 @@ const fontAwesome = {
 			faSpinner,
 			faChevronRight,
 			faStarOfLife,
-			faChevronLeft
+			faChevronLeft,
+			faCircleXmark,
+			faCircleCheck
 		)
 };
 

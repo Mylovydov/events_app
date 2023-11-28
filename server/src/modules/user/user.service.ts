@@ -1,6 +1,5 @@
 import {
 	TAddAppSettingsDto,
-	TAddEmailSettingsDto,
 	TCreateUserDto,
 	TUpdateUserDto
 } from './user.types.js';
@@ -22,7 +21,9 @@ class UserService {
 		const user = await UserModel.create(dto);
 		await this.addAppSettings({ userId: user._id, isAutoSendEnabled: false });
 		await emailService.addEmailSettings({
-			userId: user._id
+			userId: user._id,
+			serviceEmail: '',
+			servicePassword: ''
 		});
 
 		return user.toJSON();
@@ -126,9 +127,31 @@ class UserService {
 		return await this.getById(input.userId);
 	}
 
-	async addEmailSettingsToUser(input: TAddEmailSettingsDto) {
-		await emailService.addEmailSettings(input);
-		return await this.getById(input.userId);
+	async toggleAppSettingsAutoSend(
+		isAutoSendEnabled: boolean,
+		appSettingsId: string
+	) {
+		return AppSettingsModel.findByIdAndUpdate(
+			{
+				_id: appSettingsId
+			},
+			{
+				isAutoSendEnabled
+			},
+			{
+				new: true
+			}
+		);
+	}
+
+	async getAppSettingsById(appSettingsId: string) {
+		const userAppSettings = await AppSettingsModel.findById(appSettingsId);
+		if (!userAppSettings) {
+			throw ApiError.notFound(
+				`App settings with id: ${appSettingsId} not found!`
+			);
+		}
+		return userAppSettings.toJSON();
 	}
 }
 

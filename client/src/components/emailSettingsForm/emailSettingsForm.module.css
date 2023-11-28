@@ -1,6 +1,7 @@
 .emailSettingsForm {
     display: flex;
     flex-direction: column;
+    gap: 2rem;
 }
 
 .emailSettingsFormBody {

@@ -9,3 +9,4 @@ export type TCreateTransporterDto = Omit<
 	TAddEmailSettingsInputSchema,
 	'userId'
 >;
+export type TAddEmailSettingsDto = Omit<TAddEmailSettingsInputSchema, 'userId'>;

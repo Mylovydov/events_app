@@ -8,6 +8,12 @@ import userService from '../user/user.service.js';
 import { ApiError } from '../../error/index.js';
 import { EmailSettingsModel } from './emailSettings.model.js';
 
+export type TChangeVerifyStatusArgs = {
+	transporterDto: TCreateTransporterDto;
+	emailSettingsId: string;
+	appSettingsId: string;
+};
+
 class EmailSettingsService {
 	transporter: Transporter<SMTPTransport.SentMessageInfo>;
 
@@ -20,22 +26,23 @@ class EmailSettingsService {
 			}
 		});
 	}
+
 	async addEmailSettings({
 		userId,
+		isSettingsVerified,
 		...restEmailSettings
 	}: TAddEmailSettingsInputSchema) {
-		if (restEmailSettings.servicePassword && restEmailSettings.serviceEmail) {
-			const isEmailSettingsVerified = await this.verifyEmailSettings({
-				...restEmailSettings
-			});
-			if (!isEmailSettingsVerified) {
-				throw ApiError.badRequest('Email settings are not verified!');
-			}
-		}
-
 		const user = await userService.getByIdWithoutFlatten(userId);
 		if (!user) {
 			throw ApiError.notFound(`User with id: ${userId} not found!`);
+		}
+
+		if (restEmailSettings.servicePassword && restEmailSettings.serviceEmail) {
+			await this.changeSettingsStatus({
+				transporterDto: restEmailSettings,
+				emailSettingsId: user.emailSettings as string,
+				appSettingsId: user.appSettings as string
+			});
 		}
 
 		let emailSettingsDb = await EmailSettingsModel.findByIdAndUpdate(
@@ -70,6 +77,43 @@ class EmailSettingsService {
 		} catch {
 			return false;
 		}
+	}
+
+	async toggleEmailSettingsVerify(
+		isSettingsVerified: boolean,
+		emailSettingsId: string
+	) {
+		return EmailSettingsModel.findByIdAndUpdate(
+			{
+				_id: emailSettingsId
+			},
+			{
+				isSettingsVerified
+			},
+			{
+				new: true
+			}
+		);
+	}
+
+	async changeSettingsStatus(args: TChangeVerifyStatusArgs) {
+		const { transporterDto, emailSettingsId, appSettingsId } = args;
+		const isEmailSettingsVerified = await this.verifyEmailSettings({
+			...transporterDto
+		});
+		await this.toggleEmailSettingsVerify(
+			isEmailSettingsVerified,
+			emailSettingsId
+		);
+
+		const userAppSettings = await userService.getAppSettingsById(appSettingsId);
+		const isAutoSendEnabled = isEmailSettingsVerified
+			? userAppSettings.isAutoSendEnabled
+			: false;
+		await userService.toggleAppSettingsAutoSend(
+			isAutoSendEnabled,
+			appSettingsId
+		);
 	}
 
 	private createTransporter({

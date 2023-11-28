@@ -12,3 +12,4 @@ export * from './pageHeader';
 export * from './appSettings';
 export * from './textField';
 export * from './emailSettingsForm';
+export * from './verifiedCheckmark';

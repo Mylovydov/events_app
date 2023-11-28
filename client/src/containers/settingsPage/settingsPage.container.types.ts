@@ -2,6 +2,7 @@ export type TEmailSettings = {
 	service: string;
 	servicePassword: string;
 	serviceEmail: string;
+	isSettingsVerified: boolean;
 };
 
 export type TAppSettings = {
