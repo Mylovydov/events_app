@@ -1,6 +1,9 @@
 import nodemailer, { Transporter } from 'nodemailer';
 import SMTPTransport from 'nodemailer/lib/smtp-transport/index.js';
-import { TAddEmailSettingsInputSchema } from './emailSettings.types.js';
+import {
+	TAddEmailSettingsInputSchema,
+	TCreateTransporterDto
+} from './emailSettings.types.js';
 import userService from '../user/user.service.js';
 import { ApiError } from '../../error/index.js';
 import { EmailSettingsModel } from './emailSettings.model.js';
@@ -16,12 +19,20 @@ class EmailSettingsService {
 				user: process.env.EMAIL_USER
 			}
 		});
-		this.verifyEmailSettings();
 	}
 	async addEmailSettings({
 		userId,
 		...restEmailSettings
 	}: TAddEmailSettingsInputSchema) {
+		if (restEmailSettings.servicePassword && restEmailSettings.serviceEmail) {
+			const isEmailSettingsVerified = await this.verifyEmailSettings({
+				...restEmailSettings
+			});
+			if (!isEmailSettingsVerified) {
+				throw ApiError.badRequest('Email settings are not verified!');
+			}
+		}
+
 		const user = await userService.getByIdWithoutFlatten(userId);
 		if (!user) {
 			throw ApiError.notFound(`User with id: ${userId} not found!`);
@@ -53,12 +64,26 @@ class EmailSettingsService {
 		});
 	}
 
-	async verifyEmailSettings() {
+	async verifyEmailSettings(dto: TCreateTransporterDto) {
 		try {
-			return await this.transporter.verify();
+			return await this.createTransporter(dto).verify();
 		} catch {
 			return false;
 		}
+	}
+
+	private createTransporter({
+		service = 'gmail',
+		servicePassword,
+		serviceEmail
+	}: TCreateTransporterDto) {
+		return nodemailer.createTransport({
+			service,
+			auth: {
+				pass: servicePassword,
+				user: serviceEmail
+			}
+		});
 	}
 }
 

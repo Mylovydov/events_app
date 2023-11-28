@@ -34,8 +34,7 @@ export class User {
 }
 
 export const UserModel = getModelForClass(User, {
-	...baseModelOptions,
-	options: { customName: 'user' }
+	...baseModelOptions
 });
 
 export type UserDocument = DocumentType<User>;
