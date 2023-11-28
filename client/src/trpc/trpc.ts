@@ -5,7 +5,7 @@ const trpcClient = createTRPCProxyClient<TAppRouter>({
 	links: [
 		loggerLink(),
 		httpBatchLink({
-			url: 'http://localhost:4200/api/trpc'
+			url: `${import.meta.env.VITE_SERVER_URL}/api/trpc`
 		})
 	]
 });

@@ -21,6 +21,9 @@ class UserService {
 		}
 		const user = await UserModel.create(dto);
 		await this.addAppSettings({ userId: user._id, isAutoSendEnabled: false });
+		await this.addEmailSettingsToUser({
+			userId: user._id
+		});
 		return user.toJSON();
 	}
 
@@ -94,11 +97,6 @@ class UserService {
 		return UserModel.findById(id);
 	}
 
-	async addEmailSettingsToUser(input: TAddEmailSettingsDto) {
-		await emailService.addEmailSettings(input);
-		return await this.getById(input.userId);
-	}
-
 	async addAppSettings({ userId, ...restAppSettings }: TAddAppSettingsDto) {
 		const user = await UserModel.findById(userId);
 		if (!user) {
@@ -124,6 +122,11 @@ class UserService {
 
 	async addEmailTemplateByUserId(input: TAddEmailTemplateInput) {
 		await emailTemplateService.addEmailTemplate(input);
+		return await this.getById(input.userId);
+	}
+
+	async addEmailSettingsToUser(input: TAddEmailSettingsDto) {
+		await emailService.addEmailSettings(input);
 		return await this.getById(input.userId);
 	}
 }

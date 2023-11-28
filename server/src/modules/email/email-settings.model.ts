@@ -6,13 +6,13 @@ export class EmailSettings {
 	@prop({ required: true, unique: true, default: () => uuidv4() })
 	public _id!: string;
 
-	@prop({ type: String, default: 'gmail' })
+	@prop({ type: String, default: 'gmail', required: false })
 	public service!: string;
 
-	@prop({ type: String, required: true })
+	@prop({ type: String, required: false })
 	public pass!: string;
 
-	@prop({ type: String, required: true })
+	@prop({ type: String, required: false })
 	public user!: string;
 }
 

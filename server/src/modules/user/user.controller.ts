@@ -44,16 +44,6 @@ const userController = {
 		};
 	}),
 
-	addEmailSettingsToUser: userProcedures.addEmailSettingsToUser.mutation(
-		async ({ input }) => {
-			const user = await userService.addEmailSettingsToUser(input);
-			return {
-				message: 'Email settings was successfully added to user!',
-				data: user
-			};
-		}
-	),
-
 	addAppSettings: userProcedures.addAppSettings.mutation(async ({ input }) => {
 		const user = await userService.addAppSettings(input);
 		return {
@@ -67,6 +57,16 @@ const userController = {
 			const user = await userService.addEmailTemplateByUserId(input);
 			return {
 				message: 'Email template was successfully added or updated!',
+				data: user
+			};
+		}
+	),
+
+	addEmailSettingsToUser: userProcedures.addEmailSettingsToUser.mutation(
+		async ({ input }) => {
+			const user = await userService.addEmailSettingsToUser(input);
+			return {
+				message: 'Email settings was successfully added to user!',
 				data: user
 			};
 		}

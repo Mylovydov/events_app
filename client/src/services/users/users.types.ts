@@ -34,13 +34,6 @@ export type TDeleteUserOutput = inferProcedureOutput<
 	TAppRouter['users']['delete']
 >;
 
-export type TAddSMTPSettingsUserInput = inferProcedureInput<
-	TAppRouter['users']['addSmtpSettings']
->;
-export type TAddSMTPSettingsUserOutput = inferProcedureOutput<
-	TAppRouter['users']['addSmtpSettings']
->;
-
 export type TAddAppSettingsUserInput = inferProcedureInput<
 	TAppRouter['users']['addAppSettings']
 >;
@@ -53,6 +46,13 @@ export type TAddEmailTemplateByUserIdInput = inferProcedureInput<
 >;
 export type TAddEmailTemplateByUserIdOutput = inferProcedureOutput<
 	TAppRouter['users']['addEmailTemplateByUserId']
+>;
+
+export type TAddEmailSettingsToUserInput = inferProcedureInput<
+	TAppRouter['users']['addEmailSettingsToUser']
+>;
+export type TAddEmailSettingsToUserOutput = inferProcedureOutput<
+	TAppRouter['users']['addEmailSettingsToUser']
 >;
 
 export type TUser = TGetUserOutput['data'];

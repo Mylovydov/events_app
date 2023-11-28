@@ -2,9 +2,9 @@ import { z } from 'zod';
 import { baseOutputSchema } from '../utils/index.js';
 
 export const mainEmailSettingsSchema = z.object({
-	service: z.string(),
-	user: z.string(),
-	pass: z.string()
+	service: z.string().optional(),
+	user: z.string().optional(),
+	pass: z.string().optional()
 });
 
 export const emailSettingsSchemaDb = mainEmailSettingsSchema.extend({

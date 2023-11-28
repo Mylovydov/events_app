@@ -37,7 +37,7 @@ class EmailService {
 			emailSettingsDb = await EmailSettingsModel.create({
 				...restEmailSettings
 			});
-			user.appSettings = emailSettingsDb._id;
+			user.emailSettings = emailSettingsDb._id;
 			await user.save();
 		}
 

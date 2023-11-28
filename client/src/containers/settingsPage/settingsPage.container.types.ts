@@ -4,7 +4,9 @@ export type TEmailSettings = {
 	user: string;
 };
 
-export type TSettingsFormValues = {
+export type TAppSettings = {
 	color: string;
 	isAutoSendEnabled: boolean;
-} & TEmailSettings;
+};
+
+export type TSettingsFormValues = TAppSettings & TEmailSettings;

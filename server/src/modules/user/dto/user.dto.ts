@@ -11,9 +11,9 @@ export const mainUserSchema = z.object({
 	_id: z.string().uuid({ message: 'Invalid UUID format' }),
 	email: z.string().email({ message: 'Invalid email address' }),
 	name: z.string().max(25, 'Name must be less than 25 characters').optional(),
-	emailSettings: z.optional(z.string().uuid().or(emailSettingsSchemaDb)),
 	emailTemplate: z.optional(z.string().uuid().or(mainEmailTemplateSchema)),
 	appSettings: mainAppSettingsSchema.or(z.string().uuid()),
+	emailSettings: emailSettingsSchemaDb.or(z.string().uuid()),
 	password: z
 		.string()
 		.min(8, 'Password must be at least 8 characters long')

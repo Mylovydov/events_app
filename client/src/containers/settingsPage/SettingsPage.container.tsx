@@ -1,49 +1,64 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { ColorPicker, EmailSettingsForm, Switch } from '@/components';
 import { SettingsPage } from '@/pages';
-import { useAddAppSettings, useUserContext } from '@/hooks';
-import { defaultHighlightColor, isStringType } from '@/utils';
+import {
+	useAddAppSettings,
+	useAddEmailSettings,
+	useUserContext
+} from '@/hooks';
+import { isStringType } from '@/utils';
 import { Controller, useForm } from 'react-hook-form';
-import { TEmailSettings, TSettingsFormValues } from '@/containers';
+import {
+	TAppSettings,
+	TEmailSettings,
+	TSettingsFormValues
+} from '@/containers';
 
 const SettingsPageContainer = () => {
+	const { addAppSettings, isAppSettingsAdding } = useAddAppSettings();
+	const { addEmailSettings, isEmailSettingsAdding } = useAddEmailSettings();
 	const { user, isUserLoading } = useUserContext();
 
-	const [color, setColor] = useState<string>(defaultHighlightColor);
-	const [isAutoSendEnabled, setIsAutoSendEnabled] = useState<boolean>(false);
-	const [userEmailSettings, setUserEmailSettings] = useState<
-		TEmailSettings | undefined
-	>({
+	const [appSettings, setAppSettings] = useState<TAppSettings>({
+		color: '',
+		isAutoSendEnabled: false
+	});
+	const [userEmailSettings, setUserEmailSettings] = useState<TEmailSettings>({
 		service: '',
 		password: '',
 		user: ''
 	});
 
-	const { addAppSettings, isAppSettingsAdding } = useAddAppSettings();
-
 	const methods = useForm<TSettingsFormValues>({
 		values: {
-			color,
-			isAutoSendEnabled,
-			service: userEmailSettings?.service || 'gmail',
-			password: userEmailSettings?.password || '',
-			user: userEmailSettings?.user || ''
+			color: appSettings.color,
+			isAutoSendEnabled: appSettings.isAutoSendEnabled,
+			service: userEmailSettings.service,
+			password: userEmailSettings.password,
+			user: userEmailSettings.user
 		}
 	});
 
 	const onAddAppSettings = useCallback(
-		data => {
+		(data: TSettingsFormValues) => {
 			if (!user?._id) {
 				return;
 			}
+
+			const { color, isAutoSendEnabled, ...emailSettings } = data;
 
 			addAppSettings({
 				userId: user._id,
 				highlightColor: color,
 				isAutoSendEnabled
 			});
+
+			addEmailSettings({
+				userId: user._id,
+				...emailSettings
+			});
 		},
-		[addAppSettings, color, isAutoSendEnabled, user]
+		[addAppSettings, addEmailSettings, user]
 	);
 
 	useEffect(() => {
@@ -51,14 +66,22 @@ const SettingsPageContainer = () => {
 			return;
 		}
 
-		if (!isStringType(user.appSettings)) {
-			setColor(user.appSettings.highlightColor || defaultHighlightColor);
-			setIsAutoSendEnabled(user.appSettings.isAutoSendEnabled);
+		const { appSettings, emailSettings } = user;
+
+		if (!isStringType(appSettings)) {
+			setAppSettings({
+				...appSettings,
+				color: appSettings.highlightColor || ''
+			});
 		}
 
-		if (user.emailSettings && !isStringType(user.emailSettings)) {
-			const { _id, pass, ...emailSettings } = user.emailSettings;
-			setUserEmailSettings({ ...emailSettings, password: pass });
+		if (!isStringType(emailSettings)) {
+			const { pass = '', user = '', service = '' } = emailSettings;
+			setUserEmailSettings({
+				password: pass,
+				user,
+				service
+			});
 		}
 	}, [user]);
 
@@ -117,13 +140,16 @@ const SettingsPageContainer = () => {
 		[methods.control]
 	);
 
+	const isPageLoading =
+		isUserLoading || isAppSettingsAdding || isEmailSettingsAdding;
+
 	return (
 		<SettingsPage
 			title="Settings"
 			subtitle="Change the settings of your application"
 			items={settingsItems}
 			disableSaveButton={false}
-			isPageLoading={isUserLoading || isAppSettingsAdding}
+			isPageLoading={isPageLoading}
 			onSubmit={onAddAppSettings}
 			methods={methods}
 		/>
