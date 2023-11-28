@@ -2,11 +2,13 @@ import nodemailer, { Transporter } from 'nodemailer';
 import SMTPTransport from 'nodemailer/lib/smtp-transport/index.js';
 import {
 	TAddEmailSettingsInputSchema,
-	TCreateTransporterDto
+	TCreateTransporterDto,
+	TResetEmailSettingsDto
 } from './emailSettings.types.js';
 import userService from '../user/user.service.js';
 import { ApiError } from '../../error/index.js';
 import { EmailSettingsModel } from './emailSettings.model.js';
+import { defaultEmailSettings } from '../../utils/index.js';
 
 export type TChangeVerifyStatusArgs = {
 	transporterDto: TCreateTransporterDto;
@@ -29,6 +31,7 @@ class EmailSettingsService {
 
 	async addEmailSettings({
 		userId,
+		// eslint-disable-next-line @typescript-eslint/no-unused-vars
 		isSettingsVerified,
 		...restEmailSettings
 	}: TAddEmailSettingsInputSchema) {
@@ -116,6 +119,19 @@ class EmailSettingsService {
 		);
 	}
 
+	async resetEmailSettings({ userId }: TResetEmailSettingsDto) {
+		const user = await userService.getByIdWithoutFlatten(userId);
+		if (!user) {
+			throw ApiError.notFound(`User with id: ${userId} not found!`);
+		}
+
+		const emailSettingsDb = await this.setDefaultEmailSettings(
+			user.emailSettings as string
+		);
+
+		return emailSettingsDb.toJSON();
+	}
+
 	private createTransporter({
 		service = 'gmail',
 		servicePassword,
@@ -128,6 +144,22 @@ class EmailSettingsService {
 				user: serviceEmail
 			}
 		});
+	}
+
+	private async setDefaultEmailSettings(emailSettingsId: string) {
+		const emailSettingsDb = await EmailSettingsModel.findByIdAndUpdate(
+			emailSettingsId,
+			defaultEmailSettings,
+			{ new: true }
+		);
+
+		if (!emailSettingsDb) {
+			throw ApiError.notFound(
+				`Email settings with id: ${emailSettingsId} not found!`
+			);
+		}
+
+		return emailSettingsDb;
 	}
 }
 

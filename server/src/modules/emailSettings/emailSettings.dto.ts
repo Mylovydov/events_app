@@ -19,3 +19,11 @@ export const addEmailSettingsInput = mainEmailSettingsSchema.extend({
 export const addEmailSettingsOutput = baseOutputSchema.extend({
 	data: emailSettingsSchemaDb
 });
+
+export const resetEmailSettingsInput = z.object({
+	userId: z.string().uuid()
+});
+
+export const resetEmailSettingsOutput = baseOutputSchema.extend({
+	data: emailSettingsSchemaDb
+});

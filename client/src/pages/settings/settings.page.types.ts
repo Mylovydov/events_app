@@ -7,4 +7,5 @@ export type TSettingsPageProps = TPageHeaderProps &
 		isPageLoading?: boolean;
 		onSubmit: SubmitHandler<TSettingsFormValues>;
 		methods: UseFormReturn<TSettingsFormValues>;
+		isSendBtnDisabled?: boolean;
 	};

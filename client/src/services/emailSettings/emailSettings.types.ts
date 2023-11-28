@@ -7,3 +7,10 @@ export type TAddEmailSettingsInput = inferProcedureInput<
 export type TAddEmailSettingsOutput = inferProcedureOutput<
 	TAppRouter['emailSettings']['addEmailSettings']
 >;
+
+export type TResetEmailSettingsInput = inferProcedureInput<
+	TAppRouter['emailSettings']['resetEmailSettings']
+>;
+export type TResetEmailSettingsOutput = inferProcedureOutput<
+	TAppRouter['emailSettings']['resetEmailSettings']
+>;

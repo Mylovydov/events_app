@@ -19,6 +19,16 @@ const emailSettingsController = {
 				data: createdEvents
 			};
 		}
+	),
+
+	resetEmailSettings: emailProcedures.resetEmailSettings.mutation(
+		async ({ input }) => {
+			const emailSettings = await emailService.resetEmailSettings(input);
+			return {
+				message: 'Email settings successfully added!',
+				data: emailSettings
+			};
+		}
 	)
 };
 

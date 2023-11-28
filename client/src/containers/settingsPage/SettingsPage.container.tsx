@@ -9,10 +9,13 @@ import {
 import { getFormValues } from '@/utils';
 import { Controller, useForm } from 'react-hook-form';
 import { TSettingsFormValues } from '@/containers';
+import useResetEmailSettings from '../../hooks/useResetEmailSettings/useResetEmailSettings.hook.ts';
 
 const SettingsPageContainer = () => {
 	const { addAppSettings, isAppSettingsAdding } = useAddAppSettings();
 	const { addEmailSettings, isEmailSettingsAdding } = useAddEmailSettings();
+	const { resetEmailSettings, isEmailSettingsResetting } =
+		useResetEmailSettings();
 	const { user, isUserLoading } = useUserContext();
 
 	const methods = useForm<TSettingsFormValues>({
@@ -95,15 +98,16 @@ const SettingsPageContainer = () => {
 		[isSettingsVerified, methods.control]
 	);
 
-	const isPageLoading =
-		isUserLoading || isAppSettingsAdding || isEmailSettingsAdding;
+	const isSendBtnDisabled =
+		isAppSettingsAdding || isEmailSettingsAdding || isEmailSettingsResetting;
 
 	return (
 		<SettingsPage
 			title="Settings"
 			subtitle="Change the settings of your application"
 			items={settingsItems}
-			isPageLoading={isPageLoading}
+			isPageLoading={isUserLoading}
+			isSendBtnDisabled={isSendBtnDisabled}
 			onSubmit={onChangeSettings}
 			methods={methods}
 		/>
