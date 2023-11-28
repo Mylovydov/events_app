@@ -1,4 +1,6 @@
 import { authProcedure, publicProcedure } from '../../trpc/index.js';
+
+import { z } from 'zod';
 import {
 	addAppSettingsInput,
 	addEmailTemplateByUserIdInput,
@@ -8,8 +10,7 @@ import {
 	getUsersOutput,
 	updateUserInput,
 	userIdInput
-} from './dto/index.js';
-import { z } from 'zod';
+} from './user.dto.js';
 
 const userProcedures = {
 	create: authProcedure

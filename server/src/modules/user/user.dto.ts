@@ -1,11 +1,11 @@
 import { z } from 'zod';
-import { baseOutputSchema } from '../../utils/index.js';
-import { mainAppSettingsSchema } from './app-settings.dto.js';
 import {
 	addEmailTemplateInput,
 	mainEmailTemplateSchema
-} from '../../emailTemplate/index.js';
-import { emailSettingsSchemaDb } from '../../emailSettings/index.js';
+} from '../emailTemplate/index.js';
+import { mainAppSettingsSchema } from '../appSettings/index.js';
+import { emailSettingsSchemaDb } from '../emailSettings/index.js';
+import { baseOutputSchema } from '../utils/index.js';
 
 export const mainUserSchema = z.object({
 	_id: z.string().uuid({ message: 'Invalid UUID format' }),

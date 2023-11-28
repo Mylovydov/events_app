@@ -4,13 +4,14 @@ import {
 	TUpdateUserDto
 } from './user.types.js';
 import { ApiError } from '../../error/index.js';
-import { AppSettingsModel, UserModel } from './models/index.js';
 import { tokenService } from '../token/index.js';
 import {
 	emailTemplateService,
 	TAddEmailTemplateInput
 } from '../emailTemplate/index.js';
 import { emailService, EmailSettingsModel } from '../emailSettings/index.js';
+import { UserModel } from './user.model.js';
+import { AppSettingsModel } from '../appSettings/index.js';
 
 class UserService {
 	async create(dto: TCreateUserDto) {

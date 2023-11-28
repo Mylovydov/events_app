@@ -1,4 +1,3 @@
-import { Template } from '../../emailTemplate/index.js';
 import {
 	DocumentType,
 	getModelForClass,
@@ -6,9 +5,10 @@ import {
 	Ref
 } from '@typegoose/typegoose';
 import { v4 as uuidv4 } from 'uuid';
-import { baseModelOptions } from '../../utils/index.js';
-import { Settings } from './app-settings.model.js';
-import { EmailSettings } from '../../emailSettings/index.js';
+import { EmailSettings } from '../emailSettings/index.js';
+import { Settings } from '../appSettings/index.js';
+import { Template } from '../emailTemplate/index.js';
+import { baseModelOptions } from '../utils/index.js';
 
 export class User {
 	@prop({ required: true, unique: true, default: () => uuidv4() })

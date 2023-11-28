@@ -1,6 +1,6 @@
 import * as mongoose from 'mongoose';
-import { UserModel } from '../modules/user/models/index.js';
 import { authService } from '../modules/auth/index.js';
+import { UserModel } from '../modules/user/user.model.js';
 
 export const db = {
 	connect: async (cb: () => void) => {
