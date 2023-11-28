@@ -48,11 +48,4 @@ export type TAddEmailTemplateByUserIdOutput = inferProcedureOutput<
 	TAppRouter['users']['addEmailTemplateByUserId']
 >;
 
-export type TAddEmailSettingsToUserInput = inferProcedureInput<
-	TAppRouter['users']['addEmailSettingsToUser']
->;
-export type TAddEmailSettingsToUserOutput = inferProcedureOutput<
-	TAppRouter['users']['addEmailSettingsToUser']
->;
-
 export type TUser = TGetUserOutput['data'];

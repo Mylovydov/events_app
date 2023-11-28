@@ -1,7 +1,6 @@
 import { authProcedure, publicProcedure } from '../../trpc/index.js';
 import {
 	addAppSettingsInput,
-	addEmailSettingsToUserInput,
 	addEmailTemplateByUserIdInput,
 	addEmailTemplateByUserIdOutput,
 	baseUserOutput,
@@ -175,27 +174,7 @@ const userProcedures = {
 			}
 		})
 		.input(addEmailTemplateByUserIdInput)
-		.output(addEmailTemplateByUserIdOutput),
-
-	addEmailSettingsToUser: publicProcedure
-		.meta({
-			openapi: {
-				method: 'PUT',
-				path: '/users/smtp-settings',
-				tags: ['users'],
-				protect: true,
-				summary: 'Add SMTP settings to user by id',
-				example: {
-					response: {},
-					request: {
-						userId: '10db6a2d-0dd8-44f8-a603-b5a69723e751',
-						server: 'smtp.gmail.com'
-					}
-				}
-			}
-		})
-		.input(addEmailSettingsToUserInput)
-		.output(baseUserOutput)
+		.output(addEmailTemplateByUserIdOutput)
 };
 
 export default userProcedures;

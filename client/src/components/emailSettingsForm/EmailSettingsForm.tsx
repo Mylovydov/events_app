@@ -25,31 +25,25 @@ const EmailSettingsForm: FC<TEmailSettingsFormProps> = () => {
 				<div className={styles.emailSettingsFormItem}>
 					<TextField
 						labelProps={{
-							label: 'Service Password',
-							required: true
+							label: 'Service Password'
 						}}
 						errorMessageProps={{
 							message: errors.password?.message as string
 						}}
 						fullWidth
-						{...register('servicePassword', {
-							required: { value: true, message: 'Required field!' }
-						})}
+						{...register('servicePassword')}
 					/>
 				</div>
 				<div className={styles.emailSettingsFormItem}>
 					<TextField
 						labelProps={{
-							label: 'Service email',
-							required: true
+							label: 'Service email'
 						}}
 						errorMessageProps={{
 							message: errors.user?.message as string
 						}}
 						fullWidth
-						{...register('serviceEmail', {
-							required: { value: true, message: 'Required field!' }
-						})}
+						{...register('serviceEmail')}
 					/>
 				</div>
 			</div>

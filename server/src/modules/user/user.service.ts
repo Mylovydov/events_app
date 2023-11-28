@@ -21,9 +21,10 @@ class UserService {
 		}
 		const user = await UserModel.create(dto);
 		await this.addAppSettings({ userId: user._id, isAutoSendEnabled: false });
-		await this.addEmailSettingsToUser({
+		await emailService.addEmailSettings({
 			userId: user._id
 		});
+
 		return user.toJSON();
 	}
 

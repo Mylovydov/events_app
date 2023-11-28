@@ -59,16 +59,6 @@ const userController = {
 				data: user
 			};
 		}
-	),
-
-	addEmailSettingsToUser: userProcedures.addEmailSettingsToUser.mutation(
-		async ({ input }) => {
-			const user = await userService.addEmailSettingsToUser(input);
-			return {
-				message: 'Email settings was successfully added to user!',
-				data: user
-			};
-		}
 	)
 };
 

@@ -1,22 +1,22 @@
 import { TUseAddEmailSettingsReturn, useNotify } from '@/hooks';
 import {
-	TAddEmailSettingsToUserInput,
-	useAddEmailSettingsToUserMutation
+	TAddEmailSettingsInput,
+	useAddEmailSettingsMutation
 } from '@/services';
 import { useCallback } from 'react';
 
 const useAddEmailSettings = (): TUseAddEmailSettingsReturn => {
-	const { successNotify, errorNotify } = useNotify();
+	const { errorNotify } = useNotify();
 	const [addEmailSettingsTrigger, { isLoading: isEmailSettingsAdding }] =
-		useAddEmailSettingsToUserMutation();
+		useAddEmailSettingsMutation();
 
 	const addEmailSettings = useCallback(
-		(args: TAddEmailSettingsToUserInput) => {
+		(args: TAddEmailSettingsInput) => {
 			addEmailSettingsTrigger(args)
 				.unwrap()
 				.catch(err => errorNotify(err.message));
 		},
-		[addEmailSettingsTrigger, successNotify, errorNotify]
+		[addEmailSettingsTrigger, errorNotify]
 	);
 
 	return {
