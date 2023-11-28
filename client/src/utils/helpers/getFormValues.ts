@@ -3,11 +3,11 @@ import { isStringType } from '@/utils';
 
 const getFormValues = (user: TUser | null) => {
 	let defaultValues = {
-		color: '',
+		highlightColor: '',
 		isAutoSendEnabled: false,
 		service: '',
-		password: '',
-		user: ''
+		servicePassword: '',
+		serviceEmail: ''
 	};
 
 	if (!user) {
@@ -20,16 +20,21 @@ const getFormValues = (user: TUser | null) => {
 		defaultValues = {
 			...defaultValues,
 			isAutoSendEnabled: appSettings.isAutoSendEnabled,
-			color: appSettings.highlightColor || ''
+			highlightColor: appSettings.highlightColor || ''
 		};
 	}
 
 	if (!isStringType(emailSettings)) {
-		const { password = '', user = '', service = '' } = emailSettings;
+		const {
+			servicePassword = '',
+			serviceEmail = '',
+			service = ''
+		} = emailSettings;
+
 		defaultValues = {
 			...defaultValues,
-			password,
-			user,
+			servicePassword,
+			serviceEmail,
 			service
 		};
 	}

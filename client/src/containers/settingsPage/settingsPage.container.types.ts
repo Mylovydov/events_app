@@ -1,11 +1,11 @@
 export type TEmailSettings = {
 	service: string;
-	password: string;
-	user: string;
+	servicePassword: string;
+	serviceEmail: string;
 };
 
 export type TAppSettings = {
-	color: string;
+	highlightColor: string;
 	isAutoSendEnabled: boolean;
 };
 

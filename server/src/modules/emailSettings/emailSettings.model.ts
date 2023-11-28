@@ -10,10 +10,10 @@ export class EmailSettings {
 	public service!: string;
 
 	@prop({ type: String, required: false })
-	public password!: string;
+	public servicePassword!: string;
 
 	@prop({ type: String, required: false })
-	public user!: string;
+	public serviceEmail!: string;
 }
 
 export const EmailSettingsModel = getModelForClass(EmailSettings, {

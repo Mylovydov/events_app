@@ -26,11 +26,11 @@ const SettingsPageContainer = () => {
 			}
 
 			const { _id: userId } = user;
-			const { color, isAutoSendEnabled, ...emailSettings } = data;
+			const { highlightColor, isAutoSendEnabled, ...emailSettings } = data;
 
 			addAppSettings({
 				userId,
-				highlightColor: color,
+				highlightColor,
 				isAutoSendEnabled
 			});
 
@@ -50,7 +50,7 @@ const SettingsPageContainer = () => {
 					'Select the color that will be used to highlight unsent messages',
 				children: (
 					<Controller
-						name="color"
+						name="highlightColor"
 						control={methods.control}
 						render={({ field: { value, onChange } }) => (
 							<ColorPicker color={value} onChange={onChange} />
@@ -84,6 +84,7 @@ const SettingsPageContainer = () => {
 
 	const isPageLoading =
 		isUserLoading || isAppSettingsAdding || isEmailSettingsAdding;
+
 	return (
 		<SettingsPage
 			title="Settings"
