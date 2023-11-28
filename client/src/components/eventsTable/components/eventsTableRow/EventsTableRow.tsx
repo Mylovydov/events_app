@@ -1,13 +1,13 @@
 import { FC } from 'react';
-import { Cell } from '@/components/baseTable/components';
 import styles from './eventsTableRow.module.css';
 import {
 	Button,
+	Cell,
 	prepareRowValue,
 	TEventKeys,
 	TEventsTableRowProps
 } from '@/components';
-import isColorDark from '../../../../utils/helpers/isColorDark.ts';
+import { isColorDark } from '@/utils';
 
 const EventsTableRow: FC<TEventsTableRowProps> = ({
 	columns,

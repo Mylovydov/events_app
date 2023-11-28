@@ -14,9 +14,6 @@ const useAddEmailSettings = (): TUseAddEmailSettingsReturn => {
 		(args: TAddEmailSettingsToUserInput) => {
 			addEmailSettingsTrigger(args)
 				.unwrap()
-				.then(data => {
-					successNotify(data.message);
-				})
 				.catch(err => errorNotify(err.message));
 		},
 		[addEmailSettingsTrigger, successNotify, errorNotify]

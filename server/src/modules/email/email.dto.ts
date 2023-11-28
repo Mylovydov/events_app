@@ -4,7 +4,7 @@ import { baseOutputSchema } from '../utils/index.js';
 export const mainEmailSettingsSchema = z.object({
 	service: z.string().optional(),
 	user: z.string().optional(),
-	pass: z.string().optional()
+	password: z.string().optional()
 });
 
 export const emailSettingsSchemaDb = mainEmailSettingsSchema.extend({

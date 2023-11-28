@@ -10,7 +10,7 @@ export class EmailSettings {
 	public service!: string;
 
 	@prop({ type: String, required: false })
-	public pass!: string;
+	public password!: string;
 
 	@prop({ type: String, required: false })
 	public user!: string;

@@ -9,7 +9,6 @@ const SettingsPage: FC<TSettingsPageProps> = ({
 	subtitle,
 	isPageLoading,
 	onSubmit,
-	disableSaveButton,
 	methods,
 	...settingsProps
 }) => {
@@ -30,12 +29,7 @@ const SettingsPage: FC<TSettingsPageProps> = ({
 				</div>
 				<div className={styles.settingsPageBody}>{contentMarkup}</div>
 				<div className={styles.settingsPageFooter}>
-					<Button
-						label="Save"
-						type="submit"
-						// onClick={onSave}
-						disabled={isPageLoading || disableSaveButton}
-					/>
+					<Button label="Save" type="submit" disabled={isPageLoading} />
 				</div>
 			</form>
 		</FormProvider>
