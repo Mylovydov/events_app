@@ -8,7 +8,7 @@ import {
 import { v4 as uuidv4 } from 'uuid';
 import { baseModelOptions } from '../../utils/index.js';
 import { Settings } from './app-settings.model.js';
-import { EmailSettings } from '../../email/index.js';
+import { EmailSettings } from '../../emailSettings/index.js';
 
 export class User {
 	@prop({ required: true, unique: true, default: () => uuidv4() })

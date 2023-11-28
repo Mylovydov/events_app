@@ -1,6 +1,6 @@
 import { z } from 'zod';
 import { baseOutputSchema } from '../utils/index.js';
-import { mainUserSchema } from '../user/dto/index.js';
+import { mainUserSchema } from '../user/index.js';
 
 const minLengthErrorMessage = 'Must be 5 or more characters long';
 const maxLengthErrorMessage = 'Must be 5 or fewer characters long';
@@ -18,7 +18,7 @@ export const mainEventSchema = z.object({
 	inviteeEmail: z
 		.string()
 		.min(5, { message: minLengthErrorMessage })
-		.email('Invalid email')
+		.email('Invalid emailSettings')
 		.max(255, { message: maxLengthErrorMessage }),
 	startDateTime: z.string().datetime(),
 	endDateTime: z.string().datetime(),

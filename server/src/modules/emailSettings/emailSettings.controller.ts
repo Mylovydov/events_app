@@ -1,6 +1,6 @@
 import { emailProcedures, emailService } from './index.js';
 
-const emailController = {
+const emailSettingsController = {
 	addEmailSettings: emailProcedures.addEmailSettings.mutation(
 		async ({ input }) => {
 			const emailSettings = await emailService.addEmailSettings(input);
@@ -22,4 +22,4 @@ const emailController = {
 	)
 };
 
-export default emailController;
+export default emailSettingsController;

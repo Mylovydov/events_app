@@ -81,7 +81,7 @@ const userProcedures = {
 							{
 								id: 'j34jn5js-d5cc-4ccd-ad33-1fc56bd6aeeb',
 								name: 'John',
-								email: 'example-email@gmail.com'
+								email: 'example-emailSettings@gmail.com'
 							},
 							['...']
 						]
@@ -181,9 +181,9 @@ const userProcedures = {
 		.meta({
 			openapi: {
 				method: 'POST',
-				path: '/users/email-template',
+				path: '/users/emailSettings-template',
 				tags: ['users'],
-				summary: 'Create or update email template by user id',
+				summary: 'Create or update emailSettings template by user id',
 				protect: true,
 				example: {
 					request: {},

@@ -11,7 +11,7 @@ import {
 	emailTemplateService,
 	TAddEmailTemplateInput
 } from '../emailTemplate/index.js';
-import { emailService, EmailSettingsModel } from '../email/index.js';
+import { emailService, EmailSettingsModel } from '../emailSettings/index.js';
 
 class UserService {
 	async create(dto: TCreateUserDto) {

@@ -5,11 +5,11 @@ import {
 	addEmailTemplateInput,
 	mainEmailTemplateSchema
 } from '../../emailTemplate/index.js';
-import { emailSettingsSchemaDb } from '../../email/index.js';
+import { emailSettingsSchemaDb } from '../../emailSettings/index.js';
 
 export const mainUserSchema = z.object({
 	_id: z.string().uuid({ message: 'Invalid UUID format' }),
-	email: z.string().email({ message: 'Invalid email address' }),
+	email: z.string().email({ message: 'Invalid emailSettings address' }),
 	name: z.string().max(25, 'Name must be less than 25 characters').optional(),
 	emailTemplate: z.optional(z.string().uuid().or(mainEmailTemplateSchema)),
 	appSettings: mainAppSettingsSchema.or(z.string().uuid()),

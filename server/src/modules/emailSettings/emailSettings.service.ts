@@ -1,11 +1,11 @@
 import nodemailer, { Transporter } from 'nodemailer';
 import SMTPTransport from 'nodemailer/lib/smtp-transport/index.js';
-import { TAddEmailSettingsInputSchema } from './email.types.js';
+import { TAddEmailSettingsInputSchema } from './emailSettings.types.js';
 import userService from '../user/user.service.js';
 import { ApiError } from '../../error/index.js';
-import { EmailSettingsModel } from './email-settings.model.js';
+import { EmailSettingsModel } from './emailSettings.model.js';
 
-class EmailService {
+class EmailSettingsService {
 	transporter: Transporter<SMTPTransport.SentMessageInfo>;
 
 	constructor() {
@@ -62,4 +62,4 @@ class EmailService {
 	}
 }
 
-export default new EmailService();
+export default new EmailSettingsService();

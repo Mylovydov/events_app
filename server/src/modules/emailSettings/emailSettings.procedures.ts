@@ -1,15 +1,18 @@
 import { publicProcedure } from '../../trpc/index.js';
 import { z } from 'zod';
-import { addEmailSettingsInput, addEmailSettingsOutput } from './email.dto.js';
+import {
+	addEmailSettingsInput,
+	addEmailSettingsOutput
+} from './emailSettings.dto.js';
 
-const emailProcedures = {
+const emailSettingsProcedures = {
 	addEmailSettings: publicProcedure
 		.meta({
 			openapi: {
 				method: 'POST',
-				path: '/email-settings',
-				tags: ['email-settings'],
-				summary: 'Add email settings',
+				path: '/emailSettings-settings',
+				tags: ['emailSettings-settings'],
+				summary: 'Add emailSettings settings',
 				protect: true,
 				example: {
 					request: {},
@@ -24,7 +27,7 @@ const emailProcedures = {
 		.meta({
 			openapi: {
 				method: 'POST',
-				path: '/email/send-invitation',
+				path: '/emailSettings/send-invitation',
 				tags: ['email'],
 				summary: 'Send invitation to event',
 				protect: true,
@@ -38,4 +41,4 @@ const emailProcedures = {
 		.output(z.any())
 };
 
-export default emailProcedures;
+export default emailSettingsProcedures;
