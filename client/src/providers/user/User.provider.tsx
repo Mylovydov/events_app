@@ -12,11 +12,8 @@ const UserProvider: FC<PropsWithChildren> = ({ children }) => {
 		userId: import.meta.env.VITE_USER_ID
 	});
 
-	const value: TUserContext = useMemo(
-		() => ({
-			user,
-			isUserLoading
-		}),
+	const value = useMemo(
+		(): TUserContext => ({ user: user ?? null, isUserLoading }),
 		[user, isUserLoading]
 	);
 	return <UserContext.Provider value={value}>{children}</UserContext.Provider>;

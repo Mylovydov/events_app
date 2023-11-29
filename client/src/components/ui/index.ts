@@ -7,3 +7,6 @@ export * from './pagination';
 export * from './colorPicker';
 export * from './switch';
 export * from './emailLayoutEditor';
+export * from './input';
+export * from './inputLabel';
+export * from './errorMessage';

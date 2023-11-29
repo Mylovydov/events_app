@@ -1,20 +1,9 @@
-import {
-	TAddAppSettingsDto,
-	TAddSmtpSettingsDto,
-	TCreateUserDto,
-	TUpdateUserDto
-} from './user.types.js';
+import { TCreateUserDto, TUpdateUserDto } from './user.types.js';
 import { ApiError } from '../../error/index.js';
-import {
-	AppSettingsModel,
-	SmtpSettingsModel,
-	UserModel
-} from './models/index.js';
 import { tokenService } from '../token/index.js';
-import {
-	emailTemplateService,
-	TAddEmailTemplateInput
-} from '../emailTemplate/index.js';
+import { emailService, EmailSettingsModel } from '../emailSettings/index.js';
+import { UserModel } from './user.model.js';
+import { AppSettingsModel, appSettingsService } from '../appSettings/index.js';
 
 class UserService {
 	async create(dto: TCreateUserDto) {
@@ -23,7 +12,16 @@ class UserService {
 			throw ApiError.badRequest('User already exists!');
 		}
 		const user = await UserModel.create(dto);
-		await this.addAppSettings({ userId: user._id, isAutoSendEnabled: false });
+		await appSettingsService.addAppSettings({
+			userId: user._id,
+			isAutoSendEnabled: false
+		});
+		await emailService.addEmailSettings({
+			userId: user._id,
+			serviceEmail: '',
+			servicePassword: ''
+		});
+
 		return user.toJSON();
 	}
 
@@ -35,7 +33,7 @@ class UserService {
 			{ ...rest },
 			{ new: true }
 		)
-			.populate('smtpSettings')
+			.populate('emailSettings')
 			.populate('appSettings')
 			.populate('emailTemplate')
 			.lean();
@@ -50,7 +48,7 @@ class UserService {
 		const deletedUser = await UserModel.findOneAndDelete({
 			_id: userId
 		})
-			.populate('smtpSettings')
+			.populate('emailSettings')
 			.populate('appSettings')
 			.populate('emailTemplate')
 			.lean();
@@ -58,8 +56,8 @@ class UserService {
 			throw ApiError.notFound(`User with id: ${userId} not found!`);
 		}
 
-		if (deletedUser.smtpSettings) {
-			await SmtpSettingsModel.deleteOne({ _id: deletedUser.smtpSettings });
+		if (deletedUser.emailSettings) {
+			await EmailSettingsModel.deleteOne({ _id: deletedUser.emailSettings });
 		}
 
 		if (deletedUser.appSettings) {
@@ -72,7 +70,7 @@ class UserService {
 
 	async getAll() {
 		return UserModel.find()
-			.populate('smtpSettings')
+			.populate('emailSettings')
 			.populate('appSettings')
 			.populate('emailTemplate')
 			.lean();
@@ -84,7 +82,7 @@ class UserService {
 
 	async getById(id: string) {
 		const user = await UserModel.findById(id)
-			.populate('smtpSettings')
+			.populate('emailSettings')
 			.populate('appSettings')
 			.populate('emailTemplate');
 		if (!user) {
@@ -97,60 +95,31 @@ class UserService {
 		return UserModel.findById(id);
 	}
 
-	async addSmtpSettings({ userId, ...restSmtpSettings }: TAddSmtpSettingsDto) {
-		const user = await UserModel.findById(userId);
-		if (!user) {
-			throw ApiError.notFound(`User with id: ${userId} not found!`);
-		}
-
-		const smtpSettingsDb = await SmtpSettingsModel.findByIdAndUpdate(
-			user.smtpSettings,
-			{ ...restSmtpSettings },
-			{ new: true }
+	async toggleAppSettingsAutoSend(
+		isAutoSendEnabled: boolean,
+		appSettingsId: string
+	) {
+		return AppSettingsModel.findByIdAndUpdate(
+			{
+				_id: appSettingsId
+			},
+			{
+				isAutoSendEnabled
+			},
+			{
+				new: true
+			}
 		);
-
-		if (!smtpSettingsDb) {
-			const createdSmtpSettings = await SmtpSettingsModel.create({
-				...restSmtpSettings
-			});
-			user.appSettings = createdSmtpSettings._id;
-			await user.save();
-		}
-
-		const updatedUser = await UserModel.findById(user._id)
-			.populate('smtpSettings')
-			.populate('emailTemplate')
-			.populate('appSettings');
-
-		return updatedUser!.toJSON();
 	}
 
-	async addAppSettings({ userId, ...restAppSettings }: TAddAppSettingsDto) {
-		const user = await UserModel.findById(userId);
-		if (!user) {
-			throw ApiError.notFound(`User with id: ${userId} not found!`);
+	async getAppSettingsById(appSettingsId: string) {
+		const userAppSettings = await AppSettingsModel.findById(appSettingsId);
+		if (!userAppSettings) {
+			throw ApiError.notFound(
+				`App settings with id: ${appSettingsId} not found!`
+			);
 		}
-
-		const appSettingsDb = await AppSettingsModel.findByIdAndUpdate(
-			user.appSettings,
-			{ ...restAppSettings },
-			{ new: true }
-		);
-
-		if (!appSettingsDb) {
-			const createdAppSettings = await AppSettingsModel.create({
-				...restAppSettings
-			});
-			user.appSettings = createdAppSettings._id;
-			await user.save();
-		}
-
-		return await this.getById(user._id);
-	}
-
-	async addEmailTemplateByUserId(input: TAddEmailTemplateInput) {
-		await emailTemplateService.addEmailTemplate(input);
-		return await this.getById(input.userId);
+		return userAppSettings.toJSON();
 	}
 }
 

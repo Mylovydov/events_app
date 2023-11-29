@@ -1,16 +1,13 @@
 import { authProcedure, publicProcedure } from '../../trpc/index.js';
+
+import { z } from 'zod';
 import {
-	addAppSettingsInput,
-	addEmailTemplateByUserIdInput,
-	addEmailTemplateByUserIdOutput,
-	addSmtpSettingsInput,
 	baseUserOutput,
 	createUserInput,
 	getUsersOutput,
 	updateUserInput,
 	userIdInput
-} from './dto/index.js';
-import { z } from 'zod';
+} from './user.dto.js';
 
 const userProcedures = {
 	create: authProcedure
@@ -81,7 +78,7 @@ const userProcedures = {
 							{
 								id: 'j34jn5js-d5cc-4ccd-ad33-1fc56bd6aeeb',
 								name: 'John',
-								email: 'example-email@gmail.com'
+								email: 'example-emailSettings@gmail.com'
 							},
 							['...']
 						]
@@ -135,67 +132,7 @@ const userProcedures = {
 			}
 		})
 		.input(userIdInput)
-		.output(baseUserOutput),
-
-	addSmtpSettings: publicProcedure
-		.meta({
-			openapi: {
-				method: 'PUT',
-				path: '/users/smtp-settings',
-				tags: ['users'],
-				protect: true,
-				summary: 'Add SMTP settings to user by id',
-				example: {
-					response: {},
-					request: {
-						userId: '10db6a2d-0dd8-44f8-a603-b5a69723e751',
-						server: 'smtp.gmail.com'
-					}
-				}
-			}
-		})
-		.input(addSmtpSettingsInput)
-		.output(baseUserOutput),
-
-	addAppSettings: publicProcedure
-		.meta({
-			openapi: {
-				method: 'PUT',
-				path: '/users/app-settings',
-				tags: ['users'],
-				protect: true,
-				summary: 'Add app settings to user by id',
-				example: {
-					response: {},
-					request: {
-						userId: '10db6a2d-0dd8-44f8-a603-b5a69723e751',
-						highlightColor: '#fbf1e6'
-					}
-				}
-			}
-		})
-		.input(addAppSettingsInput)
-		.output(baseUserOutput),
-
-	addEmailTemplateByUserId: publicProcedure
-		.meta({
-			openapi: {
-				method: 'POST',
-				path: '/users/email-template',
-				tags: ['users'],
-				summary: 'Create or update email template by user id',
-				protect: true,
-				example: {
-					request: {},
-					response: {
-						message: '',
-						data: {}
-					}
-				}
-			}
-		})
-		.input(addEmailTemplateByUserIdInput)
-		.output(addEmailTemplateByUserIdOutput)
+		.output(baseUserOutput)
 };
 
 export default userProcedures;

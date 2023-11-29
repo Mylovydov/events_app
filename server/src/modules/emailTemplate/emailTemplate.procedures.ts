@@ -9,14 +9,18 @@ const emailTemplateProcedures = {
 		.meta({
 			openapi: {
 				method: 'POST',
-				path: '/emailTemplate',
-				tags: ['emailTemplate'],
-				summary: 'Create or update email template',
+				path: '/emailSettings-template',
+				tags: ['emailSettings-template'],
+				summary: 'Create or update emailSettings template',
 				protect: true,
 				example: {
-					request: {},
+					request: {
+						template: '',
+						design: '',
+						userId: '284a4e92-57b2-414f-8757-4d6e1462a347'
+					},
 					response: {
-						message: '',
+						message: 'Email template successfully created or updated!',
 						data: {}
 					}
 				}

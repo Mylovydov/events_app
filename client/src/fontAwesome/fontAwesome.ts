@@ -7,12 +7,17 @@ import {
 	faCaretUp,
 	faChevronLeft,
 	faChevronRight,
+	faCircleCheck,
+	faCircleXmark,
+	faEye,
+	faEyeSlash,
 	faFaceSadTear,
 	faFileCsv,
 	faGear,
 	faHouse,
 	faRectangleList,
 	faSpinner,
+	faStarOfLife,
 	faUser
 } from '@fortawesome/free-solid-svg-icons';
 
@@ -32,7 +37,12 @@ const fontAwesome = {
 			faFaceSadTear,
 			faSpinner,
 			faChevronRight,
-			faChevronLeft
+			faStarOfLife,
+			faChevronLeft,
+			faCircleXmark,
+			faCircleCheck,
+			faEyeSlash,
+			faEye
 		)
 };
 

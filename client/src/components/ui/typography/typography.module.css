@@ -1,80 +1,67 @@
 .typography {
-    line-height: 130%;
+    line-height: var(--main-line-height);
     margin: 0;
 }
 
 .h1 {
-    font-size: 4.8rem;
+    font-size: var(--main-font-size-h1);
 }
 
 .h2 {
-    font-size: 4.2rem;
+    font-size: var(--main-font-size-h2);
+}
+
+.h3, h4, h5, h6, .subtitle1, .subtitle2, .caption, .regular {
+    font-weight: var(--main-font-weight-regular);
 }
 
 .h3 {
-    font-weight: 400;
-    font-size: 3.6rem;
+    font-size: var(--main-font-size-h3);
 }
 
 .h4 {
-    font-weight: 400;
-    font-size: 2.8rem;
+    font-size: var(--main-font-size-h4);
 }
 
 .h5 {
-    font-weight: 400;
-    font-size: 2.4rem;
+    font-size: var(--main-font-size-h5);
 }
 
 .h6 {
-    font-weight: 400;
-    font-size: 2rem;
+    font-size: var(--main-font-size-h6);
 }
 
 .subtitle1 {
-    font-weight: 400;
-    font-size: 1.6rem;
+    font-size: var(--main-font-size);
 }
 
 .subtitle2 {
-    font-weight: 400;
-    font-size: 1.4rem;
+    font-size: var(--main-font-size-subtitle2);
 }
 
 .body1 {
-    font-weight: 400;
-    font-size: 1.6rem;
-}
-
-.subtitle2 {
-    font-weight: 400;
-    font-size: 1.4rem;
+    font-size: var(--main-font-size);
 }
 
 .button {
-    font-weight: 600;
-    font-size: 1.4rem;
+    font-weight: var(--main-font-weight-semi);;
+    font-size: var(--main-font-size-subtitle2);
 }
 
 .caption {
-    font-weight: 400;
-    font-size: 1.2rem;
-}
-
-.regular {
-    font-weight: 400;
+    font-size: var(--main-font-size-caption);
 }
 
 .medium {
-    font-weight: 500;
+    font-weight: var(--main-font-weight-medium);
 }
 
 .semi {
-    font-weight: 600;
+    font-weight: var(--main-font-weight-semi);;
 }
 
 .bold {
-    font-weight: 700;
+    font-weight: var(--main-font-weight-bold);;
 }
 
 .noWrap {

@@ -1,0 +1,19 @@
+.inputLabel {
+    display: inline-flex;
+    align-items: start;
+    gap: .5rem;
+    cursor: pointer;
+}
+
+.inputLabelContent {
+}
+
+.inputLabelIcon {
+    margin-top: .3rem;
+    color: var(--main-error-color);
+    font-size: .6rem;
+}
+
+.disabled {
+    cursor: default;
+}

@@ -3,6 +3,7 @@ import { TBaseSortDirection, TEventUnionKeys } from '@/components';
 export enum EApiTags {
 	USERS = 'Users',
 	EVENTS = 'Events',
+	EMAIL_SETTINGS = 'EmailSettings',
 	LIST = 'List'
 }
 

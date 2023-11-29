@@ -1,6 +1,6 @@
 import { TUser } from '@/services';
 
 export type TUserContext = {
-	user?: TUser | null;
+	user: TUser | null;
 	isUserLoading: boolean;
 };

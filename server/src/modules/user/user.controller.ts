@@ -1,5 +1,4 @@
-import userService from './user.service.js';
-import userProcedures from './user.procedures.js';
+import { userProcedures, userService } from './index.js';
 
 const userController = {
 	create: userProcedures.create.mutation(async ({ input }) => {
@@ -13,7 +12,6 @@ const userController = {
 
 	getUser: userProcedures.getUser.query(async ({ input }) => {
 		const user = await userService.getById(input.userId);
-
 		return {
 			message: 'User was successfully found!',
 			data: user
@@ -42,35 +40,7 @@ const userController = {
 			message: 'User was successfully deleted!',
 			data: user
 		};
-	}),
-
-	addSmtpSettings: userProcedures.addSmtpSettings.mutation(
-		async ({ input }) => {
-			const smtpSettings = await userService.addSmtpSettings(input);
-			return {
-				message: 'SMTP settings was successfully added!',
-				data: smtpSettings
-			};
-		}
-	),
-
-	addAppSettings: userProcedures.addAppSettings.mutation(async ({ input }) => {
-		const updatedUser = await userService.addAppSettings(input);
-		return {
-			message: 'App settings was successfully added!',
-			data: updatedUser
-		};
-	}),
-
-	addEmailTemplateByUserId: userProcedures.addEmailTemplateByUserId.mutation(
-		async ({ input }) => {
-			const updatedUser = await userService.addEmailTemplateByUserId(input);
-			return {
-				message: 'Email template was successfully added or updated!',
-				data: updatedUser
-			};
-		}
-	)
+	})
 };
 
 export default userController;

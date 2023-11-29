@@ -9,5 +9,6 @@ export type TEventsTableRowProps = {
 	columns: TTableColumn[];
 	item: TEvent;
 	actionBtnLabel: string;
+	onSendButtonClick: (eventId: string) => void;
 	highlightColor: string | undefined;
 };

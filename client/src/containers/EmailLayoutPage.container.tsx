@@ -32,6 +32,7 @@ const EmailLayoutPageContainer = () => {
 
 		emailEditorRef.current.editor.exportHtml(data => {
 			const { html, design } = data;
+			console.log('html', { html, design });
 			addEmailTemplateToUser({
 				userId: user._id,
 				template: html,

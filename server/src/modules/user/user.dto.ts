@@ -1,19 +1,16 @@
 import { z } from 'zod';
-import { mainSmtpSettingsSchema } from './smtp-settings.dto.js';
-import { baseOutputSchema } from '../../utils/index.js';
-import { mainAppSettingsSchema } from './app-settings.dto.js';
-import {
-	addEmailTemplateInput,
-	mainEmailTemplateSchema
-} from '../../emailTemplate/index.js';
+import { mainEmailTemplateSchema } from '../emailTemplate/index.js';
+import { appSettingsDb } from '../appSettings/index.js';
+import { emailSettingsSchemaDb } from '../emailSettings/index.js';
+import { baseOutputSchema } from '../utils/index.js';
 
 export const mainUserSchema = z.object({
 	_id: z.string().uuid({ message: 'Invalid UUID format' }),
-	email: z.string().email({ message: 'Invalid email address' }),
+	email: z.string().email({ message: 'Invalid emailSettings address' }),
 	name: z.string().max(25, 'Name must be less than 25 characters').optional(),
-	smtpSettings: z.optional(z.string().uuid().or(mainSmtpSettingsSchema)),
 	emailTemplate: z.optional(z.string().uuid().or(mainEmailTemplateSchema)),
-	appSettings: mainAppSettingsSchema.or(z.string().uuid()),
+	appSettings: appSettingsDb.or(z.string().uuid()),
+	emailSettings: emailSettingsSchemaDb.or(z.string().uuid()),
 	password: z
 		.string()
 		.min(8, 'Password must be at least 8 characters long')
@@ -49,22 +46,3 @@ export const updateUserInput = baseUserSchema.omit({ _id: true }).extend({
 export const getUsersOutput = baseOutputSchema.extend({
 	data: z.array(baseUserSchema)
 });
-
-// APP SETTINGS
-export const addAppSettingsInput = mainAppSettingsSchema
-	.omit({ _id: true })
-	.extend({
-		userId: mainUserSchema.shape._id
-	});
-
-export const addEmailTemplateByUserIdInput = addEmailTemplateInput;
-export const addEmailTemplateByUserIdOutput = baseOutputSchema.extend({
-	data: baseUserSchema
-});
-
-// SMTP SETTINGS
-export const addSmtpSettingsInput = mainSmtpSettingsSchema
-	.omit({ _id: true })
-	.extend({
-		userId: mainUserSchema.shape._id
-	});

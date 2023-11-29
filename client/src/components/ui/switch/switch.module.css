@@ -40,3 +40,11 @@
 .switchInput:checked + .switchLabel:before {
     box-shadow: inset 3rem 0 0 var(--main-purple-light-color);
 }
+
+.switchInput:disabled {
+    cursor: auto;
+}
+
+.switchInput:disabled + .switchLabel:before {
+    box-shadow: inset -3rem 0 0 var(--main-grey-lighten-color);
+}

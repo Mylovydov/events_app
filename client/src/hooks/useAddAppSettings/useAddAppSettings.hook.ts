@@ -1,8 +1,5 @@
 import { useNotify } from '@/hooks';
-import {
-	TAddAppSettingsUserInput,
-	useAddAppSettingsMutation
-} from '@/services';
+import { TAddAppSettingsInput, useAddAppSettingsMutation } from '@/services';
 import { useCallback } from 'react';
 
 const useAddAppSettings = () => {
@@ -11,7 +8,7 @@ const useAddAppSettings = () => {
 		useAddAppSettingsMutation();
 
 	const addAppSettings = useCallback(
-		(args: TAddAppSettingsUserInput) => {
+		(args: TAddAppSettingsInput) => {
 			addAppSettingsTrigger(args)
 				.unwrap()
 				.then(data => {

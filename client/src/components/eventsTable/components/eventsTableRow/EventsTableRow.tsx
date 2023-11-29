@@ -1,19 +1,20 @@
 import { FC } from 'react';
-import { Cell } from '@/components/baseTable/components';
 import styles from './eventsTableRow.module.css';
 import {
 	Button,
+	Cell,
 	prepareRowValue,
 	TEventKeys,
 	TEventsTableRowProps
 } from '@/components';
-import isColorDark from '../../../../utils/helpers/isColorDark.ts';
+import { isColorDark } from '@/utils';
 
 const EventsTableRow: FC<TEventsTableRowProps> = ({
 	columns,
 	item,
 	actionBtnLabel,
-	highlightColor
+	highlightColor,
+	onSendButtonClick
 }) => {
 	const rowsKeys = columns.map(c => c.accessor);
 	const style = {
@@ -43,7 +44,10 @@ const EventsTableRow: FC<TEventsTableRowProps> = ({
 			key="action"
 			className={styles.eventsTableCell}
 		>
-			<Button label={actionBtnLabel} />
+			<Button
+				label={actionBtnLabel}
+				onClick={() => onSendButtonClick(item._id)}
+			/>
 		</Cell>
 	);
 	return <tr className={styles.eventsTableRow}>{tableRowsMarkup}</tr>;

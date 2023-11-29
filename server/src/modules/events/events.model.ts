@@ -7,10 +7,10 @@ import {
 } from '@typegoose/typegoose';
 import { v4 as uuidv4 } from 'uuid';
 import { baseModelOptions } from '../utils/index.js';
-import { User } from '../user/models/index.js';
+import { User } from '../user/index.js';
 
 @index({ eventUUID: 1, inviteeUUID: 1 })
-class EventSchema {
+class Event {
 	@prop({ required: true, unique: true, default: () => uuidv4() })
 	public _id!: string;
 
@@ -45,9 +45,8 @@ class EventSchema {
 	public userId!: Ref<User, string>;
 }
 
-export const EventModel = getModelForClass(EventSchema, {
-	...baseModelOptions,
-	options: { customName: 'events' }
+export const EventModel = getModelForClass(Event, {
+	...baseModelOptions
 });
 
-export type EventDocument = DocumentType<EventSchema>;
+export type EventDocument = DocumentType<Event>;
