@@ -1,6 +1,6 @@
-import { TAddEmailSettingsInput } from '@/services';
+import { TResetEmailSettingsInput } from '@/services';
 
-export type TUseAddEmailSettingsReturn = {
-	addEmailSettings: (args: TAddEmailSettingsInput) => void;
-	isEmailSettingsAdding: boolean;
+export type TUseResetEmailSettingsReturn = {
+	resetEmailSettings: (args: TResetEmailSettingsInput) => void;
+	isEmailSettingsResetting: boolean;
 };

@@ -9,6 +9,16 @@ const appSettingsController = {
 				data: emailSettings
 			};
 		}
+	),
+
+	resetAppSettings: appSettingsProcedures.resetAppSettings.mutation(
+		async ({ input }) => {
+			const emailSettings = await appSettingsService.resetAppSettings(input);
+			return {
+				message: 'Email settings successfully added!',
+				data: emailSettings
+			};
+		}
 	)
 };
 

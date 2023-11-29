@@ -5,3 +5,8 @@ export const defaultEmailSettings = {
 	serviceEmail: '',
 	isSettingsVerified: false
 };
+
+export const defaultAppSettings = {
+	highlightColor: defaultHighlightColor,
+	isAutoSendEnabled: false
+};

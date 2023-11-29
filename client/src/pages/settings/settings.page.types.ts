@@ -6,6 +6,7 @@ export type TSettingsPageProps = TPageHeaderProps &
 	TAppSettingsProps & {
 		isPageLoading?: boolean;
 		onSubmit: SubmitHandler<TSettingsFormValues>;
+		onReset: () => void;
 		methods: UseFormReturn<TSettingsFormValues>;
-		isSendBtnDisabled?: boolean;
+		isBtnDisabled?: boolean;
 	};

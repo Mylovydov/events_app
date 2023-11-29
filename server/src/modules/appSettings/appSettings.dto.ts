@@ -17,3 +17,11 @@ export const addAppSettingsInput = appSettingsDb.omit({ _id: true }).extend({
 export const addAppSettingsOutput = baseOutputSchema.extend({
 	data: appSettingsDb
 });
+
+export const resetAppSettingsInput = z.object({
+	userId: z.string().uuid()
+});
+
+export const resetAppSettingsOutput = baseOutputSchema.extend({
+	data: appSettingsDb
+});

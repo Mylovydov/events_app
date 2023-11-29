@@ -10,7 +10,8 @@ const SettingsPage: FC<TSettingsPageProps> = ({
 	isPageLoading,
 	onSubmit,
 	methods,
-	isSendBtnDisabled,
+	isBtnDisabled,
+	onReset,
 	...settingsProps
 }) => {
 	const contentMarkup = isPageLoading ? (
@@ -30,8 +31,13 @@ const SettingsPage: FC<TSettingsPageProps> = ({
 				</div>
 				<div className={styles.settingsPageBody}>{contentMarkup}</div>
 				<div className={styles.settingsPageFooter}>
-					<Button label="Save" type="submit" disabled={isSendBtnDisabled} />
-					<Button label="Reset" type="button" disabled={isSendBtnDisabled} />
+					<Button label="Save" type="submit" disabled={isBtnDisabled} />
+					<Button
+						label="Reset"
+						type="button"
+						onClick={onReset}
+						disabled={isBtnDisabled}
+					/>
 				</div>
 			</form>
 		</FormProvider>

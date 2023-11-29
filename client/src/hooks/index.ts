@@ -11,4 +11,6 @@ export * from './useUserContext';
 export * from './useAddAppSettings';
 export * from './useAddEmailTemplate';
 export * from './useAddEmailSettings';
+export * from './useResetSettings';
+export * from './useResetAppSettings';
 export * from './useResetEmailSettings';

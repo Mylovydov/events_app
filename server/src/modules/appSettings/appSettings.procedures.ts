@@ -1,7 +1,9 @@
 import { publicProcedure } from '../../trpc/index.js';
 import {
 	addAppSettingsInput,
-	addAppSettingsOutput
+	addAppSettingsOutput,
+	resetAppSettingsInput,
+	resetAppSettingsOutput
 } from './appSettings.dto.js';
 
 const appSettingsProcedures = {
@@ -24,7 +26,26 @@ const appSettingsProcedures = {
 			}
 		})
 		.input(addAppSettingsInput)
-		.output(addAppSettingsOutput)
+		.output(addAppSettingsOutput),
+
+	resetAppSettings: publicProcedure
+		.meta({
+			openapi: {
+				method: 'POST',
+				path: '/app-settings/reset',
+				tags: ['app-settings'],
+				protect: true,
+				summary: 'Reset app settings to default',
+				example: {
+					response: {},
+					request: {
+						userId: '10db6a2d-0dd8-44f8-a603-b5a69723e751'
+					}
+				}
+			}
+		})
+		.input(resetAppSettingsInput)
+		.output(resetAppSettingsOutput)
 };
 
 export default appSettingsProcedures;

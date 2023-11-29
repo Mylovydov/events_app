@@ -4,19 +4,27 @@ import { SettingsPage } from '@/pages';
 import {
 	useAddAppSettings,
 	useAddEmailSettings,
+	useResetSettings,
 	useUserContext
 } from '@/hooks';
 import { getFormValues } from '@/utils';
 import { Controller, useForm } from 'react-hook-form';
 import { TSettingsFormValues } from '@/containers';
-import useResetEmailSettings from '../../hooks/useResetEmailSettings/useResetEmailSettings.hook.ts';
 
 const SettingsPageContainer = () => {
 	const { addAppSettings, isAppSettingsAdding } = useAddAppSettings();
 	const { addEmailSettings, isEmailSettingsAdding } = useAddEmailSettings();
-	const { resetEmailSettings, isEmailSettingsResetting } =
-		useResetEmailSettings();
+	const { resetSettings, isSettingsResetting } = useResetSettings();
+
 	const { user, isUserLoading } = useUserContext();
+
+	const onSettingsReset = () => {
+		if (!user) {
+			return;
+		}
+
+		resetSettings({ userId: user._id });
+	};
 
 	const methods = useForm<TSettingsFormValues>({
 		values: getFormValues(user)
@@ -99,7 +107,7 @@ const SettingsPageContainer = () => {
 	);
 
 	const isSendBtnDisabled =
-		isAppSettingsAdding || isEmailSettingsAdding || isEmailSettingsResetting;
+		isAppSettingsAdding || isEmailSettingsAdding || isSettingsResetting;
 
 	return (
 		<SettingsPage
@@ -107,7 +115,8 @@ const SettingsPageContainer = () => {
 			subtitle="Change the settings of your application"
 			items={settingsItems}
 			isPageLoading={isUserLoading}
-			isSendBtnDisabled={isSendBtnDisabled}
+			isBtnDisabled={isSendBtnDisabled}
+			onReset={onSettingsReset}
 			onSubmit={onChangeSettings}
 			methods={methods}
 		/>
