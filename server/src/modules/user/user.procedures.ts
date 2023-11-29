@@ -2,7 +2,6 @@ import { authProcedure, publicProcedure } from '../../trpc/index.js';
 
 import { z } from 'zod';
 import {
-	addAppSettingsInput,
 	addEmailTemplateByUserIdInput,
 	addEmailTemplateByUserIdOutput,
 	baseUserOutput,
@@ -135,26 +134,6 @@ const userProcedures = {
 			}
 		})
 		.input(userIdInput)
-		.output(baseUserOutput),
-
-	addAppSettings: publicProcedure
-		.meta({
-			openapi: {
-				method: 'PUT',
-				path: '/users/app-settings',
-				tags: ['users'],
-				protect: true,
-				summary: 'Add app settings to user by id',
-				example: {
-					response: {},
-					request: {
-						userId: '10db6a2d-0dd8-44f8-a603-b5a69723e751',
-						highlightColor: '#fbf1e6'
-					}
-				}
-			}
-		})
-		.input(addAppSettingsInput)
 		.output(baseUserOutput),
 
 	addEmailTemplateByUserId: publicProcedure

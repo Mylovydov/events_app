@@ -42,14 +42,6 @@ const userController = {
 		};
 	}),
 
-	addAppSettings: userProcedures.addAppSettings.mutation(async ({ input }) => {
-		const user = await userService.addAppSettings(input);
-		return {
-			message: 'App settings was successfully added!',
-			data: user
-		};
-	}),
-
 	addEmailTemplateByUserId: userProcedures.addEmailTemplateByUserId.mutation(
 		async ({ input }) => {
 			const user = await userService.addEmailTemplateByUserId(input);

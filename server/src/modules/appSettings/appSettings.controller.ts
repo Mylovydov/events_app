@@ -1,13 +1,15 @@
+import { appSettingsProcedures, appSettingsService } from './index.js';
+
 const appSettingsController = {
-	// addEmailSettings: emailProcedures.addEmailSettings.mutation(
-	// 	async ({ input }) => {
-	// 		const emailSettings = await emailService.addEmailSettings(input);
-	// 		return {
-	// 			message: 'Email settings successfully added!',
-	// 			data: emailSettings
-	// 		};
-	// 	}
-	// ),
+	addEmailSettings: appSettingsProcedures.addAppSettings.mutation(
+		async ({ input }) => {
+			const emailSettings = await appSettingsService.addAppSettings(input);
+			return {
+				message: 'App settings successfully added!',
+				data: emailSettings
+			};
+		}
+	)
 };
 
 export default appSettingsController;

@@ -1,8 +1,4 @@
-import {
-	TAddAppSettingsDto,
-	TCreateUserDto,
-	TUpdateUserDto
-} from './user.types.js';
+import { TCreateUserDto, TUpdateUserDto } from './user.types.js';
 import { ApiError } from '../../error/index.js';
 import { tokenService } from '../token/index.js';
 import {
@@ -11,7 +7,7 @@ import {
 } from '../emailTemplate/index.js';
 import { emailService, EmailSettingsModel } from '../emailSettings/index.js';
 import { UserModel } from './user.model.js';
-import { AppSettingsModel } from '../appSettings/index.js';
+import { AppSettingsModel, appSettingsService } from '../appSettings/index.js';
 
 class UserService {
 	async create(dto: TCreateUserDto) {
@@ -20,7 +16,10 @@ class UserService {
 			throw ApiError.badRequest('User already exists!');
 		}
 		const user = await UserModel.create(dto);
-		await this.addAppSettings({ userId: user._id, isAutoSendEnabled: false });
+		await appSettingsService.addAppSettings({
+			userId: user._id,
+			isAutoSendEnabled: false
+		});
 		await emailService.addEmailSettings({
 			userId: user._id,
 			serviceEmail: '',
@@ -98,29 +97,6 @@ class UserService {
 
 	async getByIdWithoutFlatten(id: string) {
 		return UserModel.findById(id);
-	}
-
-	async addAppSettings({ userId, ...restAppSettings }: TAddAppSettingsDto) {
-		const user = await UserModel.findById(userId);
-		if (!user) {
-			throw ApiError.notFound(`User with id: ${userId} not found!`);
-		}
-
-		const appSettingsDb = await AppSettingsModel.findByIdAndUpdate(
-			user.appSettings,
-			{ ...restAppSettings },
-			{ new: true }
-		);
-
-		if (!appSettingsDb) {
-			const createdAppSettings = await AppSettingsModel.create({
-				...restAppSettings
-			});
-			user.appSettings = createdAppSettings._id;
-			await user.save();
-		}
-
-		return await this.getById(user._id);
 	}
 
 	async addEmailTemplateByUserId(input: TAddEmailTemplateInput) {
