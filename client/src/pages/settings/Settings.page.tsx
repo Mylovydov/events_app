@@ -35,6 +35,7 @@ const SettingsPage: FC<TSettingsPageProps> = ({
 					<Button
 						label="Reset"
 						type="button"
+						variant="outlined"
 						onClick={onReset}
 						disabled={isBtnDisabled}
 					/>

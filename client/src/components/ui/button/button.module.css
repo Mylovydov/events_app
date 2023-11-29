@@ -2,7 +2,6 @@
     padding: 1.5rem 4rem;
     border-radius: var(--main-border-radius);
     overflow: hidden;
-    background: var(--main-gradient);
     display: inline-flex;
     flex-direction: column;
     justify-content: center;
@@ -10,7 +9,6 @@
     vertical-align: middle;
     transition: all var(--main-transition-delay) var(--main-transition-fn);
     border: 0;
-    color: var(--main-white-color);
     cursor: pointer;
     text-transform: uppercase;
 }
@@ -32,4 +30,15 @@
     transform: none;
     opacity: .5;
     cursor: auto;
+}
+
+.filled {
+    background: var(--main-gradient);
+    color: var(--main-white-color);
+}
+
+.outlined {
+    background: transparent;
+    color: var(--main-text-color);
+    border: 1px solid var(--main-purple-dark-color);
 }

@@ -23,7 +23,8 @@ const SettingsPageContainer = () => {
 			return;
 		}
 
-		resetSettings({ userId: user._id });
+		const { _id: userId } = user;
+		resetSettings({ userId });
 	};
 
 	const methods = useForm<TSettingsFormValues>({

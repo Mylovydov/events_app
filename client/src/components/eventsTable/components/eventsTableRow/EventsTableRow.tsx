@@ -13,7 +13,8 @@ const EventsTableRow: FC<TEventsTableRowProps> = ({
 	columns,
 	item,
 	actionBtnLabel,
-	highlightColor
+	highlightColor,
+	onSendButtonClick
 }) => {
 	const rowsKeys = columns.map(c => c.accessor);
 	const style = {
@@ -43,7 +44,10 @@ const EventsTableRow: FC<TEventsTableRowProps> = ({
 			key="action"
 			className={styles.eventsTableCell}
 		>
-			<Button label={actionBtnLabel} />
+			<Button
+				label={actionBtnLabel}
+				onClick={() => onSendButtonClick(item._id)}
+			/>
 		</Cell>
 	);
 	return <tr className={styles.eventsTableRow}>{tableRowsMarkup}</tr>;

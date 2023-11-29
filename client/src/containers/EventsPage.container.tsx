@@ -16,6 +16,8 @@ import {
 	SORT_KEY_PARAM_KEY
 } from '@/utils';
 import { EventsTableRow, TBaseSortDirection } from '@/components';
+import { useNavigate } from 'react-router-dom';
+import { SETTINGS_PATH } from '@/router';
 
 const columns = [
 	{ label: 'First Name', accessor: 'inviteeFirstName', sortable: true },
@@ -38,6 +40,7 @@ const EventsPageContainer = () => {
 		pageParamKey: PAGE_PARAM_KEY,
 		resetPageAfterSort: true
 	});
+	const navigate = useNavigate();
 	const { changePaginationPage, page } = usePagination(PAGE_PARAM_KEY);
 
 	const { events, isEventsLoading, pageCount } = useGetEvents({
@@ -56,12 +59,26 @@ const EventsPageContainer = () => {
 			return;
 		}
 
-		if (!isStringType(user.appSettings)) {
-			setHighlightColor(
-				user.appSettings.highlightColor || defaultHighlightColor
-			);
+		const { appSettings } = user;
+		if (!isStringType(appSettings)) {
+			setHighlightColor(appSettings.highlightColor || defaultHighlightColor);
 		}
 	}, [user]);
+
+	const onSendButtonClick = useCallback(
+		(eventId: string) => {
+			if (!user || isStringType(user?.emailSettings)) {
+				return;
+			}
+
+			const {
+				emailSettings: { isSettingsVerified }
+			} = user;
+
+			return isSettingsVerified ? () => {} : navigate(SETTINGS_PATH);
+		},
+		[user, navigate]
+	);
 
 	const onSortDirectionChange = useCallback(
 		(accessor: string, sortDirection: TBaseSortDirection) => {
@@ -80,18 +97,30 @@ const EventsPageContainer = () => {
 		[changePaginationPage]
 	);
 
+	const rowActionBtnLabel = useMemo(() => {
+		const defaultLabel = 'Send';
+		if (!user || isStringType(user?.emailSettings)) {
+			return defaultLabel;
+		}
+
+		return user.emailSettings.isSettingsVerified
+			? defaultLabel
+			: 'Add settings';
+	}, [user]);
+
 	const tableRows = useMemo(
 		() =>
 			events.map(item => (
 				<EventsTableRow
 					key={item._id}
 					highlightColor={highlightColor}
+					onSendButtonClick={onSendButtonClick}
 					columns={columns}
 					item={item}
-					actionBtnLabel="Send"
+					actionBtnLabel={rowActionBtnLabel}
 				/>
 			)),
-		[events, highlightColor]
+		[events, highlightColor, onSendButtonClick, rowActionBtnLabel]
 	);
 
 	const tableColumns = useMemo(

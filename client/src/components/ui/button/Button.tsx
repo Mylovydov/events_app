@@ -8,11 +8,13 @@ const Button: FC<TButtonProps> = ({
 	type = 'submit',
 	disabled,
 	fullWidth,
+	variant = 'filled',
 	...rest
 }) => {
 	const btmClasses = classNames({
 		[styles.button]: true,
-		[styles.fullWidth]: fullWidth
+		[styles.fullWidth]: fullWidth,
+		[styles[variant]]: variant
 	});
 
 	return (

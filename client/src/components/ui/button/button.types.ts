@@ -5,6 +5,7 @@ export type TButtonProps = {
 	type?: 'button' | 'submit' | 'reset';
 	disabled?: boolean;
 	fullWidth?: boolean;
+	variant?: 'filled' | 'outlined';
 } & React.DetailedHTMLProps<
 	React.ButtonHTMLAttributes<HTMLButtonElement>,
 	HTMLButtonElement

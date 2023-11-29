@@ -15,7 +15,7 @@ const appSettingsController = {
 		async ({ input }) => {
 			const emailSettings = await appSettingsService.resetAppSettings(input);
 			return {
-				message: 'Email settings successfully added!',
+				message: 'App settings successfully reset!',
 				data: emailSettings
 			};
 		}
