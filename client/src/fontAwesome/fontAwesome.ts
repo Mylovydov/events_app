@@ -9,6 +9,8 @@ import {
 	faChevronRight,
 	faCircleCheck,
 	faCircleXmark,
+	faEye,
+	faEyeSlash,
 	faFaceSadTear,
 	faFileCsv,
 	faGear,
@@ -38,7 +40,9 @@ const fontAwesome = {
 			faStarOfLife,
 			faChevronLeft,
 			faCircleXmark,
-			faCircleCheck
+			faCircleCheck,
+			faEyeSlash,
+			faEye
 		)
 };
 

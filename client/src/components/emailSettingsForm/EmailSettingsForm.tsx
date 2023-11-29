@@ -1,11 +1,13 @@
 import styles from './emailSettingsForm.module.css';
-import { FC } from 'react';
+import { FC, useState } from 'react';
 import { TEmailSettingsFormProps, TextField } from '@/components';
 import { useFormContext } from 'react-hook-form';
 import VerifiedCheckmark from '../verifiedCheckmark/VerifiedCheckmark.tsx';
 import { TSettingsFormValues } from '@/containers';
 
 const EmailSettingsForm: FC<TEmailSettingsFormProps> = () => {
+	const [isShowPassword, setIsShowPassword] = useState(false);
+
 	const {
 		register,
 		formState: { errors },
@@ -43,6 +45,9 @@ const EmailSettingsForm: FC<TEmailSettingsFormProps> = () => {
 							message: errors.servicePassword?.message as string
 						}}
 						fullWidth
+						type={isShowPassword ? 'text' : 'password'}
+						icon={isShowPassword ? 'eye-slash' : 'eye'}
+						onIconClick={() => setIsShowPassword(prev => !prev)}
 						{...register('servicePassword', {
 							required: { value: true, message: 'Required field!' }
 						})}

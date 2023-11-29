@@ -1,3 +1,17 @@
+.inputWrapper {
+    position: relative;
+}
+
+.inputIcon {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 2.4rem;
+    font-size: 1.6rem;
+    cursor: pointer;
+    color: var(--main-grey-darken-color);
+}
+
 .input {
     font-size: 1.4rem;
     font-weight: var(--main-font-weight-semi);
@@ -14,6 +28,7 @@
 
     transition: border var(--main-transition-fn) var(--main-transition-delay);
     max-width: 40rem;
+    width: 100%;
 }
 
 .input::placeholder {
