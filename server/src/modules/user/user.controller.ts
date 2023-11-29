@@ -40,17 +40,7 @@ const userController = {
 			message: 'User was successfully deleted!',
 			data: user
 		};
-	}),
-
-	addEmailTemplateByUserId: userProcedures.addEmailTemplateByUserId.mutation(
-		async ({ input }) => {
-			const user = await userService.addEmailTemplateByUserId(input);
-			return {
-				message: 'Email template was successfully added or updated!',
-				data: user
-			};
-		}
-	)
+	})
 };
 
 export default userController;

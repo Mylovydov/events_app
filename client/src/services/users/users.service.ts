@@ -1,8 +1,6 @@
 import { trpcClient } from '@/trpc';
 import {
 	baseApi,
-	TAddEmailTemplateByUserIdInput,
-	TAddEmailTemplateByUserIdOutput,
 	TCreateUserInput,
 	TCreateUserOutput,
 	TDeleteUserInput,
@@ -54,15 +52,6 @@ export const usersApi = baseApi.injectEndpoints({
 			query: arg => trpcClient.users.delete.mutate(arg),
 			transformErrorResponse: ({ data }) => data,
 			invalidatesTags: [EApiTags.USERS]
-		}),
-
-		addEmailTemplateByUserId: builder.mutation<
-			TAddEmailTemplateByUserIdOutput,
-			TAddEmailTemplateByUserIdInput
-		>({
-			query: arg => trpcClient.users.addEmailTemplateByUserId.mutate(arg),
-			invalidatesTags: [EApiTags.USERS],
-			transformErrorResponse: ({ data }) => data
 		})
 	})
 });
@@ -72,6 +61,5 @@ export const {
 	useGetUserQuery,
 	useGetUsersQuery,
 	useUpdateUserMutation,
-	useDeleteUserMutation,
-	useAddEmailTemplateByUserIdMutation
+	useDeleteUserMutation
 } = usersApi;

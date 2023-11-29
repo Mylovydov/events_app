@@ -1,10 +1,6 @@
 import { TCreateUserDto, TUpdateUserDto } from './user.types.js';
 import { ApiError } from '../../error/index.js';
 import { tokenService } from '../token/index.js';
-import {
-	emailTemplateService,
-	TAddEmailTemplateInput
-} from '../emailTemplate/index.js';
 import { emailService, EmailSettingsModel } from '../emailSettings/index.js';
 import { UserModel } from './user.model.js';
 import { AppSettingsModel, appSettingsService } from '../appSettings/index.js';
@@ -97,11 +93,6 @@ class UserService {
 
 	async getByIdWithoutFlatten(id: string) {
 		return UserModel.findById(id);
-	}
-
-	async addEmailTemplateByUserId(input: TAddEmailTemplateInput) {
-		await emailTemplateService.addEmailTemplate(input);
-		return await this.getById(input.userId);
 	}
 
 	async toggleAppSettingsAutoSend(

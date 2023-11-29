@@ -6,8 +6,7 @@ const userRouter = router({
 	getUser: userController.getUser,
 	getUsers: userController.getUsers,
 	update: userController.update,
-	delete: userController.delete,
-	addEmailTemplateByUserId: userController.addEmailTemplateByUserId
+	delete: userController.delete
 });
 
 export default userRouter;

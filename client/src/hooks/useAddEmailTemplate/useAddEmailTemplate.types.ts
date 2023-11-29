@@ -1,6 +1,6 @@
-import { TAddEmailTemplateByUserIdInput } from '@/services';
+import { TAddEmailTemplateInput } from '@/services';
 
 export type TUseAddEmailTemplateSettingsReturn = {
-	addEmailTemplateToUser: (args: TAddEmailTemplateByUserIdInput) => void;
+	addEmailTemplateToUser: (args: TAddEmailTemplateInput) => void;
 	isEmailTemplateAdding: boolean;
 };

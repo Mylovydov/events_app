@@ -1,8 +1,5 @@
 import { z } from 'zod';
-import {
-	addEmailTemplateInput,
-	mainEmailTemplateSchema
-} from '../emailTemplate/index.js';
+import { mainEmailTemplateSchema } from '../emailTemplate/index.js';
 import { appSettingsDb } from '../appSettings/index.js';
 import { emailSettingsSchemaDb } from '../emailSettings/index.js';
 import { baseOutputSchema } from '../utils/index.js';
@@ -49,15 +46,3 @@ export const updateUserInput = baseUserSchema.omit({ _id: true }).extend({
 export const getUsersOutput = baseOutputSchema.extend({
 	data: z.array(baseUserSchema)
 });
-
-export const addEmailTemplateByUserIdInput = addEmailTemplateInput;
-export const addEmailTemplateByUserIdOutput = baseOutputSchema.extend({
-	data: baseUserSchema
-});
-
-// EMAIL SETTINGS
-export const addEmailSettingsToUserInput = emailSettingsSchemaDb
-	.omit({ _id: true })
-	.extend({
-		userId: mainUserSchema.shape._id
-	});
