@@ -12,11 +12,13 @@ export const db = {
 	},
 	initUser: async () => {
 		const userDocsCount = await UserModel.countDocuments();
-		if (!userDocsCount) {
-			await authService.register({
-				email: 'user@example.com',
-				password: '12345678'
-			});
+		if (userDocsCount) {
+			return;
 		}
+
+		await authService.register({
+			email: process.env.BASE_APP_USER_EMAIL ?? 'user@example.com',
+			password: process.env.BASE_APP_USER_PASSWORD ?? '12345678'
+		});
 	}
 };
