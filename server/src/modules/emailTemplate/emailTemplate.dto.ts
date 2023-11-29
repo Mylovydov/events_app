@@ -19,3 +19,11 @@ export const addEmailTemplateInput = mainEmailTemplateSchema.extend({
 export const addEmailTemplateOutput = baseOutputSchema.extend({
 	data: emailTemplateSchemaDb
 });
+
+export const getEmailTemplateInput = z.object({
+	emailTemplateId: emailTemplateSchemaDb.shape._id
+});
+
+export const getEmailTemplateOutput = baseOutputSchema.extend({
+	data: emailTemplateSchemaDb
+});

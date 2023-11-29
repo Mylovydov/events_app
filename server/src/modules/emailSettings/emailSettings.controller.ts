@@ -1,9 +1,9 @@
-import { emailProcedures, emailService } from './index.js';
+import { emailSettingsProcedures, emailSettingsService } from './index.js';
 
 const emailSettingsController = {
-	addEmailSettings: emailProcedures.addEmailSettings.mutation(
+	addEmailSettings: emailSettingsProcedures.addEmailSettings.mutation(
 		async ({ input }) => {
-			const emailSettings = await emailService.addEmailSettings(input);
+			const emailSettings = await emailSettingsService.addEmailSettings(input);
 			return {
 				message: 'Email settings successfully added!',
 				data: emailSettings
@@ -11,19 +11,21 @@ const emailSettingsController = {
 		}
 	),
 
-	sendInvitationToEvent: emailProcedures.sendInvitationToEvent.mutation(
+	getEmailSettingsById: emailSettingsProcedures.getEmailSettingsById.query(
 		async ({ input }) => {
-			const createdEvents = await emailService.sendInvitationToEvent();
+			const emailSettings =
+				await emailSettingsService.getEmailSettingsById(input);
 			return {
-				message: 'Invitation successfully sent!',
-				data: createdEvents
+				message: 'Email settings successfully added!',
+				data: emailSettings
 			};
 		}
 	),
 
-	resetEmailSettings: emailProcedures.resetEmailSettings.mutation(
+	resetEmailSettings: emailSettingsProcedures.resetEmailSettings.mutation(
 		async ({ input }) => {
-			const emailSettings = await emailService.resetEmailSettings(input);
+			const emailSettings =
+				await emailSettingsService.resetEmailSettings(input);
 			return {
 				message: 'Email settings successfully added!',
 				data: emailSettings

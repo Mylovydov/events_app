@@ -3,6 +3,7 @@ import {
 	addEmailTemplateInput,
 	addEmailTemplateOutput,
 	emailTemplateSchemaDb,
+	getEmailTemplateInput,
 	mainEmailTemplateSchema
 } from './emailTemplate.dto.js';
 
@@ -12,3 +13,4 @@ export type TAddEmailTemplateInput = z.infer<typeof addEmailTemplateInput>;
 export type TCreateOrUpdateEmailTemplateOutput = z.infer<
 	typeof addEmailTemplateOutput
 >;
+export type TGetEmailTemplateInput = z.infer<typeof getEmailTemplateInput>;

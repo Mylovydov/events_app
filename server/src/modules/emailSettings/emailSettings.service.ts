@@ -1,32 +1,25 @@
-import nodemailer, { Transporter } from 'nodemailer';
-import SMTPTransport from 'nodemailer/lib/smtp-transport/index.js';
+import nodemailer from 'nodemailer';
 import {
 	TAddEmailSettingsInputSchema,
+	TChangeVerifyStatusArgs,
 	TCreateTransporterDto,
+	TGetEmailSettingsInput,
 	TResetEmailSettingsDto
 } from './emailSettings.types.js';
 import userService from '../user/user.service.js';
 import { ApiError } from '../../error/index.js';
-import { EmailSettingsModel } from './emailSettings.model.js';
 import { defaultEmailSettings } from '../../utils/index.js';
-
-export type TChangeVerifyStatusArgs = {
-	transporterDto: TCreateTransporterDto;
-	emailSettingsId: string;
-	appSettingsId: string;
-};
+import { EmailSettingsModel } from '../emailSettings/index.js';
 
 class EmailSettingsService {
-	transporter: Transporter<SMTPTransport.SentMessageInfo>;
-
-	constructor() {
-		this.transporter = nodemailer.createTransport({
-			service: 'gmail',
-			auth: {
-				pass: process.env.EMAIL_PASSWORD,
-				user: process.env.EMAIL_USER
-			}
-		});
+	async getEmailSettingsById({ emailSettingsId }: TGetEmailSettingsInput) {
+		const emailSettings = await EmailSettingsModel.findById(emailSettingsId);
+		if (!emailSettings) {
+			throw ApiError.notFound(
+				`Email settings with id: ${emailSettingsId} not found!`
+			);
+		}
+		return emailSettings.toJSON();
 	}
 
 	async addEmailSettings({
@@ -63,15 +56,6 @@ class EmailSettingsService {
 		}
 
 		return emailSettingsDb.toJSON();
-	}
-
-	async sendInvitationToEvent() {
-		await this.transporter.sendMail({
-			from: process.env.EMAIL_USER,
-			to: 'den.milovidov.91@gmail.com',
-			subject: 'Invitation to event',
-			html: '<h1>Invitation to event</h1>'
-		});
 	}
 
 	async verifyEmailSettings(dto: TCreateTransporterDto) {
@@ -132,7 +116,7 @@ class EmailSettingsService {
 		return emailSettingsDb.toJSON();
 	}
 
-	private createTransporter({
+	createTransporter({
 		service = 'gmail',
 		servicePassword,
 		serviceEmail

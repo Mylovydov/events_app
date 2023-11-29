@@ -72,3 +72,11 @@ export const getEventsOutput = baseOutputSchema.extend({
 		pageCount: z.number()
 	})
 });
+
+export const getEventInput = z.object({
+	eventId: eventSchemaDb.shape._id
+});
+
+export const getEventOutput = baseOutputSchema.extend({
+	data: eventSchemaDb
+});

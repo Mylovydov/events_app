@@ -6,13 +6,25 @@ import { isStringType } from '@/utils';
 
 const editorOptions: EmailEditorProps['options'] = {
 	mergeTags: {
+		inviteeFirstName: {
+			name: 'first name',
+			value: '{{inviteeFirstName}}'
+		},
 		inviteeLastName: {
-			name: 'Invitee Last Name',
+			name: 'last name',
 			value: '{{inviteeLastName}}'
 		},
-		inviteeFirstName: {
-			name: 'Invitee First Name',
-			value: '{{inviteeFirstName}}'
+		startDateTime: {
+			name: 'start time',
+			value: '{{startDateTime}}'
+		},
+		endDateTime: {
+			name: 'end time',
+			value: '{{endDateTime}}'
+		},
+		location: {
+			name: 'location',
+			value: '{{location}}'
 		}
 	},
 	displayMode: 'email'
@@ -32,7 +44,7 @@ const EmailLayoutPageContainer = () => {
 
 		emailEditorRef.current.editor.exportHtml(data => {
 			const { html, design } = data;
-			console.log('html', { html, design });
+
 			addEmailTemplateToUser({
 				userId: user._id,
 				template: html,

@@ -1,6 +1,7 @@
 import {
 	TCreateFileDto,
 	TEventsSchema,
+	TGetEventInput,
 	TGetEventsInput,
 	TValidateCSVResult
 } from './events.types.js';
@@ -8,7 +9,7 @@ import { eventsSchema } from './events.dto.js';
 import { EventModel } from './events.model.js';
 import { ApiError } from '../../error/index.js';
 import papaParse, { ParseConfig } from 'papaparse';
-import { prepareValidationErrors } from './events.utils.js';
+import { prepareValidationError } from '../../utils/index.js';
 
 const defaultDirection = 'desc';
 const defaultSortKey = 'startDateTime';
@@ -23,7 +24,6 @@ class EventsService {
 		}
 
 		const preparedEvents = this.prepareFileData(events);
-
 		const validationResult = this.validateEventsBySchema(preparedEvents);
 		if (validationResult.error) {
 			throw ApiError.badRequest(validationResult.error);
@@ -64,7 +64,16 @@ class EventsService {
 		};
 	}
 
-	addUserIdToEvent(events: TEventsSchema, userId: string) {
+	async getEvent({ eventId }: TGetEventInput) {
+		const event = await EventModel.findById(eventId);
+		if (!event) {
+			throw ApiError.notFound(`Event with id: ${eventId} not found!`);
+		}
+
+		return event.toJSON();
+	}
+
+	private addUserIdToEvent(events: TEventsSchema, userId: string) {
 		return events.map(event => ({
 			...event,
 			userId
@@ -105,7 +114,7 @@ class EventsService {
 
 		return {
 			events: null,
-			error: prepareValidationErrors(parseResult.error.issues)
+			error: prepareValidationError(parseResult.error.issues)
 		};
 	}
 
