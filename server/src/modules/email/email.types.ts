@@ -3,6 +3,7 @@ import { sendEmailInput } from './email.dto.js';
 import { TEventSchema } from '../events/index.js';
 
 export type TSendEmailInput = z.infer<typeof sendEmailInput>;
+export type TSendEmailsInput = Omit<TSendEmailInput, 'eventId'>;
 
 export type TEventToSend = keyof Omit<
 	TEventSchema,

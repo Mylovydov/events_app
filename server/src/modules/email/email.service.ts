@@ -1,8 +1,7 @@
-import nodemailer, { Transporter } from 'nodemailer';
-import SMTPTransport from 'nodemailer/lib/smtp-transport/index.js';
 import {
 	TPrepareEmailTemplateToSentParams,
-	TSendEmailInput
+	TSendEmailInput,
+	TSendEmailsInput
 } from './email.types.js';
 import { emailSettingsService } from '../emailSettings/index.js';
 import { userService } from '../user/index.js';
@@ -11,19 +10,7 @@ import { eventsService } from '../events/index.js';
 import { emailTemplateService } from '../emailTemplate/index.js';
 
 class EmailService {
-	private transporter: Transporter<SMTPTransport.SentMessageInfo>;
-
-	constructor() {
-		this.transporter = nodemailer.createTransport({
-			service: 'gmail',
-			auth: {
-				pass: process.env.EMAIL_PASSWORD,
-				user: process.env.EMAIL_USER
-			}
-		});
-	}
-
-	async sendEmail({ eventId, userId }: TSendEmailInput) {
+	async sendEmailInvitationToEvent({ eventId, userId }: TSendEmailInput) {
 		const user = await userService.getByIdWithoutFlatten(userId);
 		if (!user) {
 			throw ApiError.notFound(`User with id: ${userId} not found!`);
@@ -62,6 +49,13 @@ class EmailService {
 			subject: `Dear ${event.inviteeFirstName}, we invite you to the event!`,
 			html: preparedEmailTemplate
 		});
+	}
+
+	async sendEmailInvitationToUserEvents({ userId }: TSendEmailsInput) {
+		const user = await userService.getByIdWithoutFlatten(userId);
+		if (!user) {
+			throw ApiError.notFound(`User with id: ${userId} not found!`);
+		}
 	}
 
 	private prepareEmailTemplateToSent({

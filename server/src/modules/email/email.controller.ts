@@ -1,13 +1,14 @@
 import { emailProcedures, emailService } from './index.js';
 
 const emailController = {
-	sendEmail: emailProcedures.sendEmail.mutation(async ({ input }) => {
-		const emailSettings = await emailService.sendEmail(input);
-		return {
-			message: 'Email settings successfully added!',
-			data: {}
-		};
-	})
+	sendEmailInvitationToEvent:
+		emailProcedures.sendEmailInvitationToEvent.mutation(async ({ input }) => {
+			await emailService.sendEmailInvitationToEvent(input);
+			return {
+				message: 'Email successfully sent!',
+				data: {}
+			};
+		})
 };
 
 export default emailController;
