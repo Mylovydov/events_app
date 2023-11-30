@@ -3,8 +3,8 @@ import { emailSettingsController } from '../modules/emailSettings/index.js';
 
 const emailSettingsRouter = router({
 	addEmailSettings: emailSettingsController.addEmailSettings,
-	sendInvitationToEvent: emailSettingsController.sendInvitationToEvent,
-	resetEmailSettings: emailSettingsController.resetEmailSettings
+	resetEmailSettings: emailSettingsController.resetEmailSettings,
+	getEmailSettingsById: emailSettingsController.getEmailSettingsById
 });
 
 export default emailSettingsRouter;

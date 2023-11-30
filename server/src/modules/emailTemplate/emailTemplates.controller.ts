@@ -10,6 +10,16 @@ const emailTemplatesController = {
 				data: emailTemplate
 			};
 		}
+	),
+
+	getEmailTemplate: emailTemplateProcedures.getEmailTemplate.query(
+		async ({ input }) => {
+			const emailTemplate = await emailTemplateService.getEmailTemplate(input);
+			return {
+				message: 'Email template successfully added!',
+				data: emailTemplate
+			};
+		}
 	)
 };
 

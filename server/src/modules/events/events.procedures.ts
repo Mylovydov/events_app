@@ -3,6 +3,8 @@ import { exampleBase64CSV, exampleEvents } from '../../utils/index.js';
 import {
 	createEventsInput,
 	createEventsOutput,
+	getEventInput,
+	getEventOutput,
 	getEventsInput,
 	getEventsOutput
 } from './events.dto.js';
@@ -48,7 +50,27 @@ const eventsProcedures = {
 			}
 		})
 		.input(getEventsInput)
-		.output(getEventsOutput)
+		.output(getEventsOutput),
+
+	getEvent: publicProcedure
+		.meta({
+			openapi: {
+				method: 'GET',
+				path: '/events/{eventId}',
+				tags: ['events'],
+				summary: 'Get event by id',
+				protect: true,
+				example: {
+					// request: {},
+					response: {
+						message: '',
+						data: exampleEvents[0]
+					}
+				}
+			}
+		})
+		.input(getEventInput)
+		.output(getEventOutput)
 };
 
 export default eventsProcedures;

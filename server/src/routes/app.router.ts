@@ -6,6 +6,7 @@ import tokenRouter from './token.router.js';
 import emailTemplateRouter from './emailTemplate.router.js';
 import emailSettingsRouter from './emailSettings.router.js';
 import appSettingsRouter from './appSettings.router.js';
+import emailRouter from './email.router.js';
 
 const appRouter = router({
 	token: tokenRouter,
@@ -14,7 +15,8 @@ const appRouter = router({
 	events: eventsRouter,
 	emailTemplate: emailTemplateRouter,
 	emailSettings: emailSettingsRouter,
-	appSettings: appSettingsRouter
+	appSettings: appSettingsRouter,
+	email: emailRouter
 });
 
 export default appRouter;

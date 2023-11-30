@@ -80,7 +80,7 @@ const SettingsPageContainer = () => {
 				)
 			},
 			{
-				title: 'Specify the SMT server settings',
+				title: 'Specify the SMTP server settings',
 				subtitle:
 					'Once verified, automatic invitations will be available when events are uploaded',
 				children: <EmailSettingsForm />

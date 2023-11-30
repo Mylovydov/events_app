@@ -1,4 +1,7 @@
-import { TAddEmailTemplateInput } from './emailTemplate.types.js';
+import {
+	TAddEmailTemplateInput,
+	TGetEmailTemplateInput
+} from './emailTemplate.types.js';
 import userService from '../user/user.service.js';
 import { EmailTemplateModel } from './emailTemplates.model.js';
 import { ApiError } from '../../error/index.js';
@@ -29,6 +32,16 @@ class EmailTemplateService {
 		}
 
 		return emailTemplateDb.toJSON();
+	}
+
+	async getEmailTemplate({ emailTemplateId }: TGetEmailTemplateInput) {
+		const emailTemplate = await EmailTemplateModel.findById(emailTemplateId);
+		if (!emailTemplate) {
+			throw ApiError.notFound(
+				`Email template with id: ${emailTemplateId} not found!`
+			);
+		}
+		return emailTemplate.toJSON();
 	}
 }
 

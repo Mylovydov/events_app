@@ -1,7 +1,10 @@
 import { TCreateUserDto, TUpdateUserDto } from './user.types.js';
 import { ApiError } from '../../error/index.js';
 import { tokenService } from '../token/index.js';
-import { emailService, EmailSettingsModel } from '../emailSettings/index.js';
+import {
+	EmailSettingsModel,
+	emailSettingsService
+} from '../emailSettings/index.js';
 import { UserModel } from './user.model.js';
 import { AppSettingsModel, appSettingsService } from '../appSettings/index.js';
 
@@ -16,7 +19,7 @@ class UserService {
 			userId: user._id,
 			isAutoSendEnabled: false
 		});
-		await emailService.addEmailSettings({
+		await emailSettingsService.addEmailSettings({
 			userId: user._id,
 			serviceEmail: '',
 			servicePassword: ''

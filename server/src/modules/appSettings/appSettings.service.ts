@@ -1,4 +1,3 @@
-import { UserModel } from '../user/index.js';
 import { ApiError } from '../../error/index.js';
 import { AppSettingsModel } from './appSettings.model.js';
 import {
@@ -10,7 +9,7 @@ import { defaultAppSettings } from '../../utils/index.js';
 
 class AppSettingsService {
 	async addAppSettings({ userId, ...restAppSettings }: TAddAppSettingsDto) {
-		const user = await UserModel.findById(userId);
+		const user = await userService.getByIdWithoutFlatten(userId);
 		if (!user) {
 			throw ApiError.notFound(`User with id: ${userId} not found!`);
 		}

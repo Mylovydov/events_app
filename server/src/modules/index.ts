@@ -5,3 +5,4 @@ export * from './token/index.js';
 export * from './user/index.js';
 export * from './emailSettings/index.js';
 export * from './appSettings/index.js';
+export * from './email/index.js';
