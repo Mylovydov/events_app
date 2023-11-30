@@ -10,6 +10,7 @@ import { EventModel } from './events.model.js';
 import { ApiError } from '../../error/index.js';
 import papaParse, { ParseConfig } from 'papaparse';
 import { prepareValidationError } from '../../utils/index.js';
+import { QueryOptions } from 'mongoose';
 
 const defaultDirection = 'desc';
 const defaultSortKey = 'startDateTime';
@@ -32,6 +33,10 @@ class EventsService {
 		return await this.uploadEventsToDb(validationResult.events!, userId);
 	}
 
+	async getEventsByUserId(userId: string, opt?: QueryOptions) {
+		return EventModel.find({ userId }, null, opt);
+	}
+
 	async getEvents({
 		sortKey,
 		sortDirection,
@@ -46,13 +51,15 @@ class EventsService {
 		limit = limit || 5;
 		const skip = (page - 1) * limit;
 
-		const events = await EventModel.find({ userId })
-			.sort({
+		const opt = {
+			sort: {
 				[sortKey || defaultSortKey]: sortDirection || defaultDirection
-			})
-			.skip(skip)
-			.limit(limit);
+			},
+			skip,
+			limit
+		};
 
+		const events = await this.getEventsByUserId(userId, opt);
 		const totalEvents = await EventModel.countDocuments();
 
 		return {
@@ -77,14 +84,6 @@ class EventsService {
 		return events.map(event => ({
 			...event,
 			userId
-		}));
-	}
-
-	private prepareFileData(events: TEventsSchema) {
-		return events.map(({ startDateTime, endDateTime, ...restEvent }) => ({
-			...restEvent,
-			startDateTime: new Date(`${startDateTime} UTC`).toISOString(),
-			endDateTime: new Date(`${endDateTime} UTC`).toISOString()
 		}));
 	}
 

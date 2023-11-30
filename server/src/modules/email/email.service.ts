@@ -30,14 +30,7 @@ class EmailService {
 		});
 		const preparedEmailTemplate = this.prepareEmailTemplateToSent({
 			template: emailTemplate.template,
-			event,
-			keys: [
-				'inviteeLastName',
-				'inviteeFirstName',
-				'startDateTime',
-				'endDateTime',
-				'location'
-			]
+			event
 		});
 
 		const transporter =
@@ -51,16 +44,53 @@ class EmailService {
 		});
 	}
 
-	async sendEmailInvitationToUserEvents({ userId }: TSendEmailsInput) {
+	async sendEmailInvitationToEvents({ userId }: TSendEmailsInput) {
 		const user = await userService.getByIdWithoutFlatten(userId);
 		if (!user) {
 			throw ApiError.notFound(`User with id: ${userId} not found!`);
 		}
+
+		const { isSettingsVerified, _id, ...restEmailSettings } =
+			await emailSettingsService.getEmailSettingsById({
+				emailSettingsId: user.emailSettings as string
+			});
+		if (!isSettingsVerified) {
+			throw ApiError.badRequest(`Email settings with id: ${_id} not verified!`);
+		}
+
+		const transporter =
+			emailSettingsService.createTransporter(restEmailSettings);
+		const events = await eventsService.getEventsByUserId(userId);
+		const emailTemplate = await emailTemplateService.getEmailTemplate({
+			emailTemplateId: user.emailTemplate as string
+		});
+
+		const emailPromises = events.map(async event => {
+			const preparedEmailTemplate = this.prepareEmailTemplateToSent({
+				template: emailTemplate.template,
+				event
+			});
+
+			return transporter.sendMail({
+				from: restEmailSettings.serviceEmail,
+				to: event.inviteeEmail,
+				subject: `Dear ${event.inviteeFirstName}, we invite you to the event!`,
+				html: preparedEmailTemplate
+			});
+		});
+
+		await Promise.all(emailPromises);
 	}
 
 	private prepareEmailTemplateToSent({
 		template,
-		keys = [],
+		keys = [
+			'inviteeLastName',
+			'inviteeFirstName',
+			'startDateTime',
+			'endDateTime',
+			'location'
+		],
 		event
 	}: TPrepareEmailTemplateToSentParams) {
 		let preparedTemplate = template;

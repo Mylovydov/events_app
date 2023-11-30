@@ -1,14 +1,18 @@
 import { publicProcedure } from '../../trpc/index.js';
-import { sendEmailInput, sendEmailOutput } from './email.dto.js';
+import {
+	sendEmailInput,
+	sendEmailOutput,
+	sendEmailsInput
+} from './email.dto.js';
 
 const emailProcedures = {
 	sendEmailInvitationToEvent: publicProcedure
 		.meta({
 			openapi: {
 				method: 'POST',
-				path: '/email/send-email-invitation',
+				path: '/email/send-email',
 				tags: ['email'],
-				summary: 'Send email',
+				summary: 'Send email invitation to event',
 				protect: true,
 				example: {
 					request: {
@@ -23,6 +27,28 @@ const emailProcedures = {
 			}
 		})
 		.input(sendEmailInput)
+		.output(sendEmailOutput),
+
+	sendEmailInvitationToEvents: publicProcedure
+		.meta({
+			openapi: {
+				method: 'POST',
+				path: '/email/send-emails',
+				tags: ['email'],
+				summary: 'Send email invitation to events',
+				protect: true,
+				example: {
+					request: {
+						userId: '5fe3dd3c-fd7b-4976-9692-1702878c68c4'
+					},
+					response: {
+						message: 'Emails successfully sent!',
+						data: {}
+					}
+				}
+			}
+		})
+		.input(sendEmailsInput)
 		.output(sendEmailOutput)
 };
 

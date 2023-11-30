@@ -8,6 +8,15 @@ const emailController = {
 				message: 'Email successfully sent!',
 				data: {}
 			};
+		}),
+
+	sendEmailInvitationToEvents:
+		emailProcedures.sendEmailInvitationToEvents.mutation(async ({ input }) => {
+			await emailService.sendEmailInvitationToEvents(input);
+			return {
+				message: 'Email successfully sent!',
+				data: {}
+			};
 		})
 };
 
