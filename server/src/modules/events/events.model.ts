@@ -23,10 +23,10 @@ class Event {
 	@prop({ required: true, type: String, unique: false })
 	public inviteeEmail!: string;
 
-	@prop({ required: true, type: Date })
+	@prop({ required: true, type: String })
 	public startDateTime!: string;
 
-	@prop({ required: true, type: Date })
+	@prop({ required: true, type: String })
 	public endDateTime!: string;
 
 	@prop({ required: true, type: String })

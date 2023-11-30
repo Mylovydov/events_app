@@ -9,7 +9,6 @@ import { userService } from '../user/index.js';
 import { ApiError } from '../../error/index.js';
 import { eventsService } from '../events/index.js';
 import { emailTemplateService } from '../emailTemplate/index.js';
-import { format, parseISO } from 'date-fns';
 
 class EmailService {
 	private transporter: Transporter<SMTPTransport.SentMessageInfo>;
@@ -71,28 +70,11 @@ class EmailService {
 		event
 	}: TPrepareEmailTemplateToSentParams) {
 		let preparedTemplate = template;
-		const dateFormat = 'dd.MM.yyyy HH:mm';
-
 		keys.forEach(key => {
-			switch (key) {
-				case 'startDateTime':
-					preparedTemplate = preparedTemplate.replace(
-						new RegExp(`{{${key}}}`, 'g'),
-						format(parseISO(event[key]), dateFormat)
-					);
-					break;
-				case 'endDateTime':
-					preparedTemplate = preparedTemplate.replace(
-						new RegExp(`{{${key}}}`, 'g'),
-						format(parseISO(event[key]), dateFormat)
-					);
-					break;
-				default:
-					preparedTemplate = preparedTemplate.replace(
-						new RegExp(`{{${key}}}`, 'g'),
-						event[key]
-					);
-			}
+			preparedTemplate = preparedTemplate.replace(
+				new RegExp(`{{${key}}}`, 'g'),
+				event[key as keyof typeof event]
+			);
 		});
 		return preparedTemplate;
 	}

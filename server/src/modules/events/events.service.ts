@@ -23,8 +23,8 @@ class EventsService {
 			throw ApiError.badRequest('Invalid CSV file');
 		}
 
-		const preparedEvents = this.prepareFileData(events);
-		const validationResult = this.validateEventsBySchema(preparedEvents);
+		// const preparedEvents = this.prepareFileData(events);
+		const validationResult = this.validateEventsBySchema(events);
 		if (validationResult.error) {
 			throw ApiError.badRequest(validationResult.error);
 		}
@@ -104,7 +104,6 @@ class EventsService {
 
 	private validateEventsBySchema(events: TEventsSchema): TValidateCSVResult {
 		const parseResult = eventsSchema.safeParse(events);
-
 		if (parseResult.success) {
 			return {
 				events: parseResult.data,

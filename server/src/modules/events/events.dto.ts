@@ -20,8 +20,8 @@ export const mainEventSchema = z.object({
 		.min(5, { message: minLengthErrorMessage })
 		.email('Invalid emailSettings')
 		.max(255, { message: maxLengthErrorMessage }),
-	startDateTime: z.string().datetime(),
-	endDateTime: z.string().datetime(),
+	startDateTime: z.string(),
+	endDateTime: z.string(),
 	location: z
 		.string()
 		.min(3, { message: minLengthErrorMessage })
@@ -36,14 +36,13 @@ export const eventSchemaDb = mainEventSchema
 		_id: z.string().uuid(),
 		userId: z.optional(z.string().uuid().or(mainUserSchema)),
 		isEmailSend: z.boolean(),
-		endDateTime: z.any(),
+		endDateTime: z.string(),
+		startDateTime: z.string(),
 		createdAt: z.any(),
-		updatedAt: z.any(),
-		startDateTime: z.any()
-		// startDateTime: z.date(),
+		updatedAt: z.any()
 	});
 
-export const eventsSchema = z.array(mainEventSchema);
+export const eventsSchema = z.array(mainEventSchema.strict());
 export const eventsSchemaDb = z.array(eventSchemaDb);
 
 export const createEventsInput = z.object({
