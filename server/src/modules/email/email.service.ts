@@ -15,7 +15,9 @@ import getSubjectText from '../../utils/getSubjectText.js';
 
 export type TSendEmail = {
 	transporter: Transporter<SMTPTransport.SentMessageInfo>;
-} & Mail.Options;
+} & Omit<Mail.Options, 'to'> & {
+		to: string;
+	};
 
 class EmailService {
 	async sendEmailInvitationToEvent({ eventId, userId }: TSendEmailInput) {
@@ -49,7 +51,13 @@ class EmailService {
 			from: restEmailSettings.serviceEmail,
 			to: event.inviteeEmail,
 			subject: getSubjectText(event.inviteeFirstName),
-			html: preparedEmailTemplate
+			html: preparedEmailTemplate,
+			messageId: event._id
+		});
+
+		await eventsService.changeEmailSentStatus({
+			eventId,
+			isEmailSend: true
 		});
 	}
 
@@ -74,29 +82,44 @@ class EmailService {
 			emailTemplateId: user.emailTemplate as string
 		});
 
-		const emailPromises = events.map(async event => {
-			const preparedEmailTemplate = this.prepareEmailTemplateToSent({
-				template: emailTemplate.template,
-				event
-			});
+		for (const event of events) {
+			try {
+				const preparedEmailTemplate = this.prepareEmailTemplateToSent({
+					template: emailTemplate.template,
+					event
+				});
 
-			return this.sendEmail({
-				transporter,
-				from: restEmailSettings.serviceEmail,
-				to: event.inviteeEmail,
-				subject: getSubjectText(event.inviteeFirstName),
-				html: preparedEmailTemplate
-			});
-		});
+				await this.sendEmail({
+					transporter,
+					from: restEmailSettings.serviceEmail,
+					to: event.inviteeEmail,
+					subject: getSubjectText(event.inviteeFirstName),
+					html: preparedEmailTemplate,
+					messageId: event._id
+				});
 
-		await Promise.all(emailPromises);
+				await eventsService.changeEmailSentStatus({
+					eventId: event._id,
+					isEmailSend: true
+				});
+			} catch (err) {
+				// TODO: add logging
+				console.log(err);
+			}
+		}
 	}
 
 	private async sendEmail({ transporter, ...restOpt }: TSendEmail) {
-		return transporter.sendMail({
+		const { rejected } = await transporter.sendMail({
 			replyTo: restOpt.from,
 			...restOpt
 		});
+
+		if (rejected.includes(restOpt.to)) {
+			throw ApiError.badRequest(
+				`The invitation for the ${restOpt.to} address has not been delivered!`
+			);
+		}
 	}
 
 	private prepareEmailTemplateToSent({

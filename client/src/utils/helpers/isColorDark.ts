@@ -3,7 +3,6 @@ const isColorDark = (color?: string) => {
 		return false;
 	}
 
-	// Убираем символ #, если он есть
 	color = color.replace('#', '');
 
 	const r = parseInt(color.substring(0, 2), 16);

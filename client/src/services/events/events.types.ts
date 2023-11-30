@@ -5,6 +5,10 @@ export type TCreateEventsOutput = inferProcedureOutput<
 	TAppRouter['events']['create']
 >;
 
+export type TGetEventOutput = inferProcedureOutput<
+	TAppRouter['events']['getEvent']
+>;
+
 export type TCreateEventsInput = inferProcedureInput<
 	TAppRouter['events']['create']
 >;
@@ -21,4 +25,4 @@ export type TGetEventsOutput = inferProcedureOutput<
 	TAppRouter['events']['getEvents']
 >;
 
-export type TEvent = TCreateEventsOutput['data'][0];
+export type TEvent = TGetEventOutput['data'];

@@ -62,7 +62,7 @@
     position: sticky;
     z-index: 10;
     right: -.1rem;
-    filter: drop-shadow(-0.1rem 0.7rem 2px rgba(0, 0, 0, 0.1));
+    filter: drop-shadow(-0.1rem 0.4rem 5px rgba(0, 0, 0, 0.1));
 }
 
 .baseTableEmpty {

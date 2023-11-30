@@ -79,3 +79,12 @@ export const getEventInput = z.object({
 export const getEventOutput = baseOutputSchema.extend({
 	data: eventSchemaDb
 });
+
+export const changeEmailSentStatusInput = z.object({
+	eventId: eventSchemaDb.shape._id,
+	isEmailSend: eventSchemaDb.shape.isEmailSend
+});
+
+export const changeEmailSentStatusOutput = baseOutputSchema.extend({
+	data: eventSchemaDb
+});

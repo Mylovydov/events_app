@@ -17,10 +17,12 @@ const EventsTableRow: FC<TEventsTableRowProps> = ({
 	onSendButtonClick
 }) => {
 	const rowsKeys = columns.map(c => c.accessor);
-	const style = {
-		backgroundColor: highlightColor,
+	const rowStyle = {
+		backgroundColor: highlightColor || '',
 		color: isColorDark(highlightColor) ? '#fff' : '#0C1E36'
 	};
+
+	const style = item.isEmailSend ? {} : rowStyle;
 
 	const tableRowsMarkup = (rowsKeys as TEventKeys).map(key => {
 		const rowValue = prepareRowValue(item[key], key);

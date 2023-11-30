@@ -1,4 +1,5 @@
 import {
+	TChangeEmailSentStatusInput,
 	TCreateFileDto,
 	TEventsSchema,
 	TGetEventInput,
@@ -24,7 +25,6 @@ class EventsService {
 			throw ApiError.badRequest('Invalid CSV file');
 		}
 
-		// const preparedEvents = this.prepareFileData(events);
 		const validationResult = this.validateEventsBySchema(events);
 		if (validationResult.error) {
 			throw ApiError.badRequest(validationResult.error);
@@ -76,6 +76,21 @@ class EventsService {
 		if (!event) {
 			throw ApiError.notFound(`Event with id: ${eventId} not found!`);
 		}
+
+		return event.toJSON();
+	}
+
+	async changeEmailSentStatus({
+		eventId,
+		isEmailSend
+	}: TChangeEmailSentStatusInput) {
+		const event = await EventModel.findById(eventId);
+		if (!event) {
+			throw ApiError.notFound(`Event with id: ${eventId} not found!`);
+		}
+
+		event.isEmailSend = isEmailSend;
+		await event.save();
 
 		return event.toJSON();
 	}
