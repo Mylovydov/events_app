@@ -8,6 +8,14 @@ import { userService } from '../user/index.js';
 import { ApiError } from '../../error/index.js';
 import { eventsService } from '../events/index.js';
 import { emailTemplateService } from '../emailTemplate/index.js';
+import { Transporter } from 'nodemailer';
+import SMTPTransport from 'nodemailer/lib/smtp-transport/index.js';
+import Mail from 'nodemailer/lib/mailer/index.js';
+import getSubjectText from '../../utils/getSubjectText.js';
+
+export type TSendEmail = {
+	transporter: Transporter<SMTPTransport.SentMessageInfo>;
+} & Mail.Options;
 
 class EmailService {
 	async sendEmailInvitationToEvent({ eventId, userId }: TSendEmailInput) {
@@ -36,10 +44,11 @@ class EmailService {
 		const transporter =
 			emailSettingsService.createTransporter(restEmailSettings);
 
-		await transporter.sendMail({
+		await this.sendEmail({
+			transporter,
 			from: restEmailSettings.serviceEmail,
 			to: event.inviteeEmail,
-			subject: `Dear ${event.inviteeFirstName}, we invite you to the event!`,
+			subject: getSubjectText(event.inviteeFirstName),
 			html: preparedEmailTemplate
 		});
 	}
@@ -71,15 +80,23 @@ class EmailService {
 				event
 			});
 
-			return transporter.sendMail({
+			return this.sendEmail({
+				transporter,
 				from: restEmailSettings.serviceEmail,
 				to: event.inviteeEmail,
-				subject: `Dear ${event.inviteeFirstName}, we invite you to the event!`,
+				subject: getSubjectText(event.inviteeFirstName),
 				html: preparedEmailTemplate
 			});
 		});
 
 		await Promise.all(emailPromises);
+	}
+
+	private async sendEmail({ transporter, ...restOpt }: TSendEmail) {
+		return transporter.sendMail({
+			replyTo: restOpt.from,
+			...restOpt
+		});
 	}
 
 	private prepareEmailTemplateToSent({
