@@ -12,12 +12,16 @@ import { ApiError } from '../../error/index.js';
 import papaParse, { ParseConfig } from 'papaparse';
 import { prepareValidationError } from '../../utils/index.js';
 import { QueryOptions } from 'mongoose';
+import { userService } from '../user/index.js';
+import isStringType from '../utils/isStringType.js';
+import { emailService } from '../email/index.js';
 
 const defaultDirection = 'desc';
 const defaultSortKey = 'startDateTime';
 
 class EventsService {
 	async create({ userId, file }: TCreateFileDto) {
+		const { appSettings } = await userService.getById(userId);
 		const csvString = this.getCSVDataFromBase64(file);
 
 		const { errors, data: events } = this.parseCSV(csvString);
@@ -30,7 +34,16 @@ class EventsService {
 			throw ApiError.badRequest(validationResult.error);
 		}
 
-		return await this.uploadEventsToDb(validationResult.events!, userId);
+		const uploadedEvents = await this.uploadEventsToDb(
+			validationResult.events!,
+			userId
+		);
+
+		if (!isStringType(appSettings) && appSettings.isAutoSendEnabled) {
+			await emailService.sendInvitationToEvents({ userId });
+		}
+
+		return uploadedEvents;
 	}
 
 	async getEventsByUserId(userId: string, opt?: QueryOptions) {

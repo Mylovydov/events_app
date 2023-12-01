@@ -12,6 +12,7 @@ import { Transporter } from 'nodemailer';
 import SMTPTransport from 'nodemailer/lib/smtp-transport/index.js';
 import Mail from 'nodemailer/lib/mailer/index.js';
 import getSubjectText from '../../utils/getSubjectText.js';
+import getUnsentEvents from '../../utils/getUnsentEvents.js';
 
 export type TSendEmail = {
 	transporter: Transporter<SMTPTransport.SentMessageInfo>;
@@ -58,7 +59,10 @@ class EmailService {
 		});
 	}
 
-	async sendInvitationToEvents({ userId }: TSendEmailsInput) {
+	async sendInvitationToEvents(
+		{ userId }: TSendEmailsInput,
+		isUnsentOnly = true
+	) {
 		const user = await userService.getByIdWithoutFlatten(userId);
 
 		const { isSettingsVerified, _id, ...restEmailSettings } =
@@ -71,7 +75,11 @@ class EmailService {
 
 		const transporter =
 			emailSettingsService.createTransporter(restEmailSettings);
-		const events = await eventsService.getEventsByUserId(userId);
+		let events = await eventsService.getEventsByUserId(userId);
+		if (isUnsentOnly) {
+			events = getUnsentEvents(events);
+		}
+
 		const emailTemplate = await emailTemplateService.getEmailTemplate({
 			emailTemplateId: user.emailTemplate as string
 		});
