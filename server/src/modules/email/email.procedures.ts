@@ -6,11 +6,11 @@ import {
 } from './email.dto.js';
 
 const emailProcedures = {
-	sendEmailInvitationToEvent: publicProcedure
+	sendInvitationToEvent: publicProcedure
 		.meta({
 			openapi: {
 				method: 'POST',
-				path: '/email/send-email',
+				path: '/email/send-invitation',
 				tags: ['email'],
 				summary: 'Send email invitation to event',
 				protect: true,
@@ -29,11 +29,11 @@ const emailProcedures = {
 		.input(sendEmailInput)
 		.output(sendEmailOutput),
 
-	sendEmailInvitationToEvents: publicProcedure
+	sendInvitationToEvents: publicProcedure
 		.meta({
 			openapi: {
 				method: 'POST',
-				path: '/email/send-emails',
+				path: '/email/send-invitations',
 				tags: ['email'],
 				summary: 'Send email invitation to events',
 				protect: true,

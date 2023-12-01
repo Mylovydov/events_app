@@ -20,11 +20,8 @@ export type TSendEmail = {
 	};
 
 class EmailService {
-	async sendEmailInvitationToEvent({ eventId, userId }: TSendEmailInput) {
+	async sendInvitationToEvent({ eventId, userId }: TSendEmailInput) {
 		const user = await userService.getByIdWithoutFlatten(userId);
-		if (!user) {
-			throw ApiError.notFound(`User with id: ${userId} not found!`);
-		}
 
 		const { isSettingsVerified, _id, ...restEmailSettings } =
 			await emailSettingsService.getEmailSettingsById({
@@ -61,11 +58,8 @@ class EmailService {
 		});
 	}
 
-	async sendEmailInvitationToEvents({ userId }: TSendEmailsInput) {
+	async sendInvitationToEvents({ userId }: TSendEmailsInput) {
 		const user = await userService.getByIdWithoutFlatten(userId);
-		if (!user) {
-			throw ApiError.notFound(`User with id: ${userId} not found!`);
-		}
 
 		const { isSettingsVerified, _id, ...restEmailSettings } =
 			await emailSettingsService.getEmailSettingsById({

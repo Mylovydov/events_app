@@ -94,8 +94,12 @@ class UserService {
 		return user.toJSON();
 	}
 
-	async getByIdWithoutFlatten(id: string) {
-		return UserModel.findById(id);
+	async getByIdWithoutFlatten(userId: string) {
+		const user = await UserModel.findById(userId);
+		if (!user) {
+			throw ApiError.notFound(`User with id: ${userId} not found!`);
+		}
+		return user;
 	}
 
 	async toggleAppSettingsAutoSend(

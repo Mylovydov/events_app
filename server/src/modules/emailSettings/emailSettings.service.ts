@@ -29,9 +29,6 @@ class EmailSettingsService {
 		...restEmailSettings
 	}: TAddEmailSettingsInputSchema) {
 		const user = await userService.getByIdWithoutFlatten(userId);
-		if (!user) {
-			throw ApiError.notFound(`User with id: ${userId} not found!`);
-		}
 
 		if (restEmailSettings.servicePassword && restEmailSettings.serviceEmail) {
 			await this.changeSettingsStatus({
@@ -105,9 +102,6 @@ class EmailSettingsService {
 
 	async resetEmailSettings({ userId }: TResetEmailSettingsDto) {
 		const user = await userService.getByIdWithoutFlatten(userId);
-		if (!user) {
-			throw ApiError.notFound(`User with id: ${userId} not found!`);
-		}
 
 		const emailSettingsDb = await this.setDefaultEmailSettings(
 			user.emailSettings as string

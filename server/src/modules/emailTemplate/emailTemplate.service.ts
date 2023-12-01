@@ -13,10 +13,6 @@ class EmailTemplateService {
 	}: TAddEmailTemplateInput) {
 		const user = await userService.getByIdWithoutFlatten(userId);
 
-		if (!user) {
-			throw ApiError.notFound(`User with id: ${userId} not found!`);
-		}
-
 		let emailTemplateDb = await EmailTemplateModel.findByIdAndUpdate(
 			user.emailTemplate,
 			{ ...restEmailTemplate },

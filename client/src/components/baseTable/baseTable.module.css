@@ -7,7 +7,6 @@
     max-width: 100%;
     overflow-x: auto;
     flex: 1 1 auto;
-    min-height: 30rem;
     display: flex;
     border-radius: 1rem;
     flex-direction: column;
@@ -69,5 +68,6 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    min-height: 30rem;
     flex: 1 1 auto;
 }
