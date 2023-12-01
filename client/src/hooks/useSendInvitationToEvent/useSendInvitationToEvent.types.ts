@@ -1,6 +1,6 @@
-import { TSendInvitationToEventInput } from '@/services';
+import { TResendInvitationToEventsInput } from '@/services';
 
-export type TUseSendInvitationToEventReturn = {
-	sendInvitationToEvent: (args: TSendInvitationToEventInput) => void;
-	isInvitationToEventSending: boolean;
+export type TUseResendAllInvitationToEventReturn = {
+	resendAllInvitationToEvent: (args: TResendInvitationToEventsInput) => void;
+	isInvitationToAllEventResending: boolean;
 };

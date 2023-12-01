@@ -1,6 +1,8 @@
 import { trpcClient } from '@/trpc';
 import {
 	baseApi,
+	TResendInvitationToEventsInput,
+	TResendInvitationToEventsOutput,
 	TSendInvitationToEventInput,
 	TSendInvitationToEventOutput,
 	TSendInvitationToEventsInput,
@@ -26,11 +28,21 @@ export const emailApi = baseApi.injectEndpoints({
 			query: arg => trpcClient.email.sendInvitationToEvents.mutate(arg),
 			transformErrorResponse: ({ data }) => data,
 			invalidatesTags: [EApiTags.EVENTS]
+		}),
+
+		resendAllInvitationToEvents: builder.mutation<
+			TResendInvitationToEventsOutput,
+			TResendInvitationToEventsInput
+		>({
+			query: arg => trpcClient.email.resendAllInvitationToEvents.mutate(arg),
+			transformErrorResponse: ({ data }) => data,
+			invalidatesTags: [EApiTags.EVENTS]
 		})
 	})
 });
 
 export const {
 	useSendInvitationToEventMutation,
-	useSendInvitationToEventsMutation
+	useSendInvitationToEventsMutation,
+	useResendAllInvitationToEventsMutation
 } = emailApi;

@@ -1,5 +1,10 @@
 import { FC } from 'react';
-import { BaseTable, Pagination, TEventsTableProps } from '@/components';
+import {
+	BaseTable,
+	EventsActions,
+	Pagination,
+	TEventsTableProps
+} from '@/components';
 
 import styles from './eventsTable.module.css';
 
@@ -12,10 +17,18 @@ const EventsTable: FC<TEventsTableProps> = ({
 	sortDirection,
 	isLastColumnSticky,
 	emptyLabel,
+	actionItems,
 	...paginationProps
 }) => {
+	const eventActionsMarkup = !!actionItems.length && (
+		<div className={styles.eventsTableHeader}>
+			<EventsActions actionItems={actionItems} />
+		</div>
+	);
+
 	return (
 		<div className={styles.eventsTable}>
+			{eventActionsMarkup}
 			<div className={styles.eventsTableBody}>
 				<BaseTable
 					{...{
@@ -28,7 +41,6 @@ const EventsTable: FC<TEventsTableProps> = ({
 						isLastColumnSticky,
 						emptyLabel
 					}}
-					isLastColumnSticky={true}
 				/>
 			</div>
 			<div className={styles.eventsTableFooter}>

@@ -14,3 +14,10 @@ export type TSendInvitationToEventsInput = inferProcedureInput<
 export type TSendInvitationToEventsOutput = inferProcedureOutput<
 	TAppRouter['email']['sendInvitationToEvents']
 >;
+
+export type TResendInvitationToEventsInput = inferProcedureInput<
+	TAppRouter['email']['resendAllInvitationToEvents']
+>;
+export type TResendInvitationToEventsOutput = inferProcedureOutput<
+	TAppRouter['email']['resendAllInvitationToEvents']
+>;

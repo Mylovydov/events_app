@@ -11,7 +11,7 @@ const EventsPage: FC<TEventsPageProps> = ({
 }) => (
 	<section className={styles.eventsPage}>
 		<div className={styles.eventsPageHeader}>
-			<PageHeader title={title} subtitle={subtitle} />
+			<PageHeader {...{ title, subtitle }} />
 		</div>
 		<div className={styles.eventsPageBody}>
 			<EventsTable {...tableProps} />
