@@ -5,5 +5,7 @@ export { default as formatDate } from './formatDate';
 export { default as isStringType } from './isStringType';
 export { default as isTErrorResponse } from './isTErrorResponse';
 export { default as getFormValues } from './getFormValues';
+export { default as setTokenToLS } from './setTokenToLS';
+export { default as getTokenFromLS } from './getTokenFromLS';
 export { default as isColorDark } from './isColorDark';
 export * from './validateEvents';

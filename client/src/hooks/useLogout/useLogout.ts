@@ -11,7 +11,7 @@ const useLogout = (): TUseLogoutReturn => {
 			logoutTrigger(args)
 				.unwrap()
 				.then(data => successNotify(data.message))
-				.catch(err => errorNotify(err.message));
+				.catch(({ message, zodError }) => errorNotify(zodError || message));
 		},
 		[logoutTrigger, successNotify, errorNotify]
 	);

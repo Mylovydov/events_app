@@ -3,8 +3,9 @@ import { EApiTags } from '@/utils';
 
 const baseApi = createApi({
 	reducerPath: 'baseApi',
-	baseQuery: (trpcResult: Promise<unknown>) =>
-		trpcResult.then(data => ({ data })).catch(error => ({ error })),
+	baseQuery: (trpcResult: Promise<unknown>) => {
+		return trpcResult.then(data => ({ data })).catch(error => ({ error }));
+	},
 	tagTypes: [EApiTags.EVENTS, EApiTags.USERS, EApiTags.EMAIL_SETTINGS],
 	endpoints: () => ({})
 });

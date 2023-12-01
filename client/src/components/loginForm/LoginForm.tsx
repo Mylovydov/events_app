@@ -5,18 +5,18 @@ import {
 	PasswordField,
 	TextField,
 	TLoginFormProps,
+	TLoginFormValues,
 	Typography
 } from '@/components';
 import { useForm } from 'react-hook-form';
 import { FC } from 'react';
 import { requiredFieldMessage } from '@/utils';
 
-export type TLoginFormValues = {
-	email: string;
-	password: string;
-};
-
-const LoginForm: FC<TLoginFormProps> = ({ defaultValues, onSubmit }) => {
+const LoginForm: FC<TLoginFormProps> = ({
+	defaultValues,
+	onSubmit,
+	isLoading
+}) => {
 	const {
 		formState: { errors },
 		handleSubmit,
@@ -72,7 +72,7 @@ const LoginForm: FC<TLoginFormProps> = ({ defaultValues, onSubmit }) => {
 					/>
 				</div>
 				<div className={styles.loginFormFooter}>
-					<Button label="Sing in" />
+					<Button label="Sing in" disabled={isLoading} />
 				</div>
 			</form>
 		</Card>

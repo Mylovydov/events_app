@@ -18,7 +18,7 @@ const useCreateEvents = () => {
 					successNotify(data.message);
 					navigate(EVENTS_PATH);
 				})
-				.catch(err => errorNotify(err.message));
+				.catch(({ message, zodError }) => errorNotify(zodError || message));
 		},
 		[createEventsTrigger, successNotify, navigate, errorNotify]
 	);

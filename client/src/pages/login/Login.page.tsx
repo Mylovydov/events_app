@@ -1,12 +1,10 @@
 import styles from './login.page.module.css';
-import { LoginForm, Logo } from '@/components';
+import { LoginForm, Logo, TLoginFormProps } from '@/components';
+import { FC } from 'react';
 
-const loginFormDefaultValues = {
-	email: '',
-	password: ''
-};
+export type TLoginPageProps = TLoginFormProps;
 
-const LoginPage = () => {
+const LoginPage: FC<TLoginPageProps> = props => {
 	return (
 		<div className={styles.loginPage}>
 			<div className={styles.loginPageWrapper}>
@@ -14,7 +12,7 @@ const LoginPage = () => {
 					<Logo />
 				</div>
 				<div className={styles.loginPageBody}>
-					<LoginForm defaultValues={loginFormDefaultValues} />
+					<LoginForm {...props} />
 				</div>
 			</div>
 		</div>

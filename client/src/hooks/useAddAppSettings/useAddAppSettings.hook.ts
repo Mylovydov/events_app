@@ -14,7 +14,7 @@ const useAddAppSettings = () => {
 				.then(data => {
 					successNotify(data.message);
 				})
-				.catch(err => errorNotify(err.message));
+				.catch(({ message, zodError }) => errorNotify(zodError || message));
 		},
 		[addAppSettingsTrigger, successNotify, errorNotify]
 	);

@@ -14,7 +14,7 @@ const useAddEmailSettings = (): TUseAddEmailSettingsReturn => {
 		(args: TAddEmailSettingsInput) => {
 			addEmailSettingsTrigger(args)
 				.unwrap()
-				.catch(err => errorNotify(err.message));
+				.catch(({ message, zodError }) => errorNotify(zodError || message));
 		},
 		[addEmailSettingsTrigger, errorNotify]
 	);

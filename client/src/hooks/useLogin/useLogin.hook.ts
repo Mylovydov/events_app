@@ -11,7 +11,7 @@ const useLogin = (): TUseLoginReturn => {
 			loginTrigger(args)
 				.unwrap()
 				.then(data => successNotify(data.message))
-				.catch(err => errorNotify(err.message));
+				.catch(({ message, zodError }) => errorNotify(zodError || message));
 		},
 		[loginTrigger, successNotify, errorNotify]
 	);

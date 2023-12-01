@@ -6,6 +6,7 @@ const isDevMode = process.env.NODE_ENV === 'development';
 const links = [
 	httpBatchLink({
 		url: `${import.meta.env.VITE_SERVER_URL}/api/trpc`
+		// headers: () => {}
 	})
 ];
 

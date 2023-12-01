@@ -1,5 +1,7 @@
 import { TBaseSortDirection, TEventUnionKeys } from '@/components';
 
+export const accessTokenName = 'eventAppToken';
+
 export enum EApiTags {
 	USERS = 'Users',
 	EVENTS = 'Events',

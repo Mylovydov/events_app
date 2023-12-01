@@ -11,7 +11,7 @@ const useRegister = (): TUseRegisterReturn => {
 			registerTrigger(args)
 				.unwrap()
 				.then(data => successNotify(data.message))
-				.catch(err => errorNotify(err.message));
+				.catch(({ message, zodError }) => errorNotify(zodError || message));
 		},
 		[registerTrigger, successNotify, errorNotify]
 	);
