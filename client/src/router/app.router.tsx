@@ -5,6 +5,7 @@ import { AppLayout } from '@/layouts';
 import {
 	EmailLayoutPageContainer,
 	EventsPageContainer,
+	LoginPageContainer,
 	SettingsPageContainer,
 	UploadPageContainer
 } from '@/containers';
@@ -12,10 +13,16 @@ import {
 	EMAIL_LAYOUT_PATH,
 	EVENTS_PATH,
 	HOME_PATH,
+	LOGIN_PATH,
 	SETTINGS_PATH
 } from '@/router';
 
-const appRouter = createBrowserRouter([
+const routes = [
+	{
+		path: LOGIN_PATH,
+		element: <LoginPageContainer />,
+		errorElement: <ErrorPage />
+	},
 	{
 		path: HOME_PATH,
 		element: <AppLayout />,
@@ -44,6 +51,8 @@ const appRouter = createBrowserRouter([
 			}
 		]
 	}
-]);
+];
+
+const appRouter = createBrowserRouter(routes);
 
 export default appRouter;

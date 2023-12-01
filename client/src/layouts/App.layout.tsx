@@ -6,7 +6,7 @@ import {
 	HOME_PATH,
 	SETTINGS_PATH
 } from '@/router/constants.ts';
-import { Header, Sidebar, TNavItemProps } from '@/components';
+import { AppContainer, Header, Sidebar, TNavItemProps } from '@/components';
 
 const navList: TNavItemProps[] = [
 	{ label: 'Home', to: HOME_PATH, icon: 'house' },
@@ -30,9 +30,9 @@ const AppLayout = () => {
 					<Header username="Denys" />
 				</header>
 				<main className={styles.appBody}>
-					<div className={styles.appContainer}>
+					<AppContainer>
 						<Outlet />
-					</div>
+					</AppContainer>
 				</main>
 			</div>
 		</div>

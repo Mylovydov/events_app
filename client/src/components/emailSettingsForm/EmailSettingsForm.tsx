@@ -1,13 +1,16 @@
 import styles from './emailSettingsForm.module.css';
-import { FC, useState } from 'react';
-import { TEmailSettingsFormProps, TextField } from '@/components';
+import { FC } from 'react';
+import {
+	PasswordField,
+	TEmailSettingsFormProps,
+	TextField
+} from '@/components';
 import { useFormContext } from 'react-hook-form';
 import VerifiedCheckmark from '../verifiedCheckmark/VerifiedCheckmark.tsx';
 import { TSettingsFormValues } from '@/containers';
+import { requiredFieldMessage } from '@/utils';
 
 const EmailSettingsForm: FC<TEmailSettingsFormProps> = () => {
-	const [isShowPassword, setIsShowPassword] = useState(false);
-
 	const {
 		register,
 		formState: { errors },
@@ -36,7 +39,7 @@ const EmailSettingsForm: FC<TEmailSettingsFormProps> = () => {
 					/>
 				</div>
 				<div className={styles.emailSettingsFormItem}>
-					<TextField
+					<PasswordField
 						labelProps={{
 							label: 'Service Password',
 							required: true
@@ -45,11 +48,8 @@ const EmailSettingsForm: FC<TEmailSettingsFormProps> = () => {
 							message: errors.servicePassword?.message as string
 						}}
 						fullWidth
-						type={isShowPassword ? 'text' : 'password'}
-						icon={isShowPassword ? 'eye-slash' : 'eye'}
-						onIconClick={() => setIsShowPassword(prev => !prev)}
 						{...register('servicePassword', {
-							required: { value: true, message: 'Required field!' }
+							required: { value: true, message: requiredFieldMessage }
 						})}
 					/>
 				</div>
@@ -64,7 +64,7 @@ const EmailSettingsForm: FC<TEmailSettingsFormProps> = () => {
 						}}
 						fullWidth
 						{...register('serviceEmail', {
-							required: { value: true, message: 'Required field!' }
+							required: { value: true, message: requiredFieldMessage }
 						})}
 					/>
 				</div>

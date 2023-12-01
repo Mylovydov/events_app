@@ -17,3 +17,5 @@ export const defaultDirection: TBaseSortDirection = 'desc';
 export const defaultSortKey: TEventUnionKeys = 'startDateTime';
 
 export const defaultHighlightColor = '#ebe8ff';
+
+export const requiredFieldMessage = 'This field is required!';

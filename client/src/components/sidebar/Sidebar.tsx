@@ -9,7 +9,7 @@ const Sidebar: FC<TSidebarProps> = ({
 }) => (
 	<div className={styles.sidebar}>
 		<div className={styles.sidebarHeader}>
-			<AppLogo />
+			<AppLogo logoText="Events App" />
 		</div>
 		<div className={styles.sidebarBody}>
 			<Navbar items={navList} />

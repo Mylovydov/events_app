@@ -42,10 +42,10 @@
     border: 1px solid var(--main-purple-dark-color);
 }
 
-.medium {
+.large {
     padding: 1.5rem 4rem;
 }
 
-.small {
+.medium {
     padding: 1rem 2rem;
 }
