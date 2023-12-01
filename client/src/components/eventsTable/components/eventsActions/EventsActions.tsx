@@ -6,7 +6,7 @@ const EventsActions: FC<TEventsActionsProps> = memo(({ actionItems }) => (
 	<ul className={styles.eventsActions}>
 		{actionItems.map((props, i) => (
 			<li className={styles.eventsActionsItem} key={i}>
-				<Button {...props} />
+				<Button {...props} size="medium" />
 			</li>
 		))}
 	</ul>

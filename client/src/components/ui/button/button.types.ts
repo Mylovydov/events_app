@@ -6,6 +6,7 @@ export type TButtonProps = {
 	disabled?: boolean;
 	fullWidth?: boolean;
 	variant?: 'filled' | 'outlined';
+	size?: 'medium' | 'large';
 } & React.DetailedHTMLProps<
 	React.ButtonHTMLAttributes<HTMLButtonElement>,
 	HTMLButtonElement
