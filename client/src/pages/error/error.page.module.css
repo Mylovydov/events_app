@@ -1,2 +1,19 @@
-.root {
+.errorPage {
+    display: flex;
+    flex-direction: column;
+}
+
+.errorImg {
+    flex: 0 1 40rem;
+    display: flex;
+}
+
+.errorImg svg {
+    max-width: 50rem;
+    width: 100%;
+    height: auto;
+    margin: 0 auto;
+}
+.errorBody {
+    flex: 1 1 auto;
 }
