@@ -12,17 +12,17 @@ import { Transporter } from 'nodemailer';
 import SMTPTransport from 'nodemailer/lib/smtp-transport/index.js';
 import Mail from 'nodemailer/lib/mailer/index.js';
 import getSubjectText from '../../utils/getSubjectText.js';
+import getUnsentEvents from '../../utils/getUnsentEvents.js';
 
 export type TSendEmail = {
 	transporter: Transporter<SMTPTransport.SentMessageInfo>;
-} & Mail.Options;
+} & Omit<Mail.Options, 'to'> & {
+		to: string;
+	};
 
 class EmailService {
-	async sendEmailInvitationToEvent({ eventId, userId }: TSendEmailInput) {
+	async sendInvitationToEvent({ eventId, userId }: TSendEmailInput) {
 		const user = await userService.getByIdWithoutFlatten(userId);
-		if (!user) {
-			throw ApiError.notFound(`User with id: ${userId} not found!`);
-		}
 
 		const { isSettingsVerified, _id, ...restEmailSettings } =
 			await emailSettingsService.getEmailSettingsById({
@@ -49,15 +49,21 @@ class EmailService {
 			from: restEmailSettings.serviceEmail,
 			to: event.inviteeEmail,
 			subject: getSubjectText(event.inviteeFirstName),
-			html: preparedEmailTemplate
+			html: preparedEmailTemplate,
+			messageId: event._id
+		});
+
+		await eventsService.changeEmailSentStatus({
+			eventId,
+			isEmailSend: true
 		});
 	}
 
-	async sendEmailInvitationToEvents({ userId }: TSendEmailsInput) {
+	async sendInvitationToEvents(
+		{ userId }: TSendEmailsInput,
+		isUnsentOnly = true
+	) {
 		const user = await userService.getByIdWithoutFlatten(userId);
-		if (!user) {
-			throw ApiError.notFound(`User with id: ${userId} not found!`);
-		}
 
 		const { isSettingsVerified, _id, ...restEmailSettings } =
 			await emailSettingsService.getEmailSettingsById({
@@ -69,34 +75,53 @@ class EmailService {
 
 		const transporter =
 			emailSettingsService.createTransporter(restEmailSettings);
-		const events = await eventsService.getEventsByUserId(userId);
+		let events = await eventsService.getEventsByUserId(userId);
+		if (isUnsentOnly) {
+			events = getUnsentEvents(events);
+		}
+
 		const emailTemplate = await emailTemplateService.getEmailTemplate({
 			emailTemplateId: user.emailTemplate as string
 		});
 
-		const emailPromises = events.map(async event => {
-			const preparedEmailTemplate = this.prepareEmailTemplateToSent({
-				template: emailTemplate.template,
-				event
-			});
+		for (const event of events) {
+			try {
+				const preparedEmailTemplate = this.prepareEmailTemplateToSent({
+					template: emailTemplate.template,
+					event
+				});
 
-			return this.sendEmail({
-				transporter,
-				from: restEmailSettings.serviceEmail,
-				to: event.inviteeEmail,
-				subject: getSubjectText(event.inviteeFirstName),
-				html: preparedEmailTemplate
-			});
-		});
+				await this.sendEmail({
+					transporter,
+					from: restEmailSettings.serviceEmail,
+					to: event.inviteeEmail,
+					subject: getSubjectText(event.inviteeFirstName),
+					html: preparedEmailTemplate,
+					messageId: event._id
+				});
 
-		await Promise.all(emailPromises);
+				await eventsService.changeEmailSentStatus({
+					eventId: event._id,
+					isEmailSend: true
+				});
+			} catch (err) {
+				// TODO: add logging
+				console.log(err);
+			}
+		}
 	}
 
 	private async sendEmail({ transporter, ...restOpt }: TSendEmail) {
-		return transporter.sendMail({
+		const { rejected } = await transporter.sendMail({
 			replyTo: restOpt.from,
 			...restOpt
 		});
+
+		if (rejected.includes(restOpt.to)) {
+			throw ApiError.badRequest(
+				`The invitation for the ${restOpt.to} address has not been delivered!`
+			);
+		}
 	}
 
 	private prepareEmailTemplateToSent({

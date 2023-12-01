@@ -10,9 +10,6 @@ import { defaultAppSettings } from '../../utils/index.js';
 class AppSettingsService {
 	async addAppSettings({ userId, ...restAppSettings }: TAddAppSettingsDto) {
 		const user = await userService.getByIdWithoutFlatten(userId);
-		if (!user) {
-			throw ApiError.notFound(`User with id: ${userId} not found!`);
-		}
 
 		let appSettingsDb = await AppSettingsModel.findByIdAndUpdate(
 			user.appSettings,
@@ -33,9 +30,6 @@ class AppSettingsService {
 
 	async resetAppSettings({ userId }: TResetAppSettingsDto) {
 		const user = await userService.getByIdWithoutFlatten(userId);
-		if (!user) {
-			throw ApiError.notFound(`User with id: ${userId} not found!`);
-		}
 
 		const appSettingsDb = await this.setDefaultAppSettings(
 			user.appSettings as string

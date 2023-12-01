@@ -1,6 +1,8 @@
 import { publicProcedure } from '../../trpc/index.js';
 import { exampleBase64CSV, exampleEvents } from '../../utils/index.js';
 import {
+	changeEmailSentStatusInput,
+	changeEmailSentStatusOutput,
 	createEventsInput,
 	createEventsOutput,
 	getEventInput,
@@ -70,7 +72,30 @@ const eventsProcedures = {
 			}
 		})
 		.input(getEventInput)
-		.output(getEventOutput)
+		.output(getEventOutput),
+
+	changeEmailSentStatus: publicProcedure
+		.meta({
+			openapi: {
+				method: 'PUT',
+				path: '/events/change-sent-status',
+				tags: ['events'],
+				summary: 'Change email sent status',
+				protect: true,
+				example: {
+					request: {
+						eventId: '',
+						isEmailSend: true
+					},
+					response: {
+						message: '',
+						data: exampleEvents
+					}
+				}
+			}
+		})
+		.input(changeEmailSentStatusInput)
+		.output(changeEmailSentStatusOutput)
 };
 
 export default eventsProcedures;

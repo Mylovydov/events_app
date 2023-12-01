@@ -3,6 +3,9 @@ import { useCallback, useEffect, useMemo, useState } from 'react';
 import {
 	useGetEvents,
 	usePagination,
+	useResendAllInvitationToEvents,
+	useSendInvitationToEvent,
+	useSendInvitationToEvents,
 	useSortTable,
 	useUserContext
 } from '@/hooks';
@@ -31,6 +34,12 @@ const columns = [
 ];
 
 const EventsPageContainer = () => {
+	const { sendInvitationToEvent, isInvitationToEventSending } =
+		useSendInvitationToEvent();
+	const { resendAllInvitationToEvent, isInvitationToAllEventResending } =
+		useResendAllInvitationToEvents();
+	const { sendInvitationToEvents, isInvitationToEventsSending } =
+		useSendInvitationToEvents();
 	const { user, isUserLoading } = useUserContext();
 	const { setSortParams, sortKey, sortDirection } = useSortTable({
 		sortKeyName: SORT_KEY_PARAM_KEY,
@@ -40,6 +49,7 @@ const EventsPageContainer = () => {
 		pageParamKey: PAGE_PARAM_KEY,
 		resetPageAfterSort: true
 	});
+
 	const navigate = useNavigate();
 	const { changePaginationPage, page } = usePagination(PAGE_PARAM_KEY);
 
@@ -72,12 +82,20 @@ const EventsPageContainer = () => {
 			}
 
 			const {
-				emailSettings: { isSettingsVerified }
+				emailSettings: { isSettingsVerified },
+				_id: userId
 			} = user;
 
-			return isSettingsVerified ? () => {} : navigate(SETTINGS_PATH);
+			if (isSettingsVerified) {
+				return sendInvitationToEvent({
+					eventId,
+					userId
+				});
+			}
+
+			return navigate(SETTINGS_PATH);
 		},
-		[user, navigate]
+		[user, sendInvitationToEvent, navigate]
 	);
 
 	const onSortDirectionChange = useCallback(
@@ -118,15 +136,54 @@ const EventsPageContainer = () => {
 					columns={columns}
 					item={item}
 					actionBtnLabel={rowActionBtnLabel}
+					isInvitationSending={isInvitationToEventSending}
 				/>
 			)),
-		[events, highlightColor, onSendButtonClick, rowActionBtnLabel]
+		[
+			events,
+			highlightColor,
+			isInvitationToEventSending,
+			onSendButtonClick,
+			rowActionBtnLabel
+		]
 	);
 
 	const tableColumns = useMemo(
 		() => [...columns, { label: 'Action', accessor: '' }],
 		[]
 	);
+
+	const actionItems = useMemo(() => {
+		if (
+			!user ||
+			isStringType(user?.emailSettings) ||
+			!user.emailSettings.isSettingsVerified
+		) {
+			return [];
+		}
+
+		const isUnsentInvitationsExist = events.some(e => !e.isEmailSend);
+
+		return [
+			{
+				label: 'Re-send all invitations',
+				disabled: isInvitationToAllEventResending,
+				onClick: () => resendAllInvitationToEvent({ userId: user._id })
+			},
+			{
+				label: 'Send unsent invitations',
+				disabled: isInvitationToEventsSending || !isUnsentInvitationsExist,
+				onClick: () => sendInvitationToEvents({ userId: user._id })
+			}
+		];
+	}, [
+		events,
+		isInvitationToAllEventResending,
+		isInvitationToEventsSending,
+		resendAllInvitationToEvent,
+		sendInvitationToEvents,
+		user
+	]);
 
 	return (
 		<EventsPage
@@ -141,6 +198,8 @@ const EventsPageContainer = () => {
 			onPageChange={onPageChange}
 			pageCount={pageCount}
 			forcePage={page}
+			actionItems={actionItems}
+			isLastColumnSticky={true}
 		/>
 	);
 };

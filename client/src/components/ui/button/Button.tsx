@@ -9,17 +9,21 @@ const Button: FC<TButtonProps> = ({
 	disabled,
 	fullWidth,
 	variant = 'filled',
+	size = 'large',
 	...rest
 }) => {
 	const btmClasses = classNames({
 		[styles.button]: true,
 		[styles.fullWidth]: fullWidth,
-		[styles[variant]]: variant
+		[styles[variant]]: variant,
+		[styles[size]]: size
 	});
+
+	const typographyVariant = size === 'medium' ? 'caption' : 'button';
 
 	return (
 		<button className={btmClasses} type={type} disabled={disabled} {...rest}>
-			<Typography variant="button" weight="bold" text={label} />
+			<Typography variant={typographyVariant} weight="bold" text={label} />
 		</button>
 	);
 };

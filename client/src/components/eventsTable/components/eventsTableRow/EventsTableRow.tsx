@@ -14,13 +14,16 @@ const EventsTableRow: FC<TEventsTableRowProps> = ({
 	item,
 	actionBtnLabel,
 	highlightColor,
-	onSendButtonClick
+	onSendButtonClick,
+	isInvitationSending
 }) => {
 	const rowsKeys = columns.map(c => c.accessor);
-	const style = {
-		backgroundColor: highlightColor,
+	const rowStyle = {
+		backgroundColor: highlightColor || '',
 		color: isColorDark(highlightColor) ? '#fff' : '#0C1E36'
 	};
+
+	const style = item.isEmailSend ? {} : rowStyle;
 
 	const tableRowsMarkup = (rowsKeys as TEventKeys).map(key => {
 		const rowValue = prepareRowValue(item[key], key);
@@ -47,6 +50,7 @@ const EventsTableRow: FC<TEventsTableRowProps> = ({
 			<Button
 				label={actionBtnLabel}
 				onClick={() => onSendButtonClick(item._id)}
+				disabled={isInvitationSending}
 			/>
 		</Cell>
 	);

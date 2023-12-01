@@ -1,3 +1,9 @@
-import { TBaseTableProps, TPaginationProps } from '@/components';
+import {
+	TBaseTableProps,
+	TEventsActionsProps,
+	TPaginationProps
+} from '@/components';
 
-export type TEventsTableProps = TBaseTableProps & TPaginationProps;
+export type TEventsTableProps = TBaseTableProps &
+	TPaginationProps &
+	TEventsActionsProps;

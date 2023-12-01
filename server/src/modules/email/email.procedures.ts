@@ -6,11 +6,11 @@ import {
 } from './email.dto.js';
 
 const emailProcedures = {
-	sendEmailInvitationToEvent: publicProcedure
+	sendInvitationToEvent: publicProcedure
 		.meta({
 			openapi: {
 				method: 'POST',
-				path: '/email/send-email',
+				path: '/email/send-invitation',
 				tags: ['email'],
 				summary: 'Send email invitation to event',
 				protect: true,
@@ -29,11 +29,11 @@ const emailProcedures = {
 		.input(sendEmailInput)
 		.output(sendEmailOutput),
 
-	sendEmailInvitationToEvents: publicProcedure
+	sendInvitationToEvents: publicProcedure
 		.meta({
 			openapi: {
 				method: 'POST',
-				path: '/email/send-emails',
+				path: '/email/send-invitations',
 				tags: ['email'],
 				summary: 'Send email invitation to events',
 				protect: true,
@@ -43,6 +43,28 @@ const emailProcedures = {
 					},
 					response: {
 						message: 'Emails successfully sent!',
+						data: {}
+					}
+				}
+			}
+		})
+		.input(sendEmailsInput)
+		.output(sendEmailOutput),
+
+	resendAllInvitationToEvents: publicProcedure
+		.meta({
+			openapi: {
+				method: 'POST',
+				path: '/email/resend-all-invitations',
+				tags: ['email'],
+				summary: 'Resend all email invitations to events',
+				protect: true,
+				example: {
+					request: {
+						userId: '5fe3dd3c-fd7b-4976-9692-1702878c68c4'
+					},
+					response: {
+						message: 'Invitations successfully resent!',
 						data: {}
 					}
 				}

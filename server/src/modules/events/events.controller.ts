@@ -27,7 +27,18 @@ const eventsController = {
 			message: 'Event successfully found!',
 			data: event
 		};
-	})
+	}),
+
+	changeEmailSentStatus: eventsProcedures.changeEmailSentStatus.query(
+		async ({ input }) => {
+			const event = await eventsService.changeEmailSentStatus(input);
+
+			return {
+				message: 'Email sent status successfully changed!',
+				data: event
+			};
+		}
+	)
 };
 
 export default eventsController;

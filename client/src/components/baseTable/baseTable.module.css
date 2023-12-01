@@ -7,7 +7,6 @@
     max-width: 100%;
     overflow-x: auto;
     flex: 1 1 auto;
-    min-height: 30rem;
     display: flex;
     border-radius: 1rem;
     flex-direction: column;
@@ -62,12 +61,13 @@
     position: sticky;
     z-index: 10;
     right: -.1rem;
-    filter: drop-shadow(-0.1rem 0.7rem 2px rgba(0, 0, 0, 0.1));
+    filter: drop-shadow(-0.1rem 0.4rem 5px rgba(0, 0, 0, 0.1));
 }
 
 .baseTableEmpty {
     display: flex;
     align-items: center;
     justify-content: center;
+    min-height: 30rem;
     flex: 1 1 auto;
 }

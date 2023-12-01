@@ -1,20 +1,31 @@
 import { emailProcedures, emailService } from './index.js';
 
 const emailController = {
-	sendEmailInvitationToEvent:
-		emailProcedures.sendEmailInvitationToEvent.mutation(async ({ input }) => {
-			await emailService.sendEmailInvitationToEvent(input);
+	sendInvitationToEvent: emailProcedures.sendInvitationToEvent.mutation(
+		async ({ input }) => {
+			await emailService.sendInvitationToEvent(input);
 			return {
 				message: 'Email successfully sent!',
 				data: {}
 			};
-		}),
+		}
+	),
 
-	sendEmailInvitationToEvents:
-		emailProcedures.sendEmailInvitationToEvents.mutation(async ({ input }) => {
-			await emailService.sendEmailInvitationToEvents(input);
+	sendInvitationToEvents: emailProcedures.sendInvitationToEvents.mutation(
+		async ({ input }) => {
+			await emailService.sendInvitationToEvents(input);
 			return {
 				message: 'Email successfully sent!',
+				data: {}
+			};
+		}
+	),
+
+	resendAllInvitationToEvents:
+		emailProcedures.resendAllInvitationToEvents.mutation(async ({ input }) => {
+			await emailService.sendInvitationToEvents(input, false);
+			return {
+				message: 'Invitations successfully resent!',
 				data: {}
 			};
 		})
