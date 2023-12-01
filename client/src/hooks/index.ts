@@ -17,3 +17,6 @@ export * from './useResetEmailSettings';
 export * from './useSendInvitationToEvent';
 export * from './useSendInvitationToEvents';
 export * from './useResendAllInvitationToEvents';
+export * from './useLogin';
+export * from './useRegister';
+export * from './useLogout';
