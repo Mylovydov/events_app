@@ -14,7 +14,8 @@ const EventsTableRow: FC<TEventsTableRowProps> = ({
 	item,
 	actionBtnLabel,
 	highlightColor,
-	onSendButtonClick
+	onSendButtonClick,
+	isInvitationSending
 }) => {
 	const rowsKeys = columns.map(c => c.accessor);
 	const rowStyle = {
@@ -49,6 +50,7 @@ const EventsTableRow: FC<TEventsTableRowProps> = ({
 			<Button
 				label={actionBtnLabel}
 				onClick={() => onSendButtonClick(item._id)}
+				disabled={isInvitationSending}
 			/>
 		</Cell>
 	);

@@ -18,6 +18,7 @@ import {
 import { EventsTableRow, TBaseSortDirection } from '@/components';
 import { useNavigate } from 'react-router-dom';
 import { SETTINGS_PATH } from '@/router';
+import useSendInvitationToEvent from '../hooks/useSendInvitationToEvent/useSendInvitationToEvent.hook.ts';
 
 const columns = [
 	{ label: 'First Name', accessor: 'inviteeFirstName', sortable: true },
@@ -31,6 +32,8 @@ const columns = [
 ];
 
 const EventsPageContainer = () => {
+	const { sendInvitationToEvent, isInvitationToEventSending } =
+		useSendInvitationToEvent();
 	const { user, isUserLoading } = useUserContext();
 	const { setSortParams, sortKey, sortDirection } = useSortTable({
 		sortKeyName: SORT_KEY_PARAM_KEY,
@@ -72,12 +75,20 @@ const EventsPageContainer = () => {
 			}
 
 			const {
-				emailSettings: { isSettingsVerified }
+				emailSettings: { isSettingsVerified },
+				_id: userId
 			} = user;
 
-			return isSettingsVerified ? () => {} : navigate(SETTINGS_PATH);
+			if (isSettingsVerified) {
+				return sendInvitationToEvent({
+					eventId,
+					userId
+				});
+			}
+
+			return navigate(SETTINGS_PATH);
 		},
-		[user, navigate]
+		[user, sendInvitationToEvent, navigate]
 	);
 
 	const onSortDirectionChange = useCallback(
@@ -118,9 +129,16 @@ const EventsPageContainer = () => {
 					columns={columns}
 					item={item}
 					actionBtnLabel={rowActionBtnLabel}
+					isInvitationSending={isInvitationToEventSending}
 				/>
 			)),
-		[events, highlightColor, onSendButtonClick, rowActionBtnLabel]
+		[
+			events,
+			highlightColor,
+			isInvitationToEventSending,
+			onSendButtonClick,
+			rowActionBtnLabel
+		]
 	);
 
 	const tableColumns = useMemo(

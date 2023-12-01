@@ -11,4 +11,5 @@ export type TEventsTableRowProps = {
 	actionBtnLabel: string;
 	onSendButtonClick: (eventId: string) => void;
 	highlightColor: string | undefined;
+	isInvitationSending?: boolean;
 };
