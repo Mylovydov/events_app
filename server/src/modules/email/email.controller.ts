@@ -19,7 +19,16 @@ const emailController = {
 				data: {}
 			};
 		}
-	)
+	),
+
+	resendAllInvitationToEvents:
+		emailProcedures.resendAllInvitationToEvents.mutation(async ({ input }) => {
+			await emailService.sendInvitationToEvents(input, false);
+			return {
+				message: 'Invitations successfully resent!',
+				data: {}
+			};
+		})
 };
 
 export default emailController;

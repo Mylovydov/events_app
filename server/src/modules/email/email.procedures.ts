@@ -49,6 +49,28 @@ const emailProcedures = {
 			}
 		})
 		.input(sendEmailsInput)
+		.output(sendEmailOutput),
+
+	resendAllInvitationToEvents: publicProcedure
+		.meta({
+			openapi: {
+				method: 'POST',
+				path: '/email/resend-all-invitations',
+				tags: ['email'],
+				summary: 'Resend all email invitations to events',
+				protect: true,
+				example: {
+					request: {
+						userId: '5fe3dd3c-fd7b-4976-9692-1702878c68c4'
+					},
+					response: {
+						message: 'Invitations successfully resent!',
+						data: {}
+					}
+				}
+			}
+		})
+		.input(sendEmailsInput)
 		.output(sendEmailOutput)
 };
 

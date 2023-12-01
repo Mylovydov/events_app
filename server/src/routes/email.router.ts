@@ -3,7 +3,8 @@ import { emailController } from '../modules/index.js';
 
 const emailRouter = router({
 	sendInvitationToEvent: emailController.sendInvitationToEvent,
-	sendInvitationToEvents: emailController.sendInvitationToEvents
+	sendInvitationToEvents: emailController.sendInvitationToEvents,
+	resendAllInvitationToEvents: emailController.resendAllInvitationToEvents
 });
 
 export default emailRouter;
