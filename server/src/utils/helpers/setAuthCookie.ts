@@ -1,6 +1,6 @@
 import { Response } from 'express';
 import { CookieOptions } from 'express-serve-static-core';
-import { refreshTokenKeyName } from './constants.js';
+import { refreshTokenKeyName } from '../constants.js';
 
 const setAuthCookie = (
 	res: Response,

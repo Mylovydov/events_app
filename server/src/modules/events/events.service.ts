@@ -10,11 +10,11 @@ import { eventsSchema } from './events.dto.js';
 import { EventModel } from './events.model.js';
 import { ApiError } from '../../error/index.js';
 import papaParse, { ParseConfig } from 'papaparse';
-import { prepareValidationError } from '../../utils/index.js';
 import { QueryOptions } from 'mongoose';
 import { userService } from '../user/index.js';
 import isStringType from '../utils/isStringType.js';
 import { emailService } from '../email/index.js';
+import { prepareValidationError } from '../../utils/helpers/index.js';
 
 const defaultDirection = 'desc';
 const defaultSortKey = 'startDateTime';

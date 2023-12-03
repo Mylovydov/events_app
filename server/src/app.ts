@@ -7,7 +7,7 @@ import cookiesParser from 'cookie-parser';
 import { createOpenApiExpressMiddleware } from 'trpc-openapi';
 import swaggerUi from 'swagger-ui-express';
 import openApiDocument from './swaggerDocument/openApi.js';
-import { setResponseHeaders } from './utils/index.js';
+import { setResponseHeaders } from './utils/helpers/index.js';
 import { config } from './config/index.js';
 // TODO: hashing pass in schema
 // TODO: add global env config

@@ -4,7 +4,7 @@ import {
 	clearAuthCookie,
 	getRefreshTokenFromCookie,
 	setAuthCookie
-} from '../../utils/index.js';
+} from '../../utils/helpers/index.js';
 
 const authController = {
 	register: authProcedures.register.mutation(async ({ input, ctx }) => {

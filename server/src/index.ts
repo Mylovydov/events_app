@@ -7,6 +7,7 @@ const PORT = config.get('APP_PORT');
 
 const start = async () => {
 	try {
+		// TODO: add logger
 		await db.connect(() => console.log('Connected to database'));
 		await db.initUser();
 		app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
