@@ -1,4 +1,3 @@
-import { trpcClient } from '@/trpc';
 import {
 	baseApi,
 	TCreateUserInput,
@@ -13,6 +12,7 @@ import {
 	TUpdateUserOutput
 } from '@/services';
 import { EApiTags } from '@/utils';
+import { trpcClient } from '@/trpc';
 
 export const usersApi = baseApi.injectEndpoints({
 	endpoints: builder => ({
@@ -22,7 +22,10 @@ export const usersApi = baseApi.injectEndpoints({
 
 		getUser: builder.query<TGetUserOutput, TGetUserInput>({
 			query: arg => trpcClient.users.getUser.query(arg),
-			transformErrorResponse: ({ data }) => data,
+			transformResult: res => {
+				console.log('transformResult', res);
+				return res.data;
+			},
 			providesTags: (_, __, { userId }) => [
 				{ type: EApiTags.USERS, id: userId }
 			]
@@ -30,7 +33,6 @@ export const usersApi = baseApi.injectEndpoints({
 
 		getUsers: builder.query<TGetUsersOutput, TGetUsersInput>({
 			query: arg => trpcClient.users.getUsers.query(arg),
-			transformErrorResponse: ({ data }) => data,
 			providesTags: result => {
 				if (!result) {
 					return [EApiTags.USERS];
@@ -44,13 +46,11 @@ export const usersApi = baseApi.injectEndpoints({
 
 		updateUser: builder.mutation<TUpdateUserOutput, TUpdateUserInput>({
 			query: arg => trpcClient.users.update.mutate(arg),
-			transformErrorResponse: ({ data }) => data,
 			invalidatesTags: [EApiTags.USERS]
 		}),
 
 		deleteUser: builder.mutation<TDeleteUserOutput, TDeleteUserInput>({
 			query: arg => trpcClient.users.delete.mutate(arg),
-			transformErrorResponse: ({ data }) => data,
 			invalidatesTags: [EApiTags.USERS]
 		})
 	})
