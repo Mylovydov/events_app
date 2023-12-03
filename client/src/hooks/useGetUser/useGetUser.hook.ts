@@ -16,7 +16,7 @@ const useGetUser = (
 
 	if (error) {
 		if (isTErrorResponse(error)) {
-			errorNotify(error.message);
+			errorNotify(error.zodError || error.message);
 		} else {
 			errorNotify('Something went wrong');
 		}
