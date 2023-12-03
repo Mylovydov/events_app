@@ -13,8 +13,7 @@ export const emailTemplateApi = baseApi.injectEndpoints({
 			TAddEmailTemplateInput
 		>({
 			query: arg => trpcClient.emailTemplate.addEmailTemplate.mutate(arg),
-			invalidatesTags: [EApiTags.USERS],
-			transformErrorResponse: ({ data }) => data
+			invalidatesTags: [EApiTags.USERS]
 		})
 	})
 });

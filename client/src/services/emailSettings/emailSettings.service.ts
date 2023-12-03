@@ -15,7 +15,6 @@ export const emailSettingsApi = baseApi.injectEndpoints({
 			TAddEmailSettingsInput
 		>({
 			query: arg => trpcClient.emailSettings.addEmailSettings.mutate(arg),
-			transformErrorResponse: ({ data }) => data,
 			invalidatesTags: [EApiTags.USERS]
 		}),
 		resetEmailSettings: builder.mutation<
@@ -23,7 +22,6 @@ export const emailSettingsApi = baseApi.injectEndpoints({
 			TResetEmailSettingsInput
 		>({
 			query: arg => trpcClient.emailSettings.resetEmailSettings.mutate(arg),
-			transformErrorResponse: ({ data }) => data,
 			invalidatesTags: [EApiTags.USERS]
 		})
 	})

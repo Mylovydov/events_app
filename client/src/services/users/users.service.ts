@@ -22,10 +22,6 @@ export const usersApi = baseApi.injectEndpoints({
 
 		getUser: builder.query<TGetUserOutput, TGetUserInput>({
 			query: arg => trpcClient.users.getUser.query(arg),
-			transformResult: res => {
-				console.log('transformResult', res);
-				return res.data;
-			},
 			providesTags: (_, __, { userId }) => [
 				{ type: EApiTags.USERS, id: userId }
 			]

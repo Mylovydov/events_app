@@ -17,7 +17,6 @@ export const emailApi = baseApi.injectEndpoints({
 			TSendInvitationToEventInput
 		>({
 			query: arg => trpcClient.email.sendInvitationToEvent.mutate(arg),
-			transformErrorResponse: ({ data }) => data,
 			invalidatesTags: [EApiTags.EVENTS]
 		}),
 
@@ -26,7 +25,6 @@ export const emailApi = baseApi.injectEndpoints({
 			TSendInvitationToEventsInput
 		>({
 			query: arg => trpcClient.email.sendInvitationToEvents.mutate(arg),
-			transformErrorResponse: ({ data }) => data,
 			invalidatesTags: [EApiTags.EVENTS]
 		}),
 
@@ -35,7 +33,6 @@ export const emailApi = baseApi.injectEndpoints({
 			TResendInvitationToEventsInput
 		>({
 			query: arg => trpcClient.email.resendAllInvitationToEvents.mutate(arg),
-			transformErrorResponse: ({ data }) => data,
 			invalidatesTags: [EApiTags.EVENTS]
 		})
 	})
