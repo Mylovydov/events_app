@@ -6,7 +6,7 @@ const isDevMode = process.env.NODE_ENV === 'development';
 
 const links = [
 	httpBatchLink({
-		url: `${import.meta.env.VITE_SERVER_URL}/api/trpc`,
+		url: import.meta.env.VITE_SERVER_URL,
 		fetch: (url, opt) => fetch(url, { ...opt, credentials: 'include' }),
 		headers: () => {
 			const token = localStorageService.getTokenFromLS();

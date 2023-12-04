@@ -10,7 +10,7 @@ export const isTRPCClientError = (
 	return cause instanceof TRPCClientError;
 };
 
-const isLoginData = (data: unknown): data is TAuthOutput => {
+const isAuthData = (data: unknown): data is TAuthOutput => {
 	return (
 		typeof data === 'object' &&
 		data !== null &&
@@ -33,7 +33,7 @@ const trpcBaseQuery: BaseQueryFn<
 	console.log('api', api);
 	return trpcResult
 		.then(result => {
-			if (isAuthEndpoint(api.endpoint) && isLoginData(result.data)) {
+			if (isAuthEndpoint(api.endpoint) && isAuthData(result.data)) {
 				localStorageService.setTokenToLS(result.data.accessToken);
 			}
 			return { data: result };
@@ -58,10 +58,10 @@ const trpcBaseQueryWithReauth: BaseQueryFn<
 			api,
 			extraOptions
 		);
-		console.log('refreshResult', error);
+
 		if (error) {
+			// api.dispatch(clearAppUser());
 			return result;
-			// TODO: need to logout
 		}
 
 		result = await trpcBaseQuery(args, api, extraOptions);
