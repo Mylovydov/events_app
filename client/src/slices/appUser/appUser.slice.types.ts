@@ -1,13 +1,13 @@
 import { TUser } from '@/services';
 
 export type TAppUserState = {
-	appUser: TUser | null;
+	user: TUser | null;
 	isAppUserLoading: boolean;
 	isAppUserAuth: boolean;
 };
 
 export type TSetAppUserPayload = {
-	user: TAppUserState['appUser'];
+	user: TAppUserState['user'];
 	isUserAuth: TAppUserState['isAppUserAuth'];
 };
 

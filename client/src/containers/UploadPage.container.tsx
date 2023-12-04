@@ -1,12 +1,13 @@
 import { fileToString } from '../utils/helpers';
-import { useCreateEvents, useUserContext } from '@/hooks';
+import { useAppSelector, useCreateEvents } from '@/hooks';
 import { UploadPage } from '@/pages';
 import { validateEvents } from '@/utils';
 import { useCallback } from 'react';
+import { getUserSelector } from '@/slices';
 
 const UploadPageContainer = () => {
 	const { uploadEvents, isEventsCreating } = useCreateEvents();
-	const { user } = useUserContext();
+	const { user } = useAppSelector(getUserSelector);
 
 	const onFileUpload = useCallback(
 		async (file: File) => {

@@ -1,8 +1,9 @@
 import { EmailLayoutPage } from '@/pages';
 import { useCallback, useRef, useState } from 'react';
 import { EditorRef, EmailEditorProps } from 'react-email-editor/dist/types';
-import { useAddEmailTemplate, useUserContext } from '@/hooks';
+import { useAddEmailTemplate, useAppSelector } from '@/hooks';
 import { isStringType } from '@/utils';
+import { getUserSelector } from '@/slices';
 
 const editorOptions: EmailEditorProps['options'] = {
 	mergeTags: {
@@ -31,7 +32,7 @@ const editorOptions: EmailEditorProps['options'] = {
 };
 
 const EmailLayoutPageContainer = () => {
-	const { user, isUserLoading } = useUserContext();
+	const { user, isAppUserLoading } = useAppSelector(getUserSelector);
 	const { addEmailTemplateToUser, isEmailTemplateAdding } =
 		useAddEmailTemplate();
 	const [isEditorLoading, setIsEditorLoading] = useState(true);
@@ -69,7 +70,7 @@ const EmailLayoutPageContainer = () => {
 	};
 
 	const isPageLoading =
-		isUserLoading || isEmailTemplateAdding || isEditorLoading;
+		isAppUserLoading || isEmailTemplateAdding || isEditorLoading;
 
 	return (
 		<EmailLayoutPage

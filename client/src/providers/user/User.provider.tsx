@@ -20,9 +20,7 @@ export const UserContext = createContext<TUserContext>({
 const UserProvider: FC<PropsWithChildren> = ({ children }) => {
 	const [appUser, setAppUser] = useState<TUser | null>(null);
 
-	const { user, isUserLoading } = useGetUser({
-		userId: import.meta.env.VITE_USER_ID
-	});
+	const { user, isUserLoading } = useGetUser(import.meta.env.VITE_USER_ID);
 
 	useEffect(() => {
 		user && setAppUser(user);

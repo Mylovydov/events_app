@@ -3,6 +3,7 @@ import { EApiTags, isTErrorResponse, localStorageService } from '@/utils';
 import { trpcClient, TTRPCClientError } from '@/trpc';
 import { TAuthOutput, TSuccessResponse } from '@/services';
 import { TRPCClientError } from '@trpc/client';
+import { clearAppUser } from '@/slices';
 
 export const isTRPCClientError = (
 	cause: unknown
@@ -30,7 +31,6 @@ const trpcBaseQuery: BaseQueryFn<
 	TSuccessResponse,
 	TTRPCClientError
 > = async (trpcResult, api) => {
-	console.log('api', api);
 	return trpcResult
 		.then(result => {
 			if (isAuthEndpoint(api.endpoint) && isAuthData(result.data)) {
@@ -60,7 +60,7 @@ const trpcBaseQueryWithReauth: BaseQueryFn<
 		);
 
 		if (error) {
-			// api.dispatch(clearAppUser());
+			api.dispatch(clearAppUser());
 			return result;
 		}
 

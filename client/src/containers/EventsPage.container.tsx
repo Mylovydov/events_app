@@ -1,13 +1,13 @@
 import { EventsPage } from '@/pages';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import {
+	useAppSelector,
 	useGetEvents,
 	usePagination,
 	useResendAllInvitationToEvents,
 	useSendInvitationToEvent,
 	useSendInvitationToEvents,
-	useSortTable,
-	useUserContext
+	useSortTable
 } from '@/hooks';
 import {
 	defaultDirection,
@@ -21,6 +21,7 @@ import {
 import { EventsTableRow, TBaseSortDirection } from '@/components';
 import { useNavigate } from 'react-router-dom';
 import { SETTINGS_PATH } from '@/router';
+import { getUserSelector } from '@/slices';
 
 const columns = [
 	{ label: 'First Name', accessor: 'inviteeFirstName', sortable: true },
@@ -34,13 +35,15 @@ const columns = [
 ];
 
 const EventsPageContainer = () => {
+	const { user, isAppUserLoading } = useAppSelector(getUserSelector);
+
 	const { sendInvitationToEvent, isInvitationToEventSending } =
 		useSendInvitationToEvent();
 	const { resendAllInvitationToEvent, isInvitationToAllEventResending } =
 		useResendAllInvitationToEvents();
 	const { sendInvitationToEvents, isInvitationToEventsSending } =
 		useSendInvitationToEvents();
-	const { user, isUserLoading } = useUserContext();
+
 	const { setSortParams, sortKey, sortDirection } = useSortTable({
 		sortKeyName: SORT_KEY_PARAM_KEY,
 		sortDirectionKeyName: SORT_DIRECTION_PARAM_KEY,
@@ -194,7 +197,7 @@ const EventsPageContainer = () => {
 			onSortDirectionChange={onSortDirectionChange}
 			sortDirection={sortDirection}
 			sortKey={sortKey}
-			isLoading={isEventsLoading || isUserLoading}
+			isLoading={isEventsLoading || isAppUserLoading}
 			onPageChange={onPageChange}
 			pageCount={pageCount}
 			forcePage={page}

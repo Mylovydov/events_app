@@ -7,9 +7,9 @@ export type TErrorResponse = {
 	zodError: string | null;
 };
 
-export type TSuccessResponse = {
+export type TSuccessResponse<Data = unknown> = {
 	message: string;
-	data: unknown;
+	data: Data;
 };
 
 export type TAuthOutput = TRegisterOutput['data'];

@@ -7,6 +7,8 @@ import {
 	SETTINGS_PATH
 } from '@/router/constants.ts';
 import { AppContainer, Header, Sidebar, TNavItemProps } from '@/components';
+import { UserProvider } from '@/providers';
+import { useGetUser } from '@/hooks';
 
 const navList: TNavItemProps[] = [
 	{ label: 'Home', to: HOME_PATH, icon: 'house' },
@@ -16,26 +18,30 @@ const navList: TNavItemProps[] = [
 ];
 
 const AppLayout = () => {
+	useGetUser(import.meta.env.VITE_USER_ID);
+
 	return (
-		<div className={styles.app}>
-			<aside className={styles.appSidebar}>
-				<Sidebar
-					navList={navList}
-					logoutLabel="Logout"
-					onLogoutClick={() => {}}
-				/>
-			</aside>
-			<div className={styles.appMain}>
-				<header className={styles.appHeader}>
-					<Header username="Denys" />
-				</header>
-				<main className={styles.appBody}>
-					<AppContainer>
-						<Outlet />
-					</AppContainer>
-				</main>
+		<UserProvider>
+			<div className={styles.app}>
+				<aside className={styles.appSidebar}>
+					<Sidebar
+						navList={navList}
+						logoutLabel="Logout"
+						onLogoutClick={() => {}}
+					/>
+				</aside>
+				<div className={styles.appMain}>
+					<header className={styles.appHeader}>
+						<Header username="Denys" />
+					</header>
+					<main className={styles.appBody}>
+						<AppContainer>
+							<Outlet />
+						</AppContainer>
+					</main>
+				</div>
 			</div>
-		</div>
+		</UserProvider>
 	);
 };
 
