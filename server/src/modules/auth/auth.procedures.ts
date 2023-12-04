@@ -20,7 +20,7 @@ const authProcedures = {
 		})
 		.input(authInput)
 		.output(authOutput),
-	login: authProcedure
+	login: publicProcedure
 		.meta({
 			openapi: {
 				method: 'POST',

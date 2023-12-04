@@ -20,7 +20,7 @@ import {
 } from '@/utils';
 import { EventsTableRow, TBaseSortDirection } from '@/components';
 import { useNavigate } from 'react-router-dom';
-import { SETTINGS_PATH } from '@/router';
+import { SETTINGS_PATH } from 'src/routes';
 import { getUserSelector } from '@/slices';
 
 const columns = [

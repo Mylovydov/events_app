@@ -1,7 +1,7 @@
 import { TCreateEventsInput, useCreateEventsMutation } from '@/services';
 import { useNavigate } from 'react-router-dom';
 import { useCallback } from 'react';
-import { EVENTS_PATH } from '@/router/constants.ts';
+import { EVENTS_PATH } from '@/routes/constants.ts';
 import { useNotify } from '@/hooks';
 
 const useCreateEvents = () => {

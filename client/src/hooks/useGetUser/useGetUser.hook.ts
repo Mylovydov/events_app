@@ -3,8 +3,8 @@ import { useNotify } from '@/hooks';
 import { TUseGetUserReturn } from '@/hooks/useGetUser/useGetUser.types.ts';
 import { isTErrorResponse } from '@/utils';
 import { skipToken } from '@reduxjs/toolkit/query';
-// TGetUserInput
-const useGetUser = (userId?: string): TUseGetUserReturn => {
+
+const useGetUser = (userId: string | null): TUseGetUserReturn => {
 	const { errorNotify } = useNotify();
 	const {
 		data: user,
