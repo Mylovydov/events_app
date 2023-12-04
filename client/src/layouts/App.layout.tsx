@@ -1,10 +1,9 @@
 import styles from './app.layout.module.css';
-import { Outlet, useNavigate } from 'react-router-dom';
+import { Outlet } from 'react-router-dom';
 import {
 	EMAIL_LAYOUT_PATH,
 	EVENTS_PATH,
 	HOME_PATH,
-	LOGIN_PATH,
 	SETTINGS_PATH
 } from '@/routes/constants.ts';
 import {
@@ -14,9 +13,7 @@ import {
 	Spinner,
 	TNavItemProps
 } from '@/components';
-import { useGetUser } from '@/hooks';
-import { localStorageService } from '@/utils';
-import { jwtDecode } from 'jwt-decode';
+import { FC } from 'react';
 
 const navList: TNavItemProps[] = [
 	{ label: 'Home', to: HOME_PATH, icon: 'house' },
@@ -25,28 +22,15 @@ const navList: TNavItemProps[] = [
 	{ label: 'Layout', to: EMAIL_LAYOUT_PATH, icon: 'rectangle-list' }
 ];
 
-const decodeUserToken = (token: string | null) => {
-	if (token) {
-		const decodedToken = jwtDecode<{ userId: string }>(token);
-		return decodedToken.userId;
-	}
-	return null;
+export type TAppLayoutProps = {
+	isAppLoading?: boolean;
 };
 
-const AppLayout = () => {
-	const navigate = useNavigate();
-	const { user, isUserLoading } = useGetUser(
-		decodeUserToken(localStorageService.getTokenFromLS())
-	);
-
-	if (!user && !isUserLoading) {
-		navigate(LOGIN_PATH);
-	}
-
-	const contentMarkup = isUserLoading ? (
+const AppLayout: FC<TAppLayoutProps> = ({ isAppLoading }) => {
+	const appContentMarkup = isAppLoading ? (
 		<Spinner />
 	) : (
-		<>
+		<div className={styles.app}>
 			<aside className={styles.appSidebar}>
 				<Sidebar
 					navList={navList}
@@ -64,10 +48,22 @@ const AppLayout = () => {
 					</AppContainer>
 				</main>
 			</div>
-		</>
+		</div>
 	);
 
-	return <div className={styles.app}>{contentMarkup}</div>;
+	return (
+		<div
+			style={{
+				width: '100vw',
+				height: '100vh',
+				display: 'flex',
+				justifyContent: 'center',
+				alignItems: 'center'
+			}}
+		>
+			{appContentMarkup}
+		</div>
+	);
 };
 
 export default AppLayout;

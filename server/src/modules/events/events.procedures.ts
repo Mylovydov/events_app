@@ -1,4 +1,4 @@
-import { publicProcedure } from '../../trpc/index.js';
+import { authProcedure } from '../../trpc/index.js';
 import { exampleBase64CSV, exampleEvents } from '../../utils/index.js';
 import {
 	changeEmailSentStatusInput,
@@ -12,7 +12,7 @@ import {
 } from './events.dto.js';
 
 const eventsProcedures = {
-	create: publicProcedure
+	create: authProcedure
 		.meta({
 			openapi: {
 				method: 'POST',
@@ -34,7 +34,7 @@ const eventsProcedures = {
 		.input(createEventsInput)
 		.output(createEventsOutput),
 
-	getEvents: publicProcedure
+	getEvents: authProcedure
 		.meta({
 			openapi: {
 				method: 'GET',
@@ -54,7 +54,7 @@ const eventsProcedures = {
 		.input(getEventsInput)
 		.output(getEventsOutput),
 
-	getEvent: publicProcedure
+	getEvent: authProcedure
 		.meta({
 			openapi: {
 				method: 'GET',
@@ -74,7 +74,7 @@ const eventsProcedures = {
 		.input(getEventInput)
 		.output(getEventOutput),
 
-	changeEmailSentStatus: publicProcedure
+	changeEmailSentStatus: authProcedure
 		.meta({
 			openapi: {
 				method: 'PUT',

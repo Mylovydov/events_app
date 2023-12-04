@@ -49,7 +49,7 @@ const authProcedures = {
 		})
 		.input(z.void())
 		.output(logoutOutput),
-	refresh: authProcedure
+	refresh: publicProcedure
 		.meta({
 			openapi: {
 				method: 'GET',

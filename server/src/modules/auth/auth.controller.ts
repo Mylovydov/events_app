@@ -19,6 +19,7 @@ const authController = {
 
 	login: authProcedures.login.mutation(async ({ input, ctx: { res } }) => {
 		const tokens = await authService.login(input);
+		console.log('tokens', tokens);
 		setAuthCookie(res, tokens.refreshToken);
 
 		return {
@@ -39,9 +40,12 @@ const authController = {
 		};
 	}),
 
-	refresh: authProcedures.refresh.query(async ({ ctx: { req } }) => {
+	refresh: authProcedures.refresh.query(async ({ ctx: { req, res } }) => {
 		const refreshToken = getRefreshTokenFromCookie(req);
+
 		const tokens = await authService.refresh(refreshToken);
+		setAuthCookie(res, tokens.refreshToken);
+		console.log('refresh====================', tokens);
 		return {
 			message: 'Tokens have been updated',
 			data: tokens
@@ -50,3 +54,11 @@ const authController = {
 };
 
 export default authController;
+
+//acc
+// eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MDBiMGUwYS0wZjIzLTRhMzUtOGQwYS1lM2RmOGNhOTdlNTQiLCJpYXQiOjE3MDE3MTg0ODQsImV4cCI6MTcwMTcxODQ5NH0.NMS4qYvLfCwSO71zjRrDEI0X_lqL9qcfZeCWjRBWC6U
+
+// refreshToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MDBiMGUwYS0wZjIzLTRhMzUtOGQwYS1lM2RmOGNhOTdlNTQiLCJpYXQiOjE3MDE3MTg0ODQsImV4cCI6MTcwMTc1NDQ4NH0.rhMrh5nUdrDbTYKTUTxGkzWCxhVC_vjWPWcHwfh3dic
+
+//new refresh
+// eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MDBiMGUwYS0wZjIzLTRhMzUtOGQwYS1lM2RmOGNhOTdlNTQiLCJpYXQiOjE3MDE3MTg4MDQsImV4cCI6MTcwMTc1NDgwNH0.U8XuDkSITcWmVuI2Yvg8wnaFTZI0D2lzDfqZlpHefHc

@@ -9,5 +9,6 @@ export { default as readCsvFile } from './readCsvFile';
 export { default as isTRPCClientError } from './isTRPCClientError';
 export { default as isAuthResponseData } from './isAuthResponseData';
 export { default as isAuthEndpoint } from './isAuthEndpoint';
+export { default as decodeUserToken } from './decodeUserToken';
 export * from './localStorageService';
 export * from './validateEvents';

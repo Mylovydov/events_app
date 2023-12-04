@@ -56,17 +56,17 @@ class AuthService {
 		}
 
 		const dbRefreshToken = await tokenService.getRefreshToken(token);
+		console.log('dbRefreshToken', dbRefreshToken);
 		if (!dbRefreshToken) {
 			throw ApiError.unauthorized('Invalid refresh token');
 		}
 
-		const verifiedRefreshToken = tokenService.verifyRefreshToken(token);
-		if (!verifiedRefreshToken) {
+		const userId = tokenService.verifyRefreshToken(token);
+		console.log('userId', userId);
+		if (!userId) {
 			throw ApiError.unauthorized('Invalid refresh token');
 		}
 
-		const { userId } = verifiedRefreshToken;
-		await tokenService.deleteRefreshToken(userId);
 		return await tokenService.generateTokens({ userId });
 	}
 }

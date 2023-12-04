@@ -1,4 +1,4 @@
-import { authProcedure, publicProcedure } from '../../trpc/index.js';
+import { authProcedure } from '../../trpc/index.js';
 
 import { z } from 'zod';
 import {
@@ -35,7 +35,7 @@ const userProcedures = {
 		.input(createUserInput)
 		.output(baseUserOutput),
 
-	getUser: publicProcedure
+	getUser: authProcedure
 		.meta({
 			openapi: {
 				method: 'GET',
@@ -58,7 +58,7 @@ const userProcedures = {
 		.input(userIdInput)
 		.output(baseUserOutput),
 
-	getUsers: publicProcedure
+	getUsers: authProcedure
 		.meta({
 			openapi: {
 				method: 'GET',
@@ -90,7 +90,7 @@ const userProcedures = {
 		.input(z.void())
 		.output(getUsersOutput),
 
-	update: publicProcedure
+	update: authProcedure
 		.meta({
 			openapi: {
 				method: 'PUT',

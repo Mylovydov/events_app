@@ -21,8 +21,9 @@ const BaseNotifyProvider: FC<PropsWithChildren> = ({ children }) => {
 	const { enqueueSnackbar, closeSnackbar } = useSnackbar();
 
 	const open = useCallback(
-		({ message, ...options }: IOpenNotifyParams) =>
-			enqueueSnackbar(message, { ...options }),
+		({ message, ...options }: IOpenNotifyParams) => {
+			enqueueSnackbar(message, { ...options });
+		},
 		[enqueueSnackbar]
 	);
 
