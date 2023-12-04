@@ -39,7 +39,7 @@ const authController = {
 		};
 	}),
 
-	refresh: authProcedures.refresh.mutation(async ({ ctx: { req } }) => {
+	refresh: authProcedures.refresh.query(async ({ ctx: { req } }) => {
 		const refreshToken = getRefreshTokenFromCookie(req);
 		const tokens = await authService.refresh(refreshToken);
 		return {

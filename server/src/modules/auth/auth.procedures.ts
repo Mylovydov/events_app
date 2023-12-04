@@ -6,6 +6,7 @@ import {
 	logoutOutput,
 	refreshOutput
 } from './auth.dto.js';
+import { z } from 'zod';
 
 const authProcedures = {
 	register: publicProcedure
@@ -25,7 +26,7 @@ const authProcedures = {
 		})
 		.input(authInput)
 		.output(authOutput),
-	login: publicProcedure
+	login: authProcedure
 		.meta({
 			openapi: {
 				method: 'POST',
@@ -57,14 +58,14 @@ const authProcedures = {
 	refresh: authProcedure
 		.meta({
 			openapi: {
-				method: 'POST',
-				path: '/auth/check',
+				method: 'GET',
+				path: '/auth/refresh',
 				tags: ['auth'],
 				summary: 'Update token pair by refresh token',
 				protect: true
 			}
 		})
-		.input(logoutInput)
+		.input(z.void())
 		.output(refreshOutput)
 };
 

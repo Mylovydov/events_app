@@ -1,7 +1,14 @@
 import { BaseQueryFn, createApi } from '@reduxjs/toolkit/query/react';
-import { EApiTags, setTokenToLS } from '@/utils';
-import { TTRPCClientError } from '@/trpc';
+import { EApiTags, isTErrorResponse, localStorageService } from '@/utils';
+import { trpcClient, TTRPCClientError } from '@/trpc';
 import { TAuthOutput, TSuccessResponse } from '@/services';
+import { TRPCClientError } from '@trpc/client';
+
+export const isTRPCClientError = (
+	cause: unknown
+): cause is TTRPCClientError => {
+	return cause instanceof TRPCClientError;
+};
 
 const isLoginData = (data: unknown): data is TAuthOutput => {
 	return (
@@ -23,40 +30,48 @@ const trpcBaseQuery: BaseQueryFn<
 	TSuccessResponse,
 	TTRPCClientError
 > = async (trpcResult, api) => {
+	console.log('api', api);
 	return trpcResult
 		.then(result => {
 			if (isAuthEndpoint(api.endpoint) && isLoginData(result.data)) {
-				setTokenToLS(result.data.accessToken);
+				localStorageService.setTokenToLS(result.data.accessToken);
 			}
 			return { data: result };
 		})
 		.catch(error => ({ error: error.data }));
 };
 
-// const trpcBaseQueryWithReauth: BaseQueryFn<
-// 	Promise<TSuccessResponse>,
-// 	TSuccessResponse,
-// 	TTRPCClientError
-// > = async (args, api, extraOptions) => {
-// 	let result = await trpcBaseQuery(args, api, extraOptions)
-// 	if (result.error && result.status === 401) {
-// 		// try to get a new token
-// 		const refreshResult = await baseQuery('/refreshToken', api, extraOptions)
-// 		if (refreshResult.data) {
-// 			// store the new token
-// 			api.dispatch(tokenReceived(refreshResult.data))
-// 			// retry the initial query
-// 			result = await baseQuery(args, api, extraOptions)
-// 		} else {
-// 			api.dispatch(loggedOut())
-// 		}
-// 	}
-// 	return result
-// }
+const trpcBaseQueryWithReauth: BaseQueryFn<
+	Promise<TSuccessResponse>,
+	TSuccessResponse,
+	TTRPCClientError
+> = async (args, api, extraOptions) => {
+	let result = await trpcBaseQuery(args, api, extraOptions);
+
+	if (
+		result.error &&
+		isTErrorResponse(result.error) &&
+		result.error.status === 401
+	) {
+		const { error } = await trpcBaseQuery(
+			trpcClient.auth.refresh.query(),
+			api,
+			extraOptions
+		);
+		console.log('refreshResult', error);
+		if (error) {
+			return result;
+			// TODO: need to logout
+		}
+
+		result = await trpcBaseQuery(args, api, extraOptions);
+	}
+	return result;
+};
 
 const baseApi = createApi({
 	reducerPath: 'baseApi',
-	baseQuery: trpcBaseQuery,
+	baseQuery: trpcBaseQueryWithReauth,
 	tagTypes: [EApiTags.EVENTS, EApiTags.USERS, EApiTags.EMAIL_SETTINGS],
 	endpoints: () => ({})
 });

@@ -5,7 +5,6 @@ import {
 	TLoginOutput,
 	TLogoutInput,
 	TLogoutOutput,
-	TRefreshInput,
 	TRefreshOutput,
 	TRegisterInput,
 	TRegisterOutput
@@ -25,8 +24,8 @@ export const authApi = baseApi.injectEndpoints({
 			query: arg => trpcClient.auth.logout.mutate(arg)
 		}),
 
-		refresh: builder.mutation<TRefreshOutput, TRefreshInput>({
-			query: arg => trpcClient.auth.refresh.mutate(arg)
+		refresh: builder.query<TRefreshOutput, void>({
+			query: () => trpcClient.auth.refresh.query()
 		})
 	})
 });
@@ -35,5 +34,5 @@ export const {
 	useRegisterMutation,
 	useLoginMutation,
 	useLogoutMutation,
-	useRefreshMutation
+	useRefreshQuery
 } = authApi;

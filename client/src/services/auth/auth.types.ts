@@ -14,7 +14,6 @@ export type TLoginOutput = inferProcedureOutput<TAppRouter['auth']['login']>;
 export type TLogoutInput = inferProcedureInput<TAppRouter['auth']['logout']>;
 export type TLogoutOutput = inferProcedureOutput<TAppRouter['auth']['logout']>;
 
-export type TRefreshInput = inferProcedureInput<TAppRouter['auth']['refresh']>;
 export type TRefreshOutput = inferProcedureOutput<
 	TAppRouter['auth']['refresh']
 >;

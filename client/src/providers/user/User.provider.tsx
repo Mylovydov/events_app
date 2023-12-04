@@ -11,7 +11,6 @@ import { TUserContext } from '@/providers';
 import { useGetUser } from '@/hooks';
 import { TUser } from '@/services';
 
-// TODO: add clear user function
 export const UserContext = createContext<TUserContext>({
 	user: null,
 	isUserLoading: false,
