@@ -1,11 +1,5 @@
 import { authProcedure, publicProcedure } from '../../trpc/index.js';
-import {
-	authInput,
-	authOutput,
-	logoutInput,
-	logoutOutput,
-	refreshOutput
-} from './auth.dto.js';
+import { authInput, authOutput, logoutOutput } from './auth.dto.js';
 import { z } from 'zod';
 
 const authProcedures = {
@@ -53,7 +47,7 @@ const authProcedures = {
 				protect: true
 			}
 		})
-		.input(logoutInput)
+		.input(z.void())
 		.output(logoutOutput),
 	refresh: authProcedure
 		.meta({
@@ -66,7 +60,7 @@ const authProcedures = {
 			}
 		})
 		.input(z.void())
-		.output(refreshOutput)
+		.output(authOutput)
 };
 
 export default authProcedures;
