@@ -18,3 +18,4 @@ export * from './appContainer';
 export * from './loginForm';
 export * from './card';
 export * from './passwordField';
+export * from './privateRoutesGuard';
