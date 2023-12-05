@@ -15,43 +15,6 @@ import {
 } from '@/containers';
 import { ErrorPage } from '@/pages';
 import { createBrowserRouter } from 'react-router-dom';
-import { AppLayout } from '@/layouts';
-
-export const loginRoute = {
-	path: LOGIN_PATH,
-	element: <LoginPageContainer />,
-	errorElement: <ErrorPage />
-};
-
-export const homeRoutes = {
-	path: HOME_PATH,
-	element: <AppLayout />,
-	// element: <AppContentContainer />,
-	errorElement: <ErrorPage />,
-	children: [
-		{
-			errorElement: <ErrorPage />,
-			children: [
-				{
-					index: true,
-					element: <UploadPageContainer />
-				},
-				{
-					path: EVENTS_PATH,
-					element: <EventsPageContainer />
-				},
-				{
-					path: SETTINGS_PATH,
-					element: <SettingsPageContainer />
-				},
-				{
-					path: EMAIL_LAYOUT_PATH,
-					element: <EmailLayoutPageContainer />
-				}
-			]
-		}
-	]
-};
 
 export const appRouter = createBrowserRouter([
 	{
