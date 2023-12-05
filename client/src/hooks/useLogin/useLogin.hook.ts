@@ -14,10 +14,12 @@ const useLogin = (): TUseLoginReturn => {
 			loginTrigger(args)
 				.unwrap()
 				.then(data => {
-					successNotify(data.message);
+					data?.message && successNotify(data?.message);
 					navigate(SETTINGS_PATH);
 				})
-				.catch(({ message, zodError }) => errorNotify(zodError || message));
+				.catch(error => {
+					errorNotify(error?.zodError || error?.message);
+				});
 		},
 		[loginTrigger, successNotify, navigate, errorNotify]
 	);

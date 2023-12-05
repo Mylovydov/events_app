@@ -18,6 +18,7 @@ const authController = {
 	}),
 
 	login: authProcedures.login.mutation(async ({ input, ctx: { res } }) => {
+		console.log('input', input);
 		const tokens = await authService.login(input);
 		console.log('tokens', tokens);
 		setAuthCookie(res, tokens.refreshToken);

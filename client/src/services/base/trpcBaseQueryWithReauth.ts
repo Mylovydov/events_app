@@ -5,7 +5,6 @@ import { isTErrorResponse } from '@/utils';
 import { clearAppUser } from '@/slices';
 
 const trpcBaseQueryWithReauth: BaseQueryFn<
-	// string | FetchArgs,
 	Promise<TSuccessResponse>,
 	TSuccessResponse,
 	TTRPCClientError

@@ -8,7 +8,7 @@ class TokenService {
 	private refreshTokenKey = config.get('REFRESH_JWT_SECRET');
 
 	async generateTokens(payload: TPayload): Promise<TGenerateResult> {
-		const accessExpiresIn = '10s';
+		const accessExpiresIn = '10h';
 		const refreshExpiresIn = '10h';
 
 		const accessToken = jwt.sign(payload, this.accessTokenKey, {

@@ -24,7 +24,7 @@ export const appUserSlice = createSlice({
 		builder.addMatcher(
 			usersApi.endpoints.getUser.matchFulfilled,
 			(state, { payload }: PayloadAction<TSuccessResponse<TUser>>) => {
-				state.user = payload.data;
+				state.user = payload?.data;
 				state.isAppUserAuth = true;
 				state.isAppUserLoading = false;
 			}

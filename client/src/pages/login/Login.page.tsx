@@ -1,8 +1,7 @@
 import styles from './login.page.module.css';
-import { LoginForm, Logo, TLoginFormProps } from '@/components';
+import { LoginForm, Logo } from '@/components';
 import { FC } from 'react';
-
-export type TLoginPageProps = TLoginFormProps;
+import { TLoginPageProps } from '@/pages';
 
 const LoginPage: FC<TLoginPageProps> = props => {
 	return (
