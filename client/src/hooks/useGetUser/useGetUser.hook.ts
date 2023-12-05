@@ -1,12 +1,33 @@
 import { useGetUserQuery } from '@/services';
-import { useNotify } from '@/hooks';
-import { TUseGetUserReturn } from '@/hooks/useGetUser/useGetUser.types.ts';
+import { TUseGetUserReturn, useNotify } from '@/hooks';
 import { isTErrorResponse } from '@/utils';
 import { skipToken } from '@reduxjs/toolkit/query';
-import { useEffect } from 'react';
+import { useCallback, useEffect } from 'react';
+import { TTRPCClientError } from '@/trpc';
+import { SerializedError } from '@reduxjs/toolkit';
+
+const useHandleError = () => {
+	const { errorNotify } = useNotify();
+	return useCallback(
+		(error?: TTRPCClientError | SerializedError) => {
+			if (!error) {
+				return;
+			}
+
+			if (isTErrorResponse(error)) {
+				console.log('useGetUser', error);
+				return errorNotify(error.zodError || error.message);
+			}
+			errorNotify('Something went wrong');
+		},
+		[errorNotify]
+	);
+};
 
 const useGetUser = (userId: string | null): TUseGetUserReturn => {
-	const { errorNotify } = useNotify();
+	const handleError = useHandleError();
+	// const refreshToken = useRefreshToken();
+
 	const {
 		data: user,
 		isLoading: isUserLoading,
@@ -14,14 +35,29 @@ const useGetUser = (userId: string | null): TUseGetUserReturn => {
 	} = useGetUserQuery(userId || skipToken);
 
 	useEffect(() => {
-		if (error) {
-			if (isTErrorResponse(error)) {
-				errorNotify(error.zodError || error.message);
-			} else {
-				errorNotify('Something went wrong');
-			}
-		}
-	}, [error, errorNotify]);
+		handleError(error);
+		// if (!error) {
+		// 	return;
+		// }
+		//
+		// if (isTErrorResponse(error)) {
+		// 	console.log('useGetUser', error);
+		// 	if (error.status === 401) {
+		// 		refreshToken()
+		// 			.unwrap()
+		// 			.then(() => {
+		// 				console.log('userId', userId);
+		// 				refetch();
+		// 			})
+		// 			.catch(error => {
+		// 				console.log('refreshTokenError', error);
+		// 				dispatch(clearAppUser());
+		// 			});
+		// 	}
+		// 	return errorNotify(error.zodError || error.message);
+		// }
+		// errorNotify('Something went wrong');
+	}, [error, handleError]);
 
 	return {
 		user: user?.data,

@@ -1,8 +1,7 @@
-import { Navigate, useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import { useGetUser } from '@/hooks';
 import { decodeUserToken, localStorageService } from '@/utils';
 import { AppLayout } from '@/layouts';
-import { LOGIN_PATH } from '@/routes';
 import { Spinner } from '@/components';
 import { PropsWithChildren } from 'react';
 
@@ -36,11 +35,13 @@ const PrivateRoutesGuard = () => {
 		);
 	}
 
-	return user ? (
-		<AppLayout isAppLoading={isUserLoading} />
-	) : (
-		<Navigate to={LOGIN_PATH} replace state={{ from: location }} />
-	);
+	// return user ? (
+	// 	<AppLayout isAppLoading={isUserLoading} />
+	// ) : (
+	// 	<Navigate to={LOGIN_PATH} replace state={{ from: location }} />
+	// );
+
+	return <AppLayout isAppLoading={isUserLoading} />;
 };
 
 export default PrivateRoutesGuard;

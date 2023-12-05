@@ -21,7 +21,14 @@ export const usersApi = baseApi.injectEndpoints({
 		}),
 
 		getUser: builder.query<TGetUserOutput, TGetUserInput['userId']>({
-			query: userId => trpcClient.users.getUser.query({ userId }),
+			query: async userId => {
+				return new Promise(resolve =>
+					resolve({
+						originalRequest: trpcClient.users.getUser.query,
+						requestArgs: { userId }
+					})
+				);
+			},
 			providesTags: (_, __, userId) => [{ type: EApiTags.USERS, id: userId }]
 		}),
 

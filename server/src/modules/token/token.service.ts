@@ -6,17 +6,16 @@ import { config } from '../../config/index.js';
 class TokenService {
 	private accessTokenKey = config.get('ACCESS_JWT_SECRET');
 	private refreshTokenKey = config.get('REFRESH_JWT_SECRET');
+	private accessExpiresIn = config.get('ACCESS_JWT_EXPIRES_IN');
+	private refreshExpiresIn = config.get('REFRESH_JWT_EXPIRES_IN');
 
 	async generateTokens(payload: TPayload): Promise<TGenerateResult> {
-		const accessExpiresIn = '10h';
-		const refreshExpiresIn = '10h';
-
 		const accessToken = jwt.sign(payload, this.accessTokenKey, {
-			expiresIn: accessExpiresIn
+			expiresIn: this.accessExpiresIn
 		});
 
 		const refreshToken = jwt.sign(payload, this.refreshTokenKey, {
-			expiresIn: refreshExpiresIn
+			expiresIn: this.refreshExpiresIn
 		});
 
 		await this.saveRefreshToken(payload.userId, refreshToken);

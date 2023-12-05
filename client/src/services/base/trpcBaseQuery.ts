@@ -11,6 +11,7 @@ const trpcBaseQuery: BaseQueryFn<
 	console.log('api.endpoint======success', api);
 	return trpcResult
 		.then(result => {
+			console.log('trpcBaseQuery======result', result);
 			if (isAuthResponseData(result.data)) {
 				localStorageService.setTokenToLS(result.data.accessToken);
 			}
@@ -19,6 +20,7 @@ const trpcBaseQuery: BaseQueryFn<
 			// 	console.log('api.endpoint======success', api.endpoint);
 			// 	localStorageService.setTokenToLS(result.data.accessToken);
 			// }
+
 			return { data: result };
 		})
 		.catch(error => ({ error: error.data }));

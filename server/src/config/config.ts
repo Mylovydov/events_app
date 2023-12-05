@@ -11,6 +11,8 @@ const config: TConfig = {
 	MONGO_DB_PORT: process.env.MONGO_DB_PORT || '27018',
 	ACCESS_JWT_SECRET: process.env.ACCESS_JWT_SECRET || 'secret-access-key',
 	REFRESH_JWT_SECRET: process.env.ACCESS_JWT_SECRET || 'secret-refresh-key',
+	ACCESS_JWT_EXPIRES_IN: process.env.ACCESS_JWT_EXPIRES_IN || '10h',
+	REFRESH_JWT_EXPIRES_IN: process.env.REFRESH_JWT_EXPIRES_IN || '30d',
 
 	get(key: keyof Omit<TConfig, 'get'>) {
 		return this[key];
