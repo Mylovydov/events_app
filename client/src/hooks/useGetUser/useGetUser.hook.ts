@@ -15,7 +15,6 @@ const useHandleError = () => {
 			}
 
 			if (isTErrorResponse(error)) {
-				console.log('useGetUser', error);
 				return errorNotify(error.zodError || error.message);
 			}
 			errorNotify('Something went wrong');
@@ -26,7 +25,6 @@ const useHandleError = () => {
 
 const useGetUser = (userId: string | null): TUseGetUserReturn => {
 	const handleError = useHandleError();
-	// const refreshToken = useRefreshToken();
 
 	const {
 		data: user,
@@ -34,30 +32,7 @@ const useGetUser = (userId: string | null): TUseGetUserReturn => {
 		error
 	} = useGetUserQuery(userId || skipToken);
 
-	useEffect(() => {
-		handleError(error);
-		// if (!error) {
-		// 	return;
-		// }
-		//
-		// if (isTErrorResponse(error)) {
-		// 	console.log('useGetUser', error);
-		// 	if (error.status === 401) {
-		// 		refreshToken()
-		// 			.unwrap()
-		// 			.then(() => {
-		// 				console.log('userId', userId);
-		// 				refetch();
-		// 			})
-		// 			.catch(error => {
-		// 				console.log('refreshTokenError', error);
-		// 				dispatch(clearAppUser());
-		// 			});
-		// 	}
-		// 	return errorNotify(error.zodError || error.message);
-		// }
-		// errorNotify('Something went wrong');
-	}, [error, handleError]);
+	useEffect(() => handleError(error), [error, handleError]);
 
 	return {
 		user: user?.data,

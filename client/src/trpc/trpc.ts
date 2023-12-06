@@ -3,7 +3,9 @@ import type { TAppRouter } from '../../../server/src/types/shared.types';
 import { localStorageService } from '@/utils';
 
 const isDevMode = process.env.NODE_ENV === 'development';
+
 export type GetUserQueryType = TAppRouter['users']['getUser'];
+
 const links = [
 	httpBatchLink({
 		url: import.meta.env.VITE_SERVER_URL,

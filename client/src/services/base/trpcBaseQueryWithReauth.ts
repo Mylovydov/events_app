@@ -2,29 +2,25 @@ import { BaseQueryFn } from '@reduxjs/toolkit/dist/query/react';
 import { trpcClient, TTRPCClientError } from '@/trpc';
 import { isTErrorResponse } from '@/utils';
 import { clearAppUser } from '@/slices';
-import { trpcBaseQuery, TSuccessResponse } from '@/services';
-import { Resolver } from '@trpc/client';
-import { GetUserQueryType } from '@/trpc/trpc.ts';
+import {
+	TBaseQueryPromisedArgs,
+	trpcBaseQuery,
+	TSuccessResponse
+} from '@/services';
 
 const trpcBaseQueryWithReauth: BaseQueryFn<
-	Promise<{
-		// pendingPromise: Promise<TSuccessResponse>;
-		originalRequest: Resolver<GetUserQueryType>;
-		requestArgs: unknown;
-	}>,
+	TBaseQueryPromisedArgs,
 	TSuccessResponse,
 	TTRPCClientError
 > = async (args, api, extraOptions) => {
 	const { originalRequest, requestArgs } = await args;
-
+	console.log('api======', api);
 	let result = await trpcBaseQuery(
-		// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-		// @ts-ignore
 		originalRequest(requestArgs),
 		api,
 		extraOptions
 	);
-	console.log('api======', api);
+
 	console.log('result======', result);
 	if (
 		result.error &&
@@ -38,8 +34,6 @@ const trpcBaseQueryWithReauth: BaseQueryFn<
 		);
 		if (data) {
 			result = await trpcBaseQuery(
-				// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-				// @ts-ignore
 				originalRequest(requestArgs),
 				api,
 				extraOptions

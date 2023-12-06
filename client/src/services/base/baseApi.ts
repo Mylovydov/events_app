@@ -1,6 +1,5 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
 import { EApiTags } from '@/utils';
-// import { trpcBaseQueryWithReauth } from '@/services';
 import trpcBaseQueryWithReauth from './trpcBaseQueryWithReauth.ts';
 
 const baseApi = createApi({

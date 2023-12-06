@@ -21,4 +21,3 @@ export * from './useRegister';
 export * from './useLogout';
 export * from './useAppDispatch';
 export * from './useAppSelector';
-export * from './useRefreshToken';

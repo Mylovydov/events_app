@@ -7,11 +7,9 @@ const trpcBaseQuery: BaseQueryFn<
 	Promise<TSuccessResponse>,
 	TSuccessResponse,
 	TTRPCClientError
-> = async (trpcResult, api) => {
-	console.log('api.endpoint======success', api);
+> = async trpcResult => {
 	return trpcResult
 		.then(result => {
-			console.log('trpcBaseQuery======result', result);
 			if (isAuthResponseData(result.data)) {
 				localStorageService.setTokenToLS(result.data.accessToken);
 			}

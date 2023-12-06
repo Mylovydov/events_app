@@ -8,7 +8,7 @@ import {
 	TSendInvitationToEventsInput,
 	TSendInvitationToEventsOutput
 } from '@/services';
-import { EApiTags } from '@/utils';
+import { EApiTags, wrapMetadataInPromise } from '@/utils';
 
 export const emailApi = baseApi.injectEndpoints({
 	endpoints: builder => ({
@@ -16,7 +16,11 @@ export const emailApi = baseApi.injectEndpoints({
 			TSendInvitationToEventOutput,
 			TSendInvitationToEventInput
 		>({
-			query: arg => trpcClient.email.sendInvitationToEvent.mutate(arg),
+			query: arg =>
+				wrapMetadataInPromise({
+					originalRequest: trpcClient.email.sendInvitationToEvent.mutate,
+					requestArgs: arg
+				}),
 			invalidatesTags: [EApiTags.EVENTS]
 		}),
 
@@ -24,7 +28,11 @@ export const emailApi = baseApi.injectEndpoints({
 			TSendInvitationToEventsOutput,
 			TSendInvitationToEventsInput
 		>({
-			query: arg => trpcClient.email.sendInvitationToEvents.mutate(arg),
+			query: arg =>
+				wrapMetadataInPromise({
+					originalRequest: trpcClient.email.sendInvitationToEvents.mutate,
+					requestArgs: arg
+				}),
 			invalidatesTags: [EApiTags.EVENTS]
 		}),
 
@@ -32,7 +40,11 @@ export const emailApi = baseApi.injectEndpoints({
 			TResendInvitationToEventsOutput,
 			TResendInvitationToEventsInput
 		>({
-			query: arg => trpcClient.email.resendAllInvitationToEvents.mutate(arg),
+			query: arg =>
+				wrapMetadataInPromise({
+					originalRequest: trpcClient.email.resendAllInvitationToEvents.mutate,
+					requestArgs: arg
+				}),
 			invalidatesTags: [EApiTags.EVENTS]
 		})
 	})

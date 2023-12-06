@@ -1,4 +1,5 @@
 import { TRegisterOutput } from '@/services';
+import { Resolver } from '@trpc/client';
 
 export type TErrorResponse = {
 	code: string;
@@ -13,3 +14,10 @@ export type TSuccessResponse<Data = unknown> = {
 };
 
 export type TAuthOutput = TRegisterOutput['data'];
+
+export type TBaseQueryArgs = {
+	originalRequest: Resolver<any>;
+	requestArgs: unknown;
+};
+
+export type TBaseQueryPromisedArgs = Promise<TBaseQueryArgs>;

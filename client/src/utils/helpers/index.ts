@@ -10,5 +10,6 @@ export { default as isTRPCClientError } from './isTRPCClientError';
 export { default as isAuthResponseData } from './isAuthResponseData';
 export { default as isAuthEndpoint } from './isAuthEndpoint';
 export { default as decodeUserToken } from './decodeUserToken';
+export { default as wrapMetadataInPromise } from './wrapMetadataInPromise';
 export * from './localStorageService';
 export * from './validateEvents';

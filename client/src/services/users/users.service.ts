@@ -11,29 +11,34 @@ import {
 	TUpdateUserInput,
 	TUpdateUserOutput
 } from '@/services';
-import { EApiTags } from '@/utils';
+import { EApiTags, wrapMetadataInPromise } from '@/utils';
 import { trpcClient } from '@/trpc';
 
 export const usersApi = baseApi.injectEndpoints({
 	endpoints: builder => ({
 		createUser: builder.mutation<TCreateUserOutput, TCreateUserInput>({
-			query: arg => trpcClient.users.create.mutate(arg)
+			query: arg =>
+				wrapMetadataInPromise({
+					originalRequest: trpcClient.users.create.mutate,
+					requestArgs: arg
+				})
 		}),
 
 		getUser: builder.query<TGetUserOutput, TGetUserInput['userId']>({
-			query: async userId => {
-				return new Promise(resolve =>
-					resolve({
-						originalRequest: trpcClient.users.getUser.query,
-						requestArgs: { userId }
-					})
-				);
-			},
+			query: userId =>
+				wrapMetadataInPromise({
+					originalRequest: trpcClient.users.getUser.query,
+					requestArgs: { userId }
+				}),
 			providesTags: (_, __, userId) => [{ type: EApiTags.USERS, id: userId }]
 		}),
 
 		getUsers: builder.query<TGetUsersOutput, TGetUsersInput>({
-			query: arg => trpcClient.users.getUsers.query(arg),
+			query: arg =>
+				wrapMetadataInPromise({
+					originalRequest: trpcClient.users.getUsers.query,
+					requestArgs: arg
+				}),
 			providesTags: result => {
 				if (!result) {
 					return [EApiTags.USERS];
@@ -46,12 +51,20 @@ export const usersApi = baseApi.injectEndpoints({
 		}),
 
 		updateUser: builder.mutation<TUpdateUserOutput, TUpdateUserInput>({
-			query: arg => trpcClient.users.update.mutate(arg),
+			query: arg =>
+				wrapMetadataInPromise({
+					originalRequest: trpcClient.users.update.mutate,
+					requestArgs: arg
+				}),
 			invalidatesTags: [EApiTags.USERS]
 		}),
 
 		deleteUser: builder.mutation<TDeleteUserOutput, TDeleteUserInput>({
-			query: arg => trpcClient.users.delete.mutate(arg),
+			query: arg =>
+				wrapMetadataInPromise({
+					originalRequest: trpcClient.users.delete.mutate,
+					requestArgs: arg
+				}),
 			invalidatesTags: [EApiTags.USERS]
 		})
 	})
