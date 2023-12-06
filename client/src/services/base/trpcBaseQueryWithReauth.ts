@@ -19,7 +19,7 @@ const trpcBaseQueryWithReauth: BaseQueryFn<
 		api,
 		extraOptions
 	);
-
+	console.log('result.error', result.error);
 	// INFO: добавляем api, только потому что этого требует trpcBaseQuery. В целом это бессмысленно
 	if (
 		result.error &&

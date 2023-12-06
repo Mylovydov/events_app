@@ -1,33 +1,25 @@
 import { z } from 'zod';
 import { baseOutputSchema } from '../utils/index.js';
 import { mainUserSchema } from '../user/index.js';
-
-const minLengthErrorMessage = 'Must be 5 or more characters long';
-const maxLengthErrorMessage = 'Must be 5 or fewer characters long';
-const idErrorMessage = 'Invalid UUID';
+import zodErrorMessage from '../../utils/zodErrorMessage.js';
 
 export const mainEventSchema = z.object({
 	inviteeLastName: z
 		.string()
-		.min(3, { message: minLengthErrorMessage })
-		.max(255, { message: maxLengthErrorMessage }),
+		.min(1, { message: zodErrorMessage.min('inviteeLastName', 1) }),
 	inviteeFirstName: z
 		.string()
-		.min(3, { message: minLengthErrorMessage })
-		.max(255, { message: maxLengthErrorMessage }),
-	inviteeEmail: z
+		.min(1, { message: zodErrorMessage.min('inviteeFirstName', 1) }),
+	inviteeEmail: z.string().email(zodErrorMessage.email),
+	startDateTime: z
 		.string()
-		.min(5, { message: minLengthErrorMessage })
-		.email('Invalid emailSettings')
-		.max(255, { message: maxLengthErrorMessage }),
-	startDateTime: z.string(),
-	endDateTime: z.string(),
-	location: z
+		.min(1, { message: zodErrorMessage.min('startDateTime', 1) }),
+	endDateTime: z
 		.string()
-		.min(3, { message: minLengthErrorMessage })
-		.max(255, { message: maxLengthErrorMessage }),
-	eventUUID: z.string().uuid(idErrorMessage),
-	inviteeUUID: z.string().uuid(idErrorMessage)
+		.min(1, { message: zodErrorMessage.min('endDateTime', 1) }),
+	location: z.string().min(1, { message: zodErrorMessage.min('location', 1) }),
+	eventUUID: z.string().uuid(zodErrorMessage.id),
+	inviteeUUID: z.string().uuid(zodErrorMessage.id)
 });
 
 export const eventSchemaDb = mainEventSchema

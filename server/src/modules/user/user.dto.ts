@@ -3,18 +3,21 @@ import { mainEmailTemplateSchema } from '../emailTemplate/index.js';
 import { appSettingsDb } from '../appSettings/index.js';
 import { emailSettingsSchemaDb } from '../emailSettings/index.js';
 import { baseOutputSchema } from '../utils/index.js';
+import { zodErrorMessage } from '../../utils/index.js';
 
 export const mainUserSchema = z.object({
-	_id: z.string().uuid({ message: 'Invalid UUID format' }),
-	email: z.string().email({ message: 'Invalid emailSettings address' }),
-	name: z.string().max(25, 'Name must be less than 25 characters').optional(),
-	emailTemplate: z.optional(z.string().uuid().or(mainEmailTemplateSchema)),
-	appSettings: appSettingsDb.or(z.string().uuid()),
-	emailSettings: emailSettingsSchemaDb.or(z.string().uuid()),
+	_id: z.string().uuid({ message: zodErrorMessage.id }),
+	email: z.string().email({ message: zodErrorMessage.email }),
+	name: z.string().max(25, zodErrorMessage.maxLength('Name', 25)).optional(),
+	emailTemplate: z.optional(
+		z.string().uuid(zodErrorMessage.id).or(mainEmailTemplateSchema)
+	),
+	appSettings: appSettingsDb.or(z.string().uuid(zodErrorMessage.id)),
+	emailSettings: emailSettingsSchemaDb.or(z.string().uuid(zodErrorMessage.id)),
 	password: z
 		.string()
-		.min(8, 'Password must be at least 8 characters long')
-		.max(25, 'Password must be less than 25 characters')
+		.min(8, zodErrorMessage.min('Password', 8))
+		.max(25, zodErrorMessage.max('Password', 25))
 });
 
 // BASE SCHEMA
