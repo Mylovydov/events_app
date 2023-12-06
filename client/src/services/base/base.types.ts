@@ -15,9 +15,11 @@ export type TSuccessResponse<Data = unknown> = {
 
 export type TAuthOutput = TRegisterOutput['data'];
 
-export type TBaseQueryArgs = {
+export type TBaseQueryArgs = Promise<TSuccessResponse>;
+
+export type TBaseQueryPromiseArgs = {
 	originalRequest: Resolver<any>;
 	requestArgs: unknown;
 };
 
-export type TBaseQueryPromisedArgs = Promise<TBaseQueryArgs>;
+export type TBaseQueryWithReauthPromiseArgs = Promise<TBaseQueryPromiseArgs>;

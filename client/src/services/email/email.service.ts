@@ -16,11 +16,12 @@ export const emailApi = baseApi.injectEndpoints({
 			TSendInvitationToEventOutput,
 			TSendInvitationToEventInput
 		>({
-			query: arg =>
-				wrapMetadataInPromise({
+			query: arg => {
+				return wrapMetadataInPromise({
 					originalRequest: trpcClient.email.sendInvitationToEvent.mutate,
 					requestArgs: arg
-				}),
+				});
+			},
 			invalidatesTags: [EApiTags.EVENTS]
 		}),
 

@@ -105,7 +105,6 @@ class EmailService {
 				});
 			} catch (err) {
 				// TODO: add logging
-				console.log(err);
 			}
 		}
 	}

@@ -1,5 +1,6 @@
-import { TBaseQueryArgs } from '@/services';
+import { TBaseQueryPromiseArgs } from '@/services';
 
-const wrapMetadataInPromise = (meta: TBaseQueryArgs) => Promise.resolve(meta);
+const wrapMetadataInPromise = (meta: TBaseQueryPromiseArgs) =>
+	Promise.resolve(meta);
 
 export default wrapMetadataInPromise;
