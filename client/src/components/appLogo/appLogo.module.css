@@ -1,16 +1,13 @@
-.logo {
+.appLogo {
     display: flex;
     align-items: center;
     gap: 1rem;
 }
 
-.logoImg {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.appLogoImg {
     flex: 0 0 5rem;
 }
 
-.logoText {
+.appLogoText {
     flex: 1 1 auto;
 }

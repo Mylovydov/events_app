@@ -1,4 +1,4 @@
-import { publicProcedure } from '../../trpc/index.js';
+import { authProcedure } from '../../trpc/index.js';
 import {
 	addEmailTemplateInput,
 	addEmailTemplateOutput,
@@ -7,7 +7,7 @@ import {
 } from './emailTemplate.dto.js';
 
 const emailTemplateProcedures = {
-	addEmailTemplate: publicProcedure
+	addEmailTemplate: authProcedure
 		.meta({
 			openapi: {
 				method: 'POST',
@@ -31,7 +31,7 @@ const emailTemplateProcedures = {
 		.input(addEmailTemplateInput)
 		.output(addEmailTemplateOutput),
 
-	getEmailTemplate: publicProcedure
+	getEmailTemplate: authProcedure
 		.meta({
 			openapi: {
 				method: 'GET',

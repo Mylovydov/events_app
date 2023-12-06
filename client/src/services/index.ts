@@ -5,3 +5,4 @@ export * from './emailSettings';
 export * from './appSettings';
 export * from './emailTemplate';
 export * from './email';
+export * from './auth';

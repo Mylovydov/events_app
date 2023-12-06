@@ -18,7 +18,7 @@ const useResendAllInvitationToEvents =
 				resendAllInvitationToEventTrigger(args)
 					.unwrap()
 					.then(data => successNotify(data.message))
-					.catch(err => errorNotify(err.message));
+					.catch(({ message, zodError }) => errorNotify(zodError || message));
 			},
 			[resendAllInvitationToEventTrigger, successNotify, errorNotify]
 		);

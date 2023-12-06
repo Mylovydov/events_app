@@ -1,24 +1,19 @@
-import { configureStore } from '@reduxjs/toolkit';
 import { baseApi } from '@/services';
-
-// export const rtkQueryErrorLogger: Middleware =
-// 	(api: MiddlewareAPI) => next => action => {
-// 		if (isRejectedWithValue(action)) {
-// 			console.warn('We got a rejected action!', action);
-// 		}
-//
-// 		return next(action);
-// 	};
+import { configureStore } from '@reduxjs/toolkit';
+import { appUserReducer } from '@/slices';
 
 const store = configureStore({
 	reducer: {
-		[baseApi.reducerPath]: baseApi.reducer
+		[baseApi.reducerPath]: baseApi.reducer,
+		appUser: appUserReducer
 	},
 	middleware: getDefaultMiddleware => [
 		...getDefaultMiddleware(),
 		baseApi.middleware
-		// rtkQueryErrorLogger
 	]
 });
+
+export type RootState = ReturnType<typeof store.getState>;
+export type AppDispatch = typeof store.dispatch;
 
 export default store;

@@ -11,6 +11,8 @@ export const defaultAppSettings = {
 	isAutoSendEnabled: false
 };
 
+export const refreshTokenKeyName = 'refreshToken';
+
 export const defaultDateFormatForDB = 'yyyy-MM-dd HH:mm:ss';
 
 const defaultEmailTemplateMessage =

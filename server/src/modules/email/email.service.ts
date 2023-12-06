@@ -11,8 +11,7 @@ import { emailTemplateService } from '../emailTemplate/index.js';
 import { Transporter } from 'nodemailer';
 import SMTPTransport from 'nodemailer/lib/smtp-transport/index.js';
 import Mail from 'nodemailer/lib/mailer/index.js';
-import getSubjectText from '../../utils/getSubjectText.js';
-import getUnsentEvents from '../../utils/getUnsentEvents.js';
+import { getSubjectText, getUnsentEvents } from '../../utils/helpers/index.js';
 
 export type TSendEmail = {
 	transporter: Transporter<SMTPTransport.SentMessageInfo>;
@@ -106,7 +105,6 @@ class EmailService {
 				});
 			} catch (err) {
 				// TODO: add logging
-				console.log(err);
 			}
 		}
 	}

@@ -1,14 +1,14 @@
 import styles from './appLogo.module.css';
-import Logo from '@/assets/logo/logo.svg?react';
-import { Typography } from '@/components';
+import { Logo, TAppLogoProps, Typography } from '@/components';
+import { FC } from 'react';
 
-const AppLogo = () => (
-	<div className={styles.logo}>
-		<div className={styles.logoImg}>
-			<Logo fontSize="6rem" />
+const AppLogo: FC<TAppLogoProps> = ({ logoText }) => (
+	<div className={styles.appLogo}>
+		<div className={styles.appLogoImg}>
+			<Logo />
 		</div>
-		<div className={styles.logoText}>
-			<Typography text="Events App" weight="medium" variant="h6" lightColor />
+		<div className={styles.appLogoText}>
+			<Typography text={logoText} weight="medium" variant="h6" lightColor />
 		</div>
 	</div>
 );

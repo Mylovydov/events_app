@@ -1,26 +1,38 @@
-import { TGetUserInput, useGetUserQuery } from '@/services';
-import { useNotify } from '@/hooks';
-import { TUseGetUserReturn } from '@/hooks/useGetUser/useGetUser.types.ts';
+import { useGetUserQuery } from '@/services';
+import { TUseGetUserReturn, useNotify } from '@/hooks';
 import { isTErrorResponse } from '@/utils';
+import { skipToken } from '@reduxjs/toolkit/query';
+import { useCallback, useEffect } from 'react';
+import { TTRPCClientError } from '@/trpc';
+import { SerializedError } from '@reduxjs/toolkit';
 
-const useGetUser = (
-	args: TGetUserInput,
-	opt?: { [key: string]: unknown }
-): TUseGetUserReturn => {
+const useHandleError = () => {
 	const { errorNotify } = useNotify();
+	return useCallback(
+		(error?: TTRPCClientError | SerializedError) => {
+			if (!error) {
+				return;
+			}
+
+			if (isTErrorResponse(error)) {
+				return errorNotify(error.zodError || error.message);
+			}
+			errorNotify('Something went wrong');
+		},
+		[errorNotify]
+	);
+};
+
+const useGetUser = (userId: string | null): TUseGetUserReturn => {
+	const handleError = useHandleError();
+
 	const {
 		data: user,
 		isLoading: isUserLoading,
 		error
-	} = useGetUserQuery(args, opt);
+	} = useGetUserQuery(userId || skipToken);
 
-	if (error) {
-		if (isTErrorResponse(error)) {
-			errorNotify(error.message);
-		} else {
-			errorNotify('Something went wrong');
-		}
-	}
+	useEffect(() => handleError(error), [error, handleError]);
 
 	return {
 		user: user?.data,

@@ -1,4 +1,4 @@
-import { publicProcedure } from '../../trpc/index.js';
+import { authProcedure } from '../../trpc/index.js';
 import {
 	addAppSettingsInput,
 	addAppSettingsOutput,
@@ -7,7 +7,7 @@ import {
 } from './appSettings.dto.js';
 
 const appSettingsProcedures = {
-	addAppSettings: publicProcedure
+	addAppSettings: authProcedure
 		.meta({
 			openapi: {
 				method: 'POST',
@@ -28,7 +28,7 @@ const appSettingsProcedures = {
 		.input(addAppSettingsInput)
 		.output(addAppSettingsOutput),
 
-	resetAppSettings: publicProcedure
+	resetAppSettings: authProcedure
 		.meta({
 			openapi: {
 				method: 'POST',

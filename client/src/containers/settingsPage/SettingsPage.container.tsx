@@ -4,19 +4,20 @@ import { SettingsPage } from '@/pages';
 import {
 	useAddAppSettings,
 	useAddEmailSettings,
-	useResetSettings,
-	useUserContext
+	useAppSelector,
+	useResetSettings
 } from '@/hooks';
 import { getFormValues } from '@/utils';
 import { Controller, useForm } from 'react-hook-form';
 import { TSettingsFormValues } from '@/containers';
+import { getUserSelector } from '@/slices';
 
 const SettingsPageContainer = () => {
 	const { addAppSettings, isAppSettingsAdding } = useAddAppSettings();
 	const { addEmailSettings, isEmailSettingsAdding } = useAddEmailSettings();
 	const { resetSettings, isSettingsResetting } = useResetSettings();
 
-	const { user, isUserLoading } = useUserContext();
+	const { user, isAppUserLoading } = useAppSelector(getUserSelector);
 
 	const onSettingsReset = () => {
 		if (!user) {
@@ -115,7 +116,7 @@ const SettingsPageContainer = () => {
 			title="Settings"
 			subtitle="Change the settings of your application"
 			items={settingsItems}
-			isPageLoading={isUserLoading}
+			isPageLoading={isAppUserLoading}
 			isBtnDisabled={isSendBtnDisabled}
 			onReset={onSettingsReset}
 			onSubmit={onChangeSettings}

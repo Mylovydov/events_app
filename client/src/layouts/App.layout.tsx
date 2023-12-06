@@ -5,8 +5,15 @@ import {
 	EVENTS_PATH,
 	HOME_PATH,
 	SETTINGS_PATH
-} from '@/router/constants.ts';
-import { Header, Sidebar, TNavItemProps } from '@/components';
+} from '@/routes/constants.ts';
+import {
+	AppContainer,
+	Header,
+	Sidebar,
+	Spinner,
+	TNavItemProps
+} from '@/components';
+import { FC } from 'react';
 
 const navList: TNavItemProps[] = [
 	{ label: 'Home', to: HOME_PATH, icon: 'house' },
@@ -15,8 +22,14 @@ const navList: TNavItemProps[] = [
 	{ label: 'Layout', to: EMAIL_LAYOUT_PATH, icon: 'rectangle-list' }
 ];
 
-const AppLayout = () => {
-	return (
+export type TAppLayoutProps = {
+	isAppLoading?: boolean;
+};
+
+const AppLayout: FC<TAppLayoutProps> = ({ isAppLoading }) => {
+	const appContentMarkup = isAppLoading ? (
+		<Spinner />
+	) : (
 		<div className={styles.app}>
 			<aside className={styles.appSidebar}>
 				<Sidebar
@@ -30,11 +43,25 @@ const AppLayout = () => {
 					<Header username="Denys" />
 				</header>
 				<main className={styles.appBody}>
-					<div className={styles.appContainer}>
+					<AppContainer>
 						<Outlet />
-					</div>
+					</AppContainer>
 				</main>
 			</div>
+		</div>
+	);
+
+	return (
+		<div
+			style={{
+				width: '100vw',
+				height: '100vh',
+				display: 'flex',
+				justifyContent: 'center',
+				alignItems: 'center'
+			}}
+		>
+			{appContentMarkup}
 		</div>
 	);
 };

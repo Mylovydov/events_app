@@ -1,11 +1,6 @@
 import { authProcedure, publicProcedure } from '../../trpc/index.js';
-import {
-	authInput,
-	authOutput,
-	logoutInput,
-	logoutOutput,
-	refreshOutput
-} from './auth.dto.js';
+import { authInput, authOutput, logoutOutput } from './auth.dto.js';
+import { z } from 'zod';
 
 const authProcedures = {
 	register: publicProcedure
@@ -52,20 +47,20 @@ const authProcedures = {
 				protect: true
 			}
 		})
-		.input(logoutInput)
+		.input(z.void())
 		.output(logoutOutput),
-	refresh: authProcedure
+	refresh: publicProcedure
 		.meta({
 			openapi: {
-				method: 'POST',
-				path: '/auth/check',
+				method: 'GET',
+				path: '/auth/refresh',
 				tags: ['auth'],
 				summary: 'Update token pair by refresh token',
 				protect: true
 			}
 		})
-		.input(logoutInput)
-		.output(refreshOutput)
+		.input(z.void())
+		.output(authOutput)
 };
 
 export default authProcedures;

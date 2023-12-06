@@ -6,7 +6,7 @@ import {
 	TResetAppSettingsInput,
 	TResetAppSettingsOutput
 } from '@/services';
-import { EApiTags } from '@/utils';
+import { EApiTags, wrapMetadataInPromise } from '@/utils';
 
 export const appSettingsApi = baseApi.injectEndpoints({
 	endpoints: builder => ({
@@ -14,17 +14,23 @@ export const appSettingsApi = baseApi.injectEndpoints({
 			TAddAppSettingsOutput,
 			TAddAppSettingsInput
 		>({
-			query: arg => trpcClient.appSettings.addEmailSettings.mutate(arg),
-			invalidatesTags: [EApiTags.USERS, EApiTags.EVENTS],
-			transformErrorResponse: ({ data }) => data
+			query: arg =>
+				wrapMetadataInPromise({
+					originalRequest: trpcClient.appSettings.addEmailSettings.mutate,
+					requestArgs: arg
+				}),
+			invalidatesTags: [EApiTags.USERS, EApiTags.EVENTS]
 		}),
 
 		resetAppSettings: builder.mutation<
 			TResetAppSettingsOutput,
 			TResetAppSettingsInput
 		>({
-			query: arg => trpcClient.appSettings.resetAppSettings.mutate(arg),
-			transformErrorResponse: ({ data }) => data,
+			query: arg =>
+				wrapMetadataInPromise({
+					originalRequest: trpcClient.appSettings.resetAppSettings.mutate,
+					requestArgs: arg
+				}),
 			invalidatesTags: [EApiTags.USERS]
 		})
 	})

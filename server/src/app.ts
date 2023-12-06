@@ -7,16 +7,32 @@ import cookiesParser from 'cookie-parser';
 import { createOpenApiExpressMiddleware } from 'trpc-openapi';
 import swaggerUi from 'swagger-ui-express';
 import openApiDocument from './swaggerDocument/openApi.js';
+import { setResponseHeaders } from './utils/helpers/index.js';
+import { config } from './config/index.js';
+// TODO: hashing pass in schema
 
 const app = express();
-
 app.use(cookiesParser());
-app.use(cors({ origin: '*', credentials: true }));
+app.use(cors({ origin: config.get('CLIENT_URL'), credentials: true }));
+app.use(
+	setResponseHeaders({
+		'Access-Control-Allow-Origin': config.get('CLIENT_URL'),
+		'Access-Control-Request-Method': '*',
+		'Access-Control-Allow-Methods': 'OPTIONS, GET, POST, PUT, DELETE',
+		'Access-Control-Allow-Headers': '*'
+	})
+);
+
 app.use(
 	'/api/trpc',
 	createExpressMiddleware({
 		router: appRouter,
-		createContext
+		createContext,
+		onError(opts) {
+			const { error, input, ctx, req } = opts;
+
+			// TODO: add logger
+		}
 	})
 );
 app.use(

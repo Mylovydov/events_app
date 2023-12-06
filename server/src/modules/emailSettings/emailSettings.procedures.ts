@@ -1,4 +1,4 @@
-import { publicProcedure } from '../../trpc/index.js';
+import { authProcedure } from '../../trpc/index.js';
 import {
 	addEmailSettingsInput,
 	addEmailSettingsOutput,
@@ -9,7 +9,7 @@ import {
 } from './emailSettings.dto.js';
 
 const emailSettingsProcedures = {
-	addEmailSettings: publicProcedure
+	addEmailSettings: authProcedure
 		.meta({
 			openapi: {
 				method: 'POST',
@@ -26,7 +26,7 @@ const emailSettingsProcedures = {
 		.input(addEmailSettingsInput)
 		.output(addEmailSettingsOutput),
 
-	getEmailSettingsById: publicProcedure
+	getEmailSettingsById: authProcedure
 		.meta({
 			openapi: {
 				method: 'GET',
@@ -43,7 +43,7 @@ const emailSettingsProcedures = {
 		.input(getEmailSettingsInput)
 		.output(getEmailSettingsOutput),
 
-	resetEmailSettings: publicProcedure
+	resetEmailSettings: authProcedure
 		.meta({
 			openapi: {
 				method: 'PUT',

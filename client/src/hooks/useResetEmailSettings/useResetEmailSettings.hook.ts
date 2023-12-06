@@ -14,7 +14,7 @@ const useResetEmailSettings = (): TUseResetEmailSettingsReturn => {
 		(args: TResetEmailSettingsInput) => {
 			resetEmailSettingsTrigger(args)
 				.unwrap()
-				.catch(err => errorNotify(err.message));
+				.catch(({ message, zodError }) => errorNotify(zodError || message));
 		},
 		[resetEmailSettingsTrigger, errorNotify]
 	);

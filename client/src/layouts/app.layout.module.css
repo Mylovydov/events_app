@@ -2,6 +2,7 @@
     background-color: var(--main-white-color);
     display: flex;
     min-height: 100vh;
+    width: 100%;
     overflow: hidden;
 }
 
@@ -27,11 +28,4 @@
     background-color: var(--main-bg-color);
     flex: 1 1 auto;
     padding: 3rem 0;
-}
-
-.appContainer {
-    max-width: 123rem;
-    margin: 0 auto;
-    padding: 0 1.5rem;
-    height: 100%;
 }

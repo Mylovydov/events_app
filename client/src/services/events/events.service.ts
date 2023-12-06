@@ -6,18 +6,25 @@ import {
 	TGetEventsOutput
 } from '@/services';
 import { trpcClient } from '@/trpc';
-import { EApiTags } from '@/utils';
+import { EApiTags, wrapMetadataInPromise } from '@/utils';
 
 export const eventsApi = baseApi.injectEndpoints({
 	endpoints: builder => ({
 		createEvents: builder.mutation<TCreateEventsOutput, TCreateEventsInput>({
-			query: arg => trpcClient.events.create.mutate(arg),
-			transformErrorResponse: ({ data }) => data,
+			query: arg =>
+				wrapMetadataInPromise({
+					originalRequest: trpcClient.events.create.mutate,
+					requestArgs: arg
+				}),
 			invalidatesTags: [{ type: EApiTags.EVENTS, id: EApiTags.LIST }]
 		}),
 
 		getEvents: builder.query<TGetEventsOutput, TGetEventsInput>({
-			query: arg => trpcClient.events.getEvents.query(arg),
+			query: arg =>
+				wrapMetadataInPromise({
+					originalRequest: trpcClient.events.getEvents.query,
+					requestArgs: arg
+				}),
 			providesTags: result => {
 				if (!result) {
 					return [
@@ -32,8 +39,7 @@ export const eventsApi = baseApi.injectEndpoints({
 					})),
 					{ type: EApiTags.EVENTS as const, id: EApiTags.LIST as const }
 				];
-			},
-			transformErrorResponse: ({ data }) => data
+			}
 		})
 	})
 });

@@ -3,7 +3,7 @@ import { OpenApiMeta } from 'trpc-openapi';
 import { TContext } from './context.js';
 import { ApiError } from '../error/index.js';
 import { ZodError } from 'zod';
-import { prepareFlattenZodError } from '../utils/index.js';
+import { prepareFlattenZodError } from '../utils/helpers/index.js';
 
 export const t = initTRPC
 	.context<TContext>()

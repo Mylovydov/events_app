@@ -15,7 +15,7 @@ const useResetAppSettings = (): TUseResetAppSettingsReturn => {
 			resetAppSettingsTrigger(args)
 				.unwrap()
 				.then(data => successNotify(data.message))
-				.catch(err => errorNotify(err.message));
+				.catch(({ message, zodError }) => errorNotify(zodError || message));
 		},
 		[resetAppSettingsTrigger, successNotify, errorNotify]
 	);

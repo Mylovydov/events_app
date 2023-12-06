@@ -17,7 +17,7 @@ const useSendInvitationToEvents = (): TUseSendInvitationToEventsReturn => {
 			sendInvitationToEventsTrigger(args)
 				.unwrap()
 				.then(data => successNotify(data.message))
-				.catch(err => errorNotify(err.message));
+				.catch(({ message, zodError }) => errorNotify(zodError || message));
 		},
 		[sendInvitationToEventsTrigger, successNotify, errorNotify]
 	);

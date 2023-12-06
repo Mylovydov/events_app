@@ -1,0 +1,18 @@
+.loginPage {
+    width: 100vw;
+    height: 100vh;
+    background: var(--main-gradient);
+}
+.loginPageWrapper {
+    width: inherit;
+    height: inherit;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 10rem
+}
+.loginPageHeader {}
+
+.loginPageBody {
+}

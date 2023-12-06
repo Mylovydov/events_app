@@ -1,10 +1,9 @@
-import { userService } from '../user/index.js';
+import { UserModel, userService } from '../user/index.js';
 import { ApiError } from '../../error/index.js';
 import bcrypt from 'bcrypt';
 import { tokenService } from '../token/index.js';
 import { TAuthDto } from './auth.types.js';
 import { TToken } from '../token/token.types.js';
-import { UserModel } from '../user/user.model.js';
 
 class AuthService {
 	private userService = userService;
@@ -61,13 +60,11 @@ class AuthService {
 			throw ApiError.unauthorized('Invalid refresh token');
 		}
 
-		const verifiedRefreshToken = tokenService.verifyRefreshToken(token);
-		if (!verifiedRefreshToken) {
+		const userId = tokenService.verifyRefreshToken(token);
+		if (!userId) {
 			throw ApiError.unauthorized('Invalid refresh token');
 		}
 
-		const { userId } = verifiedRefreshToken;
-		await tokenService.deleteRefreshToken(userId);
 		return await tokenService.generateTokens({ userId });
 	}
 }

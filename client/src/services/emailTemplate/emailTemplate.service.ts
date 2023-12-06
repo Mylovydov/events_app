@@ -4,7 +4,7 @@ import {
 	TAddEmailTemplateInput,
 	TAddEmailTemplateOutput
 } from '@/services';
-import { EApiTags } from '@/utils';
+import { EApiTags, wrapMetadataInPromise } from '@/utils';
 
 export const emailTemplateApi = baseApi.injectEndpoints({
 	endpoints: builder => ({
@@ -12,9 +12,12 @@ export const emailTemplateApi = baseApi.injectEndpoints({
 			TAddEmailTemplateOutput,
 			TAddEmailTemplateInput
 		>({
-			query: arg => trpcClient.emailTemplate.addEmailTemplate.mutate(arg),
-			invalidatesTags: [EApiTags.USERS],
-			transformErrorResponse: ({ data }) => data
+			query: arg =>
+				wrapMetadataInPromise({
+					originalRequest: trpcClient.emailTemplate.addEmailTemplate.mutate,
+					requestArgs: arg
+				}),
+			invalidatesTags: [EApiTags.USERS]
 		})
 	})
 });
