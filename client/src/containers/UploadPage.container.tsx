@@ -1,7 +1,7 @@
 import { fileToString } from '../utils/helpers';
 import { useAppSelector, useCreateEvents } from '@/hooks';
 import { UploadPage } from '@/pages';
-import { validateEvents } from '@/utils';
+import { uploadPage, validateEvents } from '@/utils';
 import { useCallback } from 'react';
 import { getUserSelector } from '@/slices';
 
@@ -35,11 +35,11 @@ const UploadPageContainer = () => {
 
 	return (
 		<UploadPage
-			title="Events Upload"
-			subtitle="Upload your events in csv format"
-			dragRejectText="File type not accepted, sorry!"
-			dragAcceptText="File type accepted, nice!"
-			dragPlaceholder="Drag and drop some files here, or click to select files"
+			title={uploadPage.pageTitle}
+			subtitle={uploadPage.pageSubtitle}
+			dragRejectText={uploadPage.dragRejectText}
+			dragAcceptText={uploadPage.dragAcceptText}
+			dragPlaceholder={uploadPage.dragPlaceholder}
 			fileValidator={validator}
 			btnLabel="Upload events"
 			onUpload={onFileUpload}

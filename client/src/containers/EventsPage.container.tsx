@@ -13,6 +13,7 @@ import {
 	defaultDirection,
 	defaultHighlightColor,
 	defaultSortKey,
+	eventsPage,
 	isStringType,
 	PAGE_PARAM_KEY,
 	SORT_DIRECTION_PARAM_KEY,
@@ -202,8 +203,8 @@ const EventsPageContainer = () => {
 
 	return (
 		<EventsPage
-			title="Events"
-			emptyLabel="No events found"
+			title={eventsPage.pageTitle}
+			emptyLabel={eventsPage.emptyLabel}
 			rows={tableRows}
 			columns={tableColumns}
 			onSortDirectionChange={onSortDirectionChange}
