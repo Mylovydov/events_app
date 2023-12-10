@@ -6,7 +6,6 @@ import { HeaderActions, HeaderProps } from '@/components';
 const Header: FC<HeaderProps> = ({ username }) => {
 	return (
 		<div className={styles.header}>
-			<div className={styles.headerMenu}>appHeaderMenu</div>
 			<div className={styles.headerAction}>
 				<HeaderActions userAvatar={images} username={username} />
 			</div>

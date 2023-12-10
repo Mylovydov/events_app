@@ -1,10 +1,10 @@
 import { Navigate, useLocation } from 'react-router-dom';
 import { useGetUser } from '@/hooks';
 import { decodeUserToken, localStorageService } from '@/utils';
-import { AppLayout } from '@/layouts';
 import { Spinner } from '@/components';
 import { PropsWithChildren } from 'react';
 import { LOGIN_PATH } from '@/routes';
+import AppLayoutContainer from '../../containers/AppLayout.container.tsx';
 
 const Wrapper = ({ children }: PropsWithChildren) => {
 	return (
@@ -37,7 +37,7 @@ const PrivateRoutesGuard = () => {
 	}
 
 	return user ? (
-		<AppLayout isAppLoading={isUserLoading} />
+		<AppLayoutContainer />
 	) : (
 		<Navigate to={LOGIN_PATH} replace state={{ from: location }} />
 	);
