@@ -7,3 +7,4 @@ export { default as getRefreshTokenFromCookie } from './getRefreshTokenFromCooki
 export { default as setAuthCookie } from './setAuthCookie.js';
 export { default as clearAuthCookie } from './clearAuthCookie.js';
 export { default as getLoggerError } from './getLoggerError.js';
+export { default as getLoggerInfo } from './getLoggerInfo.js';

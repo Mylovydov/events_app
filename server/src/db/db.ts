@@ -3,7 +3,7 @@ import { authService } from '../modules/auth/index.js';
 import { UserModel } from '../modules/index.js';
 import { config } from '../config/index.js';
 import { appLogger } from '../logger/index.js';
-import getLoggerError from '../utils/helpers/getLoggerError.js';
+import { getLoggerError } from '../utils/helpers/index.js';
 
 const db = {
 	connect: async (cb: () => void) => {
@@ -18,7 +18,7 @@ const db = {
 
 			cb();
 		} catch (err) {
-			appLogger.log(
+			appLogger.error.log(
 				getLoggerError({ message: `MongoDB connection error: ${err}` })
 			);
 		}
@@ -35,7 +35,9 @@ const db = {
 				password: process.env.BASE_APP_USER_PASSWORD ?? '12345678'
 			});
 		} catch (err) {
-			appLogger.log(getLoggerError({ message: `Init user error: ${err}` }));
+			appLogger.error.log(
+				getLoggerError({ message: `Init user error: ${err}` })
+			);
 		}
 	}
 };
