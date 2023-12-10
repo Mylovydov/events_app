@@ -3,7 +3,7 @@ import { app } from './app.js';
 import config from './config/config.js';
 import { db } from './db/index.js';
 import { appLogger } from './logger/index.js';
-import { getLoggerInfo } from './utils/helpers/index.js';
+import { getLoggerError, getLoggerInfo } from './utils/helpers/index.js';
 
 const PORT = config.get('APP_PORT');
 
@@ -17,7 +17,9 @@ const start = async () => {
 			appLogger.info.log(getLoggerInfo(`Server running on port ${PORT}`))
 		);
 	} catch (err) {
-		console.error(err);
+		appLogger.error.log(
+			getLoggerError({ message: `Error on application startup: ${err}` })
+		);
 	}
 };
 
