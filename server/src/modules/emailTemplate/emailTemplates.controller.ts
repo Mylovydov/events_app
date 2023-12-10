@@ -16,7 +16,7 @@ const emailTemplatesController = {
 		async ({ input }) => {
 			const emailTemplate = await emailTemplateService.getEmailTemplate(input);
 			return {
-				message: 'Email template successfully added!',
+				message: 'Email template successfully found!',
 				data: emailTemplate
 			};
 		}

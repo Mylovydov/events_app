@@ -16,7 +16,7 @@ const emailSettingsController = {
 			const emailSettings =
 				await emailSettingsService.getEmailSettingsById(input);
 			return {
-				message: 'Email settings successfully added!',
+				message: 'Email settings successfully found!',
 				data: emailSettings
 			};
 		}
@@ -27,7 +27,7 @@ const emailSettingsController = {
 			const emailSettings =
 				await emailSettingsService.resetEmailSettings(input);
 			return {
-				message: 'Email settings successfully added!',
+				message: 'Email settings successfully reset!',
 				data: emailSettings
 			};
 		}

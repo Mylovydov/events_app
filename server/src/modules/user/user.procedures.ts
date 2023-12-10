@@ -8,6 +8,7 @@ import {
 	updateUserInput,
 	userIdInput
 } from './user.dto.js';
+import { userExample } from '../../utils/index.js';
 
 const userProcedures = {
 	create: authProcedure
@@ -25,9 +26,8 @@ const userProcedures = {
 						password: '12345678'
 					},
 					response: {
-						id: '60f0f1b0c9e9b1b3e8f9b3b3',
-						name: 'John Doe',
-						email: 'example@gmail.com'
+						message: 'User has been successfully registered!',
+						data: userExample
 					}
 				}
 			}
@@ -44,13 +44,12 @@ const userProcedures = {
 				protect: true,
 				summary: 'Get a user by id',
 				example: {
-					response: {
-						id: 'b24f24af-d5cc-4ccd-ad33-1fc56bd6aeeb',
-						name: 'John Doe',
-						email: 'user@example.com'
-					},
 					request: {
 						userId: 'b24f24af-d5cc-4ccd-ad33-1fc56bd6aeeb'
+					},
+					response: {
+						message: 'User was successfully found!',
+						data: userExample
 					}
 				}
 			}
@@ -67,23 +66,11 @@ const userProcedures = {
 				protect: true,
 				summary: 'Get all users',
 				example: {
+					request: {},
 					response: {
-						message: '',
-						data: [
-							{
-								id: 'b24f24af-d5cc-4ccd-ad33-1fc56bd6aeeb',
-								name: 'John Doe',
-								email: 'example@gmail.com'
-							},
-							{
-								id: 'j34jn5js-d5cc-4ccd-ad33-1fc56bd6aeeb',
-								name: 'John',
-								email: 'example-emailSettings@gmail.com'
-							},
-							['...']
-						]
-					},
-					request: {}
+						message: 'Users successfully found!',
+						data: [userExample, userExample, ['...']]
+					}
 				}
 			}
 		})
@@ -99,15 +86,14 @@ const userProcedures = {
 				summary: 'Update a user by id',
 				protect: true,
 				example: {
-					response: {
-						id: '60f0f1b0c9e9b1b3e8f9b3b3',
-						name: 'John',
-						email: 'example@gmail.com'
-					},
 					request: {
 						userId: '6e6c331e-7f3a-44d4-bb33-7358d9f808f9',
 						name: 'John',
 						email: 'user@example.com'
+					},
+					response: {
+						message: 'User was successfully updated!',
+						data: userExample
 					}
 				}
 			}
@@ -124,9 +110,12 @@ const userProcedures = {
 				protect: true,
 				summary: 'Delete user by id',
 				example: {
-					response: {},
 					request: {
 						userId: '6e6c331e-7f3a-44d4-bb33-7358d9f808f9'
+					},
+					response: {
+						message: 'User was successfully deleted!',
+						data: userExample
 					}
 				}
 			}

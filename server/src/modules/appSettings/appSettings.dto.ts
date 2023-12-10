@@ -11,7 +11,7 @@ export const appSettingsDb = mainAppSettingsSchema.extend({
 	_id: z.string().uuid({ message: zodErrorMessage.id })
 });
 
-export const addAppSettingsInput = appSettingsDb.omit({ _id: true }).extend({
+export const addAppSettingsInput = mainAppSettingsSchema.extend({
 	userId: z.string().uuid({ message: zodErrorMessage.id })
 });
 

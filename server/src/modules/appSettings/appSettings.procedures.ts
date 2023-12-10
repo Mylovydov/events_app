@@ -5,6 +5,7 @@ import {
 	resetAppSettingsInput,
 	resetAppSettingsOutput
 } from './appSettings.dto.js';
+import { appSettingsExample } from '../../utils/index.js';
 
 const appSettingsProcedures = {
 	addAppSettings: authProcedure
@@ -16,7 +17,10 @@ const appSettingsProcedures = {
 				protect: true,
 				summary: 'Add app settings to user by id',
 				example: {
-					response: {},
+					response: {
+						message: 'App settings successfully added!',
+						data: appSettingsExample
+					},
 					request: {
 						userId: '10db6a2d-0dd8-44f8-a603-b5a69723e751',
 						highlightColor: '#fbf1e6',
@@ -37,7 +41,10 @@ const appSettingsProcedures = {
 				protect: true,
 				summary: 'Reset app settings to default',
 				example: {
-					response: {},
+					response: {
+						message: 'App settings successfully reset!',
+						data: appSettingsExample
+					},
 					request: {
 						userId: '10db6a2d-0dd8-44f8-a603-b5a69723e751'
 					}

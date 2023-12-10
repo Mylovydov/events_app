@@ -22,10 +22,11 @@ const eventsProcedures = {
 				protect: true,
 				example: {
 					request: {
-						file: exampleBase64CSV
+						file: exampleBase64CSV,
+						userId: '60f1b2b0-0b7a-4e1a-9b0a-0b9e2b7b3b1b'
 					},
 					response: {
-						message: '',
+						message: 'Events successfully created!',
 						data: exampleEvents
 					}
 				}
@@ -43,9 +44,14 @@ const eventsProcedures = {
 				summary: 'Get all uploaded events and sorting',
 				protect: true,
 				example: {
-					// request: {},
+					request: {
+						sortDirection: 'asc',
+						sortKey: 'startDateTime',
+						page: 1,
+						limit: 5
+					},
 					response: {
-						message: '',
+						message: 'Events successfully found!',
 						data: exampleEvents
 					}
 				}
@@ -63,9 +69,11 @@ const eventsProcedures = {
 				summary: 'Get event by id',
 				protect: true,
 				example: {
-					// request: {},
+					request: {
+						eventId: '60f1b2b0-0b7a-4e1a-9b0a-0b9e2b7b3b1b'
+					},
 					response: {
-						message: '',
+						message: 'Event successfully found!',
 						data: exampleEvents[0]
 					}
 				}
@@ -84,12 +92,12 @@ const eventsProcedures = {
 				protect: true,
 				example: {
 					request: {
-						eventId: '',
+						eventId: '60f1b2b0-0b7a-4e1a-9b0a-0b9e2b7b3b1b',
 						isEmailSend: true
 					},
 					response: {
-						message: '',
-						data: exampleEvents
+						message: 'Email sent status successfully changed!',
+						data: exampleEvents[0]
 					}
 				}
 			}

@@ -1,0 +1,8 @@
+const authResponseExample = {
+	accessToken:
+		'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI0Njg0YjQ5Yy1jNTU2LTQzNTgtODcyMC0zM2U1MDEwMGI2YTYiLCJpYXQiOjE3MDIyMjM2NzgsImV4cCI6MTcwMjIyMzcwOH0.mnhzEbdbdWfflnYStq8eg41nQ08rLMfRdqOVvpO8zVE',
+	refreshToken:
+		'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI0Njg0YjQ5Yy1jNTU2LTQzNTgtODcyMC0zM2U1MDEwMGI2YTYiLCJpYXQiOjE3MDIyMjM2NzgsImV4cCI6MTcwNDgxNTY3OH0.sbN4ycNbeTAv-1FKUGwabIL7FgrbgWuH1S97MAXdMc4'
+};
+
+export default authResponseExample;

@@ -1,6 +1,7 @@
 import { authProcedure, publicProcedure } from '../../trpc/index.js';
 import { authInput, authOutput, logoutOutput } from './auth.dto.js';
 import { z } from 'zod';
+import { authResponseExample } from '../../utils/index.js';
 
 const authProcedures = {
 	register: publicProcedure
@@ -14,6 +15,10 @@ const authProcedures = {
 					request: {
 						email: 'user@example.com',
 						password: '12345678'
+					},
+					response: {
+						message: 'User has been registered!',
+						data: authResponseExample
 					}
 				}
 			}
@@ -31,6 +36,10 @@ const authProcedures = {
 					request: {
 						email: 'user@example.com',
 						password: '12345678'
+					},
+					response: {
+						message: 'Logged in successfully!',
+						data: authResponseExample
 					}
 				}
 			}
@@ -44,7 +53,14 @@ const authProcedures = {
 				path: '/auth/logout',
 				tags: ['auth'],
 				summary: 'Logout user from the system',
-				protect: true
+				protect: true,
+				example: {
+					request: {},
+					response: {
+						message: 'Logged out successfully!',
+						data: {}
+					}
+				}
 			}
 		})
 		.input(z.void())
@@ -56,7 +72,14 @@ const authProcedures = {
 				path: '/auth/refresh',
 				tags: ['auth'],
 				summary: 'Update token pair by refresh token',
-				protect: true
+				protect: true,
+				example: {
+					request: {},
+					response: {
+						message: 'Tokens have been updated!',
+						data: authResponseExample
+					}
+				}
 			}
 		})
 		.input(z.void())
