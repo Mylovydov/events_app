@@ -49,7 +49,7 @@ class EventsService {
 	async getEventsByUserId(userId: string, opt?: QueryOptions) {
 		return EventModel.find({ userId }, null, opt);
 	}
-
+	// throw ApiError.notFound('sdfsdfsdfs');
 	async getEvents({
 		sortKey,
 		sortDirection,

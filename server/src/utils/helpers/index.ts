@@ -4,6 +4,6 @@ export { default as prepareValidationError } from './prepareValidationError.js';
 export { default as getUnsentEvents } from './getUnsentEvents.js';
 export { default as getTokenFromHeader } from './getTokenFromHeader.js';
 export { default as getRefreshTokenFromCookie } from './getRefreshTokenFromCookie.js';
-export { default as setResponseHeaders } from './setResponseHeaders.js';
 export { default as setAuthCookie } from './setAuthCookie.js';
 export { default as clearAuthCookie } from './clearAuthCookie.js';
+export { default as getLoggerError } from './getLoggerError.js';

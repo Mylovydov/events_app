@@ -4,6 +4,7 @@ const appSettingsController = {
 	addEmailSettings: appSettingsProcedures.addAppSettings.mutation(
 		async ({ input }) => {
 			const emailSettings = await appSettingsService.addAppSettings(input);
+
 			return {
 				message: 'App settings successfully added!',
 				data: emailSettings

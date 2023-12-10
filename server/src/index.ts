@@ -1,7 +1,7 @@
 import 'dotenv/config';
 import { app } from './app.js';
-import { db } from './db/db.js';
 import config from './config/config.js';
+import { db } from './db/index.js';
 
 const PORT = config.get('APP_PORT');
 
