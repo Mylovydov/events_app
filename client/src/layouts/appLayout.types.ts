@@ -5,4 +5,5 @@ export type TAppLayoutProps = {
 	onLogoutClick: () => void;
 	username?: string;
 	navList: TNavItemProps[];
+	isLayoutLoading?: boolean;
 };

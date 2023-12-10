@@ -1,9 +1,11 @@
-import { useNotify } from '@/hooks';
+import { TUseAddAppSettingsReturn, useNotify } from '@/hooks';
 import { TAddAppSettingsInput, useAddAppSettingsMutation } from '@/services';
 import { useCallback } from 'react';
+import useHandleError from '../useHandleError/useHandleError.hook.ts';
 
-const useAddAppSettings = () => {
-	const { successNotify, errorNotify } = useNotify();
+const useAddAppSettings = (): TUseAddAppSettingsReturn => {
+	const handleError = useHandleError();
+	const { successNotify } = useNotify();
 	const [addAppSettingsTrigger, { isLoading: isAppSettingsAdding }] =
 		useAddAppSettingsMutation();
 
@@ -14,9 +16,9 @@ const useAddAppSettings = () => {
 				.then(data => {
 					successNotify(data.message);
 				})
-				.catch(({ message, zodError }) => errorNotify(zodError || message));
+				.catch(handleError);
 		},
-		[addAppSettingsTrigger, successNotify, errorNotify]
+		[addAppSettingsTrigger, successNotify, handleError]
 	);
 
 	return {

@@ -1,4 +1,8 @@
-import { TUseAddEmailTemplateSettingsReturn, useNotify } from '@/hooks';
+import {
+	TUseAddEmailTemplateSettingsReturn,
+	useHandleError,
+	useNotify
+} from '@/hooks';
 import {
 	TAddEmailTemplateInput,
 	useAddEmailTemplateMutation
@@ -6,7 +10,8 @@ import {
 import { useCallback } from 'react';
 
 const useAddEmailTemplate = (): TUseAddEmailTemplateSettingsReturn => {
-	const { successNotify, errorNotify } = useNotify();
+	const { successNotify } = useNotify();
+	const handleError = useHandleError();
 	const [addAddEmailTemplateTrigger, { isLoading: isEmailTemplateAdding }] =
 		useAddEmailTemplateMutation();
 
@@ -17,9 +22,9 @@ const useAddEmailTemplate = (): TUseAddEmailTemplateSettingsReturn => {
 				.then(data => {
 					successNotify(data.message);
 				})
-				.catch(({ message, zodError }) => errorNotify(zodError || message));
+				.catch(handleError);
 		},
-		[addAddEmailTemplateTrigger, successNotify, errorNotify]
+		[addAddEmailTemplateTrigger, successNotify, handleError]
 	);
 
 	return {

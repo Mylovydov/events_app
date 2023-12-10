@@ -1,12 +1,13 @@
 import { TLoginInput, useLoginMutation } from '@/services';
-import { TUseLoginReturn, useNotify } from '@/hooks';
+import { TUseLoginReturn, useHandleError, useNotify } from '@/hooks';
 import { useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { SETTINGS_PATH } from '@/routes';
 
 const useLogin = (): TUseLoginReturn => {
 	const navigate = useNavigate();
-	const { errorNotify, successNotify } = useNotify();
+	const { successNotify } = useNotify();
+	const handleError = useHandleError();
 	const [loginTrigger, { isLoading: isLogging }] = useLoginMutation();
 
 	const login = useCallback(
@@ -17,11 +18,9 @@ const useLogin = (): TUseLoginReturn => {
 					data?.message && successNotify(data?.message);
 					navigate(SETTINGS_PATH);
 				})
-				.catch(error => {
-					errorNotify(error?.zodError || error?.message);
-				});
+				.catch(handleError);
 		},
-		[loginTrigger, successNotify, navigate, errorNotify]
+		[loginTrigger, successNotify, navigate, handleError]
 	);
 
 	return {

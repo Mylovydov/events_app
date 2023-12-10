@@ -1,13 +1,12 @@
 import { TGetModifyEventsInput, useGetEventsQuery } from '@/services';
-import { TUseGetEventsReturn, useNotify } from '@/hooks';
-import { isTErrorResponse } from '@/utils';
+import { TUseGetEventsReturn, useHandleError } from '@/hooks';
 import { useEffect } from 'react';
 
 const useGetEvents = ({
 	userId,
 	...restArgs
 }: TGetModifyEventsInput): TUseGetEventsReturn => {
-	const { errorNotify } = useNotify();
+	const handleError = useHandleError();
 
 	const {
 		data: eventsData,
@@ -22,15 +21,7 @@ const useGetEvents = ({
 		}
 	);
 
-	useEffect(() => {
-		if (error) {
-			if (isTErrorResponse(error)) {
-				errorNotify(error.zodError || error.message);
-			} else {
-				errorNotify('Something went wrong');
-			}
-		}
-	}, [error, errorNotify]);
+	useEffect(() => handleError(error), [error, handleError]);
 
 	return {
 		events: eventsData?.data.events || [],

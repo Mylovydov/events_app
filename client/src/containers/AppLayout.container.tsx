@@ -6,6 +6,8 @@ import {
 	HOME_PATH,
 	SETTINGS_PATH
 } from '@/routes';
+import { useLogout } from '@/hooks';
+import { useCallback } from 'react';
 
 const navList: TNavItemProps[] = [
 	{ label: 'Home', to: HOME_PATH, icon: 'house' },
@@ -15,8 +17,19 @@ const navList: TNavItemProps[] = [
 ];
 
 const AppLayoutContainer = () => {
+	const { logout, isLoggingOut } = useLogout();
+
+	const onLogoutClick = useCallback(() => {
+		logout();
+	}, [logout]);
+
 	return (
-		<AppLayout navList={navList} username="User" onLogoutClick={() => {}} />
+		<AppLayout
+			navList={navList}
+			username="User"
+			onLogoutClick={onLogoutClick}
+			isLayoutLoading={isLoggingOut}
+		/>
 	);
 };
 

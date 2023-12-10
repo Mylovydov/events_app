@@ -1,1 +1,1 @@
-export { default as useAppDispatch } from './useAppDispatch';
+export { default as useAppDispatch } from './useAppDispatch.hook.ts';
