@@ -1,4 +1,8 @@
-import { TUseSendInvitationToEventsReturn, useNotify } from '@/hooks';
+import {
+	TUseSendInvitationToEventsReturn,
+	useHandleError,
+	useNotify
+} from '@/hooks';
 import {
 	TSendInvitationToEventsInput,
 	useSendInvitationToEventsMutation
@@ -6,7 +10,8 @@ import {
 import { useCallback } from 'react';
 
 const useSendInvitationToEvents = (): TUseSendInvitationToEventsReturn => {
-	const { errorNotify, successNotify } = useNotify();
+	const { successNotify } = useNotify();
+	const handleError = useHandleError();
 	const [
 		sendInvitationToEventsTrigger,
 		{ isLoading: isInvitationToEventsSending }
@@ -17,9 +22,9 @@ const useSendInvitationToEvents = (): TUseSendInvitationToEventsReturn => {
 			sendInvitationToEventsTrigger(args)
 				.unwrap()
 				.then(data => successNotify(data.message))
-				.catch(({ message, zodError }) => errorNotify(zodError || message));
+				.catch(handleError);
 		},
-		[sendInvitationToEventsTrigger, successNotify, errorNotify]
+		[sendInvitationToEventsTrigger, successNotify, handleError]
 	);
 
 	return {

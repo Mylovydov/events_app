@@ -4,7 +4,7 @@ import { AppLogo, Logout, Navbar, TSidebarProps } from '@/components';
 
 const Sidebar: FC<TSidebarProps> = ({
 	navList,
-	logoutLabel,
+	logoutLabel = 'Logout',
 	onLogoutClick
 }) => (
 	<div className={styles.sidebar}>

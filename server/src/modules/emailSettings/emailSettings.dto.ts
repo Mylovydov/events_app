@@ -1,5 +1,6 @@
 import { z } from 'zod';
 import { baseOutputSchema } from '../utils/index.js';
+import { zodErrorMessage } from '../../utils/index.js';
 
 export const mainEmailSettingsSchema = z.object({
 	service: z.string().optional(),
@@ -9,11 +10,11 @@ export const mainEmailSettingsSchema = z.object({
 });
 
 export const emailSettingsSchemaDb = mainEmailSettingsSchema.extend({
-	_id: z.string().uuid()
+	_id: z.string().uuid(zodErrorMessage.id)
 });
 
 export const addEmailSettingsInput = mainEmailSettingsSchema.extend({
-	userId: z.string().uuid()
+	userId: z.string().uuid(zodErrorMessage.id)
 });
 
 export const addEmailSettingsOutput = baseOutputSchema.extend({
@@ -21,7 +22,7 @@ export const addEmailSettingsOutput = baseOutputSchema.extend({
 });
 
 export const getEmailSettingsInput = z.object({
-	emailSettingsId: z.string().uuid()
+	emailSettingsId: z.string().uuid(zodErrorMessage.id)
 });
 
 export const getEmailSettingsOutput = baseOutputSchema.extend({
@@ -29,7 +30,7 @@ export const getEmailSettingsOutput = baseOutputSchema.extend({
 });
 
 export const resetEmailSettingsInput = z.object({
-	userId: z.string().uuid()
+	userId: z.string().uuid(zodErrorMessage.id)
 });
 
 export const resetEmailSettingsOutput = baseOutputSchema.extend({

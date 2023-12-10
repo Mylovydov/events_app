@@ -1,5 +1,6 @@
 import { z } from 'zod';
 import { baseOutputSchema } from '../utils/index.js';
+import { zodErrorMessage } from '../../utils/index.js';
 
 export const mainAppSettingsSchema = z.object({
 	highlightColor: z.string().optional(),
@@ -7,11 +8,11 @@ export const mainAppSettingsSchema = z.object({
 });
 
 export const appSettingsDb = mainAppSettingsSchema.extend({
-	_id: z.string().uuid({ message: 'Invalid UUID format' })
+	_id: z.string().uuid({ message: zodErrorMessage.id })
 });
 
-export const addAppSettingsInput = appSettingsDb.omit({ _id: true }).extend({
-	userId: z.string().uuid({ message: 'Invalid UUID format' })
+export const addAppSettingsInput = mainAppSettingsSchema.extend({
+	userId: z.string().uuid({ message: zodErrorMessage.id })
 });
 
 export const addAppSettingsOutput = baseOutputSchema.extend({
@@ -19,7 +20,7 @@ export const addAppSettingsOutput = baseOutputSchema.extend({
 });
 
 export const resetAppSettingsInput = z.object({
-	userId: z.string().uuid()
+	userId: z.string().uuid(zodErrorMessage.id)
 });
 
 export const resetAppSettingsOutput = baseOutputSchema.extend({

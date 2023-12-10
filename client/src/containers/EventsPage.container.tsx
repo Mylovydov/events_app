@@ -13,6 +13,7 @@ import {
 	defaultDirection,
 	defaultHighlightColor,
 	defaultSortKey,
+	eventsPage,
 	isStringType,
 	PAGE_PARAM_KEY,
 	SORT_DIRECTION_PARAM_KEY,
@@ -20,7 +21,7 @@ import {
 } from '@/utils';
 import { EventsTableRow, TBaseSortDirection } from '@/components';
 import { useNavigate } from 'react-router-dom';
-import { SETTINGS_PATH } from 'src/routes';
+import { EMAIL_LAYOUT_PATH, SETTINGS_PATH } from 'src/routes';
 import { getUserSelector } from '@/slices';
 
 const columns = [
@@ -78,29 +79,6 @@ const EventsPageContainer = () => {
 		}
 	}, [user]);
 
-	const onSendButtonClick = useCallback(
-		(eventId: string) => {
-			if (!user || isStringType(user?.emailSettings)) {
-				return;
-			}
-
-			const {
-				emailSettings: { isSettingsVerified },
-				_id: userId
-			} = user;
-
-			if (isSettingsVerified) {
-				return sendInvitationToEvent({
-					eventId,
-					userId
-				});
-			}
-
-			return navigate(SETTINGS_PATH);
-		},
-		[user, sendInvitationToEvent, navigate]
-	);
-
 	const onSortDirectionChange = useCallback(
 		(accessor: string, sortDirection: TBaseSortDirection) => {
 			setSortParams({
@@ -120,14 +98,49 @@ const EventsPageContainer = () => {
 
 	const rowActionBtnLabel = useMemo(() => {
 		const defaultLabel = 'Send';
+
 		if (!user || isStringType(user?.emailSettings)) {
 			return defaultLabel;
 		}
 
-		return user.emailSettings.isSettingsVerified
-			? defaultLabel
-			: 'Add settings';
+		if (!user.emailTemplate) {
+			return 'Add template';
+		}
+
+		if (!user.emailSettings.isSettingsVerified) {
+			return 'Add settings';
+		}
+
+		return defaultLabel;
 	}, [user]);
+
+	const onSendButtonClick = useCallback(
+		(eventId: string) => {
+			if (!user || isStringType(user?.emailSettings)) {
+				return;
+			}
+
+			const {
+				emailSettings: { isSettingsVerified },
+				emailTemplate,
+				_id: userId
+			} = user;
+
+			if (!emailTemplate) {
+				return navigate(EMAIL_LAYOUT_PATH);
+			}
+
+			if (!isSettingsVerified) {
+				return navigate(SETTINGS_PATH);
+			}
+
+			return sendInvitationToEvent({
+				eventId,
+				userId
+			});
+		},
+		[user, sendInvitationToEvent, navigate]
+	);
 
 	const tableRows = useMemo(
 		() =>
@@ -190,8 +203,8 @@ const EventsPageContainer = () => {
 
 	return (
 		<EventsPage
-			title="Events"
-			emptyLabel="No events found"
+			title={eventsPage.pageTitle}
+			emptyLabel={eventsPage.emptyLabel}
 			rows={tableRows}
 			columns={tableColumns}
 			onSortDirectionChange={onSortDirectionChange}

@@ -2,7 +2,7 @@ import { EmailLayoutPage } from '@/pages';
 import { useCallback, useRef, useState } from 'react';
 import { EditorRef, EmailEditorProps } from 'react-email-editor/dist/types';
 import { useAddEmailTemplate, useAppSelector } from '@/hooks';
-import { isStringType } from '@/utils';
+import { emailLayoutPage, isStringType } from '@/utils';
 import { getUserSelector } from '@/slices';
 
 const editorOptions: EmailEditorProps['options'] = {
@@ -74,7 +74,7 @@ const EmailLayoutPageContainer = () => {
 
 	return (
 		<EmailLayoutPage
-			title="Email Layout"
+			title={emailLayoutPage.pageTitle}
 			onLoad={onLoad}
 			onReady={onReady}
 			editorRef={emailEditorRef}

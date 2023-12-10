@@ -12,7 +12,7 @@ const authController = {
 		setAuthCookie(ctx.res, tokens.refreshToken);
 
 		return {
-			message: 'User has been registered',
+			message: 'User has been registered!',
 			data: tokens
 		};
 	}),
@@ -23,7 +23,7 @@ const authController = {
 		setAuthCookie(res, tokens.refreshToken);
 
 		return {
-			message: 'Logged in successfully',
+			message: 'Logged in successfully!',
 			data: {
 				...tokens
 			}
@@ -35,7 +35,7 @@ const authController = {
 		clearAuthCookie(ctx.res);
 
 		return {
-			message: 'Logged out successfully',
+			message: 'Logged out successfully!',
 			data: {}
 		};
 	}),
@@ -47,18 +47,10 @@ const authController = {
 		setAuthCookie(res, tokens.refreshToken);
 
 		return {
-			message: 'Tokens have been updated',
+			message: 'Tokens have been updated!',
 			data: tokens
 		};
 	})
 };
 
 export default authController;
-
-//acc
-// eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MDBiMGUwYS0wZjIzLTRhMzUtOGQwYS1lM2RmOGNhOTdlNTQiLCJpYXQiOjE3MDE3MTg0ODQsImV4cCI6MTcwMTcxODQ5NH0.NMS4qYvLfCwSO71zjRrDEI0X_lqL9qcfZeCWjRBWC6U
-
-// refreshToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MDBiMGUwYS0wZjIzLTRhMzUtOGQwYS1lM2RmOGNhOTdlNTQiLCJpYXQiOjE3MDE3MTg0ODQsImV4cCI6MTcwMTc1NDQ4NH0.rhMrh5nUdrDbTYKTUTxGkzWCxhVC_vjWPWcHwfh3dic
-
-//new refresh
-// eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MDBiMGUwYS0wZjIzLTRhMzUtOGQwYS1lM2RmOGNhOTdlNTQiLCJpYXQiOjE3MDE3MTg4MDQsImV4cCI6MTcwMTc1NDgwNH0.U8XuDkSITcWmVuI2Yvg8wnaFTZI0D2lzDfqZlpHefHc

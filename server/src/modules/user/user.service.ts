@@ -88,6 +88,7 @@ class UserService {
 			.populate('emailSettings')
 			.populate('appSettings')
 			.populate('emailTemplate');
+
 		if (!user) {
 			throw ApiError.notFound(`User with id: ${id} not found!`);
 		}

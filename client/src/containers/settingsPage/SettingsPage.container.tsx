@@ -7,7 +7,7 @@ import {
 	useAppSelector,
 	useResetSettings
 } from '@/hooks';
-import { getFormValues } from '@/utils';
+import { getFormValues, settingsPage } from '@/utils';
 import { Controller, useForm } from 'react-hook-form';
 import { TSettingsFormValues } from '@/containers';
 import { getUserSelector } from '@/slices';
@@ -67,9 +67,8 @@ const SettingsPageContainer = () => {
 	const settingsItems = useMemo(
 		() => [
 			{
-				title: 'Event Highlighting Color',
-				subtitle:
-					'Select the color that will be used to highlight unsent messages',
+				title: settingsPage.settingsItems.highlight.title,
+				subtitle: settingsPage.settingsItems.highlight.subtitle,
 				children: (
 					<Controller
 						name="highlightColor"
@@ -81,15 +80,13 @@ const SettingsPageContainer = () => {
 				)
 			},
 			{
-				title: 'Specify the SMTP server settings',
-				subtitle:
-					'Once verified, automatic invitations will be available when events are uploaded',
+				title: settingsPage.settingsItems.smtp.title,
+				subtitle: settingsPage.settingsItems.smtp.subtitle,
 				children: <EmailSettingsForm />
 			},
 			{
-				title: 'Automatic sending of emails',
-				subtitle:
-					'Enable/disable automatic messaging when events are downloaded',
+				title: settingsPage.settingsItems.autosend.title,
+				subtitle: settingsPage.settingsItems.autosend.subtitle,
 				children: (
 					<Controller
 						name="isAutoSendEnabled"
@@ -113,8 +110,8 @@ const SettingsPageContainer = () => {
 
 	return (
 		<SettingsPage
-			title="Settings"
-			subtitle="Change the settings of your application"
+			title={settingsPage.pageTitle}
+			subtitle={settingsPage.pageSubtitle}
 			items={settingsItems}
 			isPageLoading={isAppUserLoading}
 			isBtnDisabled={isSendBtnDisabled}

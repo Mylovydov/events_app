@@ -1,1 +1,1 @@
-export { default as useAppSelector } from './useAppSelector';
+export { default as useAppSelector } from './useAppSelector.hook.ts';

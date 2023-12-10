@@ -24,7 +24,6 @@ class AppSettingsService {
 			user.appSettings = appSettingsDb._id;
 			await user.save();
 		}
-
 		return appSettingsDb.toJSON();
 	}
 

@@ -5,6 +5,7 @@ import {
 	getEmailTemplateInput,
 	getEmailTemplateOutput
 } from './emailTemplate.dto.js';
+import { emailTemplateExample } from '../../utils/index.js';
 
 const emailTemplateProcedures = {
 	addEmailTemplate: authProcedure
@@ -23,7 +24,7 @@ const emailTemplateProcedures = {
 					},
 					response: {
 						message: 'Email template successfully added!',
-						data: {}
+						data: emailTemplateExample
 					}
 				}
 			}
@@ -41,13 +42,11 @@ const emailTemplateProcedures = {
 				protect: true,
 				example: {
 					request: {
-						template: '',
-						design: '',
-						userId: '284a4e92-57b2-414f-8757-4d6e1462a347'
+						emailTemplateId: '284a4e92-57b2-414f-8757-4d6e1462a347'
 					},
 					response: {
 						message: 'Email template successfully found!',
-						data: {}
+						data: emailTemplateExample
 					}
 				}
 			}

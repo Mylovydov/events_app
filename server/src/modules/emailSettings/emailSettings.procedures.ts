@@ -7,6 +7,7 @@ import {
 	resetEmailSettingsInput,
 	resetEmailSettingsOutput
 } from './emailSettings.dto.js';
+import { emailSettingsExample } from '../../utils/index.js';
 
 const emailSettingsProcedures = {
 	addEmailSettings: authProcedure
@@ -18,8 +19,14 @@ const emailSettingsProcedures = {
 				summary: 'Add email settings',
 				protect: true,
 				example: {
-					request: {},
-					response: {}
+					request: {
+						...emailSettingsExample,
+						userId: '5fe3dd3c-fd7b-4976-9692-1702878c68c4'
+					},
+					response: {
+						message: 'Email settings successfully added!',
+						data: emailSettingsExample
+					}
 				}
 			}
 		})
@@ -35,8 +42,13 @@ const emailSettingsProcedures = {
 				summary: 'Get email settings by id',
 				protect: true,
 				example: {
-					request: {},
-					response: {}
+					request: {
+						emailSettingsId: '5fe3dd3c-fd7b-4976-9692-1702878c68c4'
+					},
+					response: {
+						message: 'Email settings successfully found!',
+						data: emailSettingsExample
+					}
 				}
 			}
 		})
@@ -52,8 +64,13 @@ const emailSettingsProcedures = {
 				summary: 'Reset emailSettings settings to default',
 				protect: true,
 				example: {
-					request: {},
-					response: {}
+					request: {
+						userId: '5fe3dd3c-fd7b-4976-9692-1702878c68c4'
+					},
+					response: {
+						message: 'Email settings successfully reset!',
+						data: emailSettingsExample
+					}
 				}
 			}
 		})

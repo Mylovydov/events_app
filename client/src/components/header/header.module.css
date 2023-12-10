@@ -2,13 +2,9 @@
     display: flex;
     align-items: center;
     padding: 2rem 3rem;
-    justify-content: space-between;
+    justify-content: flex-end;
     gap: 1rem;
     background-color: var(--main-white-color);
-
-    @media (min-width: 59.9rem) {
-        justify-content: flex-end;
-    }
 }
 
 .headerAction {
@@ -16,12 +12,4 @@
     align-items: center;
     gap: 1rem;
     flex: 0 0 18rem
-}
-
-
-.headerMenu {
-    flex: 1 1 auto;
-    @media (min-width: 59.9rem) {
-        display: none;
-    }
 }

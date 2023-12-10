@@ -1,4 +1,4 @@
-import { TUseResetEmailSettingsReturn, useNotify } from '@/hooks';
+import { TUseResetEmailSettingsReturn, useHandleError } from '@/hooks';
 import {
 	TResetEmailSettingsInput,
 	useResetEmailSettingsMutation
@@ -6,17 +6,15 @@ import {
 import { useCallback } from 'react';
 
 const useResetEmailSettings = (): TUseResetEmailSettingsReturn => {
-	const { errorNotify } = useNotify();
+	const handleError = useHandleError();
 	const [resetEmailSettingsTrigger, { isLoading: isEmailSettingsResetting }] =
 		useResetEmailSettingsMutation();
 
 	const resetEmailSettings = useCallback(
 		(args: TResetEmailSettingsInput) => {
-			resetEmailSettingsTrigger(args)
-				.unwrap()
-				.catch(({ message, zodError }) => errorNotify(zodError || message));
+			resetEmailSettingsTrigger(args).unwrap().catch(handleError);
 		},
-		[resetEmailSettingsTrigger, errorNotify]
+		[resetEmailSettingsTrigger, handleError]
 	);
 
 	return {

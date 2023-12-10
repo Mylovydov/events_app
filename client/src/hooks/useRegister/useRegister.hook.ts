@@ -1,9 +1,10 @@
 import { TRegisterInput, useRegisterMutation } from '@/services';
-import { TUseRegisterReturn, useNotify } from '@/hooks';
+import { TUseRegisterReturn, useHandleError, useNotify } from '@/hooks';
 import { useCallback } from 'react';
 
 const useRegister = (): TUseRegisterReturn => {
-	const { errorNotify, successNotify } = useNotify();
+	const handleError = useHandleError();
+	const { successNotify } = useNotify();
 	const [registerTrigger, { isLoading: isRegistering }] = useRegisterMutation();
 
 	const register = useCallback(
@@ -11,9 +12,9 @@ const useRegister = (): TUseRegisterReturn => {
 			registerTrigger(args)
 				.unwrap()
 				.then(data => successNotify(data.message))
-				.catch(({ message, zodError }) => errorNotify(zodError || message));
+				.catch(handleError);
 		},
-		[registerTrigger, successNotify, errorNotify]
+		[registerTrigger, successNotify, handleError]
 	);
 
 	return {

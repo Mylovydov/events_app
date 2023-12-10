@@ -1,5 +1,6 @@
 const exampleEvents = [
 	{
+		_id: '60f1b2b0-0b7a-4e1a-9b0a-0b9e2b7b3b1b',
 		inviteeLastName: 'Smith',
 		inviteeFirstName: 'John',
 		inviteeEmail: 'john.smith@example.com',
@@ -10,6 +11,7 @@ const exampleEvents = [
 		inviteeUUID: '4f3408c9-b087-4c8c-84a1-3f285f200392'
 	},
 	{
+		_id: '60f1b2b0-0b7a-4e1a-9b0a-0b9e2b7b3b1z',
 		inviteeLastName: 'Johnson',
 		inviteeFirstName: 'Lisa',
 		inviteeEmail: 'lisa.johnson@example.com',
@@ -20,6 +22,7 @@ const exampleEvents = [
 		inviteeUUID: '86645f26-2aec-4d11-beed-3967e78fcf36'
 	},
 	{
+		_id: '60f1b2b0-0b7a-4e1a-9b0a-0b9e2b7b3b1a',
 		inviteeLastName: 'Williams',
 		inviteeFirstName: 'Michael',
 		inviteeEmail: 'michael.williams@example.com',
@@ -30,6 +33,7 @@ const exampleEvents = [
 		inviteeUUID: '8aef53f7-3a08-47a7-9e9a-02e55f3dab64'
 	},
 	{
+		_id: '60f1b2b0-0b7a-4e1a-9b0a-0b9e2b7b3b1r',
 		inviteeLastName: 'Brown',
 		inviteeFirstName: 'Emily',
 		inviteeEmail: 'emily.brown@example.com',
@@ -40,6 +44,7 @@ const exampleEvents = [
 		inviteeUUID: '1f273169-35de-403f-b6a3-cffc26e889f0'
 	},
 	{
+		_id: '60f1b2b0-0b7a-4e1a-9b0a-0b9e2b7b3b1s',
 		inviteeLastName: 'Jones',
 		inviteeFirstName: 'David',
 		inviteeEmail: 'david.jones@example.com',
@@ -50,6 +55,7 @@ const exampleEvents = [
 		inviteeUUID: 'fb7ac6c5-9719-43e4-9bc7-192b2229aa7e'
 	},
 	{
+		_id: '60f1b2b0-0b7a-4e1a-9b0a-0b9e2b7b3b1v',
 		inviteeLastName: 'Taylor',
 		inviteeFirstName: 'Sarah',
 		inviteeEmail: 'sarah.taylor@example.com',
@@ -60,6 +66,7 @@ const exampleEvents = [
 		inviteeUUID: '16a7c89f-5271-4063-9996-5bb89f905ea4'
 	},
 	{
+		_id: '60f1b2b0-0b7a-4e1a-9b0a-0b9e2b7b3b1c',
 		inviteeLastName: 'Anderson',
 		inviteeFirstName: 'Kevin',
 		inviteeEmail: 'kevin.andersple.com',

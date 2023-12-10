@@ -1,27 +1,7 @@
 import { useGetUserQuery } from '@/services';
-import { TUseGetUserReturn, useNotify } from '@/hooks';
-import { isTErrorResponse } from '@/utils';
+import { TUseGetUserReturn, useHandleError } from '@/hooks';
 import { skipToken } from '@reduxjs/toolkit/query';
-import { useCallback, useEffect } from 'react';
-import { TTRPCClientError } from '@/trpc';
-import { SerializedError } from '@reduxjs/toolkit';
-
-const useHandleError = () => {
-	const { errorNotify } = useNotify();
-	return useCallback(
-		(error?: TTRPCClientError | SerializedError) => {
-			if (!error) {
-				return;
-			}
-
-			if (isTErrorResponse(error)) {
-				return errorNotify(error.zodError || error.message);
-			}
-			errorNotify('Something went wrong');
-		},
-		[errorNotify]
-	);
-};
+import { useEffect } from 'react';
 
 const useGetUser = (userId: string | null): TUseGetUserReturn => {
 	const handleError = useHandleError();

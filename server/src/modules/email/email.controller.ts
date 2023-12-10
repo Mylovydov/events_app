@@ -15,7 +15,7 @@ const emailController = {
 		async ({ input }) => {
 			await emailService.sendInvitationToEvents(input);
 			return {
-				message: 'Email successfully sent!',
+				message: 'Emails successfully sent!',
 				data: {}
 			};
 		}

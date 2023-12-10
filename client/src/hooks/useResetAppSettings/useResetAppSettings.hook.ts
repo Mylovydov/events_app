@@ -4,9 +4,11 @@ import {
 	useResetAppSettingsMutation
 } from '@/services';
 import { useCallback } from 'react';
+import useHandleError from '../useHandleError/useHandleError.hook.ts';
 
 const useResetAppSettings = (): TUseResetAppSettingsReturn => {
-	const { errorNotify, successNotify } = useNotify();
+	const { successNotify } = useNotify();
+	const handleError = useHandleError();
 	const [resetAppSettingsTrigger, { isLoading: isAppSettingsResetting }] =
 		useResetAppSettingsMutation();
 
@@ -15,9 +17,9 @@ const useResetAppSettings = (): TUseResetAppSettingsReturn => {
 			resetAppSettingsTrigger(args)
 				.unwrap()
 				.then(data => successNotify(data.message))
-				.catch(({ message, zodError }) => errorNotify(zodError || message));
+				.catch(handleError);
 		},
-		[resetAppSettingsTrigger, successNotify, errorNotify]
+		[resetAppSettingsTrigger, handleError, successNotify]
 	);
 
 	return {

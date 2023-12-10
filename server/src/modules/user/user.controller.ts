@@ -12,6 +12,7 @@ const userController = {
 
 	getUser: userProcedures.getUser.query(async ({ input }) => {
 		const user = await userService.getById(input.userId);
+
 		return {
 			message: 'User was successfully found!',
 			data: user
