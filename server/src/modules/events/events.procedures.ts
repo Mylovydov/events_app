@@ -1,5 +1,5 @@
-import { authProcedure } from '../../trpc/index.js';
-import { exampleBase64CSV, exampleEvents } from '../../utils/index.js';
+import { authProcedure } from '../../trpc';
+import { exampleBase64CSV, exampleEvents } from '../../utils';
 import {
 	changeEmailSentStatusInput,
 	changeEmailSentStatusOutput,
@@ -9,7 +9,7 @@ import {
 	getEventOutput,
 	getEventsInput,
 	getEventsOutput
-} from './events.dto.js';
+} from './events.dto';
 
 const eventsProcedures = {
 	create: authProcedure

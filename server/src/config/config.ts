@@ -1,4 +1,4 @@
-import { TConfig } from './config.types.js';
+import { TConfig } from './config.types';
 
 const config: TConfig = {
 	APP_PORT: process.env.APP_PORT || '4200',

@@ -1,6 +1,6 @@
 import { z } from 'zod';
-import { baseOutputSchema } from '../utils/index.js';
-import { zodErrorMessage } from '../../utils/index.js';
+import { zodErrorMessage } from '../../utils';
+import { baseOutputSchema } from '../utils';
 
 export const sendEmailInput = z.object({
 	eventId: z.string().uuid(zodErrorMessage.id),

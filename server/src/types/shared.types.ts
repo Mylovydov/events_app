@@ -1,3 +1,3 @@
-import { appRouter } from '../routes/index.js';
+import { appRouter } from '../routes';
 
 export type TAppRouter = typeof appRouter;

@@ -1,12 +1,12 @@
-import { router } from '../trpc/index.js';
-import authRouter from './auth.router.js';
-import userRouter from './user.router.js';
-import eventsRouter from './events.router.js';
-import tokenRouter from './token.router.js';
-import emailTemplateRouter from './emailTemplate.router.js';
-import emailSettingsRouter from './emailSettings.router.js';
-import appSettingsRouter from './appSettings.router.js';
-import emailRouter from './email.router.js';
+import { router } from '../trpc';
+import authRouter from './auth.router';
+import userRouter from './user.router';
+import eventsRouter from './events.router';
+import tokenRouter from './token.router';
+import emailTemplateRouter from './emailTemplate.router';
+import emailSettingsRouter from './emailSettings.router';
+import appSettingsRouter from './appSettings.router';
+import emailRouter from './email.router';
 
 const appRouter = router({
 	token: tokenRouter,

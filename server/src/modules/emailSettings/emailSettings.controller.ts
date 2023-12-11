@@ -1,4 +1,4 @@
-import { emailSettingsProcedures, emailSettingsService } from './index.js';
+import { emailSettingsProcedures, emailSettingsService } from './index';
 
 const emailSettingsController = {
 	addEmailSettings: emailSettingsProcedures.addEmailSettings.mutation(

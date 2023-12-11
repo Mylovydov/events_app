@@ -1,5 +1,5 @@
-import eventsProcedures from './events.procedures.js';
-import { eventsService } from './index.js';
+import eventsProcedures from './events.procedures';
+import { eventsService } from './index';
 
 const eventsController = {
 	create: eventsProcedures.create.mutation(async ({ input }) => {

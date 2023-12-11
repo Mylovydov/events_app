@@ -1,7 +1,7 @@
-import { authProcedure, publicProcedure } from '../../trpc/index.js';
-import { authInput, authOutput, logoutOutput } from './auth.dto.js';
+import { authProcedure, publicProcedure } from '../../trpc';
 import { z } from 'zod';
-import { authResponseExample } from '../../utils/index.js';
+import { authInput, authOutput, logoutOutput } from './auth.dto';
+import { authResponseExample } from '../../utils';
 
 const authProcedures = {
 	register: publicProcedure

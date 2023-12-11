@@ -1,10 +1,10 @@
 import {
 	TAddEmailTemplateInput,
 	TGetEmailTemplateInput
-} from './emailTemplate.types.js';
-import userService from '../user/user.service.js';
-import { EmailTemplateModel } from './emailTemplates.model.js';
-import { ApiError } from '../../error/index.js';
+} from './emailTemplate.types';
+import { userService } from '../user';
+import { EmailTemplateModel } from './emailTemplates.model';
+import { ApiError } from '../../error';
 
 class EmailTemplateService {
 	async addEmailTemplate({

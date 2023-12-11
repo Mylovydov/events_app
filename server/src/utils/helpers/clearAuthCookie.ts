@@ -1,4 +1,4 @@
-import { refreshTokenKeyName } from '../constants.js';
+import { refreshTokenKeyName } from '../constants';
 import { Response } from 'express';
 
 const clearAuthCookie = (res: Response) => res.clearCookie(refreshTokenKeyName);

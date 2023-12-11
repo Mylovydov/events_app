@@ -1,5 +1,5 @@
-export { default as emailProcedures } from './email.procedures.js';
-export { default as emailController } from './email.controller.js';
-export { default as emailService } from './email.service.js';
-export * from './email.dto.js';
-export * from './email.types.js';
+export { default as emailProcedures } from './email.procedures';
+export { default as emailController } from './email.controller';
+export { default as emailService } from './email.service';
+export * from './email.dto';
+export * from './email.types';

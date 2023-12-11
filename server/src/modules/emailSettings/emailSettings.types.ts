@@ -3,7 +3,7 @@ import {
 	addEmailSettingsInput,
 	getEmailSettingsInput,
 	resetEmailSettingsInput
-} from './emailSettings.dto.js';
+} from './emailSettings.dto';
 
 export type TAddEmailSettingsInputSchema = z.infer<
 	typeof addEmailSettingsInput

@@ -3,7 +3,7 @@ import {
 	generateTokenPairInput,
 	generateTokenPairOutput,
 	mainTokenSchema
-} from './token.dto.js';
+} from './token.dto';
 
 export type TToken = z.infer<typeof mainTokenSchema>;
 

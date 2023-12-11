@@ -7,7 +7,7 @@ import {
 	getEventInput,
 	getEventsInput,
 	mainEventSchema
-} from './events.dto.js';
+} from './events.dto';
 
 export type TEventSchema = z.infer<typeof mainEventSchema>;
 export type TEventsSchema = z.infer<typeof eventsSchema>;

@@ -1,6 +1,6 @@
 import { DocumentType, getModelForClass, prop } from '@typegoose/typegoose';
 import { v4 as uuidv4 } from 'uuid';
-import { baseModelOptions } from '../utils/index.js';
+import { baseModelOptions } from '../utils';
 
 export class EmailSettings {
 	@prop({ required: true, unique: true, default: () => uuidv4() })

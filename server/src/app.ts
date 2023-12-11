@@ -2,13 +2,13 @@ import express from 'express';
 import cors from 'cors';
 import cookiesParser from 'cookie-parser';
 import swaggerUi from 'swagger-ui-express';
-import openApiDocument from './swaggerDocument/openApi.js';
-import { config } from './config/index.js';
+import { openApiDocument } from './swaggerDocument';
+import { config } from './config';
 import {
 	getExpressMiddleware,
 	getOpenApiExpressMiddleware,
 	setResponseHeaders
-} from './middleware/index.js';
+} from './middleware';
 
 const app = express();
 app.use(cookiesParser());

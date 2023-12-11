@@ -1,5 +1,5 @@
-import emailTemplateProcedures from './emailTemplate.procedures.js';
-import { emailTemplateService } from './index.js';
+import emailTemplateProcedures from './emailTemplate.procedures';
+import { emailTemplateService } from './index';
 
 const emailTemplatesController = {
 	addEmailTemplate: emailTemplateProcedures.addEmailTemplate.mutation(

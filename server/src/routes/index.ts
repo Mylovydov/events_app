@@ -1,1 +1,1 @@
-export { default as appRouter } from './app.router.js';
+export { default as appRouter } from './app.router';

@@ -5,10 +5,10 @@ import {
 	Ref
 } from '@typegoose/typegoose';
 import { v4 as uuidv4 } from 'uuid';
-import { EmailSettings } from '../emailSettings/index.js';
-import { Settings } from '../appSettings/index.js';
-import { Template } from '../emailTemplate/index.js';
-import { baseModelOptions } from '../utils/index.js';
+import { EmailSettings } from '../emailSettings';
+import { Settings } from '../appSettings';
+import { Template } from '../emailTemplate';
+import { baseModelOptions } from '../utils';
 
 export class User {
 	@prop({ required: true, unique: true, default: () => uuidv4() })

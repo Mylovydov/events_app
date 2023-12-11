@@ -1,5 +1,5 @@
-import { router } from '../trpc/index.js';
-import { emailController } from '../modules/index.js';
+import { router } from '../trpc';
+import { emailController } from '../modules';
 
 const emailRouter = router({
 	sendInvitationToEvent: emailController.sendInvitationToEvent,

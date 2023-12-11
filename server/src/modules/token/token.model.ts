@@ -4,7 +4,7 @@ import {
 	modelOptions,
 	prop
 } from '@typegoose/typegoose';
-import { baseModelOptions } from '../utils/index.js';
+import { baseModelOptions } from '../utils';
 
 @modelOptions({
 	schemaOptions: {

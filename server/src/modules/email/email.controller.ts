@@ -1,4 +1,4 @@
-import { emailProcedures, emailService } from './index.js';
+import { emailProcedures, emailService } from './index';
 
 const emailController = {
 	sendInvitationToEvent: emailProcedures.sendInvitationToEvent.mutation(

@@ -1,5 +1,5 @@
-import { default as tokenService } from './token.service.js';
-import tokenProcedures from './token.procedures.js';
+import { default as tokenService } from './token.service';
+import tokenProcedures from './token.procedures';
 
 const tokenController = {
 	generateTokenPair: tokenProcedures.generateTokenPair.mutation(

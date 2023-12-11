@@ -1,8 +1,8 @@
-import { appRouter } from '../routes/index.js';
-import { createContext } from '../trpc/index.js';
-import { appLogger } from '../logger/index.js';
 import { createExpressMiddleware } from '@trpc/server/adapters/express';
-import { getLoggerError } from '../utils/helpers/index.js';
+import { appRouter } from '../routes';
+import { createContext } from '../trpc';
+import { appLogger } from '../logger';
+import { getLoggerError } from '../utils';
 
 const getExpressMiddleware = () => {
 	return createExpressMiddleware({

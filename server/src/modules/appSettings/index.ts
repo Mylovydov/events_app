@@ -1,6 +1,6 @@
-export { default as appSettingsProcedures } from './appSettings.procedures.js';
-export { default as appSettingsController } from './appSettings.controller.js';
-export { default as appSettingsService } from './appSettings.service.js';
-export * from './appSettings.dto.js';
-export * from './appSettings.model.js';
-export * from './appSettings.types.js';
+export { default as appSettingsProcedures } from './appSettings.procedures';
+export { default as appSettingsController } from './appSettings.controller';
+export { default as appSettingsService } from './appSettings.service';
+export * from './appSettings.dto';
+export * from './appSettings.model';
+export * from './appSettings.types';

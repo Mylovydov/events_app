@@ -1,5 +1,5 @@
-import { router } from '../trpc/index.js';
-import { eventsController } from '../modules/index.js';
+import { router } from '../trpc';
+import { eventsController } from '../modules';
 
 const eventsRouter = router({
 	create: eventsController.create,

@@ -1,9 +1,9 @@
 import { initTRPC } from '@trpc/server';
 import { OpenApiMeta } from 'trpc-openapi';
-import { TContext } from './context.js';
-import { ApiError } from '../error/index.js';
+import { TContext } from './context';
+import { ApiError } from '../error';
 import { ZodError } from 'zod';
-import { prepareFlattenZodError } from '../utils/helpers/index.js';
+import { prepareFlattenZodError } from '../utils/helpers';
 
 export const t = initTRPC
 	.context<TContext>()

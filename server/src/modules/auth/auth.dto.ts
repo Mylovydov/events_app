@@ -1,7 +1,7 @@
 import { z } from 'zod';
-import { generateTokenPairOutput } from '../token/token.dto.js';
-import { baseOutputSchema } from '../utils/index.js';
-import { mainUserSchema } from '../user/index.js';
+import { baseOutputSchema } from '../utils';
+import { mainUserSchema } from '../user';
+import { generateTokenPairOutput } from '../token/token.dto';
 
 export const authInput = mainUserSchema.pick({ email: true, password: true });
 export const authOutput = baseOutputSchema.extend({

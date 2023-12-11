@@ -5,7 +5,7 @@ import {
 	emailTemplateSchemaDb,
 	getEmailTemplateInput,
 	mainEmailTemplateSchema
-} from './emailTemplate.dto.js';
+} from './emailTemplate.dto';
 
 export type TEmailTemplateSchema = z.infer<typeof mainEmailTemplateSchema>;
 export type TEmailTemplateSchemaDb = z.infer<typeof emailTemplateSchemaDb>;

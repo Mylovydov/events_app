@@ -1,4 +1,4 @@
-import { userProcedures, userService } from './index.js';
+import { userProcedures, userService } from './index';
 
 const userController = {
 	create: userProcedures.create.mutation(async ({ input }) => {

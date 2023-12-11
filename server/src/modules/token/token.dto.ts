@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { mainUserSchema } from '../user/index.js';
+import { mainUserSchema } from '../user';
 
 export const mainTokenSchema = z.string();
 

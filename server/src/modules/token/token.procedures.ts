@@ -1,9 +1,6 @@
-import { publicProcedure } from '../../trpc/index.js';
-import {
-	generateTokenPairInput,
-	generateTokenPairOutput
-} from './token.dto.js';
-import { authResponseExample } from '../../utils/index.js';
+import { publicProcedure } from '../../trpc';
+import { generateTokenPairInput, generateTokenPairOutput } from './token.dto';
+import { authResponseExample } from '../../utils';
 
 const tokenProcedures = {
 	generateTokenPair: publicProcedure

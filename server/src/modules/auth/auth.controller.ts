@@ -1,10 +1,10 @@
-import { authService } from './index.js';
-import authProcedures from './auth.procedures.js';
 import {
 	clearAuthCookie,
 	getRefreshTokenFromCookie,
 	setAuthCookie
-} from '../../utils/helpers/index.js';
+} from '../../utils';
+import authService from './auth.service';
+import authProcedures from './auth.procedures';
 
 const authController = {
 	register: authProcedures.register.mutation(async ({ input, ctx }) => {

@@ -1,4 +1,4 @@
-export { default as eventsService } from './events.service.js';
-export * from './events.model.js';
-export * from './events.types.js';
-export { default as eventsController } from './events.controller.js';
+export { default as eventsService } from './events.service';
+export * from './events.model';
+export * from './events.types';
+export { default as eventsController } from './events.controller';

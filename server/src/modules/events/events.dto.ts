@@ -1,7 +1,7 @@
 import { z } from 'zod';
-import { baseOutputSchema } from '../utils/index.js';
-import { mainUserSchema } from '../user/index.js';
-import zodErrorMessage from '../../utils/zodErrorMessage.js';
+import { baseOutputSchema } from '../utils';
+import { mainUserSchema } from '../user';
+import { zodErrorMessage } from '../../utils';
 
 export const mainEventSchema = z.object({
 	inviteeLastName: z

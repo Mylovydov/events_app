@@ -1,5 +1,5 @@
-import { router } from '../trpc/index.js';
-import { emailSettingsController } from '../modules/emailSettings/index.js';
+import { router } from '../trpc';
+import { emailSettingsController } from '../modules/emailSettings';
 
 const emailSettingsRouter = router({
 	addEmailSettings: emailSettingsController.addEmailSettings,

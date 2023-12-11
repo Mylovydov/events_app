@@ -1,5 +1,5 @@
-import { router } from '../trpc/index.js';
-import { emailTemplatesController } from '../modules/index.js';
+import { router } from '../trpc';
+import { emailTemplatesController } from '../modules';
 
 const emailTemplateRouter = router({
 	addEmailTemplate: emailTemplatesController.addEmailTemplate,

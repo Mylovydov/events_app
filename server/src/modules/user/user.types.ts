@@ -4,7 +4,7 @@ import {
 	createUserInput,
 	mainUserSchema,
 	updateUserInput
-} from './user.dto.js';
+} from './user.dto';
 
 export type TCreateUserDto = z.infer<typeof createUserInput>;
 export type TUpdateUserDto = z.infer<typeof updateUserInput>;

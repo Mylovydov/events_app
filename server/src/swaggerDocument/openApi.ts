@@ -1,6 +1,6 @@
 import { generateOpenApiDocument } from 'trpc-openapi';
-import { appRouter } from '../routes/index.js';
-import { config } from '../config/index.js';
+import { appRouter } from '../routes';
+import { config } from '../config';
 
 const openApiDocument = generateOpenApiDocument(appRouter, {
 	title: 'Events-App API',

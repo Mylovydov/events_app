@@ -1,9 +1,8 @@
 import * as mongoose from 'mongoose';
-import { authService } from '../modules/auth/index.js';
-import { UserModel } from '../modules/index.js';
-import { config } from '../config/index.js';
-import { appLogger } from '../logger/index.js';
-import { getLoggerError } from '../utils/helpers/index.js';
+import { authService, UserModel } from '../modules';
+import { config } from '../config';
+import { getLoggerError } from '../utils/helpers';
+import { appLogger } from '../logger';
 
 const db = {
 	connect: async (cb: () => void) => {

@@ -5,11 +5,11 @@ import {
 	TCreateTransporterDto,
 	TGetEmailSettingsInput,
 	TResetEmailSettingsDto
-} from './emailSettings.types.js';
-import userService from '../user/user.service.js';
-import { ApiError } from '../../error/index.js';
-import { defaultEmailSettings } from '../../utils/index.js';
-import { EmailSettingsModel } from '../emailSettings/index.js';
+} from './emailSettings.types';
+import { ApiError } from '../../error';
+import { defaultEmailSettings } from '../../utils';
+import { EmailSettingsModel } from '../emailSettings';
+import { userService } from '../user';
 
 class EmailSettingsService {
 	async getEmailSettingsById({ emailSettingsId }: TGetEmailSettingsInput) {

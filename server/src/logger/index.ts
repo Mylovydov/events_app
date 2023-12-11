@@ -1,1 +1,1 @@
-export { default as appLogger } from './logger.js';
+export { default as appLogger } from './logger';

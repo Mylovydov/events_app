@@ -1,4 +1,4 @@
-import { authProcedure } from '../../trpc/index.js';
+import { authProcedure } from '../../trpc';
 
 import { z } from 'zod';
 import {
@@ -7,8 +7,8 @@ import {
 	getUsersOutput,
 	updateUserInput,
 	userIdInput
-} from './user.dto.js';
-import { userExample } from '../../utils/index.js';
+} from './user.dto';
+import { userExample } from '../../utils';
 
 const userProcedures = {
 	create: authProcedure

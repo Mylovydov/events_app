@@ -1,11 +1,11 @@
-import { authProcedure } from '../../trpc/index.js';
+import { authProcedure } from '../../trpc';
 import {
 	addEmailTemplateInput,
 	addEmailTemplateOutput,
 	getEmailTemplateInput,
 	getEmailTemplateOutput
-} from './emailTemplate.dto.js';
-import { emailTemplateExample } from '../../utils/index.js';
+} from './emailTemplate.dto';
+import { emailTemplateExample } from '../../utils';
 
 const emailTemplateProcedures = {
 	addEmailTemplate: authProcedure

@@ -1,5 +1,5 @@
-import { router } from '../trpc/index.js';
-import { tokenController } from '../modules/index.js';
+import { router } from '../trpc';
+import { tokenController } from '../modules';
 
 const tokenRouter = router({
 	generateTokenPair: tokenController.generateTokenPair

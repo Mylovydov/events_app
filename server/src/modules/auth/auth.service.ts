@@ -1,9 +1,9 @@
-import { UserModel, userService } from '../user/index.js';
-import { ApiError } from '../../error/index.js';
+import { UserModel, userService } from '../user';
+import { ApiError } from '../../error';
 import bcrypt from 'bcrypt';
-import { tokenService } from '../token/index.js';
-import { TAuthDto } from './auth.types.js';
-import { TToken } from '../token/token.types.js';
+import { tokenService } from '../token';
+import { TAuthDto } from './auth.types';
+import { TToken } from '../token/token.types';
 
 class AuthService {
 	private userService = userService;

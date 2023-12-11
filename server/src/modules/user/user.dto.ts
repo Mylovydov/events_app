@@ -1,9 +1,9 @@
 import { z } from 'zod';
-import { mainEmailTemplateSchema } from '../emailTemplate/index.js';
-import { appSettingsDb } from '../appSettings/index.js';
-import { emailSettingsSchemaDb } from '../emailSettings/index.js';
-import { baseOutputSchema } from '../utils/index.js';
-import { zodErrorMessage } from '../../utils/index.js';
+import { mainEmailTemplateSchema } from '../emailTemplate';
+import { appSettingsDb } from '../appSettings';
+import { emailSettingsSchemaDb } from '../emailSettings';
+import { baseOutputSchema } from '../utils';
+import { zodErrorMessage } from '../../utils';
 
 export const mainUserSchema = z.object({
 	_id: z.string().uuid({ message: zodErrorMessage.id }),

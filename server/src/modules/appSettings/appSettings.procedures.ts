@@ -1,11 +1,11 @@
-import { authProcedure } from '../../trpc/index.js';
+import { authProcedure } from '../../trpc';
+import { appSettingsExample } from '../../utils';
 import {
 	addAppSettingsInput,
 	addAppSettingsOutput,
 	resetAppSettingsInput,
 	resetAppSettingsOutput
-} from './appSettings.dto.js';
-import { appSettingsExample } from '../../utils/index.js';
+} from './appSettings.dto';
 
 const appSettingsProcedures = {
 	addAppSettings: authProcedure

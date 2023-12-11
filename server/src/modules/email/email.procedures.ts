@@ -1,9 +1,5 @@
-import { authProcedure } from '../../trpc/index.js';
-import {
-	sendEmailInput,
-	sendEmailOutput,
-	sendEmailsInput
-} from './email.dto.js';
+import { authProcedure } from '../../trpc';
+import { sendEmailInput, sendEmailOutput, sendEmailsInput } from './email.dto';
 
 const emailProcedures = {
 	sendInvitationToEvent: authProcedure

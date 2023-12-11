@@ -1,4 +1,5 @@
-import { appSettingsProcedures, appSettingsService } from './index.js';
+import appSettingsProcedures from './appSettings.procedures';
+import appSettingsService from './appSettings.service';
 
 const appSettingsController = {
 	addEmailSettings: appSettingsProcedures.addAppSettings.mutation(

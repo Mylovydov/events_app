@@ -1,4 +1,4 @@
-import { authProcedure } from '../../trpc/index.js';
+import { authProcedure } from '../../trpc';
 import {
 	addEmailSettingsInput,
 	addEmailSettingsOutput,
@@ -6,8 +6,8 @@ import {
 	getEmailSettingsOutput,
 	resetEmailSettingsInput,
 	resetEmailSettingsOutput
-} from './emailSettings.dto.js';
-import { emailSettingsExample } from '../../utils/index.js';
+} from './emailSettings.dto';
+import { emailSettingsExample } from '../../utils';
 
 const emailSettingsProcedures = {
 	addEmailSettings: authProcedure

@@ -1,6 +1,6 @@
 import { z } from 'zod';
-import { sendEmailInput, sendEmailsInput } from './email.dto.js';
-import { TEventSchema } from '../events/index.js';
+import { sendEmailInput, sendEmailsInput } from './email.dto';
+import { TEventSchema } from '../events';
 
 export type TSendEmailInput = z.infer<typeof sendEmailInput>;
 export type TSendEmailsInput = z.infer<typeof sendEmailsInput>;

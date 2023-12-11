@@ -1,17 +1,17 @@
+import { ApiError } from '../../error';
+import { eventsService } from '../events';
+import { emailTemplateService } from '../emailTemplate';
+import { Transporter } from 'nodemailer';
+import SMTPTransport from 'nodemailer/lib/smtp-transport';
+import Mail from 'nodemailer/lib/mailer';
+import { getSubjectText, getUnsentEvents } from '../../utils/helpers';
 import {
 	TPrepareEmailTemplateToSentParams,
 	TSendEmailInput,
 	TSendEmailsInput
-} from './email.types.js';
-import { emailSettingsService } from '../emailSettings/index.js';
-import { userService } from '../user/index.js';
-import { ApiError } from '../../error/index.js';
-import { eventsService } from '../events/index.js';
-import { emailTemplateService } from '../emailTemplate/index.js';
-import { Transporter } from 'nodemailer';
-import SMTPTransport from 'nodemailer/lib/smtp-transport/index.js';
-import Mail from 'nodemailer/lib/mailer/index.js';
-import { getSubjectText, getUnsentEvents } from '../../utils/helpers/index.js';
+} from './email.types';
+import { emailSettingsService } from '../emailSettings';
+import { userService } from '../user';
 
 export type TSendEmail = {
 	transporter: Transporter<SMTPTransport.SentMessageInfo>;

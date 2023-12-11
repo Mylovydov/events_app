@@ -1,6 +1,6 @@
 import { createOpenApiExpressMiddleware } from 'trpc-openapi';
-import { appRouter } from '../routes/index.js';
-import { createContext } from '../trpc/index.js';
+import { appRouter } from '../routes';
+import { createContext } from '../trpc';
 
 const getOpenApiExpressMiddleware = () => {
 	return createOpenApiExpressMiddleware({

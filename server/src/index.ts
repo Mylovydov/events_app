@@ -1,9 +1,9 @@
 import 'dotenv/config';
-import { app } from './app.js';
-import config from './config/config.js';
-import { db } from './db/index.js';
-import { appLogger } from './logger/index.js';
-import { getLoggerError, getLoggerInfo } from './utils/helpers/index.js';
+import { app } from './app';
+import { db } from './db';
+import { getLoggerError, getLoggerInfo } from './utils/helpers';
+import { appLogger } from './logger';
+import { config } from './config';
 
 const PORT = config.get('APP_PORT');
 

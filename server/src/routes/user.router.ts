@@ -1,5 +1,5 @@
-import { router } from '../trpc/index.js';
-import { userController } from '../modules/index.js';
+import { router } from '../trpc';
+import { userController } from '../modules';
 
 const userRouter = router({
 	create: userController.create,

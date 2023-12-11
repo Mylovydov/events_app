@@ -1,9 +1,10 @@
 {
   "compilerOptions": {
-    "outDir": "./dist",
-    "rootDir": "./src",
+    "outDir": "dist",
+    "rootDir": "src",
     "target": "es2020",
-    "module": "NodeNext",
+    "module": "commonjs",
+    "moduleResolution": "node",
     "lib": ["ES6"],
     "noImplicitAny": true,
     "allowSyntheticDefaultImports": true,

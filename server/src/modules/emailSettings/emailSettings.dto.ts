@@ -1,6 +1,6 @@
 import { z } from 'zod';
-import { baseOutputSchema } from '../utils/index.js';
-import { zodErrorMessage } from '../../utils/index.js';
+import { baseOutputSchema } from '../utils';
+import { zodErrorMessage } from '../../utils';
 
 export const mainEmailSettingsSchema = z.object({
 	service: z.string().optional(),

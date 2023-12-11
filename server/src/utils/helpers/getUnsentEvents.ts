@@ -1,4 +1,4 @@
-import { EventDocument } from '../../modules/index.js';
+import { EventDocument } from '../../modules';
 
 const getUnsentEvents = (events: EventDocument[]) =>
 	events.filter(event => !event.isEmailSend);

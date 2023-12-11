@@ -1,5 +1,5 @@
-import { router } from '../trpc/index.js';
-import { authController } from '../modules/index.js';
+import { router } from '../trpc';
+import { authController } from '../modules';
 
 const authRouter = router({
 	register: authController.register,

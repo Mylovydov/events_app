@@ -5,16 +5,16 @@ import {
 	TGetEventInput,
 	TGetEventsInput,
 	TValidateCSVResult
-} from './events.types.js';
-import { eventsSchema } from './events.dto.js';
-import { EventModel } from './events.model.js';
-import { ApiError } from '../../error/index.js';
+} from './events.types';
+import { eventsSchema } from './events.dto';
+import { EventModel } from './events.model';
+import { ApiError } from '../../error';
 import papaParse, { ParseConfig } from 'papaparse';
 import { QueryOptions } from 'mongoose';
-import { userService } from '../user/index.js';
-import isStringType from '../utils/isStringType.js';
-import { emailService } from '../email/index.js';
-import { prepareValidationError } from '../../utils/helpers/index.js';
+import { userService } from '../user';
+import { isStringType } from '../utils';
+import { emailService } from '../email';
+import { prepareValidationError } from '../../utils';
 
 const defaultDirection = 'desc';
 const defaultSortKey = 'startDateTime';

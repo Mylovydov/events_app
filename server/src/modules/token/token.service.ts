@@ -1,7 +1,7 @@
-import jwt from 'jsonwebtoken';
-import { TGenerateResult, TPayload, TToken } from './token.types.js';
-import { TokenModel } from './token.model.js';
-import { config } from '../../config/index.js';
+import jwt, { UserIDJwtPayload } from 'jsonwebtoken';
+import { TokenModel } from './token.model';
+import { config } from '../../config';
+import { TGenerateResult, TPayload, TToken } from './token.types';
 
 class TokenService {
 	private accessTokenKey = config.get('ACCESS_JWT_SECRET');
@@ -28,7 +28,9 @@ class TokenService {
 
 	verifyAccessToken(token: TToken) {
 		try {
-			const { userId } = <jwt.JwtPayload>jwt.verify(token, this.accessTokenKey);
+			const { userId } = <UserIDJwtPayload>(
+				jwt.verify(token, this.accessTokenKey)
+			);
 			return userId;
 		} catch {
 			return null;
@@ -37,7 +39,7 @@ class TokenService {
 
 	verifyRefreshToken(token: TToken) {
 		try {
-			const { userId } = <jwt.JwtPayload>(
+			const { userId } = <UserIDJwtPayload>(
 				jwt.verify(token, this.refreshTokenKey)
 			);
 			return userId;

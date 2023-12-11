@@ -1,11 +1,8 @@
-import { ApiError } from '../../error/index.js';
-import { AppSettingsModel } from './appSettings.model.js';
-import {
-	TAddAppSettingsDto,
-	TResetAppSettingsDto
-} from './appSettings.types.js';
-import userService from '../user/user.service.js';
-import { defaultAppSettings } from '../../utils/index.js';
+import { ApiError } from '../../error';
+import { TAddAppSettingsDto, TResetAppSettingsDto } from './appSettings.types';
+import { AppSettingsModel } from './appSettings.model';
+import { userService } from '../user';
+import { defaultAppSettings } from '../../utils';
 
 class AppSettingsService {
 	async addAppSettings({ userId, ...restAppSettings }: TAddAppSettingsDto) {

@@ -6,8 +6,8 @@ import {
 	Ref
 } from '@typegoose/typegoose';
 import { v4 as uuidv4 } from 'uuid';
-import { baseModelOptions } from '../utils/index.js';
-import { User } from '../user/index.js';
+import { baseModelOptions } from '../utils';
+import { User } from '../user';
 
 @index({ eventUUID: 1, inviteeUUID: 1 })
 class Event {

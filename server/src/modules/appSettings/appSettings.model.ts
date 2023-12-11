@@ -1,7 +1,7 @@
 import { DocumentType, getModelForClass, prop } from '@typegoose/typegoose';
 import { v4 as uuidv4 } from 'uuid';
-import { defaultHighlightColor } from '../../utils/index.js';
-import { baseModelOptions } from '../utils/index.js';
+import { defaultHighlightColor } from '../../utils';
+import { baseModelOptions } from '../utils';
 
 export class Settings {
 	@prop({ required: true, unique: true, default: () => uuidv4() })
