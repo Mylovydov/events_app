@@ -44,7 +44,6 @@
     "no-alert": "error",
     "no-console": "warn",
     "no-else-return": "warn",
-    "no-magic-numbers": "warn",
     "no-nested-ternary": "error",
     "no-proto": "error",
     "no-var": "error",
