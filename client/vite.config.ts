@@ -1,19 +1,28 @@
-import { defineConfig } from 'vite';
+import { defineConfig, UserConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import svgr from 'vite-plugin-svgr';
 import tsconfigPaths from 'vite-tsconfig-paths';
 import * as path from 'path';
 
-// const PORT = import.meta.env.VITE_PORT || 3000;
+const isDevMode = process.env.NODE_ENV === 'development';
 
-export default defineConfig({
-	plugins: [react(), svgr({ svgrOptions: { icon: true } }), tsconfigPaths()],
-	server: {
-		open: true,
-		port: 3000
-	},
-	resolve: {
-		alias: [{ find: '@', replacement: path.resolve(__dirname, 'src') }],
-		extensions: ['.tsx', '.ts', '.json']
+const getViteConfig = () => {
+	const config: UserConfig = {
+		plugins: [react(), svgr({ svgrOptions: { icon: true } }), tsconfigPaths()],
+		resolve: {
+			alias: [{ find: '@', replacement: path.resolve(__dirname, 'src') }],
+			extensions: ['.tsx', '.ts', '.json']
+		}
+	};
+
+	if (isDevMode) {
+		config.server = {
+			open: true,
+			port: 3000
+		};
 	}
-});
+
+	return config;
+};
+
+export default defineConfig(getViteConfig());
