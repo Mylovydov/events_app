@@ -10,8 +10,7 @@ const getViteConfig = () => {
 	const config: UserConfig = {
 		plugins: [react(), svgr({ svgrOptions: { icon: true } }), tsconfigPaths()],
 		resolve: {
-			alias: [{ find: '@', replacement: path.resolve(__dirname, 'src') }],
-			extensions: ['.tsx', '.ts', '.json']
+			alias: [{ find: '@', replacement: path.resolve(__dirname, 'src') }]
 		}
 	};
 
