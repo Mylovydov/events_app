@@ -1,5 +1,5 @@
 import { inferProcedureInput, inferProcedureOutput } from '@trpc/server';
-import type { TAppRouter } from '../../../../server/src/types/shared.types';
+import type { TAppRouter } from '../../../../server/src';
 
 export type TSendInvitationToEventInput = inferProcedureInput<
 	TAppRouter['email']['sendInvitationToEvent']

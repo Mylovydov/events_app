@@ -15,10 +15,7 @@ app.use(cookiesParser());
 app.use(cors({ origin: config.get('CLIENT_URL'), credentials: true }));
 app.use(
 	setResponseHeaders({
-		'Access-Control-Allow-Origin': config.get('CLIENT_URL'),
-		'Access-Control-Request-Method': '*',
-		'Access-Control-Allow-Methods': 'OPTIONS, GET, POST, PUT, DELETE',
-		'Access-Control-Allow-Headers': '*'
+		'Access-Control-Allow-Origin': config.get('CLIENT_URL')
 	})
 );
 
