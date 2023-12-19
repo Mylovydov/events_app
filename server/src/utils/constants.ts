@@ -13,5 +13,5 @@ export const defaultAppSettings = {
 
 export const refreshTokenKeyName = 'refreshToken';
 
-const defaultEmailTemplateMessage =
-	'Dear Ivan, We are pleased to inform you that you are invited to a scrap metal collection event to be held in Kiev. The event will start at 18.00, the end of the event is planned at 18.00. Have a metal detector. We will be glad to see you there!';
+// const defaultEmailTemplateMessage =
+// 	'Dear Ivan, We are pleased to inform you that you are invited to a scrap metal collection event to be held in Kiev. The event will start at 18.00, the end of the event is planned at 18.00. Have a metal detector. We will be glad to see you there!';
