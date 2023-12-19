@@ -13,10 +13,12 @@ const config: TConfig = {
 	REFRESH_JWT_SECRET: process.env.ACCESS_JWT_SECRET || 'secret-refresh-key',
 	ACCESS_JWT_EXPIRES_IN: process.env.ACCESS_JWT_EXPIRES_IN || '10h',
 	REFRESH_JWT_EXPIRES_IN: process.env.REFRESH_JWT_EXPIRES_IN || '30d',
+	BASE_APP_USER_EMAIL: process.env.BASE_APP_USER_EMAIL || 'user@example.com',
+	BASE_APP_USER_PASSWORD: process.env.BASE_APP_USER_PASSWORD || '12345678',
 
 	get(key: keyof Omit<TConfig, 'get'>) {
 		return this[key];
 	}
 };
 
-export default config;
+export default Object.freeze(config);

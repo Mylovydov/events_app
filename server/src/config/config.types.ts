@@ -11,6 +11,8 @@ export type TConfig = {
 	REFRESH_JWT_SECRET: string;
 	ACCESS_JWT_EXPIRES_IN: string;
 	REFRESH_JWT_EXPIRES_IN: string;
+	BASE_APP_USER_EMAIL: string;
+	BASE_APP_USER_PASSWORD: string;
 
 	get(key: keyof TConfig): string;
 };

@@ -30,8 +30,8 @@ const db = {
 			}
 
 			await authService.register({
-				email: process.env.BASE_APP_USER_EMAIL ?? 'user@example.com',
-				password: process.env.BASE_APP_USER_PASSWORD ?? '12345678'
+				email: config.get('BASE_APP_USER_EMAIL'),
+				password: config.get('BASE_APP_USER_PASSWORD')
 			});
 		} catch (err) {
 			appLogger.error.log(
