@@ -1,4 +1,4 @@
-import { BaseQueryFn } from '@reduxjs/toolkit/dist/query/react';
+import { BaseQueryFn } from '@reduxjs/toolkit/query';
 import { trpcClient, TTRPCClientError } from '@/trpc';
 import { isTErrorResponse } from '@/utils';
 import { clearAppUser } from '@/slices';
