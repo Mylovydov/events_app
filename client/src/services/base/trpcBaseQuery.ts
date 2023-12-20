@@ -1,7 +1,7 @@
-import { BaseQueryFn } from '@reduxjs/toolkit/dist/query/react';
 import { TBaseQueryArgs, TSuccessResponse } from '@/services';
 import { TTRPCClientError } from '@/trpc';
 import { isAuthResponseData, localStorageService } from '@/utils';
+import { BaseQueryFn } from '@reduxjs/toolkit/query';
 
 const trpcBaseQuery: BaseQueryFn<
 	TBaseQueryArgs,

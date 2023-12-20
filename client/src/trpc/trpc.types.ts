@@ -1,4 +1,4 @@
-import type { TAppRouter } from '../../../server/src/types/shared.types';
+import type { TAppRouter } from '../../../server/src';
 import { TRPCClientError } from '@trpc/client';
 import { inferRouterOutputs } from '@trpc/server';
 

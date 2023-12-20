@@ -4,6 +4,7 @@ import { db } from './db';
 import { getLoggerError, getLoggerInfo } from './utils/helpers';
 import { appLogger } from './logger';
 import { config } from './config';
+import { appRouter } from './routes';
 
 const PORT = config.get('APP_PORT');
 
@@ -24,3 +25,5 @@ const start = async () => {
 };
 
 start();
+
+export type TAppRouter = typeof appRouter;

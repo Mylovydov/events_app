@@ -2,10 +2,13 @@
   "compilerOptions": {
     "outDir": "dist",
     "rootDir": "src",
-    "target": "es2020",
+    "target": "es2016",
     "module": "commonjs",
     "moduleResolution": "node",
-    "lib": ["ES6"],
+    "lib": [
+      "ES6",
+      "dom"
+    ],
     "noImplicitAny": true,
     "allowSyntheticDefaultImports": true,
     "resolveJsonModule": true,
@@ -20,8 +23,4 @@
   },
   "include": ["src/**/*", "src/types/**/*.d.ts"],
   "exclude": ["node_modules"],
-  "lib": ["esnext"],
-  "ts-node": {
-    "esm": true
-  }
 }

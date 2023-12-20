@@ -1,5 +1,5 @@
 import { TRPCClientError } from '@trpc/client';
-import type { TAppRouter } from '../../../server/src/types/shared.types';
+import type { TAppRouter } from '../../../server/src';
 
 const isTRPCClientError = (
 	cause: unknown
