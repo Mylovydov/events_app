@@ -8,11 +8,7 @@ const db = {
 	connect: async (cb: () => void) => {
 		try {
 			await mongoose.connect(
-				`mongodb://${config.get('MONGO_USER')}:${config.get(
-					'MONGO_PASSWORD'
-				)}@${config.get('MONGO_DB_HOST')}:${config.get(
-					'MONGO_DB_PORT'
-				)}/${config.get('MONGO_INITDB_DATABASE')}`
+				`mongodb://${config.get('MONGO_USER')}:${config.get('MONGO_PASSWORD')}@${config.get('MONGO_DB_HOST')}:${config.get('MONGO_DB_PORT')}`
 			);
 
 			cb();
@@ -20,6 +16,7 @@ const db = {
 			appLogger.error.log(
 				getLoggerError({ message: `MongoDB connection error: ${err}` })
 			);
+			console.log(err);
 		}
 	},
 	initUser: async () => {

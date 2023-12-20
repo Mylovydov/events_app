@@ -5,12 +5,16 @@ import tsconfigPaths from 'vite-tsconfig-paths';
 import * as path from 'path';
 
 const isDevMode = process.env.NODE_ENV === 'development';
+console.log('process.env.CLIENT_PORT', process.env.CLIENT_PORT);
 
 const getViteConfig = () => {
 	const config: UserConfig = {
 		plugins: [react(), svgr({ svgrOptions: { icon: true } }), tsconfigPaths()],
 		resolve: {
 			alias: [{ find: '@', replacement: path.resolve(__dirname, 'src') }]
+		},
+		preview: {
+			port: +(process.env.CLIENT_PORT || 3000),
 		}
 	};
 
