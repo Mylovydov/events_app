@@ -1,5 +1,5 @@
 import * as dotenv from "dotenv";
-dotenv.config({ path: "../.env", debug: true });
+dotenv.config({ path: "../.env"});
 import { app } from "./app";
 import { db } from "./db";
 import { getLoggerError, getLoggerInfo } from "./utils/helpers";

@@ -1,7 +1,7 @@
 import jwt from 'jsonwebtoken';
 import { TokenModel } from './token.model';
 import { config } from '../../config';
-import { TGenerateResult, TPayload, TToken } from './token.types';
+import { TGenerateResult, TJwtPayloadWithUserId, TPayload, TToken } from "./token.types";
 
 class TokenService {
 	private accessTokenKey = config.get('ACCESS_JWT_SECRET');
