@@ -4,7 +4,6 @@ import svgr from "vite-plugin-svgr";
 import tsconfigPaths from "vite-tsconfig-paths";
 import * as path from "path";
 
-const isDevMode = process.env.NODE_ENV === "development";
 const envDir = path.resolve(__dirname, "..");
 
 export default defineConfig(({ mode }) => {
@@ -19,17 +18,13 @@ export default defineConfig(({ mode }) => {
 		preview: {
 			port: PORT,
 		},
+		server: {
+			port: PORT
+		},
 		define: {
 			"import.meta.env.VITE_SERVER_URL": JSON.stringify(env.SERVER_URL),
 		},
 	};
-	if (isDevMode) {
-		config.server = {
-			open: true,
-			port: PORT
-		};
-	}
-
 
 	return config;
 });

@@ -1,6 +1,4 @@
-version: '3'
-
-name: "events"
+version: '3.3'
 
 services:
   app:
@@ -8,10 +6,9 @@ services:
       context: .
       dockerfile: ./docker/Dockerfile
     working_dir: /app
-    container_name: app
-    restart: always
+    restart: unless-stopped
     ports:
-      - 3000:${CLIENT_PORT}
+      - "3000:3000"
     volumes:
       - ./client:/app/client:rw
       - ./server:/app/server:rw
@@ -20,7 +17,7 @@ services:
   # MongoDB
   mongodb:
     image: mongo:latest
-    container_name: mongo_db
+    container_name: event_app_db
     restart: always
     environment:
       MONGO_INITDB_ROOT_USERNAME: ${MONGO_USER}
@@ -35,6 +32,7 @@ services:
 
   mongo-express:
     image: mongo-express:1.0.0-20
+    container_name: mongo_express
     restart: always
     ports:
       - "8081:8081"

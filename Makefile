@@ -5,9 +5,9 @@ include .env
 .DEFAULT_GOAL := help
 docker_bin := $(shell command -v docker 2> /dev/null)
 docker_compose_bin := $(shell command -v docker-compose 2> /dev/null)
-PROJECT_NAME := events_app
+PROJECT_NAME := events
 
-COMPOSE_CONFIG := --env-file .env -p $(PROJECT_NAME) -f docker/docker-compose.yml
+COMPOSE_CONFIG := --env-file .env -p $(PROJECT_NAME) -f ./docker-compose.yml
 APP_SERVICE_NAME :=app
 
 help: ## Show this help
@@ -25,7 +25,7 @@ up: check
 	$(docker_compose_bin) $(COMPOSE_CONFIG) up -d
 # For the local environment we must reinstall the node_modules because we link directory to the container
 ifeq ($(ENVIRONMENT), local)
-	@make client-install
+	@make install
 endif
 down:
 	$(docker_compose_bin) $(COMPOSE_CONFIG) down
@@ -35,20 +35,10 @@ restart:
 ---------------: ## ------[ App development ]---------
 #Install node_modules --------------------------------------------------
 install:
-	$(docker_compose_bin) $(COMPOSE_CONFIG) stop $(AUTH_GATE_SERVICE)
-	$(docker_compose_bin) $(COMPOSE_CONFIG) run --rm $(AUTH_GATE_SERVICE) yarn install || true
-	$(docker_compose_bin) $(COMPOSE_CONFIG) start $(AUTH_GATE_SERVICE)
+	$(docker_compose_bin) $(COMPOSE_CONFIG) stop $(APP_SERVICE_NAME)
+	$(docker_compose_bin) $(COMPOSE_CONFIG) run --rm $(APP_SERVICE_NAME) sh -c "cd /app/server && npm i && cd ../client && npm i" || true
+	$(docker_compose_bin) $(COMPOSE_CONFIG) start $(APP_SERVICE_NAME)
 watch:
-	$(docker_compose_bin) $(COMPOSE_CONFIG) stop $(AUTH_GATE_SERVICE)
-	$(docker_compose_bin) $(COMPOSE_CONFIG) run --rm $(AUTH_GATE_SERVICE) yarn start:dev || true
-	$(docker_compose_bin) $(COMPOSE_CONFIG) start $(AUTH_GATE_SERVICE)
-debug:
-	$(docker_compose_bin) $(COMPOSE_CONFIG) stop $(AUTH_GATE_SERVICE)
-	$(docker_compose_bin) $(COMPOSE_CONFIG) run --rm -p 9229:9229 $(AUTH_GATE_SERVICE) yarn start:debug || true
-	$(docker_compose_bin) $(COMPOSE_CONFIG) start $(AUTH_GATE_SERVICE)
-sh:
-	$(docker_compose_bin) $(COMPOSE_CONFIG) stop $(AUTH_GATE_SERVICE)
-	$(docker_compose_bin) $(COMPOSE_CONFIG) run --rm $(AUTH_GATE_SERVICE) bash || true
-	$(docker_compose_bin) $(COMPOSE_CONFIG) start $(AUTH_GATE_SERVICE)
-migrate:
-	$(docker_compose_bin) $(COMPOSE_CONFIG) exec -T $(AUTH_GATE_SERVICE) yarn db:auth:migrate || true
+	$(docker_compose_bin) $(COMPOSE_CONFIG) stop $(APP_SERVICE_NAME)
+	#$(docker_compose_bin) $(COMPOSE_CONFIG) run --rm --service-ports $(APP_SERVICE_NAME) sh -c "cd /app/client && npm run dev" || true
+	#$(docker_compose_bin) $(COMPOSE_CONFIG) start $(APP_SERVICE_NAME)

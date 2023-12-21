@@ -7,7 +7,7 @@ import { appLogger } from "./logger";
 import { config } from "./config";
 import { appRouter } from "./routes";
 
-const PORT = config.get("APP_PORT");
+const PORT = config.get("API_PORT");
 
 const start = async () => {
 	try {

@@ -1,5 +1,5 @@
 export type TConfig = {
-	APP_PORT: string;
+	API_PORT: string;
 	CLIENT_URL: string;
 	MONGO_USER: string;
 	MONGO_PASSWORD: string;

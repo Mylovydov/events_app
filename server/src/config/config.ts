@@ -1,7 +1,7 @@
 import { TConfig } from './config.types';
 
 const config: TConfig = {
-	APP_PORT: process.env.APP_PORT || '4200',
+	API_PORT: process.env.API_PORT || '4200',
 	CLIENT_URL: process.env.CLIENT_URL || 'http://localhost:3000',
 
 	MONGO_USER: process.env.MONGO_USER || 'user',
