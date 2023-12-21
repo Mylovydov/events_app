@@ -4,7 +4,6 @@ import './index.css';
 import 'normalize.css';
 import { fontAwesome } from '@/fontAwesome';
 import { MainProvider } from '@/providers';
-
 fontAwesome.init();
 
 ReactDOM.createRoot(document.getElementById('root')!).render(

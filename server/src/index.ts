@@ -1,17 +1,18 @@
-import 'dotenv/config';
-import { app } from './app';
-import { db } from './db';
-import { getLoggerError, getLoggerInfo } from './utils/helpers';
-import { appLogger } from './logger';
-import { config } from './config';
-import { appRouter } from './routes';
+import * as dotenv from "dotenv";
+dotenv.config({ path: "../.env", debug: true });
+import { app } from "./app";
+import { db } from "./db";
+import { getLoggerError, getLoggerInfo } from "./utils/helpers";
+import { appLogger } from "./logger";
+import { config } from "./config";
+import { appRouter } from "./routes";
 
-const PORT = config.get('APP_PORT');
+const PORT = config.get("APP_PORT");
 
 const start = async () => {
 	try {
 		await db.connect(() =>
-			appLogger.info.log(getLoggerInfo('Connected to database'))
+			appLogger.info.log(getLoggerInfo("Connected to database"))
 		);
 		await db.initUser();
 		app.listen(PORT, () =>

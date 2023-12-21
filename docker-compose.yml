@@ -1,5 +1,20 @@
 version: '3'
+
 services:
+  app:
+    build:
+      context: ./docker
+    working_dir: /app
+    container_name: app
+    restart: always
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=development
+    volumes:
+      - ./client:/app/client
+    command: ["npm", "run", "preview"]
+
   # MongoDB
   mongodb:
     image: mongo:latest
@@ -10,8 +25,8 @@ services:
       MONGO_INITDB_ROOT_PASSWORD: ${MONGO_PASSWORD}
       MONGO_INITDB_DATABASE: ${MONGO_DB_NAME}
     volumes:
-#      - ./scripts/mongo/init/init-mongo.js:/docker-entrypoint-initdb.d/init-mongo.js:ro
-#      - ./scripts/mongo/init:/home/mongodb
+#      - ./server/scripts/mongo/init/init-mongo.js:/docker-entrypoint-initdb.d/init-mongo.js:ro
+#      - ./server/scripts/mongo/init:/home/mongodb
       - mongo-volume:/data/db
     ports:
       - ${MONGO_DB_PORT}:27017

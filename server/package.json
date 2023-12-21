@@ -13,10 +13,7 @@
     "dev": "ts-node-dev --respawn --transpile-only src/index.ts",
     "lint": "eslint --ignore-path .eslintignore --ext .ts",
     "lint:fix": "npm run lint --fix",
-    "format": "prettier --ignore-path .gitignore --write \"**/*.+ts",
-    "mongo:up": "docker compose up -d",
-    "mongo:down": "docker compose down",
-    "mongo:clean": "npm run mongo:down && docker volume rm server_mongo-volume"
+    "format": "prettier --ignore-path .gitignore --write \"**/*.+ts"
   },
   "dependencies": {
     "@trpc/server": "^10.44.1",
