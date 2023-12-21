@@ -28,11 +28,7 @@ class TokenService {
 
 	verifyAccessToken(token: TToken) {
 		try {
-			const { userId } = <
-				{
-					userId: string;
-				} & jwt.JwtPayload
-			>jwt.verify(token, this.accessTokenKey);
+			const { userId } = <TJwtPayloadWithUserId>jwt.verify(token, this.accessTokenKey);
 			return userId;
 		} catch {
 			return null;
@@ -41,11 +37,7 @@ class TokenService {
 
 	verifyRefreshToken(token: TToken) {
 		try {
-			const { userId } = <
-				{
-					userId: string;
-				} & jwt.JwtPayload
-			>jwt.verify(token, this.refreshTokenKey);
+			const { userId } = <TJwtPayloadWithUserId>jwt.verify(token, this.refreshTokenKey);
 			return userId;
 		} catch {
 			return null;
