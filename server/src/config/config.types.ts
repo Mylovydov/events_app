@@ -3,8 +3,7 @@ export type TConfig = {
 	CLIENT_URL: string;
 	MONGO_USER: string;
 	MONGO_PASSWORD: string;
-	MONGO_DB: string;
-	MONGO_INITDB_DATABASE: string;
+	MONGO_DB_NAME: string;
 	MONGO_DB_HOST: string;
 	MONGO_DB_PORT: string;
 	ACCESS_JWT_SECRET: string;
