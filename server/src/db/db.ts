@@ -7,10 +7,7 @@ import { appLogger } from '../logger';
 const db = {
 	connect: async (cb: () => void) => {
 		try {
-			await mongoose.connect(
-				`mongodb://${config.get('MONGO_USER')}:${config.get('MONGO_PASSWORD')}@${config.get('MONGO_DB_HOST')}:${config.get('MONGO_DB_PORT')}`
-			);
-
+			await mongoose.connect(config.get('MONGO_DB_URL'));
 			cb();
 		} catch (err) {
 			appLogger.error.log(

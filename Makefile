@@ -40,5 +40,5 @@ install:
 	$(docker_compose_bin) $(COMPOSE_CONFIG) start $(APP_SERVICE_NAME)
 watch:
 	$(docker_compose_bin) $(COMPOSE_CONFIG) stop $(APP_SERVICE_NAME)
-	#$(docker_compose_bin) $(COMPOSE_CONFIG) run --rm --service-ports $(APP_SERVICE_NAME) sh -c "cd /app/client && npm run dev" || true
-	#$(docker_compose_bin) $(COMPOSE_CONFIG) start $(APP_SERVICE_NAME)
+	$(docker_compose_bin) $(COMPOSE_CONFIG) run --rm --service-ports $(APP_SERVICE_NAME) || true
+	$(docker_compose_bin) $(COMPOSE_CONFIG) start $(APP_SERVICE_NAME)
