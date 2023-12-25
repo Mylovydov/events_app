@@ -96,51 +96,40 @@ const EventsPageContainer = () => {
 		[changePaginationPage]
 	);
 
-	const rowActionBtnLabel = useMemo(() => {
+	const sentActionData = useMemo(() => {
 		const defaultLabel = 'Send';
-
 		if (!user || isStringType(user?.emailSettings)) {
-			return defaultLabel;
+			return {
+				label: defaultLabel,
+				action: () => {}
+			};
 		}
 
-		if (!user.emailTemplate) {
-			return 'Add template';
+		const {
+			emailSettings: { isSettingsVerified },
+			emailTemplate,
+			_id: userId
+		} = user;
+
+		if (!emailTemplate) {
+			return {
+				label: 'Add template',
+				action: () => navigate(EMAIL_LAYOUT_PATH)
+			};
 		}
 
-		if (!user.emailSettings.isSettingsVerified) {
-			return 'Add settings';
+		if (!isSettingsVerified) {
+			return {
+				label: 'Add settings',
+				action: () => navigate(SETTINGS_PATH)
+			};
 		}
 
-		return defaultLabel;
-	}, [user]);
-
-	const onSendButtonClick = useCallback(
-		(eventId: string) => {
-			if (!user || isStringType(user?.emailSettings)) {
-				return;
-			}
-
-			const {
-				emailSettings: { isSettingsVerified },
-				emailTemplate,
-				_id: userId
-			} = user;
-
-			if (!emailTemplate) {
-				return navigate(EMAIL_LAYOUT_PATH);
-			}
-
-			if (!isSettingsVerified) {
-				return navigate(SETTINGS_PATH);
-			}
-
-			return sendInvitationToEvent({
-				eventId,
-				userId
-			});
-		},
-		[user, sendInvitationToEvent, navigate]
-	);
+		return {
+			label: defaultLabel,
+			action: (eventId: string) => sendInvitationToEvent({ eventId, userId })
+		};
+	}, [user, sendInvitationToEvent, navigate]);
 
 	const tableRows = useMemo(
 		() =>
@@ -148,10 +137,10 @@ const EventsPageContainer = () => {
 				<EventsTableRow
 					key={item._id}
 					highlightColor={highlightColor}
-					onSendButtonClick={onSendButtonClick}
+					onSendButtonClick={sentActionData.action}
 					columns={columns}
 					item={item}
-					actionBtnLabel={rowActionBtnLabel}
+					actionBtnLabel={sentActionData.label}
 					isInvitationSending={isInvitationToEventSending}
 				/>
 			)),
@@ -159,8 +148,8 @@ const EventsPageContainer = () => {
 			events,
 			highlightColor,
 			isInvitationToEventSending,
-			onSendButtonClick,
-			rowActionBtnLabel
+			sentActionData.action,
+			sentActionData.label
 		]
 	);
 
@@ -173,27 +162,35 @@ const EventsPageContainer = () => {
 		if (
 			!user ||
 			isStringType(user?.emailSettings) ||
-			!user.emailSettings.isSettingsVerified
+			!user.emailSettings.isSettingsVerified ||
+			!user.emailTemplate
 		) {
 			return [];
 		}
 
 		const isUnsentInvitationsExist = events.some(e => !e.isEmailSend);
+		const isResendAllInvitationToEventDisabled =
+			isInvitationToAllEventResending || isEventsLoading;
+		const isUnsentInvitationsDisabled =
+			isInvitationToEventsSending ||
+			!isUnsentInvitationsExist ||
+			isEventsLoading;
 
 		return [
 			{
 				label: 'Re-send all invitations',
-				disabled: isInvitationToAllEventResending,
+				disabled: isResendAllInvitationToEventDisabled,
 				onClick: () => resendAllInvitationToEvent({ userId: user._id })
 			},
 			{
 				label: 'Send unsent invitations',
-				disabled: isInvitationToEventsSending || !isUnsentInvitationsExist,
+				disabled: isUnsentInvitationsDisabled,
 				onClick: () => sendInvitationToEvents({ userId: user._id })
 			}
 		];
 	}, [
 		events,
+		isEventsLoading,
 		isInvitationToAllEventResending,
 		isInvitationToEventsSending,
 		resendAllInvitationToEvent,

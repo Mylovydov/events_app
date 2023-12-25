@@ -3,6 +3,7 @@
     height: 100vh;
     background: var(--main-gradient);
 }
+
 .loginPageWrapper {
     width: inherit;
     height: inherit;
@@ -12,7 +13,9 @@
     flex-direction: column;
     gap: 10rem
 }
-.loginPageHeader {}
+
+.loginPageHeader {
+}
 
 .loginPageBody {
 }

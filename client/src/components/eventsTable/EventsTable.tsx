@@ -17,7 +17,7 @@ const EventsTable: FC<TEventsTableProps> = ({
 	sortDirection,
 	isLastColumnSticky,
 	emptyLabel,
-	actionItems,
+	actionItems = [],
 	...paginationProps
 }) => {
 	const eventActionsMarkup = !!actionItems.length && (

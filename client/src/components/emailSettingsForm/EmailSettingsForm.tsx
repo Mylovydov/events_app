@@ -1,16 +1,11 @@
 import styles from './emailSettingsForm.module.css';
-import { FC } from 'react';
-import {
-	PasswordField,
-	TEmailSettingsFormProps,
-	TextField
-} from '@/components';
+import { PasswordField, TextField } from '@/components';
 import { useFormContext } from 'react-hook-form';
 import VerifiedCheckmark from '../verifiedCheckmark/VerifiedCheckmark.tsx';
 import { TSettingsFormValues } from '@/containers';
 import { requiredFieldMessage } from '@/utils';
 
-const EmailSettingsForm: FC<TEmailSettingsFormProps> = () => {
+const EmailSettingsForm = () => {
 	const {
 		register,
 		formState: { errors },

@@ -15,10 +15,10 @@ module.exports = {
 			'warn',
 			{ allowConstantExport: true }
 		],
-		"indent": [
-			"error",
-			"tab",
-			{ "SwitchCase": 1 }
+		'indent': [
+			'error',
+			'tab',
+			{ 'SwitchCase': 1 }
 		],
 		'linebreak-style': [
 			'error',
@@ -44,11 +44,11 @@ module.exports = {
 		'no-alert': 'error',
 		'no-console': 'warn',
 		'no-else-return': 'warn',
-		//    "no-magic-numbers": "error",
 		'no-nested-ternary': 'error',
 		'no-proto': 'error',
 		'no-var': 'error',
 		'prefer-arrow-callback': 'error',
+		"@typescript-eslint/no-explicit-any": "warn",
 		'@typescript-eslint/no-unused-vars': 'warn',
 		'prefer-const': 'error',
 		'comma-dangle': 'error',
