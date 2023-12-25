@@ -28,9 +28,7 @@ const appSettingsProcedures = {
 					}
 				}
 			}
-		})
-		.input(addAppSettingsInput)
-		.output(addAppSettingsOutput),
+		}),
 
 	resetAppSettings: authProcedure
 		.meta({
@@ -51,8 +49,7 @@ const appSettingsProcedures = {
 				}
 			}
 		})
-		.input(resetAppSettingsInput)
-		.output(resetAppSettingsOutput)
+
 };
 
 export default appSettingsProcedures;

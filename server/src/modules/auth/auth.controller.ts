@@ -5,52 +5,66 @@ import {
 } from '../../utils';
 import authService from './auth.service';
 import authProcedures from './auth.procedures';
+import { authInput, authOutput, logoutOutput } from './auth.dto';
+import { z } from 'zod';
 
 const authController = {
-	register: authProcedures.register.mutation(async ({ input, ctx }) => {
-		const tokens = await authService.register(input);
-		setAuthCookie(ctx.res, tokens.refreshToken);
+	register: authProcedures.register
+		.input(authInput)
+		.output(authOutput)
+		.mutation(async ({ input, ctx }) => {
+			const tokens = await authService.register(input);
+			setAuthCookie(ctx.res, tokens.refreshToken);
 
-		return {
-			message: 'User has been registered!',
-			data: tokens
-		};
-	}),
+			return {
+				message: 'User has been registered!',
+				data: tokens
+			};
+		}),
 
-	login: authProcedures.login.mutation(async ({ input, ctx: { res } }) => {
-		const tokens = await authService.login(input);
+	login: authProcedures.login
+		.input(authInput)
+		.output(authOutput)
+		.mutation(async ({ input, ctx: { res } }) => {
+			const tokens = await authService.login(input);
 
-		setAuthCookie(res, tokens.refreshToken);
+			setAuthCookie(res, tokens.refreshToken);
 
-		return {
-			message: 'Logged in successfully!',
-			data: {
-				...tokens
-			}
-		};
-	}),
+			return {
+				message: 'Logged in successfully!',
+				data: {
+					...tokens
+				}
+			};
+		}),
 
-	logout: authProcedures.logout.mutation(async ({ ctx }) => {
-		await authService.logout(ctx.userId);
-		clearAuthCookie(ctx.res);
+	logout: authProcedures.logout
+		.input(z.void())
+		.output(logoutOutput)
+		.mutation(async ({ ctx }) => {
+			await authService.logout(ctx.userId);
+			clearAuthCookie(ctx.res);
 
-		return {
-			message: 'Logged out successfully!',
-			data: {}
-		};
-	}),
+			return {
+				message: 'Logged out successfully!',
+				data: {}
+			};
+		}),
 
-	refresh: authProcedures.refresh.query(async ({ ctx: { req, res } }) => {
-		const refreshToken = getRefreshTokenFromCookie(req);
+	refresh: authProcedures.refresh
+		.input(z.void())
+		.output(authOutput)
+		.query(async ({ ctx: { req, res } }) => {
+			const refreshToken = getRefreshTokenFromCookie(req);
 
-		const tokens = await authService.refresh(refreshToken);
-		setAuthCookie(res, tokens.refreshToken);
+			const tokens = await authService.refresh(refreshToken);
+			setAuthCookie(res, tokens.refreshToken);
 
-		return {
-			message: 'Tokens have been updated!',
-			data: tokens
-		};
-	})
+			return {
+				message: 'Tokens have been updated!',
+				data: tokens
+			};
+		})
 };
 
 export default authController;
