@@ -23,7 +23,6 @@ check:
 	$(docker_compose_bin) $(COMPOSE_CONFIG) config
 up: check
 	$(docker_compose_bin) $(COMPOSE_CONFIG) up -d
-# For the local environment we must reinstall the node_modules because we link directory to the container
 ifeq ($(ENVIRONMENT), local)
 	@make install
 endif
@@ -37,8 +36,4 @@ restart:
 install:
 	$(docker_compose_bin) $(COMPOSE_CONFIG) stop $(APP_SERVICE_NAME)
 	$(docker_compose_bin) $(COMPOSE_CONFIG) run --rm $(APP_SERVICE_NAME) sh -c "cd /app/server && npm i && cd ../client && npm i" || true
-	$(docker_compose_bin) $(COMPOSE_CONFIG) start $(APP_SERVICE_NAME)
-watch:
-	$(docker_compose_bin) $(COMPOSE_CONFIG) stop $(APP_SERVICE_NAME)
-	$(docker_compose_bin) $(COMPOSE_CONFIG) run --rm --service-ports $(APP_SERVICE_NAME) || true
 	$(docker_compose_bin) $(COMPOSE_CONFIG) start $(APP_SERVICE_NAME)
