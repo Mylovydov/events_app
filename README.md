@@ -24,6 +24,7 @@ events_app/
         └── Dockerfile
     ├── client
     ├── server
+    └── events-example.csv
 ```
 
 ## Requirements
