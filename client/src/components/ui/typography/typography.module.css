@@ -1,0 +1,89 @@
+.typography {
+    line-height: var(--main-line-height);
+    margin: 0;
+}
+
+.h1 {
+    font-size: var(--main-font-size-h1);
+}
+
+.h2 {
+    font-size: var(--main-font-size-h2);
+}
+
+.h3, h4, h5, h6, .subtitle1, .subtitle2, .caption, .regular {
+    font-weight: var(--main-font-weight-regular);
+}
+
+.h3 {
+    font-size: var(--main-font-size-h3);
+}
+
+.h4 {
+    font-size: var(--main-font-size-h4);
+}
+
+.h5 {
+    font-size: var(--main-font-size-h5);
+}
+
+.h6 {
+    font-size: var(--main-font-size-h6);
+}
+
+.subtitle1 {
+    font-size: var(--main-font-size);
+}
+
+.subtitle2 {
+    font-size: var(--main-font-size-subtitle2);
+}
+
+.body1 {
+    font-size: var(--main-font-size);
+}
+
+.button {
+    font-weight: var(--main-font-weight-semi);;
+    font-size: var(--main-font-size-subtitle2);
+}
+
+.caption {
+    font-size: var(--main-font-size-caption);
+}
+
+.medium {
+    font-weight: var(--main-font-weight-medium);
+}
+
+.semi {
+    font-weight: var(--main-font-weight-semi);;
+}
+
+.bold {
+    font-weight: var(--main-font-weight-bold);;
+}
+
+.noWrap {
+    white-space: nowrap;
+}
+
+.lightColor {
+    color: var(--main-white-color);
+}
+
+.left {
+    text-align: left;
+}
+
+.center {
+    text-align: center;
+}
+
+.right {
+    text-align: right;
+}
+
+.uppercase {
+    text-transform: uppercase;
+}

@@ -1,0 +1,13 @@
+.appLogo {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.appLogoImg {
+    flex: 0 0 5rem;
+}
+
+.appLogoText {
+    flex: 1 1 auto;
+}

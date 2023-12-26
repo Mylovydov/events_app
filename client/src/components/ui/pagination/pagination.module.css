@@ -1,0 +1,53 @@
+.paginationContainer {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.paginationItem {
+
+}
+
+.paginationLink {
+    padding: 1rem;
+    border-radius: 50%;
+    position: relative;
+    color: var(--main-text-color);
+    background-color: var(--main-white-color);
+    border: .1rem solid var(--main-bg-secondary-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 4rem;
+    height: 4rem;
+    font-size: 1.4rem;
+    font-weight: 500;
+    font-family: inherit;
+    cursor: pointer;
+    transition: background-color var(--main-transition-delay) var(--main-transition-fn),
+    color var(--main-transition-delay) var(--main-transition-fn),
+    transform var(--main-transition-delay) var(--main-transition-fn);
+}
+
+.paginationLinkActive > .paginationLink {
+    background: var(--main-gradient);
+    color: var(--main-white-color);
+    font-weight: 600;
+}
+
+.paginationLinkDisabled {
+    color: var(--main-grey-color);
+    border: .1rem solid var(--main-bg-secondary-color);
+    cursor: auto;
+}
+
+.paginationLink:not(.paginationLinkDisabled):not(.paginationLinkActive > .paginationLink):hover,
+.paginationLinkActive:hover > .paginationLink {
+    transform: translateY(-0.2rem);
+}
+
+.paginationLink:not(.paginationLinkDisabled):not(.paginationLinkActive > .paginationLink):hover {
+    background: var(--main-bg-secondary-color);
+}
+
+

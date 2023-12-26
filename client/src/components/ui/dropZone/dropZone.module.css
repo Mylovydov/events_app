@@ -1,0 +1,38 @@
+.dropZone {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem
+}
+
+.dropZoneBody {
+}
+
+.dropZoneFooter {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+.uploadAction {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 4rem;
+    border-radius: 1rem;
+    border-width: .2rem;
+    border-style: dashed;
+    outline: none;
+    cursor: pointer;
+    background-color: var(--main-white-color);
+    border-color: var(--main-purple-light-color);
+    min-height: 30rem;
+}
+
+.dragReject {
+    border-color: var(--main-error-color);
+}
+
+.dragAccept {
+    border-color: var(--main-success-color);
+}

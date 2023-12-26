@@ -1,0 +1,22 @@
+.verifiedCheckmark {
+    display: inline-flex;
+    align-items: center;
+    gap: 1rem;
+    color: var(--main-error-color);
+}
+
+.verifiedCheckmarkContent {
+    flex: 1 1 auto;
+}
+
+.verifiedCheckmarkIcon {
+    flex: 0 0 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+}
+
+.isVerified {
+    color: var(--main-success-color);
+}

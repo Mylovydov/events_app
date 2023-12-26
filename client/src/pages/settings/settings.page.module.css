@@ -1,0 +1,23 @@
+.settingsPage {
+    display: flex;
+    flex-direction: column;
+    gap: 4rem;
+    height: inherit;
+}
+
+.settingsPageHeader {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.settingsPageBody {
+    flex: 1 1 auto;
+}
+
+.settingsPageFooter {
+    display: flex;
+    justify-content: start;
+    flex: 0 0 5rem;
+    gap: 2rem;
+}

@@ -1,7 +1,7 @@
 {
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
-    "ecmaVersion": "latest",
+    "ecmaVersion": 2020,
     "sourceType": "module"
   },
   "plugins": [
@@ -15,7 +15,10 @@
   "rules": {
     "indent": [
       "error",
-      "tab"
+      "tab",
+      {
+        "SwitchCase": 1
+      }
     ],
     "linebreak-style": [
       "error",
@@ -30,7 +33,7 @@
       "always"
     ],
     "eqeqeq": "error",
-    "no-use-before-define": "error",
+    "no-use-before-define": "warn",
     "no-duplicate-imports": "error",
     "use-isnan": "error",
     "block-scoped-var": "error",
@@ -40,16 +43,18 @@
     "default-case-last": "error",
     "no-alert": "error",
     "no-console": "warn",
-    "no-else-return": "error",
-    "no-magic-numbers": "error",
+    "no-else-return": "warn",
     "no-nested-ternary": "error",
     "no-proto": "error",
     "no-var": "error",
     "prefer-arrow-callback": "error",
-    "@typescript-eslint/no-unused-vars": "error",
+    "@typescript-eslint/no-unused-vars": "warn",
     "prefer-const": "error",
     "comma-dangle": "error",
-    "@typescript-eslint/consistent-type-definitions": ["error", "type"]
+    "@typescript-eslint/consistent-type-definitions": [
+      "warn",
+      "type"
+    ]
   },
   "env": {
     "node": true

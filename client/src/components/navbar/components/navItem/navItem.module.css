@@ -1,0 +1,41 @@
+
+.navItem {
+    padding: 2rem;
+    border-radius: 1.5rem 0 0 1.5rem;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    color: var(--main-white-color);
+    opacity: .7;
+    cursor: pointer;
+    transition: opacity var(--main-transition-delay) var(--main-transition-fn);
+}
+
+.navItem:hover {
+    opacity: 1;
+    color: var(--main-white-color);
+}
+
+.navItemActive {
+    opacity: 1;
+    background-color: var(--main-white-color);
+    color: var(--main-text-color);
+}
+
+.navIcon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 3rem;
+    color: var(--main-white-color);
+}
+
+.navLabel {
+    flex: 1 1 auto;
+}
+
+.navItem.navItemActive .navIcon,
+.navItem.navItemActive .navLabel {
+    color: var(--main-purple-dark-color);
+}

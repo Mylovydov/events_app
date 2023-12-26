@@ -1,0 +1,50 @@
+.switch {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.switchInput {
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 10;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+    opacity: 0;
+}
+
+.switchLabel {
+    position: relative;
+    display: flex;
+    align-items: center;
+    box-sizing: border-box;
+}
+
+.switchLabel:before {
+    content: '';
+    width: 6rem;
+    height: 3rem;
+    background: #fff;
+    border: .1rem solid var(--main-grey-light-color);
+    box-shadow: inset -3rem 0 0 var(--main-bg-secondary-color);
+    position: relative;
+    display: inline-block;
+    border-radius: 2rem;
+    box-sizing: border-box;
+    transition: 0.25s ease-in-out;
+}
+
+.switchInput:checked + .switchLabel:before {
+    box-shadow: inset 3rem 0 0 var(--main-purple-light-color);
+}
+
+.switchInput:disabled {
+    cursor: auto;
+}
+
+.switchInput:disabled + .switchLabel:before {
+    box-shadow: inset -3rem 0 0 var(--main-grey-lighten-color);
+}

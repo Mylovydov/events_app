@@ -1,0 +1,17 @@
+.settingsItem {
+    padding: 4rem 1rem;
+    display: flex;
+    gap: 5rem;
+}
+
+
+.settingsItemContent {
+    flex: 0 0 40rem;
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+}
+
+.settingsItemBody {
+    flex: 0 1 50rem;
+}
